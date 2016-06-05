@@ -1,0 +1,537 @@
+FD limit too low: 1024/4096 smaller than recommended 65535
+FD limit raised to: 4096
+2016-05-05 10:20:27.738 [1;32mZMQ [1;34mconnecting to monitor/zeromq[0m
+2016-05-05 10:20:27.763 [1;32mZMQ [1;34mconnected to tcp://127.0.0.1:24000[0m
+2016-05-05 10:20:27.813 [1;32mZMQ [1;34mconnecting to monitor/zeromq[0m
+2016-05-05 10:20:27.822 [1;32mZMQ [1;34mconnected to tcp://127.0.0.1:24000[0m
+2016-05-05 10:20:27.835 [1;32mSlaveBanker [1;34mSync Rate: 1[0m
+2016-05-05 10:20:27.835 [1;32mSlaveBanker [1;34mSpend Rate: {"USD/1M":100000}[0m
+2016-05-05 10:20:27.847 [1;32mZMQ [1;34mconnecting to masterBanker/zeromq[0m
+2016-05-05 10:20:27.863 [1;32mZMQ [1;34mconnected to tcp://127.0.0.1:22000[0m
+2016-05-05 10:20:27.863 [1;32mSlaveBankerArguments [1;34musing zmq interface for the MasterBanker[0m
+2016-05-05 10:20:27.938 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources ZmqNamedEndpoint::socket[0m
+2016-05-05 10:20:27.938 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources ZmqNamedEndpoint::socket[0m
+2016-05-05 10:20:27.938 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources ZmqNamedEndpoint::socket[0m
+augmentor frequency-cap-ex has connected
+agent fixed-price-agent-ex_2048 connected to router
+2016-05-05 10:20:27.939 [1;32mZMQ Trace [1;34mconnecting to PostAuctionLoop / PostAuctionLoop[0m
+2016-05-05 10:20:27.939 [1;32mZMQ [1;34mconnecting to PostAuctionLoop/events[0m
+2016-05-05 10:20:27.940 [1;32mZMQ [1;34mconnected to tcp://127.0.0.1:20000[0m
+2016-05-05 10:20:27.940 [1;32mZMQ [1;34mconnecting to agentConfigurationService/listen[0m
+2016-05-05 10:20:27.940 [1;32mZMQ [1;34mconnected to tcp://127.0.0.1:19000[0m
+got configuration message fixed-price-agent-ex_2048
+listening on hostname 0.0.0.0 port 12339
+********* calling addSpendAccount for hello:world for SlaveBanker router.slaveBanker
+total of 9.96075e+06 microseconds and 4528 sleeps
+BID                                2259     184973   1.86%    81.88us/call
+CONFIG                                1         13   0.00%    13.00us/call
+HEARTBEAT                            10        141   0.00%    14.10us/call
+HELLO                                 1         29   0.00%    29.00us/call
+PONG0                                 9        154   0.00%    17.11us/call
+PONG1                                 9         70   0.00%     7.78us/call
+checkExpiredAuctions               4528         43   0.00%     0.01us/call
+checks                             4549         21   0.00%     0.00us/call
+configureAgentOnExchange           4550         36   0.00%     0.01us/call
+doBid                              4550         75   0.00%     0.02us/call
+doConfig                           4550        341   0.00%     0.07us/call
+doStartBidding                     4550      83015   0.83%    18.25us/call
+doSubmitted                        4550      61589   0.62%    13.54us/call
+logBidEvents                         10         93   0.00%     9.30us/call
+sendPings                             9        101   0.00%    11.22us/call
+sleep                              4528     382123   3.84%    84.39us/call
+sleepPoll                          4528    9193804  92.30%  2030.43us/call
+spinPoll                           4550      54130   0.54%    11.90us/call
+total of 9.9568e+06 microseconds and 4601 sleeps
+BID                                2304     196400   1.97%    85.24us/call
+HEARTBEAT                            10        164   0.00%    16.40us/call
+PONG0                                10        150   0.00%    15.00us/call
+PONG1                                10         56   0.00%     5.60us/call
+checkExpiredAuctions               4601         63   0.00%     0.01us/call
+checks                             4638        282   0.00%     0.06us/call
+configureAgentOnExchange           4638         30   0.00%     0.01us/call
+doBid                              4638         89   0.00%     0.02us/call
+doConfig                           4638         10   0.00%     0.00us/call
+doStartBidding                     4638      84003   0.84%    18.11us/call
+doSubmitted                        4638      83046   0.83%    17.91us/call
+logBidEvents                         10         75   0.00%     7.50us/call
+sendPings                            10        103   0.00%    10.30us/call
+sleep                              4601     390530   3.92%    84.88us/call
+sleepPoll                          4601    9141817  91.81%  1986.92us/call
+spinPoll                           4638      59982   0.60%    12.93us/call
+total of 9.96244e+06 microseconds and 4619 sleeps
+BID                                2311     183018   1.84%    79.19us/call
+HEARTBEAT                            10         71   0.00%     7.10us/call
+PONG0                                10        109   0.00%    10.90us/call
+PONG1                                10         61   0.00%     6.10us/call
+checkExpiredAuctions               4619         73   0.00%     0.02us/call
+checks                             4652        192   0.00%     0.04us/call
+configureAgentOnExchange           4652         38   0.00%     0.01us/call
+doBid                              4652         48   0.00%     0.01us/call
+doConfig                           4652          9   0.00%     0.00us/call
+doStartBidding                     4652      83751   0.84%    18.00us/call
+doSubmitted                        4652      51589   0.52%    11.09us/call
+logBidEvents                         10         81   0.00%     8.10us/call
+sendPings                            10        100   0.00%    10.00us/call
+sleep                              4619     390152   3.92%    84.47us/call
+sleepPoll                          4619    9200357  92.35%  1991.85us/call
+spinPoll                           4652      52786   0.53%    11.35us/call
+total of 9.9608e+06 microseconds and 4589 sleeps
+BID                                2292     181369   1.82%    79.13us/call
+HEARTBEAT                            10         56   0.00%     5.60us/call
+PONG0                                10         97   0.00%     9.70us/call
+PONG1                                10         71   0.00%     7.10us/call
+checkExpiredAuctions               4589         44   0.00%     0.01us/call
+checks                             4614        288   0.00%     0.06us/call
+configureAgentOnExchange           4614         31   0.00%     0.01us/call
+doBid                              4614         96   0.00%     0.02us/call
+doConfig                           4614          2   0.00%     0.00us/call
+doStartBidding                     4614      82960   0.83%    17.98us/call
+doSubmitted                        4614      47535   0.48%    10.30us/call
+logBidEvents                         10         69   0.00%     6.90us/call
+sendPings                            10         88   0.00%     8.80us/call
+sleep                              4589     384658   3.86%    83.82us/call
+sleepPoll                          4589    9214499  92.51%  2007.95us/call
+spinPoll                           4614      48936   0.49%    10.61us/call
+total of 9.96012e+06 microseconds and 4464 sleeps
+BID                                2234     181746   1.82%    81.35us/call
+HEARTBEAT                            10         92   0.00%     9.20us/call
+PONG0                                10         94   0.00%     9.40us/call
+PONG1                                10         53   0.00%     5.30us/call
+checkExpiredAuctions               4464         94   0.00%     0.02us/call
+checks                             4502        194   0.00%     0.04us/call
+configureAgentOnExchange           4502         20   0.00%     0.00us/call
+doBid                              4502        100   0.00%     0.02us/call
+doConfig                           4502          7   0.00%     0.00us/call
+doStartBidding                     4502      82169   0.82%    18.25us/call
+doSubmitted                        4502      58634   0.59%    13.02us/call
+logBidEvents                         10         65   0.00%     6.50us/call
+sendPings                            10         79   0.00%     7.90us/call
+sleep                              4464     390907   3.92%    87.57us/call
+sleepPoll                          4464    9198023  92.35%  2060.49us/call
+spinPoll                           4502      47847   0.48%    10.63us/call
+total of 9.96376e+06 microseconds and 4289 sleeps
+BID                                2163     191724   1.92%    88.64us/call
+HEARTBEAT                            10        187   0.00%    18.70us/call
+PONG0                                10        148   0.00%    14.80us/call
+PONG1                                10         60   0.00%     6.00us/call
+checkExpiredAuctions               4289         61   0.00%     0.01us/call
+checks                             4356        245   0.00%     0.06us/call
+configureAgentOnExchange           4356         20   0.00%     0.00us/call
+doBid                              4356         47   0.00%     0.01us/call
+doConfig                           4356         16   0.00%     0.00us/call
+doStartBidding                     4356      79603   0.80%    18.27us/call
+doSubmitted                        4356      77992   0.78%    17.90us/call
+logBidEvents                         10         86   0.00%     8.60us/call
+sendPings                            10        109   0.00%    10.90us/call
+sleep                              4289     369060   3.70%    86.05us/call
+sleepPoll                          4289    9197970  92.31%  2144.55us/call
+spinPoll                           4356      46429   0.47%    10.66us/call
+total of 9.95656e+06 microseconds and 4500 sleeps
+BID                                2270     212483   2.13%    93.60us/call
+HEARTBEAT                            10        121   0.00%    12.10us/call
+PONG0                                10        202   0.00%    20.20us/call
+PONG1                                10         64   0.00%     6.40us/call
+checkExpiredAuctions               4500         85   0.00%     0.02us/call
+checks                             4570        267   0.00%     0.06us/call
+configureAgentOnExchange           4570         21   0.00%     0.00us/call
+doBid                              4570         36   0.00%     0.01us/call
+doConfig                           4570         27   0.00%     0.01us/call
+doStartBidding                     4570      82933   0.83%    18.15us/call
+doSubmitted                        4570      98609   0.99%    21.58us/call
+logBidEvents                         10         82   0.00%     8.20us/call
+sendPings                            10        103   0.00%    10.30us/call
+sleep                              4500     386959   3.89%    85.99us/call
+sleepPoll                          4500    9126175  91.66%  2028.04us/call
+spinPoll                           4570      48390   0.49%    10.59us/call
+total of 9.96195e+06 microseconds and 4565 sleeps
+BID                                2290     184238   1.85%    80.45us/call
+HEARTBEAT                            10         56   0.00%     5.60us/call
+PONG0                                10        114   0.00%    11.40us/call
+PONG1                                10         71   0.00%     7.10us/call
+checkExpiredAuctions               4565        107   0.00%     0.02us/call
+checks                             4610        173   0.00%     0.04us/call
+configureAgentOnExchange           4610         24   0.00%     0.01us/call
+doBid                              4610         19   0.00%     0.00us/call
+doConfig                           4610          3   0.00%     0.00us/call
+doStartBidding                     4610      84584   0.85%    18.35us/call
+doSubmitted                        4610      54391   0.55%    11.80us/call
+logBidEvents                         10         86   0.00%     8.60us/call
+sendPings                            10         95   0.00%     9.50us/call
+sleep                              4565     377306   3.79%    82.65us/call
+sleepPoll                          4565    9211224  92.46%  2017.79us/call
+spinPoll                           4610      49455   0.50%    10.73us/call
+total of 9.9592e+06 microseconds and 4497 sleeps
+BID                                2259     178693   1.79%    79.10us/call
+HEARTBEAT                            10         54   0.00%     5.40us/call
+PONG0                                10        101   0.00%    10.10us/call
+PONG1                                10         60   0.00%     6.00us/call
+checkExpiredAuctions               4497         48   0.00%     0.01us/call
+checks                             4547        186   0.00%     0.04us/call
+configureAgentOnExchange           4547         18   0.00%     0.00us/call
+doBid                              4547         13   0.00%     0.00us/call
+doConfig                           4547          5   0.00%     0.00us/call
+doStartBidding                     4547      83241   0.84%    18.31us/call
+doSubmitted                        4547      55098   0.55%    12.12us/call
+logBidEvents                         10         84   0.00%     8.40us/call
+sendPings                            10         97   0.00%     9.70us/call
+sleep                              4497     383213   3.85%    85.22us/call
+sleepPoll                          4497    9209647  92.47%  2047.95us/call
+spinPoll                           4547      48641   0.49%    10.70us/call
+total of 9.96333e+06 microseconds and 4528 sleeps
+BID                                2274     178246   1.79%    78.38us/call
+HEARTBEAT                            10         53   0.00%     5.30us/call
+PONG0                                10        110   0.00%    11.00us/call
+PONG1                                10         70   0.00%     7.00us/call
+checkExpiredAuctions               4528         48   0.00%     0.01us/call
+checks                             4579        260   0.00%     0.06us/call
+configureAgentOnExchange           4579          4   0.00%     0.00us/call
+doBid                              4579         26   0.00%     0.01us/call
+doConfig                           4579         19   0.00%     0.00us/call
+doStartBidding                     4579      82620   0.83%    18.04us/call
+doSubmitted                        4579      53709   0.54%    11.73us/call
+logBidEvents                         10         88   0.00%     8.80us/call
+sendPings                            10         99   0.00%     9.90us/call
+sleep                              4528     372081   3.73%    82.17us/call
+sleepPoll                          4528    9226735  92.61%  2037.71us/call
+spinPoll                           4579      49163   0.49%    10.74us/call
+total of 9.95949e+06 microseconds and 4546 sleeps
+BID                                2282     181903   1.83%    79.71us/call
+HEARTBEAT                            10         57   0.00%     5.70us/call
+PONG0                                10        102   0.00%    10.20us/call
+PONG1                                10         65   0.00%     6.50us/call
+checkExpiredAuctions               4546        128   0.00%     0.03us/call
+checks                             4593        176   0.00%     0.04us/call
+configureAgentOnExchange           4593          5   0.00%     0.00us/call
+doBid                              4593         40   0.00%     0.01us/call
+doConfig                           4593         12   0.00%     0.00us/call
+doStartBidding                     4593      83799   0.84%    18.24us/call
+doSubmitted                        4593      55329   0.56%    12.05us/call
+logBidEvents                         10         93   0.00%     9.30us/call
+sendPings                            10         92   0.00%     9.20us/call
+sleep                              4546     381689   3.83%    83.96us/call
+sleepPoll                          4546    9206560  92.44%  2025.20us/call
+spinPoll                           4593      49436   0.50%    10.76us/call
+total of 9.96269e+06 microseconds and 4496 sleeps
+BID                                2259     177727   1.78%    78.68us/call
+HEARTBEAT                            10         54   0.00%     5.40us/call
+PONG0                                10        102   0.00%    10.20us/call
+PONG1                                10         63   0.00%     6.30us/call
+checkExpiredAuctions               4496         64   0.00%     0.01us/call
+checks                             4549        201   0.00%     0.04us/call
+configureAgentOnExchange           4549         27   0.00%     0.01us/call
+doBid                              4549         37   0.00%     0.01us/call
+doConfig                           4549         16   0.00%     0.00us/call
+doStartBidding                     4549      82370   0.83%    18.11us/call
+doSubmitted                        4549      58243   0.58%    12.80us/call
+logBidEvents                         10         99   0.00%     9.90us/call
+sendPings                            10        104   0.00%    10.40us/call
+sleep                              4496     385366   3.87%    85.71us/call
+sleepPoll                          4496    9209889  92.44%  2048.46us/call
+spinPoll                           4549      48331   0.49%    10.62us/call
+total of 9.95551e+06 microseconds and 4607 sleeps
+BID                                2481     135930   1.37%    54.79us/call
+HEARTBEAT                            10         59   0.00%     5.90us/call
+PONG0                                10         97   0.00%     9.70us/call
+PONG1                                10         82   0.00%     8.20us/call
+checkExpiredAuctions               4607         17   0.00%     0.00us/call
+checks                             4992        184   0.00%     0.04us/call
+configureAgentOnExchange           4992         18   0.00%     0.00us/call
+doBid                              4992         19   0.00%     0.00us/call
+doConfig                           4992          3   0.00%     0.00us/call
+doStartBidding                     4992      89581   0.90%    17.94us/call
+doSubmitted                        4992     256175   2.57%    51.32us/call
+logBidEvents                         10         83   0.00%     8.30us/call
+sendPings                            10         96   0.00%     9.60us/call
+sleep                              4607     834646   8.38%   181.17us/call
+sleepPoll                          4607    8588064  86.26%  1864.13us/call
+spinPoll                           4992      50453   0.51%    10.11us/call
+total of 9.95516e+06 microseconds and 4837 sleeps
+BID                                2575     141131   1.42%    54.81us/call
+HEARTBEAT                            10         53   0.00%     5.30us/call
+PONG0                                10         88   0.00%     8.80us/call
+PONG1                                10         70   0.00%     7.00us/call
+checkExpiredAuctions               4837         68   0.00%     0.01us/call
+checks                             5180        191   0.00%     0.04us/call
+configureAgentOnExchange           5180         24   0.00%     0.00us/call
+doBid                              5180         10   0.00%     0.00us/call
+doConfig                           5180          8   0.00%     0.00us/call
+doStartBidding                     5180      93585   0.94%    18.07us/call
+doSubmitted                        5180     264153   2.65%    50.99us/call
+logBidEvents                         10         78   0.00%     7.80us/call
+sendPings                            10         93   0.00%     9.30us/call
+sleep                              4837     862783   8.67%   178.37us/call
+sleepPoll                          4837    8540594  85.79%  1765.68us/call
+spinPoll                           5180      52227   0.52%    10.08us/call
+total of 9.95624e+06 microseconds and 4698 sleeps
+BID                                2506     139581   1.40%    55.70us/call
+HEARTBEAT                            10         56   0.00%     5.60us/call
+PONG0                                10         96   0.00%     9.60us/call
+PONG1                                10         77   0.00%     7.70us/call
+checkExpiredAuctions               4698         31   0.00%     0.01us/call
+checks                             5042        190   0.00%     0.04us/call
+configureAgentOnExchange           5042         28   0.00%     0.01us/call
+doBid                              5042         47   0.00%     0.01us/call
+doConfig                           5042          9   0.00%     0.00us/call
+doStartBidding                     5042      92591   0.93%    18.36us/call
+doSubmitted                        5042     263747   2.65%    52.31us/call
+logBidEvents                         10         81   0.00%     8.10us/call
+sendPings                            10         99   0.00%     9.90us/call
+sleep                              4698     817698   8.21%   174.05us/call
+sleepPoll                          4698    8590203  86.28%  1828.48us/call
+spinPoll                           5042      51705   0.52%    10.25us/call
+total of 9.95588e+06 microseconds and 4695 sleeps
+BID                                2523     139288   1.40%    55.21us/call
+HEARTBEAT                            10         56   0.00%     5.60us/call
+PONG0                                10        104   0.00%    10.40us/call
+PONG1                                10         66   0.00%     6.60us/call
+checkExpiredAuctions               4695         33   0.00%     0.01us/call
+checks                             5076        190   0.00%     0.04us/call
+configureAgentOnExchange           5076         11   0.00%     0.00us/call
+doBid                              5076         40   0.00%     0.01us/call
+doConfig                           5076          6   0.00%     0.00us/call
+doStartBidding                     5076      92103   0.93%    18.14us/call
+doSubmitted                        5076     263280   2.64%    51.87us/call
+logBidEvents                         10         82   0.00%     8.20us/call
+sendPings                            10         97   0.00%     9.70us/call
+sleep                              4695     806110   8.10%   171.70us/call
+sleepPoll                          4695    8602727  86.41%  1832.32us/call
+spinPoll                           5076      51687   0.52%    10.18us/call
+total of 9.95463e+06 microseconds and 4687 sleeps
+BID                                2503     139661   1.40%    55.80us/call
+HEARTBEAT                            10         54   0.00%     5.40us/call
+PONG0                                10         93   0.00%     9.30us/call
+PONG1                                10         76   0.00%     7.60us/call
+checkExpiredAuctions               4687         38   0.00%     0.01us/call
+checks                             5036        179   0.00%     0.04us/call
+configureAgentOnExchange           5036          1   0.00%     0.00us/call
+doBid                              5036         31   0.00%     0.01us/call
+doConfig                           5036          9   0.00%     0.00us/call
+doStartBidding                     5036      92920   0.93%    18.45us/call
+doSubmitted                        5036     266258   2.67%    52.87us/call
+logBidEvents                         10         84   0.00%     8.40us/call
+sendPings                            10         97   0.00%     9.70us/call
+sleep                              4687     810323   8.14%   172.89us/call
+sleepPoll                          4687    8593119  86.32%  1833.39us/call
+spinPoll                           5036      51684   0.52%    10.26us/call
+total of 9.95376e+06 microseconds and 4685 sleeps
+BID                                2519     140357   1.41%    55.72us/call
+HEARTBEAT                            10         52   0.00%     5.20us/call
+PONG0                                10        113   0.00%    11.30us/call
+PONG1                                10         60   0.00%     6.00us/call
+checkExpiredAuctions               4685         64   0.00%     0.01us/call
+checks                             5068        185   0.00%     0.04us/call
+configureAgentOnExchange           5068         17   0.00%     0.00us/call
+doBid                              5068         31   0.00%     0.01us/call
+doConfig                           5068         13   0.00%     0.00us/call
+doStartBidding                     5068      92983   0.93%    18.35us/call
+doSubmitted                        5068     267997   2.69%    52.88us/call
+logBidEvents                         10         90   0.00%     9.00us/call
+sendPings                            10        104   0.00%    10.40us/call
+sleep                              4685     804585   8.08%   171.74us/call
+sleepPoll                          4685    8595001  86.35%  1834.58us/call
+spinPoll                           5068      52111   0.52%    10.28us/call
+total of 9.95334e+06 microseconds and 4627 sleeps
+BID                                2470     141512   1.42%    57.29us/call
+HEARTBEAT                            10         44   0.00%     4.40us/call
+PONG0                                10         96   0.00%     9.60us/call
+PONG1                                10         71   0.00%     7.10us/call
+checkExpiredAuctions               4627        252   0.00%     0.05us/call
+checks                             4970        270   0.00%     0.05us/call
+configureAgentOnExchange           4970          2   0.00%     0.00us/call
+doBid                              4970         17   0.00%     0.00us/call
+doConfig                           4970          4   0.00%     0.00us/call
+doStartBidding                     4970      93470   0.94%    18.81us/call
+doSubmitted                        4970     270966   2.72%    54.52us/call
+logBidEvents                         10         83   0.00%     8.30us/call
+sendPings                            10         95   0.00%     9.50us/call
+sleep                              4627     784296   7.88%   169.50us/call
+sleepPoll                          4627    8610252  86.51%  1860.87us/call
+spinPoll                           4970      51909   0.52%    10.44us/call
+total of 9.95481e+06 microseconds and 4641 sleeps
+BID                                2472     139575   1.40%    56.46us/call
+HEARTBEAT                            10         47   0.00%     4.70us/call
+PONG0                                10        100   0.00%    10.00us/call
+PONG1                                10         79   0.00%     7.90us/call
+checkExpiredAuctions               4641        104   0.00%     0.02us/call
+checks                             4976        271   0.00%     0.05us/call
+configureAgentOnExchange           4976         17   0.00%     0.00us/call
+doBid                              4976         45   0.00%     0.01us/call
+doConfig                           4976          0   0.00%     0.00us/call
+doStartBidding                     4976      93150   0.94%    18.72us/call
+doSubmitted                        4976     272144   2.73%    54.69us/call
+logBidEvents                         10         85   0.00%     8.50us/call
+sendPings                            10        105   0.00%    10.50us/call
+sleep                              4641     789351   7.93%   170.08us/call
+sleepPoll                          4641    8608630  86.48%  1854.91us/call
+spinPoll                           4976      51111   0.51%    10.27us/call
+total of 9.95511e+06 microseconds and 4704 sleeps
+BID                                2522     140274   1.41%    55.62us/call
+HEARTBEAT                            10         55   0.00%     5.50us/call
+PONG0                                10         92   0.00%     9.20us/call
+PONG1                                10         75   0.00%     7.50us/call
+checkExpiredAuctions               4704         62   0.00%     0.01us/call
+checks                             5075        181   0.00%     0.04us/call
+configureAgentOnExchange           5075         18   0.00%     0.00us/call
+doBid                              5075         58   0.00%     0.01us/call
+doConfig                           5075         18   0.00%     0.00us/call
+doStartBidding                     5075      93405   0.94%    18.40us/call
+doSubmitted                        5075     269248   2.70%    53.05us/call
+logBidEvents                         10         94   0.00%     9.40us/call
+sendPings                            10        103   0.00%    10.30us/call
+sleep                              4704     810772   8.14%   172.36us/call
+sleepPoll                          4704    8588648  86.27%  1825.82us/call
+spinPoll                           5075      52008   0.52%    10.25us/call
+total of 9.9546e+06 microseconds and 4698 sleeps
+BID                                2510     139079   1.40%    55.41us/call
+HEARTBEAT                            10         52   0.00%     5.20us/call
+PONG0                                10        101   0.00%    10.10us/call
+PONG1                                10         90   0.00%     9.00us/call
+checkExpiredAuctions               4698         36   0.00%     0.01us/call
+checks                             5050        176   0.00%     0.03us/call
+configureAgentOnExchange           5050         11   0.00%     0.00us/call
+doBid                              5050         24   0.00%     0.00us/call
+doConfig                           5050         10   0.00%     0.00us/call
+doStartBidding                     5050      92402   0.93%    18.30us/call
+doSubmitted                        5050     262149   2.63%    51.91us/call
+logBidEvents                         10         85   0.00%     8.50us/call
+sendPings                            10        106   0.00%    10.60us/call
+sleep                              4698     809441   8.13%   172.29us/call
+sleepPoll                          4698    8599562  86.39%  1830.47us/call
+spinPoll                           5050      51280   0.52%    10.15us/call
+total of 9.95575e+06 microseconds and 4576 sleeps
+BID                                2449     143728   1.44%    58.69us/call
+HEARTBEAT                            10         61   0.00%     6.10us/call
+PONG0                                10         97   0.00%     9.70us/call
+PONG1                                10         63   0.00%     6.30us/call
+checkExpiredAuctions               4576        176   0.00%     0.04us/call
+checks                             4929        262   0.00%     0.05us/call
+configureAgentOnExchange           4929         14   0.00%     0.00us/call
+doBid                              4929         10   0.00%     0.00us/call
+doConfig                           4929          0   0.00%     0.00us/call
+doStartBidding                     4929      95582   0.96%    19.39us/call
+doSubmitted                        4929     280767   2.82%    56.96us/call
+logBidEvents                         10         87   0.00%     8.70us/call
+sendPings                            10        103   0.00%    10.30us/call
+sleep                              4576     767366   7.71%   167.69us/call
+sleepPoll                          4576    8615533  86.54%  1882.77us/call
+spinPoll                           4929      51905   0.52%    10.53us/call
+total of 9.95308e+06 microseconds and 4640 sleeps
+BID                                2493     141477   1.42%    56.75us/call
+HEARTBEAT                            10         52   0.00%     5.20us/call
+PONG0                                10        118   0.00%    11.80us/call
+PONG1                                10         84   0.00%     8.40us/call
+checkExpiredAuctions               4640         99   0.00%     0.02us/call
+checks                             5016        186   0.00%     0.04us/call
+configureAgentOnExchange           5016         11   0.00%     0.00us/call
+doBid                              5016         21   0.00%     0.00us/call
+doConfig                           5016          8   0.00%     0.00us/call
+doStartBidding                     5016      94319   0.95%    18.80us/call
+doSubmitted                        5016     274997   2.76%    54.82us/call
+logBidEvents                         10         87   0.00%     8.70us/call
+sendPings                            10        101   0.00%    10.10us/call
+sleep                              4640     793967   7.98%   171.11us/call
+sleepPoll                          4640    8595560  86.36%  1852.49us/call
+spinPoll                           5016      51997   0.52%    10.37us/call
+total of 9.95464e+06 microseconds and 4674 sleeps
+BID                                2501     138048   1.39%    55.20us/call
+HEARTBEAT                            10         47   0.00%     4.70us/call
+PONG0                                10        102   0.00%    10.20us/call
+PONG1                                10         66   0.00%     6.60us/call
+checkExpiredAuctions               4674         57   0.00%     0.01us/call
+checks                             5033        193   0.00%     0.04us/call
+configureAgentOnExchange           5033          1   0.00%     0.00us/call
+doBid                              5033         24   0.00%     0.00us/call
+doConfig                           5033          0   0.00%     0.00us/call
+doStartBidding                     5033      91447   0.92%    18.17us/call
+doSubmitted                        5033     263106   2.64%    52.28us/call
+logBidEvents                         10         91   0.00%     9.10us/call
+sendPings                            10        105   0.00%    10.50us/call
+sleep                              4674     804518   8.08%   172.13us/call
+sleepPoll                          4674    8605792  86.45%  1841.20us/call
+spinPoll                           5033      51048   0.51%    10.14us/call
+total of 9.95499e+06 microseconds and 4668 sleeps
+BID                                2497     138918   1.40%    55.63us/call
+HEARTBEAT                            10         54   0.00%     5.40us/call
+PONG0                                10         90   0.00%     9.00us/call
+PONG1                                10         65   0.00%     6.50us/call
+checkExpiredAuctions               4668         81   0.00%     0.02us/call
+checks                             5024        175   0.00%     0.03us/call
+configureAgentOnExchange           5024          3   0.00%     0.00us/call
+doBid                              5024         31   0.00%     0.01us/call
+doConfig                           5024         12   0.00%     0.00us/call
+doStartBidding                     5024      92650   0.93%    18.44us/call
+doSubmitted                        5024     267821   2.69%    53.31us/call
+logBidEvents                         10         83   0.00%     8.30us/call
+sendPings                            10         97   0.00%     9.70us/call
+sleep                              4668     804443   8.08%   172.33us/call
+sleepPoll                          4668    8598114  86.37%  1841.93us/call
+spinPoll                           5024      52351   0.53%    10.42us/call
+total of 9.95427e+06 microseconds and 4732 sleeps
+BID                                2532     141907   1.43%    56.05us/call
+HEARTBEAT                            10         55   0.00%     5.50us/call
+PONG0                                10        112   0.00%    11.20us/call
+PONG1                                10         66   0.00%     6.60us/call
+checkExpiredAuctions               4732        131   0.00%     0.03us/call
+checks                             5096        167   0.00%     0.03us/call
+configureAgentOnExchange           5096          6   0.00%     0.00us/call
+doBid                              5096         22   0.00%     0.00us/call
+doConfig                           5096         12   0.00%     0.00us/call
+doStartBidding                     5096      94337   0.95%    18.51us/call
+doSubmitted                        5096     270097   2.71%    53.00us/call
+logBidEvents                         10         85   0.00%     8.50us/call
+sendPings                            10        109   0.00%    10.90us/call
+sleep                              4732     810213   8.14%   171.22us/call
+sleepPoll                          4732    8584544  86.24%  1814.15us/call
+spinPoll                           5096      52408   0.53%    10.28us/call
+total of 9.95376e+06 microseconds and 4628 sleeps
+BID                                2476     136870   1.38%    55.28us/call
+HEARTBEAT                            10         50   0.00%     5.00us/call
+PONG0                                10         92   0.00%     9.20us/call
+PONG1                                10         87   0.00%     8.70us/call
+checkExpiredAuctions               4628         28   0.00%     0.01us/call
+checks                             4983        172   0.00%     0.03us/call
+configureAgentOnExchange           4983         19   0.00%     0.00us/call
+doBid                              4983         22   0.00%     0.00us/call
+doConfig                           4983         21   0.00%     0.00us/call
+doStartBidding                     4983      90369   0.91%    18.14us/call
+doSubmitted                        4983     262026   2.63%    52.58us/call
+logBidEvents                         10         81   0.00%     8.10us/call
+sendPings                            10        101   0.00%    10.10us/call
+sleep                              4628     803484   8.07%   173.61us/call
+sleepPoll                          4628    8609497  86.49%  1860.31us/call
+spinPoll                           4983      50837   0.51%    10.20us/call
+total of 9.95387e+06 microseconds and 4691 sleeps
+BID                                2517     139622   1.40%    55.47us/call
+HEARTBEAT                            10         51   0.00%     5.10us/call
+PONG0                                10         95   0.00%     9.50us/call
+PONG1                                10         71   0.00%     7.10us/call
+checkExpiredAuctions               4691         51   0.00%     0.01us/call
+checks                             5064        204   0.00%     0.04us/call
+configureAgentOnExchange           5064          2   0.00%     0.00us/call
+doBid                              5064         31   0.00%     0.01us/call
+doConfig                           5064         13   0.00%     0.00us/call
+doStartBidding                     5064      92154   0.93%    18.20us/call
+doSubmitted                        5064     266555   2.68%    52.64us/call
+logBidEvents                         10         87   0.00%     8.70us/call
+sendPings                            10        114   0.00%    11.40us/call
+sleep                              4691     810004   8.14%   172.67us/call
+sleepPoll                          4691    8593103  86.33%  1831.83us/call
+spinPoll                           5064      51711   0.52%    10.21us/call
+total of 9.95398e+06 microseconds and 4748 sleeps
+BID                                2533     141157   1.42%    55.73us/call
+HEARTBEAT                            10         51   0.00%     5.10us/call
+PONG0                                10         96   0.00%     9.60us/call
+PONG1                                10         72   0.00%     7.20us/call
+checkExpiredAuctions               4748         43   0.00%     0.01us/call
+checks                             5097        177   0.00%     0.03us/call
+configureAgentOnExchange           5097          0   0.00%     0.00us/call
+doBid                              5097         29   0.00%     0.01us/call
+doConfig                           5097          3   0.00%     0.00us/call
+doStartBidding                     5097      93101   0.94%    18.27us/call
+doSubmitted                        5097     265686   2.67%    52.13us/call
+logBidEvents                         10         89   0.00%     8.90us/call
+sendPings                            10         99   0.00%     9.90us/call
+sleep                              4748     828125   8.32%   174.42us/call
+sleepPoll                          4748    8573561  86.13%  1805.72us/call
+spinPoll                           5097      51691   0.52%    10.14us/call
+error: Broken pipe

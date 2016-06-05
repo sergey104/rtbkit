@@ -1,0 +1,573 @@
+FD limit too low: 1024/4096 smaller than recommended 65535
+FD limit raised to: 4096
+bound tcp for http port 9987
+monitor is listening on tcp://*:24000,http://0.0.0.0:9987
+serviceClass/rtbPostAuctionService/PostAuctionLoop --> {"serviceLocation":"mtl","serviceName":"PostAuctionLoop","servicePath":"PostAuctionLoop","shardIndex":0}
+serviceClass/monitor/monitor --> {"serviceLocation":"mtl","serviceName":"monitor","servicePath":"monitor"}
+serviceClass/rtbRequestRouter/router --> {"serviceLocation":"mtl","serviceName":"router","servicePath":"router"}
+serviceClass/rtbRouterAugmentation/router.augmentationLoop --> {"serviceLocation":"mtl","serviceName":"router.augmentationLoop","servicePath":"router.augmentationLoop"}
+serviceClass/rtbAgentConfiguration/agentConfigurationService --> {"serviceLocation":"mtl","serviceName":"agentConfigurationService","servicePath":"agentConfigurationService"}
+serviceClass/adServer/adserver --> {"serviceLocation":"mtl","serviceName":"adserver","servicePath":"adserver"}
+adserver/logger/tcp --> [{"transports":[{"addr":"127.0.0.1","hostScope":"fil-104","name":"tcp","port":25000},{"name":"zeromq","socketType":9,"uri":"tcp://127.0.0.1:25000"}],"zmqConnectUri":"tcp://127.0.0.1:25000"},{"transports":[{"addr":"192.168.1.2","hostScope":"*","name":"tcp","port":25000},{"name":"zeromq","socketType":9,"uri":"tcp://fil-104:25000"}],"zmqConnectUri":"tcp://fil-104:25000"}]
+monitor/zeromq/tcp --> [{"transports":[{"addr":"127.0.0.1","hostScope":"fil-104","name":"tcp","port":24000},{"name":"zeromq","socketType":6,"uri":"tcp://127.0.0.1:24000"}],"zmqConnectUri":"tcp://127.0.0.1:24000"},{"transports":[{"addr":"192.168.1.2","hostScope":"*","name":"tcp","port":24000},{"name":"zeromq","socketType":6,"uri":"tcp://fil-104:24000"}],"zmqConnectUri":"tcp://fil-104:24000"}]
+monitor/http/tcp --> [{"httpUri":"http://127.0.0.1:9987","transports":[{"addr":"127.0.0.1","hostScope":"fil-104","name":"tcp","port":9987},{"name":"http","uri":"http://127.0.0.1:9987"}]},{"httpUri":"http://192.168.1.2:9987","transports":[{"addr":"192.168.1.2","hostScope":"*","name":"tcp","port":9987},{"name":"http","uri":"http://192.168.1.2:9987"}]}]
+2016-05-05 09:20:58.370 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources ZmqNamedEndpoint::socket[0m
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:21:06  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:21:07  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:21:07  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:21:07  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:21:07  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:21:07  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:21:16  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:21:17  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:21:17  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:21:17  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:21:17  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:21:17  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:21:26  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:21:27  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:21:27  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:21:27  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:21:27  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:21:27  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:21:36  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:21:37  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:21:37  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:21:37  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:21:37  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:21:37  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:21:46  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:21:47  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:21:47  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:21:47  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:21:47  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:21:47  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:21:56  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:21:57  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:21:57  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:21:57  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:21:57  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:21:57  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:22:06  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:22:07  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:22:07  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:22:07  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:22:07  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:22:07  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:22:16  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:22:17  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:22:17  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:22:17  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:22:17  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:22:17  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:22:26  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:22:27  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:22:27  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:22:27  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:22:27  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:22:27  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:22:36  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:22:37  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:22:37  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:22:37  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:22:37  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:22:37  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:22:46  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:22:47  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:22:47  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:22:47  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:22:47  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:22:47  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:22:56  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:22:57  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:22:57  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:22:57  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:22:57  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:22:57  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:23:06  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:23:07  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:23:07  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:23:07  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:23:07  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:23:07  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:23:16  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:23:17  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:23:17  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:23:17  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:23:17  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:23:17  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:23:26  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:23:27  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:23:27  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:23:27  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:23:27  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:23:27  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:23:36  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:23:37  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:23:37  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:23:37  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:23:37  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:23:37  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:23:46  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:23:47  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:23:47  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:23:47  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:23:47  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:23:47  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:23:56  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:23:57  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:23:57  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:23:57  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:23:57  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:23:57  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:24:06  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:24:07  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:24:07  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:24:07  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:24:07  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:24:07  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:24:16  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:24:17  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:24:17  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:24:17  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:24:17  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:24:17  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:24:26  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:24:27  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:24:27  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:24:27  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:24:27  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:24:27  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:24:36  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:24:37  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:24:37  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:24:37  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:24:37  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:24:37  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:24:46  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:24:47  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:24:47  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:24:47  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:24:47  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:24:47  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:24:56  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:24:57  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:24:57  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:24:57  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:24:57  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:24:57  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:25:06  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:25:07  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:25:07  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:25:07  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:25:07  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:25:07  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:25:16  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:25:17  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:25:17  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:25:17  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:25:17  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:25:17  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:25:26  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:25:27  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:25:27  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:25:27  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:25:27  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:25:27  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:25:36  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:25:37  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:25:37  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:25:37  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:25:37  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:25:37  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:25:46  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:25:47  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:25:47  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:25:47  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:25:47  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:25:47  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:25:56  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:25:57  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:25:57  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:25:57  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:25:57  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:25:57  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:26:06  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:26:07  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:26:07  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:26:07  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:26:07  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:26:07  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:26:16  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:26:17  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:26:17  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:26:17  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:26:17  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:26:17  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:26:26  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:26:27  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:26:27  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:26:27  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:26:27  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:26:27  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:26:36  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:26:37  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:26:37  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:26:37  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:26:37  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:26:37  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:26:46  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:26:47  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:26:47  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:26:47  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:26:47  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:26:47  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:26:56  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:26:57  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:26:57  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:26:57  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:26:57  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:26:57  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:27:06  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:27:07  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:27:07  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:27:07  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:27:07  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:27:07  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:27:16  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:27:17  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:27:17  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:27:17  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:27:17  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:27:17  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:27:26  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:27:27  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:27:27  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:27:27  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:27:27  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:27:27  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:27:36  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:27:37  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:27:37  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:27:37  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:27:37  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:27:37  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:27:46  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:27:47  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:27:47  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:27:47  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:27:47  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:27:47  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:27:56  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:27:57  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:27:57  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:27:57  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:27:57  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:27:57  Connection to PAL: OK, Banker: ERROR
+
+
+rtbAgentConfiguration: 
+    agentConfigurationService OK  2016-05-05 06:28:06  Alive
+rtbBanker: 
+    PostAuctionLoop.slaveBanker ERR 2016-05-05 06:28:07  Sync with MasterBanker: ERROR
+    router.slaveBanker   ERR 2016-05-05 06:28:07  Sync with MasterBanker: ERROR
+rtbDataLogger: 
+    data_logger          OK  2016-05-05 06:28:07  Alive
+rtbPostAuctionService: 
+    PostAuctionLoop      ERR 2016-05-05 06:28:07  WinLoss pipe: ERROR, CampaignEvent pipe: ERROR, Banker: ERROR
+rtbRequestRouter: 
+    router               ERR 2016-05-05 06:28:07  Connection to PAL: OK, Banker: ERROR

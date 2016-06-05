@@ -1,0 +1,38 @@
+FD limit too low: 1024/4096 smaller than recommended 65535
+FD limit raised to: 4096
+2016-05-05 09:20:57.697 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources FrequencyCapAugmentor::palEvents[0m
+2016-05-05 09:20:57.697 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources [0m
+2016-05-05 09:20:57.933 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources [0m
+2016-05-05 09:20:57.933 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources ZmqNamedSocket::socket[0m
+2016-05-05 09:20:57.933 [1;32mZMQ [1;34mconnecting to agentConfigurationService/listen[0m
+wexists handler returned -101
+2. returning result 
+warning: could not connect to PostAuctionLoop/logger immediately
+wexists handler returned -101
+2. returning result 
+2016-05-05 09:20:58.018 [1;32mZMQ Trace [1;34mconnecting to router.augmentationLoop / router.augmentationLoop[0m
+2016-05-05 09:20:58.018 [1;32mZMQ [1;34mconnecting to router.augmentationLoop/augmentors[0m
+wexists handler returned -101
+2. returning result 
+2016-05-05 09:20:58.082 [1;32mZMQ [1;34mconnecting to router.augmentationLoop/augmentors[0m
+2016-05-05 09:20:58.124 [1;32mZMQ [1;34mconnecting to router.augmentationLoop/augmentors[0m
+2016-05-05 09:20:58.141 [1;32mZMQ [1;34mconnected to tcp://127.0.0.1:18000[0m
+2016-05-05 09:20:58.183 [1;32mZMQ [1;34mconnecting to agentConfigurationService/listen[0m
+2016-05-05 09:20:58.199 [1;32mZMQ [1;34mconnecting to agentConfigurationService/listen[0m
+2016-05-05 09:20:58.216 [1;32mZMQ [1;34mconnected to tcp://127.0.0.1:19000[0m
+got configuration message fixed-price-agent-ex_3018
+got configuration message fixed-price-agent-ex_3018
+got configuration message fixed-price-agent-ex_3141
+got configuration message fixed-price-agent-ex_3141
+got configuration message fixed-price-agent-ex_3151
+got configuration message fixed-price-agent-ex_3151
+got configuration message fixed-price-agent-ex_3182
+got configuration message fixed-price-agent-ex_3182
+got configuration message fixed-price-agent-ex_3193
+got configuration message fixed-price-agent-ex_3193
+got configuration message fixed-price-agent-ex_3203
+got configuration message fixed-price-agent-ex_3203
+got configuration message fixed-price-agent-ex_3214
+got configuration message fixed-price-agent-ex_3214
+got configuration message fixed-price-agent-ex_3305
+got configuration message fixed-price-agent-ex_3305

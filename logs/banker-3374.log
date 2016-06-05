@@ -1,0 +1,5 @@
+FD limit too low: 1024/4096 smaller than recommended 65535
+FD limit raised to: 4096
+ redisUri=localhost:6379
+disconnection with status 1
+onConnect: code = 1 err = 0 errstr =  errno = Success

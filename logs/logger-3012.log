@@ -1,0 +1,39 @@
+FD limit too low: 1024/4096 smaller than recommended 65535
+FD limit raised to: 4096
+file ./logs/data//2016-05-05/errors-2016-05-05-06:00:00.log exists; disambiguating
+opening file ./logs/data//2016-05-05/errors-2016-05-05-06:00:00.1.log with append 0
+2016-05-05 09:20:57.746 [1;32mZMQ [1;34mconnecting to monitor/zeromq[0m
+  0 ./logs/data//%F/ -1
+  2  16
+  0 / -1
+  2  4
+  0 / -1
+  1  -1
+  0 -%T.log.gz -1
+  0 ./logs/data//%F/ -1
+  2  9
+  0 / -1
+  2  10
+  0 / -1
+  1  -1
+  0 -%T.log.gz -1
+2016-05-05 09:20:57.786 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources [0m
+wexists handler returned -101
+2. returning result 
+2016-05-05 09:20:57.875 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources [0m
+2016-05-05 09:20:57.891 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources ZmqNamedSocket::socket[0m
+wexists handler returned 0
+wexists handler: node appeared
+2016-05-05 09:20:57.949 [1;32mZMQ [1;34mconnecting to monitor/zeromq[0m
+2016-05-05 09:20:57.958 [1;32mZMQ [1;34mconnecting to monitor/zeromq[0m
+2016-05-05 09:20:58.002 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources serviceClass/adServer/adserver[0m
+2016-05-05 09:20:58.008 [1;32mZMQ [1;34mconnected to tcp://127.0.0.1:24000[0m
+2016-05-05 09:20:58.016 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources ZmqNamedSocket::socket[0m
+wexists handler returned -101
+2. returning result 
+warning: could not connect to PostAuctionLoop/logger immediately
+2016-05-05 09:20:58.066 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources serviceClass/adServer/adserver, serviceClass/rtbPostAuctionService/PostAuctionLoop[0m
+2016-05-05 09:20:58.066 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources ZmqNamedSocket::socket[0m
+wexists handler returned -101
+2. returning result 
+warning: could not connect to router/logger immediately

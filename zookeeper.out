@@ -1,0 +1,278 @@
+2016-05-05 09:19:08,413 [myid:] - INFO  [main:QuorumPeerConfig@101] - Reading configuration from: /home/fil/local/bin/zookeeper/bin/../conf/zoo.cfg
+2016-05-05 09:19:08,476 [myid:] - INFO  [main:DatadirCleanupManager@78] - autopurge.snapRetainCount set to 3
+2016-05-05 09:19:08,476 [myid:] - INFO  [main:DatadirCleanupManager@79] - autopurge.purgeInterval set to 0
+2016-05-05 09:19:08,476 [myid:] - INFO  [main:DatadirCleanupManager@101] - Purge task is not scheduled.
+2016-05-05 09:19:08,477 [myid:] - WARN  [main:QuorumPeerMain@113] - Either no config or no quorum defined in config, running  in standalone mode
+2016-05-05 09:19:08,547 [myid:] - INFO  [main:QuorumPeerConfig@101] - Reading configuration from: /home/fil/local/bin/zookeeper/bin/../conf/zoo.cfg
+2016-05-05 09:19:08,547 [myid:] - INFO  [main:ZooKeeperServerMain@95] - Starting server
+2016-05-05 09:19:08,656 [myid:] - INFO  [main:Environment@100] - Server environment:zookeeper.version=3.4.5--1, built on 05/04/2016 04:15 GMT
+2016-05-05 09:19:08,657 [myid:] - INFO  [main:Environment@100] - Server environment:host.name=fil-104
+2016-05-05 09:19:08,657 [myid:] - INFO  [main:Environment@100] - Server environment:java.version=1.8.0_91
+2016-05-05 09:19:08,657 [myid:] - INFO  [main:Environment@100] - Server environment:java.vendor=Oracle Corporation
+2016-05-05 09:19:08,658 [myid:] - INFO  [main:Environment@100] - Server environment:java.home=/usr/local/jdk1.8.0_91/jre
+2016-05-05 09:19:08,658 [myid:] - INFO  [main:Environment@100] - Server environment:java.class.path=/home/fil/local/bin/zookeeper/bin/../build/classes:/home/fil/local/bin/zookeeper/bin/../build/lib/slf4j-log4j12-1.6.1.jar:/home/fil/local/bin/zookeeper/bin/../build/lib/slf4j-api-1.6.1.jar:/home/fil/local/bin/zookeeper/bin/../build/lib/netty-3.2.2.Final.jar:/home/fil/local/bin/zookeeper/bin/../build/lib/log4j-1.2.15.jar:/home/fil/local/bin/zookeeper/bin/../build/lib/jline-0.9.94.jar:/home/fil/local/bin/zookeeper/bin/../lib/*.jar:/home/fil/local/bin/zookeeper/bin/../zookeeper-*.jar:/home/fil/local/bin/zookeeper/bin/../src/java/lib/*.jar:/home/fil/local/bin/zookeeper/bin/../conf:
+2016-05-05 09:19:08,658 [myid:] - INFO  [main:Environment@100] - Server environment:java.library.path=/home/fil/local/lib::/usr/java/packages/lib/amd64:/usr/lib64:/lib64:/lib:/usr/lib
+2016-05-05 09:19:08,659 [myid:] - INFO  [main:Environment@100] - Server environment:java.io.tmpdir=/tmp
+2016-05-05 09:19:08,659 [myid:] - INFO  [main:Environment@100] - Server environment:java.compiler=<NA>
+2016-05-05 09:19:08,659 [myid:] - INFO  [main:Environment@100] - Server environment:os.name=Linux
+2016-05-05 09:19:08,660 [myid:] - INFO  [main:Environment@100] - Server environment:os.arch=amd64
+2016-05-05 09:19:08,660 [myid:] - INFO  [main:Environment@100] - Server environment:os.version=4.2.0-35-generic
+2016-05-05 09:19:08,660 [myid:] - INFO  [main:Environment@100] - Server environment:user.name=fil
+2016-05-05 09:19:08,660 [myid:] - INFO  [main:Environment@100] - Server environment:user.home=/home/fil
+2016-05-05 09:19:08,661 [myid:] - INFO  [main:Environment@100] - Server environment:user.dir=/home/fil/rtb/rtbkit
+2016-05-05 09:19:08,681 [myid:] - INFO  [main:ZooKeeperServer@726] - tickTime set to 2000
+2016-05-05 09:19:08,682 [myid:] - INFO  [main:ZooKeeperServer@735] - minSessionTimeout set to -1
+2016-05-05 09:19:08,682 [myid:] - INFO  [main:ZooKeeperServer@744] - maxSessionTimeout set to -1
+2016-05-05 09:19:08,748 [myid:] - INFO  [main:NIOServerCnxnFactory@94] - binding to port 0.0.0.0/0.0.0.0:2181
+2016-05-05 09:19:08,830 [myid:] - INFO  [main:FileSnap@83] - Reading snapshot ./zookeeper/version-2/snapshot.0
+2016-05-05 09:19:08,899 [myid:] - INFO  [main:FileTxnSnapLog@240] - Snapshotting: 0x84 to ./zookeeper/version-2/snapshot.84
+2016-05-05 09:19:14,001 [myid:] - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x1547f846f890004, timeout of 4000ms exceeded
+2016-05-05 09:19:14,001 [myid:] - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x1547f846f890001, timeout of 4000ms exceeded
+2016-05-05 09:19:14,002 [myid:] - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x1547f846f890007, timeout of 4000ms exceeded
+2016-05-05 09:19:14,002 [myid:] - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x1547f846f890008, timeout of 4000ms exceeded
+2016-05-05 09:19:14,002 [myid:] - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x1547f846f890000, timeout of 4000ms exceeded
+2016-05-05 09:19:14,002 [myid:] - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x1547f846f890002, timeout of 4000ms exceeded
+2016-05-05 09:19:14,002 [myid:] - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x1547f846f890006, timeout of 4000ms exceeded
+2016-05-05 09:19:14,003 [myid:] - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x1547f846f890003, timeout of 4000ms exceeded
+2016-05-05 09:19:14,003 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x1547f846f890004
+2016-05-05 09:19:14,003 [myid:] - INFO  [SyncThread:0:FileTxnLog@199] - Creating new log file: log.85
+2016-05-05 09:19:14,004 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x1547f846f890001
+2016-05-05 09:19:14,004 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x1547f846f890007
+2016-05-05 09:19:14,004 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x1547f846f890008
+2016-05-05 09:19:14,005 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x1547f846f890000
+2016-05-05 09:19:14,005 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x1547f846f890002
+2016-05-05 09:19:14,006 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x1547f846f890006
+2016-05-05 09:19:14,006 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x1547f846f890003
+2016-05-05 09:20:57,219 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /127.0.0.1:40352
+2016-05-05 09:20:57,393 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client /127.0.0.1:40352; will be dropped if server is in r-o mode
+2016-05-05 09:20:57,411 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /127.0.0.1:40352
+2016-05-05 09:20:57,412 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /127.0.0.1:40354
+2016-05-05 09:20:57,412 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /127.0.0.1:40356
+2016-05-05 09:20:57,413 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client /127.0.0.1:40354; will be dropped if server is in r-o mode
+2016-05-05 09:20:57,413 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /127.0.0.1:40354
+2016-05-05 09:20:57,413 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client /127.0.0.1:40356; will be dropped if server is in r-o mode
+2016-05-05 09:20:57,413 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /127.0.0.1:40356
+2016-05-05 09:20:57,413 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /127.0.0.1:40358
+2016-05-05 09:20:57,413 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /127.0.0.1:40360
+2016-05-05 09:20:57,414 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client /127.0.0.1:40358; will be dropped if server is in r-o mode
+2016-05-05 09:20:57,414 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /127.0.0.1:40358
+2016-05-05 09:20:57,414 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /127.0.0.1:40362
+2016-05-05 09:20:57,414 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client /127.0.0.1:40360; will be dropped if server is in r-o mode
+2016-05-05 09:20:57,415 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /127.0.0.1:40360
+2016-05-05 09:20:57,415 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client /127.0.0.1:40362; will be dropped if server is in r-o mode
+2016-05-05 09:20:57,415 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /127.0.0.1:40362
+2016-05-05 09:20:57,415 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /127.0.0.1:40366
+2016-05-05 09:20:57,415 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /127.0.0.1:40368
+2016-05-05 09:20:57,416 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client /127.0.0.1:40366; will be dropped if server is in r-o mode
+2016-05-05 09:20:57,416 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /127.0.0.1:40366
+2016-05-05 09:20:57,416 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /127.0.0.1:40370
+2016-05-05 09:20:57,416 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client /127.0.0.1:40368; will be dropped if server is in r-o mode
+2016-05-05 09:20:57,417 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /127.0.0.1:40368
+2016-05-05 09:20:57,417 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client /127.0.0.1:40370; will be dropped if server is in r-o mode
+2016-05-05 09:20:57,417 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /127.0.0.1:40370
+2016-05-05 09:20:57,462 [myid:] - INFO  [SyncThread:0:ZooKeeperServer@595] - Established session 0x1547f91e6ef0000 with negotiated timeout 4000 for client /127.0.0.1:40352
+2016-05-05 09:20:57,500 [myid:] - INFO  [SyncThread:0:ZooKeeperServer@595] - Established session 0x1547f91e6ef0001 with negotiated timeout 4000 for client /127.0.0.1:40354
+2016-05-05 09:20:57,501 [myid:] - INFO  [SyncThread:0:ZooKeeperServer@595] - Established session 0x1547f91e6ef0002 with negotiated timeout 4000 for client /127.0.0.1:40356
+2016-05-05 09:20:57,502 [myid:] - INFO  [SyncThread:0:ZooKeeperServer@595] - Established session 0x1547f91e6ef0003 with negotiated timeout 4000 for client /127.0.0.1:40358
+2016-05-05 09:20:57,502 [myid:] - INFO  [SyncThread:0:ZooKeeperServer@595] - Established session 0x1547f91e6ef0004 with negotiated timeout 4000 for client /127.0.0.1:40360
+2016-05-05 09:20:57,503 [myid:] - INFO  [SyncThread:0:ZooKeeperServer@595] - Established session 0x1547f91e6ef0005 with negotiated timeout 4000 for client /127.0.0.1:40362
+2016-05-05 09:20:57,504 [myid:] - INFO  [SyncThread:0:ZooKeeperServer@595] - Established session 0x1547f91e6ef0006 with negotiated timeout 4000 for client /127.0.0.1:40366
+2016-05-05 09:20:57,505 [myid:] - INFO  [SyncThread:0:ZooKeeperServer@595] - Established session 0x1547f91e6ef0007 with negotiated timeout 4000 for client /127.0.0.1:40368
+2016-05-05 09:20:57,506 [myid:] - INFO  [SyncThread:0:ZooKeeperServer@595] - Established session 0x1547f91e6ef0008 with negotiated timeout 4000 for client /127.0.0.1:40370
+2016-05-05 09:20:57,533 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0000 type:create cxid:0x572ae64a zxid:0x96 txntype:-1 reqpath:n/a Error Path:/rtb-test Error:KeeperErrorCode = NodeExists for /rtb-test
+2016-05-05 09:20:57,534 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0001 type:create cxid:0x572ae64a zxid:0x97 txntype:-1 reqpath:n/a Error Path:/rtb-test Error:KeeperErrorCode = NodeExists for /rtb-test
+2016-05-05 09:20:57,534 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0002 type:create cxid:0x572ae64a zxid:0x98 txntype:-1 reqpath:n/a Error Path:/rtb-test Error:KeeperErrorCode = NodeExists for /rtb-test
+2016-05-05 09:20:57,534 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0003 type:create cxid:0x572ae64a zxid:0x99 txntype:-1 reqpath:n/a Error Path:/rtb-test Error:KeeperErrorCode = NodeExists for /rtb-test
+2016-05-05 09:20:57,534 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0004 type:create cxid:0x572ae64a zxid:0x9a txntype:-1 reqpath:n/a Error Path:/rtb-test Error:KeeperErrorCode = NodeExists for /rtb-test
+2016-05-05 09:20:57,535 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0005 type:create cxid:0x572ae64a zxid:0x9b txntype:-1 reqpath:n/a Error Path:/rtb-test Error:KeeperErrorCode = NodeExists for /rtb-test
+2016-05-05 09:20:57,535 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0006 type:create cxid:0x572ae64a zxid:0x9c txntype:-1 reqpath:n/a Error Path:/rtb-test Error:KeeperErrorCode = NodeExists for /rtb-test
+2016-05-05 09:20:57,535 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0007 type:create cxid:0x572ae64a zxid:0x9d txntype:-1 reqpath:n/a Error Path:/rtb-test Error:KeeperErrorCode = NodeExists for /rtb-test
+2016-05-05 09:20:57,535 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0008 type:create cxid:0x572ae64a zxid:0x9e txntype:-1 reqpath:n/a Error Path:/rtb-test Error:KeeperErrorCode = NodeExists for /rtb-test
+2016-05-05 09:20:57,572 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0002 type:delete cxid:0x572ae64c zxid:0x9f txntype:-1 reqpath:n/a Error Path:/rtb-test/frequency-cap-ex Error:KeeperErrorCode = NoNode for /rtb-test/frequency-cap-ex
+2016-05-05 09:20:57,572 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0003 type:delete cxid:0x572ae64c zxid:0xa0 txntype:-1 reqpath:n/a Error Path:/rtb-test/masterBanker Error:KeeperErrorCode = NoNode for /rtb-test/masterBanker
+2016-05-05 09:20:57,573 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0006 type:delete cxid:0x572ae64c zxid:0xa1 txntype:-1 reqpath:n/a Error Path:/rtb-test/fixed-price-agent-ex Error:KeeperErrorCode = NoNode for /rtb-test/fixed-price-agent-ex
+2016-05-05 09:20:57,573 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0008 type:delete cxid:0x572ae64c zxid:0xa2 txntype:-1 reqpath:n/a Error Path:/rtb-test/data_logger Error:KeeperErrorCode = NoNode for /rtb-test/data_logger
+2016-05-05 09:20:57,611 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0002 type:delete cxid:0x572ae64e zxid:0xa7 txntype:-1 reqpath:n/a Error Path:/rtb-test/frequency-cap-ex.loopMonitor Error:KeeperErrorCode = NoNode for /rtb-test/frequency-cap-ex.loopMonitor
+2016-05-05 09:20:57,617 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0008 type:delete cxid:0x572ae64e zxid:0xa8 txntype:-1 reqpath:n/a Error Path:/rtb-test/data_logger.loopMonitor Error:KeeperErrorCode = NoNode for /rtb-test/data_logger.loopMonitor
+2016-05-05 09:20:57,704 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0000 type:delete cxid:0x572ae653 zxid:0xb7 txntype:-1 reqpath:n/a Error Path:/rtb-test/monitor Error:KeeperErrorCode = NoNode for /rtb-test/monitor
+2016-05-05 09:20:57,710 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0004 type:delete cxid:0x572ae651 zxid:0xb8 txntype:-1 reqpath:n/a Error Path:/rtb-test/adserver Error:KeeperErrorCode = NoNode for /rtb-test/adserver
+2016-05-05 09:20:57,746 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0005 type:delete cxid:0x572ae654 zxid:0xb9 txntype:-1 reqpath:n/a Error Path:/rtb-test/PostAuctionLoop.loopMonitor Error:KeeperErrorCode = NoNode for /rtb-test/PostAuctionLoop.loopMonitor
+2016-05-05 09:20:57,786 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0000 type:create cxid:0x572ae655 zxid:0xbc txntype:-1 reqpath:n/a Error Path:/rtb-test/monitor/http Error:KeeperErrorCode = NoNode for /rtb-test/monitor/http
+2016-05-05 09:20:57,793 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0004 type:create cxid:0x572ae653 zxid:0xbd txntype:-1 reqpath:n/a Error Path:/rtb-test/adserver/logger Error:KeeperErrorCode = NoNode for /rtb-test/adserver/logger
+2016-05-05 09:20:57,829 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0000 type:create cxid:0x572ae656 zxid:0xbf txntype:-1 reqpath:n/a Error Path:/rtb-test/monitor Error:KeeperErrorCode = NoNode for /rtb-test/monitor
+2016-05-05 09:20:57,870 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0004 type:create cxid:0x572ae654 zxid:0xc1 txntype:-1 reqpath:n/a Error Path:/rtb-test/adserver Error:KeeperErrorCode = NoNode for /rtb-test/adserver
+2016-05-05 09:20:57,875 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0005 type:delete cxid:0x572ae656 zxid:0xc3 txntype:-1 reqpath:n/a Error Path:/rtb-test/PostAuctionLoop.bidder Error:KeeperErrorCode = NoNode for /rtb-test/PostAuctionLoop.bidder
+2016-05-05 09:20:57,883 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0001 type:delete cxid:0x572ae658 zxid:0xc5 txntype:-1 reqpath:n/a Error Path:/rtb-test/agentConfigurationService Error:KeeperErrorCode = NoNode for /rtb-test/agentConfigurationService
+2016-05-05 09:20:57,891 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0007 type:delete cxid:0x572ae656 zxid:0xc7 txntype:-1 reqpath:n/a Error Path:/rtb-test/router.loopMonitor Error:KeeperErrorCode = NoNode for /rtb-test/router.loopMonitor
+2016-05-05 09:20:57,926 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0000 type:create cxid:0x572ae65a zxid:0xcd txntype:-1 reqpath:n/a Error Path:/rtb-test/monitor/zeromq Error:KeeperErrorCode = NoNode for /rtb-test/monitor/zeromq
+2016-05-05 09:20:57,933 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0007 type:delete cxid:0x572ae658 zxid:0xce txntype:-1 reqpath:n/a Error Path:/rtb-test/router.bidder Error:KeeperErrorCode = NoNode for /rtb-test/router.bidder
+2016-05-05 09:20:57,950 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0001 type:create cxid:0x572ae65d zxid:0xd2 txntype:-1 reqpath:n/a Error Path:/rtb-test/agentConfigurationService/rest/http Error:KeeperErrorCode = NoNode for /rtb-test/agentConfigurationService/rest/http
+2016-05-05 09:20:58,002 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0001 type:create cxid:0x572ae65f zxid:0xd4 txntype:-1 reqpath:n/a Error Path:/rtb-test/agentConfigurationService/rest Error:KeeperErrorCode = NoNode for /rtb-test/agentConfigurationService/rest
+2016-05-05 09:20:58,008 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0001 type:create cxid:0x572ae661 zxid:0xd5 txntype:-1 reqpath:n/a Error Path:/rtb-test/agentConfigurationService Error:KeeperErrorCode = NoNode for /rtb-test/agentConfigurationService
+2016-05-05 09:20:58,009 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0007 type:create cxid:0x572ae65b zxid:0xd6 txntype:-1 reqpath:n/a Error Path:/rtb-test/router.augmentationLoop/augmentors Error:KeeperErrorCode = NoNode for /rtb-test/router.augmentationLoop/augmentors
+2016-05-05 09:20:58,048 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0007 type:create cxid:0x572ae65c zxid:0xd8 txntype:-1 reqpath:n/a Error Path:/rtb-test/router.augmentationLoop Error:KeeperErrorCode = NoNode for /rtb-test/router.augmentationLoop
+2016-05-05 09:20:58,115 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0001 type:create cxid:0x572ae666 zxid:0xdf txntype:-1 reqpath:n/a Error Path:/rtb-test/agentConfigurationService/rest/zeromq Error:KeeperErrorCode = NoNode for /rtb-test/agentConfigurationService/rest/zeromq
+2016-05-05 09:20:58,133 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0005 type:create cxid:0x572ae662 zxid:0xe1 txntype:-1 reqpath:n/a Error Path:/rtb-test/PostAuctionLoop/logger Error:KeeperErrorCode = NoNode for /rtb-test/PostAuctionLoop/logger
+2016-05-05 09:20:58,149 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0005 type:create cxid:0x572ae663 zxid:0xe3 txntype:-1 reqpath:n/a Error Path:/rtb-test/PostAuctionLoop Error:KeeperErrorCode = NoNode for /rtb-test/PostAuctionLoop
+2016-05-05 09:20:58,150 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0001 type:create cxid:0x572ae669 zxid:0xe4 txntype:-1 reqpath:n/a Error Path:/rtb-test/agentConfigurationService/listen Error:KeeperErrorCode = NoNode for /rtb-test/agentConfigurationService/listen
+2016-05-05 09:20:58,200 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0001 type:create cxid:0x572ae66c zxid:0xea txntype:-1 reqpath:n/a Error Path:/rtb-test/agentConfigurationService/agents Error:KeeperErrorCode = NoNode for /rtb-test/agentConfigurationService/agents
+2016-05-05 09:20:58,200 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0005 type:create cxid:0x572ae669 zxid:0xeb txntype:-1 reqpath:n/a Error Path:/rtb-test/PostAuctionLoop/events Error:KeeperErrorCode = NoNode for /rtb-test/PostAuctionLoop/events
+2016-05-05 09:20:58,266 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0005 type:create cxid:0x572ae66d zxid:0xf0 txntype:-1 reqpath:n/a Error Path:/rtb-test/PostAuctionLoop/agents Error:KeeperErrorCode = NoNode for /rtb-test/PostAuctionLoop/agents
+2016-05-05 09:20:58,267 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0007 type:create cxid:0x572ae66a zxid:0xf1 txntype:-1 reqpath:n/a Error Path:/rtb-test/router/logger Error:KeeperErrorCode = NoNode for /rtb-test/router/logger
+2016-05-05 09:20:58,291 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0007 type:create cxid:0x572ae66b zxid:0xf3 txntype:-1 reqpath:n/a Error Path:/rtb-test/router Error:KeeperErrorCode = NoNode for /rtb-test/router
+2016-05-05 09:20:58,341 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0007 type:create cxid:0x572ae66f zxid:0xf8 txntype:-1 reqpath:n/a Error Path:/rtb-test/router/agents Error:KeeperErrorCode = NoNode for /rtb-test/router/agents
+2016-05-05 09:20:58,397 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0007 type:delete cxid:0x572ae67b zxid:0xfb txntype:-1 reqpath:n/a Error Path:/rtb-test/router.mock Error:KeeperErrorCode = NoNode for /rtb-test/router.mock
+2016-05-05 09:21:07,881 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x1547f91e6ef0006, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:220)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:208)
+	at java.lang.Thread.run(Thread.java:745)
+2016-05-05 09:21:07,882 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /127.0.0.1:40366 which had sessionid 0x1547f91e6ef0006
+2016-05-05 09:21:12,000 [myid:] - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x1547f91e6ef0006, timeout of 4000ms exceeded
+2016-05-05 09:21:12,000 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x1547f91e6ef0006
+2016-05-05 09:21:52,960 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /127.0.0.1:41030
+2016-05-05 09:21:52,960 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client /127.0.0.1:41030; will be dropped if server is in r-o mode
+2016-05-05 09:21:52,961 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /127.0.0.1:41030
+2016-05-05 09:21:52,987 [myid:] - INFO  [SyncThread:0:ZooKeeperServer@595] - Established session 0x1547f91e6ef0009 with negotiated timeout 4000 for client /127.0.0.1:41030
+2016-05-05 09:21:52,987 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0009 type:create cxid:0x572ae681 zxid:0xfe txntype:-1 reqpath:n/a Error Path:/rtb-test Error:KeeperErrorCode = NodeExists for /rtb-test
+2016-05-05 09:21:52,995 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef0009 type:delete cxid:0x572ae683 zxid:0xff txntype:-1 reqpath:n/a Error Path:/rtb-test/fixed-price-agent-ex Error:KeeperErrorCode = NoNode for /rtb-test/fixed-price-agent-ex
+2016-05-05 09:22:03,097 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x1547f91e6ef0009, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:220)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:208)
+	at java.lang.Thread.run(Thread.java:745)
+2016-05-05 09:22:03,097 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /127.0.0.1:41030 which had sessionid 0x1547f91e6ef0009
+2016-05-05 09:22:08,000 [myid:] - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x1547f91e6ef0009, timeout of 4000ms exceeded
+2016-05-05 09:22:08,000 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x1547f91e6ef0009
+2016-05-05 09:22:48,180 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /127.0.0.1:41500
+2016-05-05 09:22:48,181 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client /127.0.0.1:41500; will be dropped if server is in r-o mode
+2016-05-05 09:22:48,181 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /127.0.0.1:41500
+2016-05-05 09:22:48,207 [myid:] - INFO  [SyncThread:0:ZooKeeperServer@595] - Established session 0x1547f91e6ef000a with negotiated timeout 4000 for client /127.0.0.1:41500
+2016-05-05 09:22:48,207 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef000a type:create cxid:0x572ae6b9 zxid:0x102 txntype:-1 reqpath:n/a Error Path:/rtb-test Error:KeeperErrorCode = NodeExists for /rtb-test
+2016-05-05 09:22:48,215 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef000a type:delete cxid:0x572ae6bb zxid:0x103 txntype:-1 reqpath:n/a Error Path:/rtb-test/fixed-price-agent-ex Error:KeeperErrorCode = NoNode for /rtb-test/fixed-price-agent-ex
+2016-05-05 09:22:58,323 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x1547f91e6ef000a, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:220)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:208)
+	at java.lang.Thread.run(Thread.java:745)
+2016-05-05 09:22:58,324 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /127.0.0.1:41500 which had sessionid 0x1547f91e6ef000a
+2016-05-05 09:23:02,000 [myid:] - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x1547f91e6ef000a, timeout of 4000ms exceeded
+2016-05-05 09:23:02,000 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x1547f91e6ef000a
+2016-05-05 09:23:43,420 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /127.0.0.1:42052
+2016-05-05 09:23:43,421 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client /127.0.0.1:42052; will be dropped if server is in r-o mode
+2016-05-05 09:23:43,421 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /127.0.0.1:42052
+2016-05-05 09:23:43,452 [myid:] - INFO  [SyncThread:0:ZooKeeperServer@595] - Established session 0x1547f91e6ef000b with negotiated timeout 4000 for client /127.0.0.1:42052
+2016-05-05 09:23:43,453 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef000b type:create cxid:0x572ae6f0 zxid:0x106 txntype:-1 reqpath:n/a Error Path:/rtb-test Error:KeeperErrorCode = NodeExists for /rtb-test
+2016-05-05 09:23:43,460 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef000b type:delete cxid:0x572ae6f2 zxid:0x107 txntype:-1 reqpath:n/a Error Path:/rtb-test/fixed-price-agent-ex Error:KeeperErrorCode = NoNode for /rtb-test/fixed-price-agent-ex
+2016-05-05 09:23:53,574 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x1547f91e6ef000b, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:220)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:208)
+	at java.lang.Thread.run(Thread.java:745)
+2016-05-05 09:23:53,575 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /127.0.0.1:42052 which had sessionid 0x1547f91e6ef000b
+2016-05-05 09:23:58,000 [myid:] - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x1547f91e6ef000b, timeout of 4000ms exceeded
+2016-05-05 09:23:58,000 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x1547f91e6ef000b
+2016-05-05 09:24:38,617 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /127.0.0.1:42490
+2016-05-05 09:24:38,617 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client /127.0.0.1:42490; will be dropped if server is in r-o mode
+2016-05-05 09:24:38,617 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /127.0.0.1:42490
+2016-05-05 09:24:38,689 [myid:] - INFO  [SyncThread:0:ZooKeeperServer@595] - Established session 0x1547f91e6ef000c with negotiated timeout 4000 for client /127.0.0.1:42490
+2016-05-05 09:24:38,689 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef000c type:create cxid:0x572ae727 zxid:0x10a txntype:-1 reqpath:n/a Error Path:/rtb-test Error:KeeperErrorCode = NodeExists for /rtb-test
+2016-05-05 09:24:38,697 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef000c type:delete cxid:0x572ae729 zxid:0x10b txntype:-1 reqpath:n/a Error Path:/rtb-test/fixed-price-agent-ex Error:KeeperErrorCode = NoNode for /rtb-test/fixed-price-agent-ex
+2016-05-05 09:24:48,819 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x1547f91e6ef000c, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:220)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:208)
+	at java.lang.Thread.run(Thread.java:745)
+2016-05-05 09:24:48,820 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /127.0.0.1:42490 which had sessionid 0x1547f91e6ef000c
+2016-05-05 09:24:54,000 [myid:] - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x1547f91e6ef000c, timeout of 4000ms exceeded
+2016-05-05 09:24:54,000 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x1547f91e6ef000c
+2016-05-05 09:25:33,902 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /127.0.0.1:43008
+2016-05-05 09:25:33,903 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client /127.0.0.1:43008; will be dropped if server is in r-o mode
+2016-05-05 09:25:33,903 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /127.0.0.1:43008
+2016-05-05 09:25:33,934 [myid:] - INFO  [SyncThread:0:ZooKeeperServer@595] - Established session 0x1547f91e6ef000d with negotiated timeout 4000 for client /127.0.0.1:43008
+2016-05-05 09:25:33,935 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef000d type:create cxid:0x572ae75e zxid:0x10e txntype:-1 reqpath:n/a Error Path:/rtb-test Error:KeeperErrorCode = NodeExists for /rtb-test
+2016-05-05 09:25:33,943 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef000d type:delete cxid:0x572ae760 zxid:0x10f txntype:-1 reqpath:n/a Error Path:/rtb-test/fixed-price-agent-ex Error:KeeperErrorCode = NoNode for /rtb-test/fixed-price-agent-ex
+2016-05-05 09:25:44,054 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x1547f91e6ef000d, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:220)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:208)
+	at java.lang.Thread.run(Thread.java:745)
+2016-05-05 09:25:44,054 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /127.0.0.1:43008 which had sessionid 0x1547f91e6ef000d
+2016-05-05 09:25:48,000 [myid:] - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x1547f91e6ef000d, timeout of 4000ms exceeded
+2016-05-05 09:25:48,000 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x1547f91e6ef000d
+2016-05-05 09:26:29,138 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /127.0.0.1:43474
+2016-05-05 09:26:29,138 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client /127.0.0.1:43474; will be dropped if server is in r-o mode
+2016-05-05 09:26:29,138 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /127.0.0.1:43474
+2016-05-05 09:26:29,163 [myid:] - INFO  [SyncThread:0:ZooKeeperServer@595] - Established session 0x1547f91e6ef000e with negotiated timeout 4000 for client /127.0.0.1:43474
+2016-05-05 09:26:29,163 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef000e type:create cxid:0x572ae796 zxid:0x112 txntype:-1 reqpath:n/a Error Path:/rtb-test Error:KeeperErrorCode = NodeExists for /rtb-test
+2016-05-05 09:26:29,171 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef000e type:delete cxid:0x572ae798 zxid:0x113 txntype:-1 reqpath:n/a Error Path:/rtb-test/fixed-price-agent-ex Error:KeeperErrorCode = NoNode for /rtb-test/fixed-price-agent-ex
+2016-05-05 09:26:39,273 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x1547f91e6ef000e, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:220)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:208)
+	at java.lang.Thread.run(Thread.java:745)
+2016-05-05 09:26:39,274 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /127.0.0.1:43474 which had sessionid 0x1547f91e6ef000e
+2016-05-05 09:26:44,000 [myid:] - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x1547f91e6ef000e, timeout of 4000ms exceeded
+2016-05-05 09:26:44,000 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x1547f91e6ef000e
+2016-05-05 09:27:24,357 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxnFactory@197] - Accepted socket connection from /127.0.0.1:44000
+2016-05-05 09:27:24,357 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@793] - Connection request from old client /127.0.0.1:44000; will be dropped if server is in r-o mode
+2016-05-05 09:27:24,357 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:ZooKeeperServer@839] - Client attempting to establish new session at /127.0.0.1:44000
+2016-05-05 09:27:24,383 [myid:] - INFO  [SyncThread:0:ZooKeeperServer@595] - Established session 0x1547f91e6ef000f with negotiated timeout 4000 for client /127.0.0.1:44000
+2016-05-05 09:27:24,384 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef000f type:create cxid:0x572ae7cd zxid:0x116 txntype:-1 reqpath:n/a Error Path:/rtb-test Error:KeeperErrorCode = NodeExists for /rtb-test
+2016-05-05 09:27:24,391 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@627] - Got user-level KeeperException when processing sessionid:0x1547f91e6ef000f type:delete cxid:0x572ae7cf zxid:0x117 txntype:-1 reqpath:n/a Error Path:/rtb-test/fixed-price-agent-ex Error:KeeperErrorCode = NoNode for /rtb-test/fixed-price-agent-ex
+2016-05-05 09:27:34,514 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x1547f91e6ef000f, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:220)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:208)
+	at java.lang.Thread.run(Thread.java:745)
+2016-05-05 09:27:34,515 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /127.0.0.1:44000 which had sessionid 0x1547f91e6ef000f
+2016-05-05 09:27:38,000 [myid:] - INFO  [SessionTracker:ZooKeeperServer@325] - Expiring session 0x1547f91e6ef000f, timeout of 4000ms exceeded
+2016-05-05 09:27:38,000 [myid:] - INFO  [ProcessThread(sid:0 cport:-1)::PrepRequestProcessor@476] - Processed session termination for sessionid: 0x1547f91e6ef000f
+2016-05-05 09:28:15,040 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x1547f91e6ef0000, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:220)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:208)
+	at java.lang.Thread.run(Thread.java:745)
+2016-05-05 09:28:15,040 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /127.0.0.1:40352 which had sessionid 0x1547f91e6ef0000
+2016-05-05 09:28:15,040 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x1547f91e6ef0003, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:220)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:208)
+	at java.lang.Thread.run(Thread.java:745)
+2016-05-05 09:28:15,041 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /127.0.0.1:40358 which had sessionid 0x1547f91e6ef0003
+2016-05-05 09:28:15,041 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x1547f91e6ef0004, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:220)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:208)
+	at java.lang.Thread.run(Thread.java:745)
+2016-05-05 09:28:15,041 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /127.0.0.1:40360 which had sessionid 0x1547f91e6ef0004
+2016-05-05 09:28:15,042 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x1547f91e6ef0001, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:220)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:208)
+	at java.lang.Thread.run(Thread.java:745)
+2016-05-05 09:28:15,042 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /127.0.0.1:40354 which had sessionid 0x1547f91e6ef0001
+2016-05-05 09:28:15,042 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x1547f91e6ef0008, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:220)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:208)
+	at java.lang.Thread.run(Thread.java:745)
+2016-05-05 09:28:15,042 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /127.0.0.1:40370 which had sessionid 0x1547f91e6ef0008
+2016-05-05 09:28:15,043 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x1547f91e6ef0002, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:220)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:208)
+	at java.lang.Thread.run(Thread.java:745)
+2016-05-05 09:28:15,043 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /127.0.0.1:40356 which had sessionid 0x1547f91e6ef0002
+2016-05-05 09:28:15,043 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x1547f91e6ef0007, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:220)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:208)
+	at java.lang.Thread.run(Thread.java:745)
+2016-05-05 09:28:15,044 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /127.0.0.1:40368 which had sessionid 0x1547f91e6ef0007
+2016-05-05 09:28:15,044 [myid:] - WARN  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@349] - caught end of stream exception
+EndOfStreamException: Unable to read additional data from client sessionid 0x1547f91e6ef0005, likely client has closed socket
+	at org.apache.zookeeper.server.NIOServerCnxn.doIO(NIOServerCnxn.java:220)
+	at org.apache.zookeeper.server.NIOServerCnxnFactory.run(NIOServerCnxnFactory.java:208)
+	at java.lang.Thread.run(Thread.java:745)
+2016-05-05 09:28:15,044 [myid:] - INFO  [NIOServerCxn.Factory:0.0.0.0/0.0.0.0:2181:NIOServerCnxn@1001] - Closed socket connection for client /127.0.0.1:40362 which had sessionid 0x1547f91e6ef0005

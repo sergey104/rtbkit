@@ -1,0 +1,24 @@
+FD limit too low: 1024/4096 smaller than recommended 65535
+FD limit raised to: 4096
+wexists handler returned -101
+2. returning result 
+2016-05-05 10:20:27.521 [1;32mZMQ [1;34mconnecting to agentConfigurationService/listen[0m
+wexists handler returned -101
+2. returning result 
+2016-05-05 10:20:27.563 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources FrequencyCapAugmentor::palEvents[0m
+2016-05-05 10:20:27.563 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources [0m
+2016-05-05 10:20:27.588 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources [0m
+2016-05-05 10:20:27.588 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources ZmqNamedSocket::socket[0m
+wexists handler returned -101
+2. returning result 
+warning: could not connect to PostAuctionLoop/logger immediately
+2016-05-05 10:20:27.693 [1;32mZMQ Trace [1;34mconnecting to router.augmentationLoop / router.augmentationLoop[0m
+2016-05-05 10:20:27.693 [1;32mZMQ [1;34mconnecting to router.augmentationLoop/augmentors[0m
+wexists handler returned -101
+2. returning result 
+2016-05-05 10:20:27.713 [1;32mZMQ [1;34mconnecting to router.augmentationLoop/augmentors[0m
+2016-05-05 10:20:27.721 [1;32mZMQ [1;34mconnecting to router.augmentationLoop/augmentors[0m
+2016-05-05 10:20:27.731 [1;32mZMQ [1;34mconnected to tcp://127.0.0.1:18000[0m
+2016-05-05 10:20:27.731 [1;32mZMQ [1;34mconnecting to agentConfigurationService/listen[0m
+2016-05-05 10:20:27.754 [1;32mZMQ [1;34mconnected to tcp://127.0.0.1:19000[0m
+got configuration message fixed-price-agent-ex_2048
