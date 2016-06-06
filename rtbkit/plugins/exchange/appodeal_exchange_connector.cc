@@ -20,7 +20,7 @@
 #include <sstream>
 
 
-const std::string bid_sample_filename("/home/fil/rtbkit/rtbkit/plugins/exchange/testing/appodealtestresponse.json");
+const std::string bid_sample_filename("/home/ubuntu/rtbkit/rtbkit/plugins/exchange/testing/appodealtestresponse.json");
 
 
 std::string loadFile(const std::string & filename)
@@ -128,7 +128,7 @@ parseBidRequest(HttpAuctionHandler & connection,
 {
 
   ofstream myfile;
-  myfile.open ("/home/fil/appodeal.txt", std::ofstream::app);
+  myfile.open ("/home/ubuntu/appodeal.txt", std::ofstream::app);
   myfile << "Writing this to a file inside appodeal parser.\n";
   myfile << header;
   myfile <<"\n";
@@ -216,7 +216,7 @@ parseBidRequest(HttpAuctionHandler & connection,
         }
     }
     ofstream idfile;
-    idfile.open ("/home/fil/id.txt");
+    idfile.open ("/home/ubuntu/id.txt");
     idfile << result->auctionId;
     idfile.close();
 myfile << "AUC_ID:" << result->auctionId << "\n";
@@ -241,7 +241,7 @@ getTimeAvailableMs(HttpAuctionHandler & connection,
     return (absoluteTimeMax < tmax) ? absoluteTimeMax : tmax;
 }
 
- /* HttpResponse
+/* HttpResponse
 AppodealExchangeConnector::
 getResponse(const HttpAuctionHandler & connection,
             const HttpHeader & requestHeader,
@@ -274,10 +274,14 @@ getResponse(const HttpAuctionHandler & connection,
 
     StreamJsonPrintingContext context(stream);
     desc.printJsonTyped(&response, context);
-
+    ofstream myfile;
+    myfile.open ("/home/fil/appodealresponse.txt", std::ofstream::app);
+    myfile << stream.str() << "\n";
+    myfile.close();
     return HttpResponse(200, "application/json", stream.str());
 
-}*/
+}
+*/
 HttpResponse
 AppodealExchangeConnector::
 getResponse(const HttpAuctionHandler & connection,
@@ -293,9 +297,9 @@ getResponse(const HttpAuctionHandler & connection,
   std::stringstream ss;
   ss << now;  // or any other type
   std::string result=ss.str();
-  strJson.replace(372,10,result);
+  strJson.replace(398,10,result);
   ofstream myfile;
-  myfile.open ("/home/fil/appodealresponse.txt", std::ofstream::app);
+  myfile.open ("/home/ubuntu/appodealresponse.txt", std::ofstream::app);
   myfile << "Writing this to a file inside appodeal parser and before sending response.\n";
   myfile << strJson;
   myfile <<"\n";
@@ -318,8 +322,12 @@ getDroppedAuctionResponse(const HttpAuctionHandler & connection,
                           const std::string & reason) const
 {
   ofstream myfile;
-  myfile.open ("/home/fil/appodealresponse.txt", std::ofstream::app);
-  myfile << "----NONE 204.\n";
+  myfile.open ("/home/ubuntu/appodealresponse.txt", std::ofstream::app);
+  myfile << "----NONE 204." ;
+  myfile << "    reason: ";
+  myfile << reason;
+  myfile << "\n" ;
+
   myfile.close();
   return HttpResponse(204, "none", "");
 }
@@ -332,8 +340,9 @@ getErrorResponse(const HttpAuctionHandler & connection,
     Json::Value response;
     response["error"] = message;
     ofstream myfile;
-    myfile.open ("/home/fil/appodealresponse.txt", std::ofstream::app);
+    myfile.open ("/home/ubuntu/appodealresponse.txt", std::ofstream::app);
     myfile << "----400.\n";
+    myfile << "message:  " << message << "\n";
     myfile.close();
     return HttpResponse(400, response);
 }
