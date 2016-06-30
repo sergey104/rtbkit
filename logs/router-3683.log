@@ -1,0 +1,1078 @@
+FD limit too low: 1024/4096 smaller than recommended 65535
+FD limit raised to: 4096
+2016-06-30 07:48:48.693 [1;32mZMQ [1;34mconnecting to monitor/zeromq[0m
+2016-06-30 07:48:48.710 [1;32mZMQ [1;34mconnected to tcp://127.0.0.1:24000[0m
+2016-06-30 07:48:48.718 [1;32mZMQ [1;34mconnecting to monitor/zeromq[0m
+2016-06-30 07:48:48.735 [1;32mZMQ [1;34mconnected to tcp://127.0.0.1:24000[0m
+2016-06-30 07:48:48.747 [1;32mSlaveBanker [1;34mSync Rate: 1[0m
+2016-06-30 07:48:48.747 [1;32mSlaveBanker [1;34mSpend Rate: {"USD/1M":100000}[0m
+2016-06-30 07:48:48.777 [1;32mZMQ [1;34mconnecting to masterBanker/zeromq[0m
+2016-06-30 07:48:48.793 [1;32mZMQ [1;34mconnected to tcp://127.0.0.1:22000[0m
+2016-06-30 07:48:48.793 [1;32mSlaveBankerArguments [1;34musing zmq interface for the MasterBanker[0m
+2016-06-30 07:48:48.902 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources ZmqNamedEndpoint::socket[0m
+2016-06-30 07:48:48.903 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources ZmqNamedEndpoint::socket[0m
+2016-06-30 07:48:48.903 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources ZmqNamedEndpoint::socket[0m
+augmentor frequency-cap-ex has connected
+2016-06-30 07:48:48.903 [1;32mZMQ Trace [1;34mconnecting to PostAuctionLoop / PostAuctionLoop[0m
+2016-06-30 07:48:48.903 [1;32mZMQ [1;34mconnecting to PostAuctionLoop/events[0m
+agent fixed-price-agent-ex_3687 connected to router
+2016-06-30 07:48:48.905 [1;32mZMQ [1;34mconnected to tcp://127.0.0.1:20000[0m
+2016-06-30 07:48:48.906 [1;32mZMQ [1;34mconnecting to agentConfigurationService/listen[0m
+2016-06-30 07:48:48.907 [1;32mZMQ [1;34mconnected to tcp://127.0.0.1:19000[0m
+got configuration message fixed-price-agent-ex_3687
+********* calling addSpendAccount for hello:world for SlaveBanker router.slaveBanker
+listening on hostname 0.0.0.0 port 17339
+my thread 140394897602304
+response: 
+total of 1.0031e+07 microseconds and 211 sleeps
+CONFIG                                1         38   0.00%    38.00us/call
+HEARTBEAT                            10         84   0.00%     8.40us/call
+HELLO                                 1         55   0.00%    55.00us/call
+PONG0                                 9        191   0.00%    21.22us/call
+PONG1                                 9         62   0.00%     6.89us/call
+checkExpiredAuctions                211        107   0.00%     0.51us/call
+checks                              220          0   0.00%     0.00us/call
+configureAgentOnExchange            221          9   0.00%     0.04us/call
+doBid                               221         54   0.00%     0.24us/call
+doConfig                            221      17428   0.17%    78.86us/call
+doStartBidding                      221          0   0.00%     0.00us/call
+doSubmitted                         221          5   0.00%     0.02us/call
+logBidEvents                         10        173   0.00%    17.30us/call
+sendPings                             9        233   0.00%    25.89us/call
+sleep                               211       3715   0.04%    17.61us/call
+sleepPoll                           211   10005918  99.75% 47421.41us/call
+spinPoll                            221       2892   0.03%    13.09us/call
+my thread 140395180377856
+response: 
+total of 1.0048e+07 microseconds and 214 sleeps
+HEARTBEAT                            10         68   0.00%     6.80us/call
+PONG0                                10        193   0.00%    19.30us/call
+PONG1                                10         81   0.00%     8.10us/call
+checkExpiredAuctions                214         83   0.00%     0.39us/call
+checks                              221        273   0.00%     1.24us/call
+configureAgentOnExchange            221          0   0.00%     0.00us/call
+doBid                               221         54   0.00%     0.24us/call
+doConfig                            221          0   0.00%     0.00us/call
+doStartBidding                      221          0   0.00%     0.00us/call
+doSubmitted                         221          4   0.00%     0.02us/call
+logBidEvents                         10        168   0.00%    16.80us/call
+sendPings                            10        267   0.00%    26.70us/call
+sleep                               214       4116   0.04%    19.23us/call
+sleepPoll                           214   10040178  99.92% 46916.72us/call
+spinPoll                            221       2526   0.03%    11.43us/call
+my thread 140394897602304
+response: 
+total of 1.0048e+07 microseconds and 216 sleeps
+HEARTBEAT                            10         95   0.00%     9.50us/call
+PONG0                                10        185   0.00%    18.50us/call
+PONG1                                10         80   0.00%     8.00us/call
+checkExpiredAuctions                216         97   0.00%     0.45us/call
+checks                              221        246   0.00%     1.11us/call
+configureAgentOnExchange            221          0   0.00%     0.00us/call
+doBid                               221         59   0.00%     0.27us/call
+doConfig                            221          0   0.00%     0.00us/call
+doStartBidding                      221          8   0.00%     0.04us/call
+doSubmitted                         221          3   0.00%     0.01us/call
+logBidEvents                         10        158   0.00%    15.80us/call
+sendPings                            10        249   0.00%    24.90us/call
+sleep                               216       4610   0.05%    21.34us/call
+sleepPoll                           216   10039580  99.92% 46479.54us/call
+spinPoll                            221       2621   0.03%    11.86us/call
+my thread 140394897602304
+response: 
+total of 9.99874e+06 microseconds and 212 sleeps
+HEARTBEAT                            10         90   0.00%     9.00us/call
+PONG0                                10        214   0.00%    21.40us/call
+PONG1                                10        105   0.00%    10.50us/call
+checkExpiredAuctions                212         43   0.00%     0.20us/call
+checks                              220        229   0.00%     1.04us/call
+configureAgentOnExchange            220          2   0.00%     0.01us/call
+doBid                               220         21   0.00%     0.10us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          8   0.00%     0.04us/call
+doSubmitted                         220          1   0.00%     0.00us/call
+logBidEvents                         10        136   0.00%    13.60us/call
+sendPings                            10        276   0.00%    27.60us/call
+sleep                               212       4197   0.04%    19.80us/call
+sleepPoll                           212    9990273  99.92% 47123.93us/call
+spinPoll                            220       3147   0.03%    14.30us/call
+my thread 140394897602304
+response: 
+my thread 140395180377856
+response: 
+total of 1.00471e+07 microseconds and 211 sleeps
+HEARTBEAT                            10        103   0.00%    10.30us/call
+PONG0                                 9        176   0.00%    19.56us/call
+PONG1                                 9         86   0.00%     9.56us/call
+checkExpiredAuctions                211         62   0.00%     0.29us/call
+checks                              219        270   0.00%     1.23us/call
+configureAgentOnExchange            219          4   0.00%     0.02us/call
+doBid                               219         18   0.00%     0.08us/call
+doConfig                            219          0   0.00%     0.00us/call
+doStartBidding                      219          0   0.00%     0.00us/call
+doSubmitted                         219          5   0.00%     0.02us/call
+logBidEvents                          9        131   0.00%    14.56us/call
+sendPings                             9        254   0.00%    28.22us/call
+sleep                               211       3653   0.04%    17.31us/call
+sleepPoll                           211   10039076  99.92% 47578.56us/call
+spinPoll                            219       3301   0.03%    15.07us/call
+my thread 140394897602304
+response: 
+total of 9.99788e+06 microseconds and 211 sleeps
+HEARTBEAT                            10         99   0.00%     9.90us/call
+PONG0                                10        222   0.00%    22.20us/call
+PONG1                                10         98   0.00%     9.80us/call
+checkExpiredAuctions                211         38   0.00%     0.18us/call
+checks                              220        250   0.00%     1.14us/call
+configureAgentOnExchange            220         11   0.00%     0.05us/call
+doBid                               220          4   0.00%     0.02us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          0   0.00%     0.00us/call
+doSubmitted                         220          1   0.00%     0.00us/call
+logBidEvents                         10        121   0.00%    12.10us/call
+sendPings                            10        241   0.00%    24.10us/call
+sleep                               211       3927   0.04%    18.61us/call
+sleepPoll                           211    9989542  99.92% 47343.80us/call
+spinPoll                            220       3326   0.03%    15.12us/call
+my thread 140394897602304
+response: 
+total of 9.99816e+06 microseconds and 211 sleeps
+HEARTBEAT                            10         80   0.00%     8.00us/call
+PONG0                                10        168   0.00%    16.80us/call
+PONG1                                10         75   0.00%     7.50us/call
+checkExpiredAuctions                211         27   0.00%     0.13us/call
+checks                              220        184   0.00%     0.84us/call
+configureAgentOnExchange            220          8   0.00%     0.04us/call
+doBid                               220          7   0.00%     0.03us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          0   0.00%     0.00us/call
+doSubmitted                         220          3   0.00%     0.01us/call
+logBidEvents                         10        129   0.00%    12.90us/call
+sendPings                            10        232   0.00%    23.20us/call
+sleep                               211       3990   0.04%    18.91us/call
+sleepPoll                           211    9990307  99.92% 47347.43us/call
+spinPoll                            220       2951   0.03%    13.41us/call
+my thread 140394897602304
+response: 
+my thread 140394897602304
+response: 
+my thread 140394897602304
+response: 
+total of 9.99828e+06 microseconds and 212 sleeps
+HEARTBEAT                            10        100   0.00%    10.00us/call
+PONG0                                10        220   0.00%    22.00us/call
+PONG1                                10        131   0.00%    13.10us/call
+checkExpiredAuctions                212         37   0.00%     0.17us/call
+checks                              220        463   0.00%     2.10us/call
+configureAgentOnExchange            220          0   0.00%     0.00us/call
+doBid                               220          3   0.00%     0.01us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          0   0.00%     0.00us/call
+doSubmitted                         220          8   0.00%     0.04us/call
+logBidEvents                         10        150   0.00%    15.00us/call
+sendPings                            10        259   0.00%    25.90us/call
+sleep                               212       3883   0.04%    18.32us/call
+sleepPoll                           212    9989463  99.91% 47120.11us/call
+spinPoll                            220       3562   0.04%    16.19us/call
+total of 1.00472e+07 microseconds and 211 sleeps
+HEARTBEAT                            10         99   0.00%     9.90us/call
+PONG0                                 9        180   0.00%    20.00us/call
+PONG1                                 9         89   0.00%     9.89us/call
+checkExpiredAuctions                211         75   0.00%     0.36us/call
+checks                              219        324   0.00%     1.48us/call
+configureAgentOnExchange            219          0   0.00%     0.00us/call
+doBid                               219         15   0.00%     0.07us/call
+doConfig                            219          0   0.00%     0.00us/call
+doStartBidding                      219          0   0.00%     0.00us/call
+doSubmitted                         219          0   0.00%     0.00us/call
+logBidEvents                          9        141   0.00%    15.67us/call
+sendPings                             9        245   0.00%    27.22us/call
+sleep                               211       3231   0.03%    15.31us/call
+sleepPoll                           211   10038953  99.92% 47577.98us/call
+spinPoll                            219       3806   0.04%    17.38us/call
+my thread 140394897602304
+response: 
+my thread 140394897602304
+response: 
+total of 1.00479e+07 microseconds and 213 sleeps
+HEARTBEAT                            10         96   0.00%     9.60us/call
+PONG0                                10        241   0.00%    24.10us/call
+PONG1                                10        115   0.00%    11.50us/call
+checkExpiredAuctions                213         41   0.00%     0.19us/call
+checks                              221        286   0.00%     1.29us/call
+configureAgentOnExchange            221          0   0.00%     0.00us/call
+doBid                               221          7   0.00%     0.03us/call
+doConfig                            221          2   0.00%     0.01us/call
+doStartBidding                      221          0   0.00%     0.00us/call
+doSubmitted                         221          5   0.00%     0.02us/call
+logBidEvents                         10        170   0.00%    17.00us/call
+sendPings                            10        278   0.00%    27.80us/call
+sleep                               213       4119   0.04%    19.34us/call
+sleepPoll                           213   10039102  99.91% 47131.93us/call
+spinPoll                            221       3445   0.03%    15.59us/call
+my thread 140394897602304
+response: 
+my thread 140394897602304
+response: 
+total of 1.0048e+07 microseconds and 214 sleeps
+HEARTBEAT                            10         86   0.00%     8.60us/call
+PONG0                                10        203   0.00%    20.30us/call
+PONG1                                10        106   0.00%    10.60us/call
+checkExpiredAuctions                214         34   0.00%     0.16us/call
+checks                              221        237   0.00%     1.07us/call
+configureAgentOnExchange            221          0   0.00%     0.00us/call
+doBid                               221          2   0.00%     0.01us/call
+doConfig                            221          0   0.00%     0.00us/call
+doStartBidding                      221          0   0.00%     0.00us/call
+doSubmitted                         221          5   0.00%     0.02us/call
+logBidEvents                         10        160   0.00%    16.00us/call
+sendPings                            10        259   0.00%    25.90us/call
+sleep                               214       4135   0.04%    19.32us/call
+sleepPoll                           214   10039544  99.92% 46913.76us/call
+spinPoll                            221       3215   0.03%    14.55us/call
+my thread 140395180377856
+response: 
+total of 9.99863e+06 microseconds and 214 sleeps
+HEARTBEAT                            10        107   0.00%    10.70us/call
+PONG0                                10        209   0.00%    20.90us/call
+PONG1                                10        140   0.00%    14.00us/call
+checkExpiredAuctions                214         64   0.00%     0.30us/call
+checks                              220        192   0.00%     0.87us/call
+configureAgentOnExchange            220          0   0.00%     0.00us/call
+doBid                               220          8   0.00%     0.04us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          1   0.00%     0.00us/call
+doSubmitted                         220          2   0.00%     0.01us/call
+logBidEvents                         10        147   0.00%    14.70us/call
+sendPings                            10        265   0.00%    26.50us/call
+sleep                               214       4320   0.04%    20.19us/call
+sleepPoll                           214    9989564  99.91% 46680.21us/call
+spinPoll                            220       3608   0.04%    16.40us/call
+my thread 140395180377856
+response: 
+total of 1.00478e+07 microseconds and 217 sleeps
+HEARTBEAT                            10         90   0.00%     9.00us/call
+PONG0                                10        188   0.00%    18.80us/call
+PONG1                                10        116   0.00%    11.60us/call
+checkExpiredAuctions                217         32   0.00%     0.15us/call
+checks                              221        205   0.00%     0.93us/call
+configureAgentOnExchange            221          0   0.00%     0.00us/call
+doBid                               221          5   0.00%     0.02us/call
+doConfig                            221          8   0.00%     0.04us/call
+doStartBidding                      221          0   0.00%     0.00us/call
+doSubmitted                         221          3   0.00%     0.01us/call
+logBidEvents                         10        155   0.00%    15.50us/call
+sendPings                            10        265   0.00%    26.50us/call
+sleep                               217       4561   0.05%    21.02us/call
+sleepPoll                           217   10038757  99.91% 46261.55us/call
+spinPoll                            221       3462   0.03%    15.67us/call
+my thread 140395180377856
+response: 
+total of 1.00476e+07 microseconds and 212 sleeps
+HEARTBEAT                            10         79   0.00%     7.90us/call
+PONG0                                 9        163   0.00%    18.11us/call
+PONG1                                 9        102   0.00%    11.33us/call
+checkExpiredAuctions                212         18   0.00%     0.08us/call
+checks                              219        332   0.00%     1.52us/call
+configureAgentOnExchange            219          0   0.00%     0.00us/call
+doBid                               219          2   0.00%     0.01us/call
+doConfig                            219          8   0.00%     0.04us/call
+doStartBidding                      219          0   0.00%     0.00us/call
+doSubmitted                         219          2   0.00%     0.01us/call
+logBidEvents                          9        136   0.00%    15.11us/call
+sendPings                             9        245   0.00%    27.22us/call
+sleep                               212       3852   0.04%    18.17us/call
+sleepPoll                           212   10039712  99.92% 47357.13us/call
+spinPoll                            219       2949   0.03%    13.47us/call
+my thread 140395180377856
+response: 
+total of 1.00478e+07 microseconds and 215 sleeps
+HEARTBEAT                            10         82   0.00%     8.20us/call
+PONG0                                10        206   0.00%    20.60us/call
+PONG1                                10        109   0.00%    10.90us/call
+checkExpiredAuctions                215         53   0.00%     0.25us/call
+checks                              221        286   0.00%     1.29us/call
+configureAgentOnExchange            221          0   0.00%     0.00us/call
+doBid                               221          5   0.00%     0.02us/call
+doConfig                            221          0   0.00%     0.00us/call
+doStartBidding                      221          0   0.00%     0.00us/call
+doSubmitted                         221          2   0.00%     0.01us/call
+logBidEvents                         10        175   0.00%    17.50us/call
+sendPings                            10        279   0.00%    27.90us/call
+sleep                               215       4158   0.04%    19.34us/call
+sleepPoll                           215   10038678  99.91% 46691.53us/call
+spinPoll                            221       3734   0.04%    16.90us/call
+my thread 140395180377856
+response: 
+total of 9.99865e+06 microseconds and 212 sleeps
+HEARTBEAT                            10        110   0.00%    11.00us/call
+PONG0                                10        191   0.00%    19.10us/call
+PONG1                                10        114   0.00%    11.40us/call
+checkExpiredAuctions                212         50   0.00%     0.24us/call
+checks                              220        325   0.00%     1.48us/call
+configureAgentOnExchange            220          0   0.00%     0.00us/call
+doBid                               220         20   0.00%     0.09us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          9   0.00%     0.04us/call
+doSubmitted                         220          2   0.00%     0.01us/call
+logBidEvents                         10        159   0.00%    15.90us/call
+sendPings                            10        252   0.00%    25.20us/call
+sleep                               212       4212   0.04%    19.87us/call
+sleepPoll                           212    9989403  99.91% 47119.83us/call
+spinPoll                            220       3805   0.04%    17.30us/call
+my thread 140394897602304
+response: 
+total of 1.00474e+07 microseconds and 212 sleeps
+HEARTBEAT                            10        113   0.00%    11.30us/call
+PONG0                                10        222   0.00%    22.20us/call
+PONG1                                10         99   0.00%     9.90us/call
+checkExpiredAuctions                212         31   0.00%     0.15us/call
+checks                              221        287   0.00%     1.30us/call
+configureAgentOnExchange            221          0   0.00%     0.00us/call
+doBid                               221         19   0.00%     0.09us/call
+doConfig                            221          0   0.00%     0.00us/call
+doStartBidding                      221          0   0.00%     0.00us/call
+doSubmitted                         221          2   0.00%     0.01us/call
+logBidEvents                         10        133   0.00%    13.30us/call
+sendPings                            10        274   0.00%    27.40us/call
+sleep                               212       3692   0.04%    17.42us/call
+sleepPoll                           212   10038825  99.91% 47352.95us/call
+spinPoll                            221       3680   0.04%    16.65us/call
+my thread 140395180377856
+response: 
+total of 9.99802e+06 microseconds and 211 sleeps
+HEARTBEAT                            10        105   0.00%    10.50us/call
+PONG0                                10        201   0.00%    20.10us/call
+PONG1                                10        116   0.00%    11.60us/call
+checkExpiredAuctions                211         40   0.00%     0.19us/call
+checks                              220        332   0.00%     1.51us/call
+configureAgentOnExchange            220          0   0.00%     0.00us/call
+doBid                               220         11   0.00%     0.05us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          1   0.00%     0.00us/call
+doSubmitted                         220          2   0.00%     0.01us/call
+logBidEvents                         10        140   0.00%    14.00us/call
+sendPings                            10        257   0.00%    25.70us/call
+sleep                               211       3963   0.04%    18.78us/call
+sleepPoll                           211    9989568  99.92% 47343.92us/call
+spinPoll                            220       3280   0.03%    14.91us/call
+my thread 140394897602304
+response: 
+total of 1.00471e+07 microseconds and 211 sleeps
+HEARTBEAT                            10        104   0.00%    10.40us/call
+PONG0                                 9        215   0.00%    23.89us/call
+PONG1                                 9        106   0.00%    11.78us/call
+checkExpiredAuctions                211         59   0.00%     0.28us/call
+checks                              219        215   0.00%     0.98us/call
+configureAgentOnExchange            219          0   0.00%     0.00us/call
+doBid                               219          9   0.00%     0.04us/call
+doConfig                            219          0   0.00%     0.00us/call
+doStartBidding                      219          8   0.00%     0.04us/call
+doSubmitted                         219          2   0.00%     0.01us/call
+logBidEvents                          9        157   0.00%    17.44us/call
+sendPings                            10        306   0.00%    30.60us/call
+sleep                               211       2948   0.03%    13.97us/call
+sleepPoll                           211   10039179  99.92% 47579.05us/call
+spinPoll                            219       3753   0.04%    17.14us/call
+my thread 140395180377856
+response: 
+total of 9.99873e+06 microseconds and 211 sleeps
+HEARTBEAT                            10         89   0.00%     8.90us/call
+PONG0                                10        200   0.00%    20.00us/call
+PONG1                                10         95   0.00%     9.50us/call
+checkExpiredAuctions                211         49   0.00%     0.23us/call
+checks                              220        179   0.00%     0.81us/call
+configureAgentOnExchange            220          0   0.00%     0.00us/call
+doBid                               220          6   0.00%     0.03us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          0   0.00%     0.00us/call
+doSubmitted                         220          4   0.00%     0.02us/call
+logBidEvents                         10        146   0.00%    14.60us/call
+sendPings                             9        187   0.00%    20.78us/call
+sleep                               211       3851   0.04%    18.25us/call
+sleepPoll                           211    9990605  99.92% 47348.84us/call
+spinPoll                            220       3317   0.03%    15.08us/call
+my thread 140395180377856
+response: 
+my thread 140395180377856
+response: 
+total of 1.00476e+07 microseconds and 212 sleeps
+HEARTBEAT                            10         99   0.00%     9.90us/call
+PONG0                                10        184   0.00%    18.40us/call
+PONG1                                10        104   0.00%    10.40us/call
+checkExpiredAuctions                212         63   0.00%     0.30us/call
+checks                              221        363   0.00%     1.64us/call
+configureAgentOnExchange            221          0   0.00%     0.00us/call
+doBid                               221         21   0.00%     0.10us/call
+doConfig                            221          0   0.00%     0.00us/call
+doStartBidding                      221          0   0.00%     0.00us/call
+doSubmitted                         221          5   0.00%     0.02us/call
+logBidEvents                         10        189   0.00%    18.90us/call
+sendPings                            10        253   0.00%    25.30us/call
+sleep                               212       4020   0.04%    18.96us/call
+sleepPoll                           212   10038837  99.91% 47353.00us/call
+spinPoll                            221       3489   0.03%    15.79us/call
+my thread 140395180377856
+response: 
+my thread 140394897602304
+response: 
+total of 9.99824e+06 microseconds and 214 sleeps
+HEARTBEAT                            10        114   0.00%    11.40us/call
+PONG0                                10        183   0.00%    18.30us/call
+PONG1                                10        116   0.00%    11.60us/call
+checkExpiredAuctions                214         48   0.00%     0.22us/call
+checks                              220        278   0.00%     1.26us/call
+configureAgentOnExchange            220          0   0.00%     0.00us/call
+doBid                               220         18   0.00%     0.08us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          2   0.00%     0.01us/call
+doSubmitted                         220          5   0.00%     0.02us/call
+logBidEvents                         10        137   0.00%    13.70us/call
+sendPings                            10        241   0.00%    24.10us/call
+sleep                               214       4285   0.04%    20.02us/call
+sleepPoll                           214    9989430  99.91% 46679.58us/call
+spinPoll                            220       3388   0.03%    15.40us/call
+my thread 140395180377856
+response: 
+my thread 140395180377856
+response: 
+total of 1.00477e+07 microseconds and 213 sleeps
+HEARTBEAT                            10         82   0.00%     8.20us/call
+PONG0                                10        209   0.00%    20.90us/call
+PONG1                                10        111   0.00%    11.10us/call
+checkExpiredAuctions                213         52   0.00%     0.24us/call
+checks                              221        405   0.00%     1.83us/call
+configureAgentOnExchange            221          0   0.00%     0.00us/call
+doBid                               221          9   0.00%     0.04us/call
+doConfig                            221          0   0.00%     0.00us/call
+doStartBidding                      221          0   0.00%     0.00us/call
+doSubmitted                         221          4   0.00%     0.02us/call
+logBidEvents                         10        143   0.00%    14.30us/call
+sendPings                            10        263   0.00%    26.30us/call
+sleep                               213       4193   0.04%    19.69us/call
+sleepPoll                           213   10039105  99.91% 47131.95us/call
+spinPoll                            221       3094   0.03%    14.00us/call
+total of 1.00478e+07 microseconds and 214 sleeps
+HEARTBEAT                            10         87   0.00%     8.70us/call
+PONG0                                 9        226   0.00%    25.11us/call
+PONG1                                 9        132   0.00%    14.67us/call
+checkExpiredAuctions                214         40   0.00%     0.19us/call
+checks                              219        169   0.00%     0.77us/call
+configureAgentOnExchange            219          0   0.00%     0.00us/call
+doBid                               219         10   0.00%     0.05us/call
+doConfig                            219          0   0.00%     0.00us/call
+doStartBidding                      219          1   0.00%     0.00us/call
+doSubmitted                         219          0   0.00%     0.00us/call
+logBidEvents                          9        167   0.00%    18.56us/call
+sendPings                             9        233   0.00%    25.89us/call
+sleep                               214       3815   0.04%    17.83us/call
+sleepPoll                           214   10039257  99.92% 46912.42us/call
+spinPoll                            219       3637   0.04%    16.61us/call
+my thread 140394897602304
+response: 
+total of 1.00459e+07 microseconds and 214 sleeps
+HEARTBEAT                            11        103   0.00%     9.36us/call
+PONG0                                10        197   0.00%    19.70us/call
+PONG1                                10        111   0.00%    11.10us/call
+checkExpiredAuctions                214         49   0.00%     0.23us/call
+checks                              221        178   0.00%     0.81us/call
+configureAgentOnExchange            221          0   0.00%     0.00us/call
+doBid                               221          4   0.00%     0.02us/call
+doConfig                            221         10   0.00%     0.05us/call
+doStartBidding                      221          1   0.00%     0.00us/call
+doSubmitted                         221          2   0.00%     0.01us/call
+logBidEvents                         10        128   0.00%    12.80us/call
+sendPings                            10        263   0.00%    26.30us/call
+sleep                               214       4064   0.04%    18.99us/call
+sleepPoll                           214   10037288  99.91% 46903.21us/call
+spinPoll                            221       3523   0.04%    15.94us/call
+total of 1.0048e+07 microseconds and 215 sleeps
+HEARTBEAT                            10         95   0.00%     9.50us/call
+PONG0                                10        169   0.00%    16.90us/call
+PONG1                                10        117   0.00%    11.70us/call
+checkExpiredAuctions                215         39   0.00%     0.18us/call
+checks                              221        259   0.00%     1.17us/call
+configureAgentOnExchange            221          0   0.00%     0.00us/call
+doBid                               221         10   0.00%     0.05us/call
+doConfig                            221          0   0.00%     0.00us/call
+doStartBidding                      221          0   0.00%     0.00us/call
+doSubmitted                         221          0   0.00%     0.00us/call
+logBidEvents                         10        142   0.00%    14.20us/call
+sendPings                            10        274   0.00%    27.40us/call
+sleep                               215       4388   0.04%    20.41us/call
+sleepPoll                           215   10039083  99.91% 46693.41us/call
+spinPoll                            221       3389   0.03%    15.33us/call
+my thread 140395180377856
+response: 
+my thread 140395180377856
+response: 
+my thread 140394897602304
+response: 
+total of 1.00478e+07 microseconds and 213 sleeps
+HEARTBEAT                            10         91   0.00%     9.10us/call
+PONG0                                10        203   0.00%    20.30us/call
+PONG1                                10        114   0.00%    11.40us/call
+checkExpiredAuctions                213         49   0.00%     0.23us/call
+checks                              221        177   0.00%     0.80us/call
+configureAgentOnExchange            221          8   0.00%     0.04us/call
+doBid                               221          3   0.00%     0.01us/call
+doConfig                            221          0   0.00%     0.00us/call
+doStartBidding                      221          0   0.00%     0.00us/call
+doSubmitted                         221          7   0.00%     0.03us/call
+logBidEvents                         10        172   0.00%    17.20us/call
+sendPings                            10        264   0.00%    26.40us/call
+sleep                               213       4026   0.04%    18.90us/call
+sleepPoll                           213   10039320  99.92% 47132.96us/call
+spinPoll                            221       3412   0.03%    15.44us/call
+total of 9.99798e+06 microseconds and 209 sleeps
+HEARTBEAT                            10         95   0.00%     9.50us/call
+PONG0                                 9        188   0.00%    20.89us/call
+PONG1                                 9         99   0.00%    11.00us/call
+checkExpiredAuctions                209         56   0.00%     0.27us/call
+checks                              218        180   0.00%     0.83us/call
+configureAgentOnExchange            218          0   0.00%     0.00us/call
+doBid                               218         15   0.00%     0.07us/call
+doConfig                            218          0   0.00%     0.00us/call
+doStartBidding                      218          1   0.00%     0.00us/call
+doSubmitted                         218          0   0.00%     0.00us/call
+logBidEvents                          9        115   0.00%    12.78us/call
+sendPings                            10        246   0.00%    24.60us/call
+sleep                               209       3647   0.04%    17.45us/call
+sleepPoll                           209    9989789  99.92% 47798.03us/call
+spinPoll                            218       3552   0.04%    16.29us/call
+my thread 140395180377856
+response: 
+total of 1.00479e+07 microseconds and 213 sleeps
+HEARTBEAT                            10         91   0.00%     9.10us/call
+PONG0                                10        177   0.00%    17.70us/call
+PONG1                                10        104   0.00%    10.40us/call
+checkExpiredAuctions                213         49   0.00%     0.23us/call
+checks                              221        496   0.00%     2.24us/call
+configureAgentOnExchange            221          0   0.00%     0.00us/call
+doBid                               221          5   0.00%     0.02us/call
+doConfig                            221          0   0.00%     0.00us/call
+doStartBidding                      221          0   0.00%     0.00us/call
+doSubmitted                         221          3   0.00%     0.01us/call
+logBidEvents                         10        124   0.00%    12.40us/call
+sendPings                             9        216   0.00%    24.00us/call
+sleep                               213       3991   0.04%    18.74us/call
+sleepPoll                           213   10039275  99.91% 47132.75us/call
+spinPoll                            221       3333   0.03%    15.08us/call
+my thread 140395180377856
+response: 
+my thread 140394897602304
+response: 
+total of 1.00479e+07 microseconds and 213 sleeps
+HEARTBEAT                            10         95   0.00%     9.50us/call
+PONG0                                10        191   0.00%    19.10us/call
+PONG1                                10        100   0.00%    10.00us/call
+checkExpiredAuctions                213         40   0.00%     0.19us/call
+checks                              221        208   0.00%     0.94us/call
+configureAgentOnExchange            221          0   0.00%     0.00us/call
+doBid                               221         15   0.00%     0.07us/call
+doConfig                            221          0   0.00%     0.00us/call
+doStartBidding                      221          0   0.00%     0.00us/call
+doSubmitted                         221          4   0.00%     0.02us/call
+logBidEvents                         10        153   0.00%    15.30us/call
+sendPings                            10        243   0.00%    24.30us/call
+sleep                               213       4181   0.04%    19.63us/call
+sleepPoll                           213   10039326  99.91% 47132.99us/call
+spinPoll                            221       3351   0.03%    15.16us/call
+my thread 140395180377856
+response: 
+total of 9.99804e+06 microseconds and 210 sleeps
+HEARTBEAT                            10         99   0.00%     9.90us/call
+PONG0                                10        226   0.00%    22.60us/call
+PONG1                                10        103   0.00%    10.30us/call
+checkExpiredAuctions                210         48   0.00%     0.23us/call
+checks                              220        226   0.00%     1.03us/call
+configureAgentOnExchange            220          0   0.00%     0.00us/call
+doBid                               220         14   0.00%     0.06us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          0   0.00%     0.00us/call
+doSubmitted                         220          2   0.00%     0.01us/call
+logBidEvents                         10        163   0.00%    16.30us/call
+sendPings                            10        302   0.00%    30.20us/call
+sleep                               210       3533   0.04%    16.82us/call
+sleepPoll                           210    9989749  99.92% 47570.23us/call
+spinPoll                            220       3577   0.04%    16.26us/call
+my thread 140394897602304
+response: 
+total of 1.00477e+07 microseconds and 213 sleeps
+HEARTBEAT                            10        110   0.00%    11.00us/call
+PONG0                                 9        186   0.00%    20.67us/call
+PONG1                                 9        118   0.00%    13.11us/call
+checkExpiredAuctions                213         72   0.00%     0.34us/call
+checks                              219        269   0.00%     1.23us/call
+configureAgentOnExchange            219          0   0.00%     0.00us/call
+doBid                               219          4   0.00%     0.02us/call
+doConfig                            219          0   0.00%     0.00us/call
+doStartBidding                      219          2   0.00%     0.01us/call
+doSubmitted                         219          2   0.00%     0.01us/call
+logBidEvents                          9        143   0.00%    15.89us/call
+sendPings                            10        284   0.00%    28.40us/call
+sleep                               213       3823   0.04%    17.95us/call
+sleepPoll                           213   10039023  99.91% 47131.56us/call
+spinPoll                            219       3653   0.04%    16.68us/call
+my thread 140394897602304
+response: 
+total of 9.99802e+06 microseconds and 211 sleeps
+HEARTBEAT                            10         98   0.00%     9.80us/call
+PONG0                                10        215   0.00%    21.50us/call
+PONG1                                10        116   0.00%    11.60us/call
+checkExpiredAuctions                211         36   0.00%     0.17us/call
+checks                              220        329   0.00%     1.50us/call
+configureAgentOnExchange            220          0   0.00%     0.00us/call
+doBid                               220          6   0.00%     0.03us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          1   0.00%     0.00us/call
+doSubmitted                         220          2   0.00%     0.01us/call
+logBidEvents                         10        137   0.00%    13.70us/call
+sendPings                             9        246   0.00%    27.33us/call
+sleep                               211       3520   0.04%    16.68us/call
+sleepPoll                           211    9989905  99.92% 47345.52us/call
+spinPoll                            220       3406   0.03%    15.48us/call
+my thread 140395180377856
+response: 
+my thread 140394897602304
+response: 
+my thread 140395180377856
+response: 
+total of 9.99789e+06 microseconds and 213 sleeps
+HEARTBEAT                            10         68   0.00%     6.80us/call
+PONG0                                10        206   0.00%    20.60us/call
+PONG1                                10        111   0.00%    11.10us/call
+checkExpiredAuctions                213         44   0.00%     0.21us/call
+checks                              220        384   0.00%     1.75us/call
+configureAgentOnExchange            220          8   0.00%     0.04us/call
+doBid                               220         19   0.00%     0.09us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          0   0.00%     0.00us/call
+doSubmitted                         220          8   0.00%     0.04us/call
+logBidEvents                         10        147   0.00%    14.70us/call
+sendPings                            10        275   0.00%    27.50us/call
+sleep                               213       4154   0.04%    19.50us/call
+sleepPoll                           213    9989360  99.91% 46898.40us/call
+spinPoll                            220       3105   0.03%    14.11us/call
+total of 9.99794e+06 microseconds and 213 sleeps
+HEARTBEAT                            10         83   0.00%     8.30us/call
+PONG0                                10        232   0.00%    23.20us/call
+PONG1                                10        108   0.00%    10.80us/call
+checkExpiredAuctions                213         57   0.00%     0.27us/call
+checks                              220        279   0.00%     1.27us/call
+configureAgentOnExchange            220          0   0.00%     0.00us/call
+doBid                               220         19   0.00%     0.09us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          0   0.00%     0.00us/call
+doSubmitted                         220          0   0.00%     0.00us/call
+logBidEvents                         10        164   0.00%    16.40us/call
+sendPings                            10        313   0.00%    31.30us/call
+sleep                               213       4240   0.04%    19.91us/call
+sleepPoll                           213    9989238  99.91% 46897.83us/call
+spinPoll                            220       3205   0.03%    14.57us/call
+my thread 140395180377856
+response: 
+my thread 140394897602304
+response: 
+total of 9.99842e+06 microseconds and 213 sleeps
+HEARTBEAT                            10        114   0.00%    11.40us/call
+PONG0                                10        245   0.00%    24.50us/call
+PONG1                                10        119   0.00%    11.90us/call
+checkExpiredAuctions                213         58   0.00%     0.27us/call
+checks                              220        283   0.00%     1.29us/call
+configureAgentOnExchange            220          0   0.00%     0.00us/call
+doBid                               220         11   0.00%     0.05us/call
+doConfig                            220          8   0.00%     0.04us/call
+doStartBidding                      220          0   0.00%     0.00us/call
+doSubmitted                         220          5   0.00%     0.02us/call
+logBidEvents                         10        185   0.00%    18.50us/call
+sendPings                            10        282   0.00%    28.20us/call
+sleep                               213       4142   0.04%    19.45us/call
+sleepPoll                           213    9989371  99.91% 46898.46us/call
+spinPoll                            220       3596   0.04%    16.35us/call
+total of 1.00469e+07 microseconds and 210 sleeps
+HEARTBEAT                            10        105   0.00%    10.50us/call
+PONG0                                 9        189   0.00%    21.00us/call
+PONG1                                 9         86   0.00%     9.56us/call
+checkExpiredAuctions                210         47   0.00%     0.22us/call
+checks                              219        298   0.00%     1.36us/call
+configureAgentOnExchange            219          0   0.00%     0.00us/call
+doBid                               219         17   0.00%     0.08us/call
+doConfig                            219          0   0.00%     0.00us/call
+doStartBidding                      219          0   0.00%     0.00us/call
+doSubmitted                         219          0   0.00%     0.00us/call
+logBidEvents                          9        130   0.00%    14.44us/call
+sendPings                             9        237   0.00%    26.33us/call
+sleep                               210       3453   0.03%    16.44us/call
+sleepPoll                           210   10038694  99.92% 47803.30us/call
+spinPoll                            219       3666   0.04%    16.74us/call
+my thread 140394897602304
+response: 
+total of 9.99807e+06 microseconds and 212 sleeps
+HEARTBEAT                            10        105   0.00%    10.50us/call
+PONG0                                10        185   0.00%    18.50us/call
+PONG1                                10         92   0.00%     9.20us/call
+checkExpiredAuctions                212         48   0.00%     0.23us/call
+checks                              220        162   0.00%     0.74us/call
+configureAgentOnExchange            220          0   0.00%     0.00us/call
+doBid                               220          3   0.00%     0.01us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          6   0.00%     0.03us/call
+doSubmitted                         220          1   0.00%     0.00us/call
+logBidEvents                         10        115   0.00%    11.50us/call
+sendPings                            10        238   0.00%    23.80us/call
+sleep                               212       4257   0.04%    20.08us/call
+sleepPoll                           212    9989592  99.92% 47120.72us/call
+spinPoll                            220       3267   0.03%    14.85us/call
+my thread 140394897602304
+response: 
+total of 9.99796e+06 microseconds and 211 sleeps
+HEARTBEAT                            10         90   0.00%     9.00us/call
+PONG0                                10        185   0.00%    18.50us/call
+PONG1                                10         83   0.00%     8.30us/call
+checkExpiredAuctions                211         65   0.00%     0.31us/call
+checks                              220        267   0.00%     1.21us/call
+configureAgentOnExchange            220          0   0.00%     0.00us/call
+doBid                               220         44   0.00%     0.20us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          0   0.00%     0.00us/call
+doSubmitted                         220          3   0.00%     0.01us/call
+logBidEvents                         10        141   0.00%    14.10us/call
+sendPings                            10        249   0.00%    24.90us/call
+sleep                               211       4161   0.04%    19.72us/call
+sleepPoll                           211    9989817  99.92% 47345.10us/call
+spinPoll                            220       2859   0.03%    13.00us/call
+total of 9.99854e+06 microseconds and 213 sleeps
+HEARTBEAT                            10         98   0.00%     9.80us/call
+PONG0                                10        200   0.00%    20.00us/call
+PONG1                                10        110   0.00%    11.00us/call
+checkExpiredAuctions                213         64   0.00%     0.30us/call
+checks                              220        257   0.00%     1.17us/call
+configureAgentOnExchange            220          0   0.00%     0.00us/call
+doBid                               220         29   0.00%     0.13us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          0   0.00%     0.00us/call
+doSubmitted                         220          0   0.00%     0.00us/call
+logBidEvents                         10        147   0.00%    14.70us/call
+sendPings                            10        252   0.00%    25.20us/call
+sleep                               213       4278   0.04%    20.08us/call
+sleepPoll                           213    9990120  99.92% 46901.97us/call
+spinPoll                            220       2987   0.03%    13.58us/call
+my thread 140395180377856
+response: 
+total of 1.00473e+07 microseconds and 211 sleeps
+HEARTBEAT                            10        121   0.00%    12.10us/call
+PONG0                                 9        200   0.00%    22.22us/call
+PONG1                                 9        113   0.00%    12.56us/call
+checkExpiredAuctions                211         61   0.00%     0.29us/call
+checks                              219        187   0.00%     0.85us/call
+configureAgentOnExchange            219          0   0.00%     0.00us/call
+doBid                               219          9   0.00%     0.04us/call
+doConfig                            219          0   0.00%     0.00us/call
+doStartBidding                      219          0   0.00%     0.00us/call
+doSubmitted                         219          2   0.00%     0.01us/call
+logBidEvents                          9        154   0.00%    17.11us/call
+sendPings                             9        273   0.00%    30.33us/call
+sleep                               211       3479   0.03%    16.49us/call
+sleepPoll                           211   10039038  99.92% 47578.38us/call
+spinPoll                            219       3640   0.04%    16.62us/call
+my thread 140395180377856
+response: 
+my thread 140394897602304
+response: 
+total of 1.00478e+07 microseconds and 212 sleeps
+HEARTBEAT                            10        106   0.00%    10.60us/call
+PONG0                                10        254   0.00%    25.40us/call
+PONG1                                10        113   0.00%    11.30us/call
+checkExpiredAuctions                212         42   0.00%     0.20us/call
+checks                              221        178   0.00%     0.81us/call
+configureAgentOnExchange            221          0   0.00%     0.00us/call
+doBid                               221         13   0.00%     0.06us/call
+doConfig                            221          0   0.00%     0.00us/call
+doStartBidding                      221          0   0.00%     0.00us/call
+doSubmitted                         221          6   0.00%     0.03us/call
+logBidEvents                         10        177   0.00%    17.70us/call
+sendPings                            10        279   0.00%    27.90us/call
+sleep                               212       3882   0.04%    18.31us/call
+sleepPoll                           212   10039292  99.92% 47355.15us/call
+spinPoll                            221       3476   0.03%    15.73us/call
+total of 9.99786e+06 microseconds and 212 sleeps
+HEARTBEAT                            10         98   0.00%     9.80us/call
+PONG0                                10        207   0.00%    20.70us/call
+PONG1                                10        119   0.00%    11.90us/call
+checkExpiredAuctions                212         56   0.00%     0.26us/call
+checks                              220        237   0.00%     1.08us/call
+configureAgentOnExchange            220          0   0.00%     0.00us/call
+doBid                               220          6   0.00%     0.03us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          2   0.00%     0.01us/call
+doSubmitted                         220          0   0.00%     0.00us/call
+logBidEvents                         10        154   0.00%    15.40us/call
+sendPings                            10        276   0.00%    27.60us/call
+sleep                               212       4003   0.04%    18.88us/call
+sleepPoll                           212    9988916  99.91% 47117.53us/call
+spinPoll                            220       3790   0.04%    17.23us/call
+my thread 140394897602304
+response: 
+total of 9.99837e+06 microseconds and 214 sleeps
+HEARTBEAT                            10         90   0.00%     9.00us/call
+PONG0                                10        215   0.00%    21.50us/call
+PONG1                                10        119   0.00%    11.90us/call
+checkExpiredAuctions                214         39   0.00%     0.18us/call
+checks                              220        298   0.00%     1.35us/call
+configureAgentOnExchange            220          0   0.00%     0.00us/call
+doBid                               220          5   0.00%     0.02us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          8   0.00%     0.04us/call
+doSubmitted                         220          2   0.00%     0.01us/call
+logBidEvents                         10        136   0.00%    13.60us/call
+sendPings                            10        253   0.00%    25.30us/call
+sleep                               214       4301   0.04%    20.10us/call
+sleepPoll                           214    9989631  99.91% 46680.52us/call
+spinPoll                            220       3277   0.03%    14.90us/call
+my thread 140395180377856
+response: 
+total of 9.9981e+06 microseconds and 211 sleeps
+HEARTBEAT                            10         98   0.00%     9.80us/call
+PONG0                                10        232   0.00%    23.20us/call
+PONG1                                10        114   0.00%    11.40us/call
+checkExpiredAuctions                211         63   0.00%     0.30us/call
+checks                              220        247   0.00%     1.12us/call
+configureAgentOnExchange            220          3   0.00%     0.01us/call
+doBid                               220          4   0.00%     0.02us/call
+doConfig                            220          5   0.00%     0.02us/call
+doStartBidding                      220          0   0.00%     0.00us/call
+doSubmitted                         220          3   0.00%     0.01us/call
+logBidEvents                         10        176   0.00%    17.60us/call
+sendPings                            10        294   0.00%    29.40us/call
+sleep                               211       3889   0.04%    18.43us/call
+sleepPoll                           211    9989639  99.92% 47344.26us/call
+spinPoll                            220       3337   0.03%    15.17us/call
+my thread 140395180377856
+response: 
+my thread 140395180377856
+response: 
+total of 1.0047e+07 microseconds and 212 sleeps
+HEARTBEAT                            10        102   0.00%    10.20us/call
+PONG0                                 9        199   0.00%    22.11us/call
+PONG1                                 9        106   0.00%    11.78us/call
+checkExpiredAuctions                212        117   0.00%     0.55us/call
+checks                              219        349   0.00%     1.59us/call
+configureAgentOnExchange            219          0   0.00%     0.00us/call
+doBid                               219         34   0.00%     0.16us/call
+doConfig                            219          0   0.00%     0.00us/call
+doStartBidding                      219          0   0.00%     0.00us/call
+doSubmitted                         219         11   0.00%     0.05us/call
+logBidEvents                          9        159   0.00%    17.67us/call
+sendPings                             9        339   0.00%    37.67us/call
+sleep                               212       3415   0.03%    16.11us/call
+sleepPoll                           212   10038458  99.92% 47351.22us/call
+spinPoll                            219       3692   0.04%    16.86us/call
+my thread 140395180377856
+response: 
+total of 1.00479e+07 microseconds and 213 sleeps
+HEARTBEAT                            10        114   0.00%    11.40us/call
+PONG0                                10        178   0.00%    17.80us/call
+PONG1                                10        105   0.00%    10.50us/call
+checkExpiredAuctions                213         54   0.00%     0.25us/call
+checks                              221        371   0.00%     1.68us/call
+configureAgentOnExchange            221          0   0.00%     0.00us/call
+doBid                               221         16   0.00%     0.07us/call
+doConfig                            221          0   0.00%     0.00us/call
+doStartBidding                      221          8   0.00%     0.04us/call
+doSubmitted                         221          7   0.00%     0.03us/call
+logBidEvents                         10        133   0.00%    13.30us/call
+sendPings                            10        228   0.00%    22.80us/call
+sleep                               213       4184   0.04%    19.64us/call
+sleepPoll                           213   10038982  99.91% 47131.37us/call
+spinPoll                            221       3503   0.03%    15.85us/call
+my thread 140394897602304
+response: 
+total of 9.99772e+06 microseconds and 210 sleeps
+HEARTBEAT                            10        103   0.00%    10.30us/call
+PONG0                                10        229   0.00%    22.90us/call
+PONG1                                10        145   0.00%    14.50us/call
+checkExpiredAuctions                210         98   0.00%     0.47us/call
+checks                              220        161   0.00%     0.73us/call
+configureAgentOnExchange            220          0   0.00%     0.00us/call
+doBid                               220         12   0.00%     0.05us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          0   0.00%     0.00us/call
+doSubmitted                         220          1   0.00%     0.00us/call
+logBidEvents                         10        163   0.00%    16.30us/call
+sendPings                            10        317   0.00%    31.70us/call
+sleep                               210       3589   0.04%    17.09us/call
+sleepPoll                           210    9989035  99.91% 47566.83us/call
+spinPoll                            220       3869   0.04%    17.59us/call
+my thread 140395180377856
+response: 
+my thread 140394897602304
+response: 
+total of 9.9988e+06 microseconds and 212 sleeps
+HEARTBEAT                            10         94   0.00%     9.40us/call
+PONG0                                10        201   0.00%    20.10us/call
+PONG1                                10        111   0.00%    11.10us/call
+checkExpiredAuctions                212         41   0.00%     0.19us/call
+checks                              220        334   0.00%     1.52us/call
+configureAgentOnExchange            220          0   0.00%     0.00us/call
+doBid                               220          2   0.00%     0.01us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          0   0.00%     0.00us/call
+doSubmitted                         220          4   0.00%     0.02us/call
+logBidEvents                         10        142   0.00%    14.20us/call
+sendPings                            10        232   0.00%    23.20us/call
+sleep                               212       3699   0.04%    17.45us/call
+sleepPoll                           212    9990690  99.92% 47125.90us/call
+spinPoll                            220       3251   0.03%    14.78us/call
+my thread 140395180377856
+response: 
+my thread 140394897602304
+response: 
+total of 1.00477e+07 microseconds and 215 sleeps
+HEARTBEAT                            10        102   0.00%    10.20us/call
+PONG0                                10        228   0.00%    22.80us/call
+PONG1                                10        134   0.00%    13.40us/call
+checkExpiredAuctions                215         82   0.00%     0.38us/call
+checks                              221        350   0.00%     1.58us/call
+configureAgentOnExchange            221          9   0.00%     0.04us/call
+doBid                               221          8   0.00%     0.04us/call
+doConfig                            221          0   0.00%     0.00us/call
+doStartBidding                      221          0   0.00%     0.00us/call
+doSubmitted                         221          5   0.00%     0.02us/call
+logBidEvents                         10        149   0.00%    14.90us/call
+sendPings                            10        310   0.00%    31.00us/call
+sleep                               215       4173   0.04%    19.41us/call
+sleepPoll                           215   10038352  99.91% 46690.01us/call
+spinPoll                            221       3795   0.04%    17.17us/call
+my thread 140394897602304
+response: 
+total of 1.00473e+07 microseconds and 211 sleeps
+HEARTBEAT                            10         70   0.00%     7.00us/call
+PONG0                                 9        158   0.00%    17.56us/call
+PONG1                                 9         81   0.00%     9.00us/call
+checkExpiredAuctions                211         24   0.00%     0.11us/call
+checks                              219        330   0.00%     1.51us/call
+configureAgentOnExchange            219          0   0.00%     0.00us/call
+doBid                               219          6   0.00%     0.03us/call
+doConfig                            219          0   0.00%     0.00us/call
+doStartBidding                      219          0   0.00%     0.00us/call
+doSubmitted                         219          2   0.00%     0.01us/call
+logBidEvents                          9        111   0.00%    12.33us/call
+sendPings                             9        199   0.00%    22.11us/call
+sleep                               211       3711   0.04%    17.59us/call
+sleepPoll                           211   10039634  99.92% 47581.20us/call
+spinPoll                            219       2958   0.03%    13.51us/call
+my thread 140394897602304
+response: 
+total of 9.99849e+06 microseconds and 215 sleeps
+HEARTBEAT                            10         98   0.00%     9.80us/call
+PONG0                                10        194   0.00%    19.40us/call
+PONG1                                10        127   0.00%    12.70us/call
+checkExpiredAuctions                215         49   0.00%     0.23us/call
+checks                              220        282   0.00%     1.28us/call
+configureAgentOnExchange            220          9   0.00%     0.04us/call
+doBid                               220         11   0.00%     0.05us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          0   0.00%     0.00us/call
+doSubmitted                         220          2   0.00%     0.01us/call
+logBidEvents                         10        152   0.00%    15.20us/call
+sendPings                            10        247   0.00%    24.70us/call
+sleep                               215       4522   0.05%    21.03us/call
+sleepPoll                           215    9989221  99.91% 46461.49us/call
+spinPoll                            220       3580   0.04%    16.27us/call
+my thread 140395180377856
+response: 
+my thread 140395180377856
+response: 
+total of 1.00483e+07 microseconds and 212 sleeps
+HEARTBEAT                            10         76   0.00%     7.60us/call
+PONG0                                10        185   0.00%    18.50us/call
+PONG1                                10         76   0.00%     7.60us/call
+checkExpiredAuctions                212         30   0.00%     0.14us/call
+checks                              221        240   0.00%     1.09us/call
+configureAgentOnExchange            221          5   0.00%     0.02us/call
+doBid                               221          4   0.00%     0.02us/call
+doConfig                            221          0   0.00%     0.00us/call
+doStartBidding                      221         12   0.00%     0.05us/call
+doSubmitted                         221          3   0.00%     0.01us/call
+logBidEvents                         10        117   0.00%    11.70us/call
+sendPings                            10        217   0.00%    21.70us/call
+sleep                               212       4110   0.04%    19.39us/call
+sleepPoll                           212   10040486  99.92% 47360.78us/call
+spinPoll                            221       2692   0.03%    12.18us/call
+my thread 140395180377856
+response: 
+my thread 140395180377856
+response: 
+total of 1.0048e+07 microseconds and 213 sleeps
+HEARTBEAT                            10         80   0.00%     8.00us/call
+PONG0                                10        191   0.00%    19.10us/call
+PONG1                                10        103   0.00%    10.30us/call
+checkExpiredAuctions                213         31   0.00%     0.15us/call
+checks                              221        211   0.00%     0.95us/call
+configureAgentOnExchange            221          0   0.00%     0.00us/call
+doBid                               221          7   0.00%     0.03us/call
+doConfig                            221          0   0.00%     0.00us/call
+doStartBidding                      221          0   0.00%     0.00us/call
+doSubmitted                         221          3   0.00%     0.01us/call
+logBidEvents                         10        153   0.00%    15.30us/call
+sendPings                            10        307   0.00%    30.70us/call
+sleep                               213       4307   0.04%    20.22us/call
+sleepPoll                           213   10039601  99.92% 47134.28us/call
+spinPoll                            221       3018   0.03%    13.66us/call
+my thread 140394897602304
+response: 
+my thread 140395180377856
+response: 
+total of 1.00473e+07 microseconds and 210 sleeps
+HEARTBEAT                            10         78   0.00%     7.80us/call
+PONG0                                 9        202   0.00%    22.44us/call
+PONG1                                 9        104   0.00%    11.56us/call
+checkExpiredAuctions                210         48   0.00%     0.23us/call
+checks                              219        200   0.00%     0.91us/call
+configureAgentOnExchange            219          2   0.00%     0.01us/call
+doBid                               219          8   0.00%     0.04us/call
+doConfig                            219          0   0.00%     0.00us/call
+doStartBidding                      219          0   0.00%     0.00us/call
+doSubmitted                         219          6   0.00%     0.03us/call
+logBidEvents                          9        144   0.00%    16.00us/call
+sendPings                             9        250   0.00%    27.78us/call
+sleep                               210       3444   0.03%    16.40us/call
+sleepPoll                           210   10039601  99.92% 47807.62us/call
+spinPoll                            219       3227   0.03%    14.74us/call
+my thread 140395180377856
+response: 
+total of 9.9987e+06 microseconds and 211 sleeps
+HEARTBEAT                            10         94   0.00%     9.40us/call
+PONG0                                10        186   0.00%    18.60us/call
+PONG1                                10         85   0.00%     8.50us/call
+checkExpiredAuctions                211         52   0.00%     0.25us/call
+checks                              220        167   0.00%     0.76us/call
+configureAgentOnExchange            220          0   0.00%     0.00us/call
+doBid                               220         13   0.00%     0.06us/call
+doConfig                            220          0   0.00%     0.00us/call
+doStartBidding                      220          0   0.00%     0.00us/call
+doSubmitted                         220          2   0.00%     0.01us/call
+logBidEvents                         10        145   0.00%    14.50us/call
+sendPings                            10        253   0.00%    25.30us/call
+sleep                               211       4146   0.04%    19.65us/call
+sleepPoll                           211    9990056  99.91% 47346.24us/call
+spinPoll                            220       3501   0.04%    15.91us/call
+total of 1.00477e+07 microseconds and 212 sleeps
+HEARTBEAT                            10        112   0.00%    11.20us/call
+PONG0                                10        207   0.00%    20.70us/call
+PONG1                                10         74   0.00%     7.40us/call
+checkExpiredAuctions                212         71   0.00%     0.33us/call
+checks                              221        309   0.00%     1.40us/call
+configureAgentOnExchange            221          0   0.00%     0.00us/call
+doBid                               221         53   0.00%     0.24us/call
+doConfig                            221          0   0.00%     0.00us/call
+doStartBidding                      221          0   0.00%     0.00us/call
+doSubmitted                         221          0   0.00%     0.00us/call
+logBidEvents                         10        156   0.00%    15.60us/call
+sendPings                            10        261   0.00%    26.10us/call
+sleep                               212       3928   0.04%    18.53us/call
+sleepPoll                           212   10039481  99.92% 47356.04us/call
+spinPoll                            221       3034   0.03%    13.73us/call
+my thread 140394897602304
+response: 

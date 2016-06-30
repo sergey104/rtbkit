@@ -1,7 +1,7 @@
 /* -*- js-mode -*- */
 [
     {
-        "exchangeType": "openrtb",
+        "exchangeType": "appodeal",
         "listenPort": 17339,
         "bindHost": "0.0.0.0",
         "auctionVerb": "POST",

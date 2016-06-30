@@ -1,0 +1,12 @@
+FD limit too low: 1024/4096 smaller than recommended 65535
+FD limit raised to: 4096
+listening on hostname 0.0.0.0 port 17340
+listening on hostname 0.0.0.0 port 17341
+2016-06-30 07:48:48.510 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources ZmqNamedEndpoint::socket[0m
+2016-06-30 07:48:48.593 [1;32mZMQ Trace [1;34mconnecting to PostAuctionLoop / PostAuctionLoop[0m
+2016-06-30 07:48:48.594 [1;32mZMQ [1;34mconnecting to PostAuctionLoop/events[0m
+wexists handler returned -101
+2. returning result 
+2016-06-30 07:48:48.826 [1;32mZMQ [1;34mconnecting to PostAuctionLoop/events[0m
+2016-06-30 07:48:48.843 [1;32mZMQ [1;34mconnecting to PostAuctionLoop/events[0m
+2016-06-30 07:48:48.860 [1;32mZMQ [1;34mconnected to tcp://127.0.0.1:20000[0m

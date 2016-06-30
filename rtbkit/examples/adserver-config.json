@@ -1,6 +1,6 @@
 /* -*- js-mode -*- */
 {
-    "type": "mock",
+    "type": "appodeal",
     "winPort": 17340,
-    "eventPort": 12341
+    "eventPort": 17341
 }

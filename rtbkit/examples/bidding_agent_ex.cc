@@ -21,6 +21,8 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
+#include <string>     // std::string, std::to_string
+
 
 using namespace std;
 using namespace ML;
@@ -68,6 +70,7 @@ struct FixedPriceBiddingAgent :
                 [&] (uint64_t) { this->pace(); });
 
         BiddingAgent::init();
+
     }
 
     void start()
@@ -76,6 +79,7 @@ struct FixedPriceBiddingAgent :
 
         // Build our configuration and tell the world about it.
         setConfig();
+
     }
 
     void shutdown()
@@ -100,6 +104,10 @@ struct FixedPriceBiddingAgent :
         config.creatives.push_back(Creative::sampleLB);
         config.creatives.push_back(Creative::sampleWS);
         config.creatives.push_back(Creative::sampleBB);
+        config.creatives.push_back(Creative::sampleAA);
+        config.creatives.push_back(Creative::sampleCC);
+        config.creatives.push_back(Creative::sampleDD);
+        config.creatives.push_back(Creative::sampleRR);
 
 
         // Indicate to the router that we want our bid requests to be augmented
@@ -127,11 +135,12 @@ struct FixedPriceBiddingAgent :
 
         // Configures the agent to only receive 10% of the bid request traffic
         // that matches its filters.
-        config.bidProbability = 0.1;
+        config.bidProbability = 0.4;
 
         // Tell the world about our config. We can change the configuration of
         // an agent at any time by calling this function.
         doConfig(config);
+
     }
 
 
@@ -146,6 +155,9 @@ struct FixedPriceBiddingAgent :
             double timeLeftMs,
             const Json::Value & augmentations)
     {
+
+
+
         for (Bid& bid : bids) {
 
             // In our example, all our creatives are of the different sizes so
@@ -153,17 +165,20 @@ struct FixedPriceBiddingAgent :
             // the router won't ask for bids on imp that don't have any
             // biddable creatives.
             ExcAssertEqual(bid.availableCreatives.size(), 1);
+
             int availableCreative = bid.availableCreatives.front();
 
             // We don't really need it here but this is how you can get the
             // AdSpot and Creative object from the indexes.
             (void) br->imp[bid.spotIndex];
+
             (void) config.creatives[availableCreative];
 
             // Create a 0.0001$ CPM bid with our available creative.
             // Note that by default, the bid price is set to 0 which indicates
             // that we don't wish to bid on the given spot.
             bid.bid(availableCreative, MicroUSD(100));
+
         }
 
         // A value that will be passed back to us when we receive the result of
@@ -172,6 +187,7 @@ struct FixedPriceBiddingAgent :
 
         // Send our bid back to the agent.
         doBid(id, bids, metadata);
+
     }
 
 

@@ -58,6 +58,7 @@ struct MockExchangeConnector : public HttpExchangeConnector {
 
 
         std::shared_ptr<BidRequest> request;
+
         request.reset(BidRequest::parse("datacratic", payload));
         return request;
     }
@@ -100,6 +101,7 @@ struct MockExchangeConnector : public HttpExchangeConnector {
         }
 
         result += "]}";
+
         return HttpResponse(200, "application/json", result);
     }
 

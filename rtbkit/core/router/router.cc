@@ -218,6 +218,7 @@ initBidderInterface(Json::Value const & json)
     bidder = BidderInterface::create(serviceName() + ".bidder", getServices(), json);
     bidder->init(&bridge, this);
     bidder->registerLoopMonitor(&loopMonitor);
+
 }
 
 void
@@ -1819,6 +1820,7 @@ doBid(const std::vector<std::string> & message)
     const string & biddata = message[3];
     const string & model = message[4];
 
+
     WinCostModel wcm = WinCostModel::fromJson(model.empty() ? Json::Value() : Json::parse(model));
 
     static const string nullStr("null");
@@ -1858,6 +1860,8 @@ Router::
 doBidImpl(const BidMessage &message, const std::vector<std::string> &originalMessage)
 {
     Date dateGotBid = Date::now();
+
+
 
     if (failBid(bidsErrorRate)) {
         returnErrorResponse(originalMessage, "Intentional error response (--bids-error-rate)");
@@ -2905,7 +2909,9 @@ startExchange(const std::string & type,
 
     exchangeBuffer.push(item);
     filters.initWithDefaultFilters();
-}
+
+ }
+
 
 void
 Router::

@@ -19,31 +19,7 @@
 #include "jml/utils/rng.h"
 #include <sstream>
 
-
-const std::string bid_sample_filename("/home/ubuntu/rtbkit/rtbkit/plugins/exchange/testing/appodealtestresponse.json");
-
-
-std::string loadFile(const std::string & filename)
-{
-    ML::filter_istream stream(filename);
-
-    std::string result;
-
-    while (stream) {
-        std::string line;
-        getline(stream, line);
-        result += line + "\n";
-    }
-
-    return result;
-}
-
-long int unix_timestamp()
-{
-    time_t t = std::time(0);
-    long int now = static_cast<long int> (t);
-    return now;
-}
+using namespace std;
 using namespace Datacratic;
 
 namespace Datacratic {
@@ -127,13 +103,6 @@ parseBidRequest(HttpAuctionHandler & connection,
                 const std::string & payload)
 {
 
-  ofstream myfile;
-  myfile.open ("/home/ubuntu/appodeal.txt", std::ofstream::app);
-  myfile << "Writing this to a file inside appodeal parser.\n";
-  myfile << header;
-  myfile <<"\n";
-  myfile << payload;
-  myfile <<"\n";
     std::shared_ptr<BidRequest> none;
 
     // Check for JSON content-type
@@ -154,13 +123,11 @@ parseBidRequest(HttpAuctionHandler & connection,
 
         if(content != "application/json") {
             connection.sendErrorResponse("UNSUPPORTED_CONTENT_TYPE", "The request is required to use the 'Content-Type: application/json' header");
-            myfile << "UNSUPPORTED_CONTENT_TYPE\n";
             return none;
         }
     }
     else {
         connection.sendErrorResponse("MISSING_CONTENT_TYPE_HEADER", "The request is missing the 'Content-Type' header");
-        myfile << "MISSING_CONTENT_TYPE_HEADER\n";
         return none;
     }
 
@@ -184,11 +151,8 @@ parseBidRequest(HttpAuctionHandler & connection,
     if(payload.empty()) {
         this->recordHit("error.emptyBidRequest");
         connection.sendErrorResponse("EMPTY_BID_REQUEST", "The request is empty");
-        myfile << "EMPTY_BID_REQUEST\n";
         return none;
     }
-    myfile << "Start parsing appodeal parser.\n";
-
     // Parse the bid request
     std::shared_ptr<BidRequest> result;
     try {
@@ -215,12 +179,7 @@ parseBidRequest(HttpAuctionHandler & connection,
             }
         }
     }
-    ofstream idfile;
-    idfile.open ("/home/ubuntu/id.txt");
-    idfile << result->auctionId;
-    idfile.close();
-myfile << "AUC_ID:" << result->auctionId << "\n";
-myfile.close();
+
 
     return result;
 }
@@ -235,13 +194,13 @@ getTimeAvailableMs(HttpAuctionHandler & connection,
     static const std::string toFind = "\"tmax\":";
     std::string::size_type pos = payload.find(toFind);
     if (pos == std::string::npos)
-        return 30.0;
+        return 35.0;
 
     int tmax = atoi(payload.c_str() + pos + toFind.length());
     return (absoluteTimeMax < tmax) ? absoluteTimeMax : tmax;
 }
 
-/* HttpResponse
+HttpResponse
 AppodealExchangeConnector::
 getResponse(const HttpAuctionHandler & connection,
             const HttpHeader & requestHeader,
@@ -274,40 +233,12 @@ getResponse(const HttpAuctionHandler & connection,
 
     StreamJsonPrintingContext context(stream);
     desc.printJsonTyped(&response, context);
-    ofstream myfile;
-    myfile.open ("/home/fil/appodealresponse.txt", std::ofstream::app);
-    myfile << stream.str() << "\n";
-    myfile.close();
+    cerr << "apposeal connector response 200:" << stream.str() << endl;
     return HttpResponse(200, "application/json", stream.str());
 
 }
-*/
-HttpResponse
-AppodealExchangeConnector::
-getResponse(const HttpAuctionHandler & connection,
-            const HttpHeader & requestHeader,
-            const Auction & auction) const
-{
 
-  std::string strJson = loadFile(bid_sample_filename);
-  std::string ids = loadFile("/home/fil/id.txt");
 
- // strJson.replace(54,49,ids.substr(0,ids.length()-2));
-  long int now = unix_timestamp();
-  std::stringstream ss;
-  ss << now;  // or any other type
-  std::string result=ss.str();
-  strJson.replace(398,10,result);
-  ofstream myfile;
-  myfile.open ("/home/ubuntu/appodealresponse.txt", std::ofstream::app);
-  myfile << "Writing this to a file inside appodeal parser and before sending response.\n";
-  myfile << strJson;
-  myfile <<"\n";
-  myfile << ids;
-  myfile <<"\n";
-  myfile.close();
-  return HttpResponse(200, "application/json", strJson);
-}
 Json::Value
 AppodealExchangeConnector::
 getResponseExt(const HttpAuctionHandler & connection,
@@ -321,16 +252,10 @@ AppodealExchangeConnector::
 getDroppedAuctionResponse(const HttpAuctionHandler & connection,
                           const std::string & reason) const
 {
-  ofstream myfile;
-  myfile.open ("/home/ubuntu/appodealresponse.txt", std::ofstream::app);
-  myfile << "----NONE 204." ;
-  myfile << "    reason: ";
-  myfile << reason;
-  myfile << "\n" ;
-
-  myfile.close();
+cerr << "apposeal connector response 204: none" << endl;
   return HttpResponse(204, "none", "");
 }
+
 
 HttpResponse
 AppodealExchangeConnector::
@@ -339,11 +264,7 @@ getErrorResponse(const HttpAuctionHandler & connection,
 {
     Json::Value response;
     response["error"] = message;
-    ofstream myfile;
-    myfile.open ("/home/ubuntu/appodealresponse.txt", std::ofstream::app);
-    myfile << "----400.\n";
-    myfile << "message:  " << message << "\n";
-    myfile.close();
+cerr << "apposeal connector response 400:" << message << endl;
     return HttpResponse(400, response);
 }
 

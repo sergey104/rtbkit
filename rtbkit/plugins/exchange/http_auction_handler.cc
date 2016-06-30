@@ -482,7 +482,7 @@ sendResponse()
     addActivityS("sendResponse");
 
     //cerr << "locked by " << bid->lock.get_thread_id() << endl;
-    //cerr << "my thread " << ACE_OS::thr_self() << endl;
+    cerr << "my thread " << ACE_OS::thr_self() << endl;
 
     Date before = Date::now();
 
@@ -556,6 +556,7 @@ sendResponse()
         .push_back({"X-Processing-Time-Ms", to_string(timeTaken)});
 
     putResponseOnWire(response, onSendFinished);
+    cerr << "response: " << response.body << endl;
 }
 
 void
@@ -575,6 +576,7 @@ dropAuction(const std::string & reason)
 
     putResponseOnWire(endpoint->getDroppedAuctionResponse(*this, reason),
                       onSendFinished);
+    cerr << "Auction droped: " << reason << endl;
 }
 
 void

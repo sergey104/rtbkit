@@ -9,6 +9,7 @@
 #include "http_adserver_connector.h"
 
 
+
 using namespace std;
 using namespace RTBKIT;
 
@@ -49,9 +50,11 @@ handleJson(const HttpHeader & header, const Json::Value & json,
                      "Content-Type: none\r\n"
                      "Content-Length: 0\r\n"
                      "\r\n");
+
         }
         else {
             endpoint_.doEvent("error.rqParsingError");
+
             resultMsg = sendErrorResponse(returnValue.error, returnValue.details, json);
         }
     }
@@ -60,6 +63,7 @@ handleJson(const HttpHeader & header, const Json::Value & json,
              << exc.what() << endl;
         endpoint_.doEvent("error.rqParsingError");
         resultMsg = sendErrorResponse("error parsing AdServer message", exc.what(), json);
+
     }
 
     send(resultMsg,
@@ -85,6 +89,7 @@ sendErrorResponse(const std::string & error, const std::string & details, const 
                                "Content-Length: %zd\r\n"
                                "\r\n%s",
                                response.size(), response.c_str());
+
     return resultMsg;
 }
 
@@ -130,7 +135,8 @@ HttpAdServerHttpEndpoint::
 getPort()
     const
 {
-    return port_;
+
+  return port_;
 }
 
 shared_ptr<ConnectionHandler>
@@ -170,6 +176,7 @@ init(const shared_ptr<ConfigurationService> & config)
                             placeholders::_3, placeholders::_4);
         endpoint.onEvent = onEvent;
     }
+
 }
 
 void
@@ -199,5 +206,6 @@ start()
         endpoint.makeRealTime(10);
     }
     AdServerConnector::start();
+
 }
 
