@@ -124,7 +124,7 @@ struct FixedPriceBiddingAgent :
 
             // Config parameter sent used by the augmentor to determine which
             // tag to set.
-            augConfig.config = Json::Value(42);
+            augConfig.config = Json::Value(112);
 
             // Instruct to router to filter out all bid requests who have not
             // been tagged by our frequency cap augmentor.
@@ -135,7 +135,7 @@ struct FixedPriceBiddingAgent :
 
         // Configures the agent to only receive 10% of the bid request traffic
         // that matches its filters.
-        config.bidProbability = 0.4;
+        config.bidProbability = 0.7;
 
         // Tell the world about our config. We can change the configuration of
         // an agent at any time by calling this function.
