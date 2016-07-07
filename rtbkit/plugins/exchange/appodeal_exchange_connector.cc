@@ -20,7 +20,16 @@
 #include <sstream>
 
 using namespace std;
+void writeFile (std::string s) {
 
+  std::ofstream ofs;
+  ofs.open ("appobelnew.txt", std::ofstream::out | std::ofstream::app);
+
+  ofs << s << endl;
+
+  ofs.close();
+
+}
 using namespace Datacratic;
 
 namespace Datacratic {
@@ -105,7 +114,7 @@ parseBidRequest(HttpAuctionHandler & connection,
 {
 
     std::shared_ptr<BidRequest> none;
-
+writeFile(payload);
     // Check for JSON content-type
     if (!header.contentType.empty()) {
         static const std::string delimiter = ";";
@@ -207,7 +216,7 @@ getResponse(const HttpAuctionHandler & connection,
             const HttpHeader & requestHeader,
             const Auction & auction) const
 {
-  const Auction::Data * current = auction.getCurrentData();
+ /* const Auction::Data * current = auction.getCurrentData();
 
     if (current->hasError())
         return getErrorResponse(connection,
@@ -235,8 +244,8 @@ getResponse(const HttpAuctionHandler & connection,
     StreamJsonPrintingContext context(stream);
     desc.printJsonTyped(&response, context);
     cerr << "apposeal connector response 200:" << stream.str() << endl;
-    return HttpResponse(200, "application/json", stream.str());
-
+    return HttpResponse(200, "application/json", stream.str()); */
+return HttpResponse(204, "none", "");
 }
 
 
