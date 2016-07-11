@@ -216,7 +216,7 @@ getResponse(const HttpAuctionHandler & connection,
             const HttpHeader & requestHeader,
             const Auction & auction) const
 {
- /* const Auction::Data * current = auction.getCurrentData();
+   const Auction::Data * current = auction.getCurrentData();
 
     if (current->hasError())
         return getErrorResponse(connection,
@@ -244,8 +244,8 @@ getResponse(const HttpAuctionHandler & connection,
     StreamJsonPrintingContext context(stream);
     desc.printJsonTyped(&response, context);
     cerr << "apposeal connector response 200:" << stream.str() << endl;
-    return HttpResponse(200, "application/json", stream.str()); */
-return HttpResponse(204, "none", "");
+    return HttpResponse(200, "application/json", stream.str()); 
+//return HttpResponse(204, "none", "");
 }
 
 

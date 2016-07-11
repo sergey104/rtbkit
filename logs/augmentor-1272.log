@@ -1,0 +1,26 @@
+FD limit too low: 32768/32768 smaller than recommended 65535
+FD limit raised to: 32768
+connecting to Carbon at 127.0.0.1:2003 (localhost)
+2016-07-11 12:45:30,520:1272(0x7fd0ad2f9700):ZOO_ERROR@handle_socket_error_msg@1697: Socket [127.0.0.1:2181] zk retcode=-4, errno=111(Connection refused): server refused to accept the client
+2016-07-11 12:45:30,854:1272(0x7fd0ad2f9700):ZOO_ERROR@handle_socket_error_msg@1697: Socket [127.0.0.1:2181] zk retcode=-4, errno=111(Connection refused): server refused to accept the client
+2016-07-11 12:45:31.238 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources FrequencyCapAugmentor::palEvents[0m
+2016-07-11 12:45:31.238 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources [0m
+2016-07-11 12:45:31.266 [1;32mZMQ [1;34mconnecting to agentConfigurationService/listen[0m
+wexists handler returned -101
+2. returning result 
+2016-07-11 12:45:31.277 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources [0m
+2016-07-11 12:45:31.277 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources ZmqNamedSocket::socket[0m
+wexists handler returned -101
+2. returning result 
+warning: could not connect to PostAuctionLoop/logger immediately
+2016-07-11 12:45:31.305 [1;32mZMQ Trace [1;34mconnecting to router.augmentationLoop / router.augmentationLoop[0m
+2016-07-11 12:45:31.305 [1;32mZMQ [1;34mconnecting to router.augmentationLoop/augmentors[0m
+wexists handler returned -101
+2. returning result 
+2016-07-11 12:45:31.314 [1;32mZMQ [1;34mconnecting to router.augmentationLoop/augmentors[0m
+2016-07-11 12:45:31.316 [1;32mZMQ [1;34mconnecting to router.augmentationLoop/augmentors[0m
+2016-07-11 12:45:31.319 [1;32mZMQ [1;34mconnected to tcp://ip-172-31-19-171.eu-west-1.compute.internal:18000[0m
+2016-07-11 12:45:31.320 [1;32mZMQ [1;34mconnecting to agentConfigurationService/listen[0m
+2016-07-11 12:45:31.324 [1;32mZMQ [1;34mconnecting to agentConfigurationService/listen[0m
+2016-07-11 12:45:31.329 [1;32mZMQ [1;34mconnected to tcp://ip-172-31-19-171.eu-west-1.compute.internal:19000[0m
+got configuration message fixed-price-agent-ex_1276

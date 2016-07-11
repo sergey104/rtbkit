@@ -1,0 +1,44 @@
+FD limit too low: 32768/32768 smaller than recommended 65535
+FD limit raised to: 32768
+connecting to Carbon at 127.0.0.1:2003 (localhost)
+2016-07-11 12:45:30,520:1266(0x7f283f94e700):ZOO_ERROR@handle_socket_error_msg@1697: Socket [127.0.0.1:2181] zk retcode=-4, errno=111(Connection refused): server refused to accept the client
+2016-07-11 12:45:30,854:1266(0x7f283f94e700):ZOO_ERROR@handle_socket_error_msg@1697: Socket [127.0.0.1:2181] zk retcode=-4, errno=111(Connection refused): server refused to accept the client
+2016-07-11 12:45:31.245 [1;32mZMQ [1;34mconnecting to monitor/zeromq[0m
+file ./logs/data//2016-07-11/errors-2016-07-11-12:00:00.log exists; disambiguating
+opening file ./logs/data//2016-07-11/errors-2016-07-11-12:00:00.1.log with append 0
+  0 ./logs/data//%F/ -1
+  2  16
+  0 / -1
+  2  4
+  0 / -1
+  1  -1
+  0 -%T.log.gz -1
+  0 ./logs/data//%F/ -1
+  2  9
+  0 / -1
+  2  10
+  0 / -1
+  1  -1
+  0 -%T.log.gz -1
+2016-07-11 12:45:31.250 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources [0m
+wexists handler returned -101
+2. returning result 
+2016-07-11 12:45:31.256 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources [0m
+2016-07-11 12:45:31.259 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources ZmqNamedSocket::socket[0m
+wexists handler returned -101
+2. returning result 
+warning: could not connect to adserver/logger immediately
+2016-07-11 12:45:31.280 [1;32mZMQ [1;34mconnecting to monitor/zeromq[0m
+2016-07-11 12:45:31.281 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources serviceClass/adServer/adserver[0m
+2016-07-11 12:45:31.281 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources ZmqNamedSocket::socket[0m
+2016-07-11 12:45:31.297 [1;32mZMQ [1;34mconnecting to monitor/zeromq[0m
+wexists handler returned -101
+2. returning result 
+warning: could not connect to PostAuctionLoop/logger immediately
+2016-07-11 12:45:31.312 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources serviceClass/adServer/adserver, serviceClass/rtbPostAuctionService/PostAuctionLoop[0m
+2016-07-11 12:45:31.312 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources ZmqNamedSocket::socket[0m
+2016-07-11 12:45:31.312 [1;32mZMQ [1;34mconnected to tcp://ip-172-31-19-171.eu-west-1.compute.internal:24000[0m
+wexists handler returned -101
+2. returning result 
+warning: could not connect to router/logger immediately
+opening file ./logs/data//2016-07-11/errors-2016-07-11-13:00:00.log with append 0
