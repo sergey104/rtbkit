@@ -12,6 +12,7 @@
 #include "rtbkit/core/agent_configuration/agent_config.h"
 #include "rtbkit/openrtb/openrtb_parsing.h"
 #include "soa/types/json_printing.h"
+#include "soa/utils/generic_utils.h"
 #include <boost/any.hpp>
 #include <boost/lexical_cast.hpp>
 #include "jml/utils/file_functions.h"
@@ -95,15 +96,100 @@ BOOST_STATIC_ASSERT(hasFromJson<int>::value == false);
 
 AppodealExchangeConnector::
 AppodealExchangeConnector(ServiceBase & owner, const std::string & name)
-    : HttpExchangeConnector(name, owner)
+    : HttpExchangeConnector(name, owner), creativeConfig("appodeal")
 {
+  this->auctionResource = "/auctions";
+  this->auctionVerb = "POST";
+  initCreativeConfiguration();
 }
 
 AppodealExchangeConnector::
 AppodealExchangeConnector(const std::string & name,
                          std::shared_ptr<ServiceProxies> proxies)
-    : HttpExchangeConnector(name, proxies)
+    : HttpExchangeConnector(name, proxies), creativeConfig("appodeal")
 {
+  this->auctionResource = "/auctions";
+  this->auctionVerb = "POST";
+  initCreativeConfiguration();
+}
+
+
+void AppodealExchangeConnector::initCreativeConfiguration()
+{
+    creativeConfig.addField(
+        "adm",
+        [](const Json::Value& value, CreativeInfo& info) {
+            Datacratic::jsonDecode(value, info.adm);
+            if (info.adm.empty()) {
+                throw std::invalid_argument("adm is required");
+            }
+
+            return true;
+    }).snippet();
+
+    creativeConfig.addField(
+        "nurl",
+        [](const Json::Value& value, CreativeInfo& info) {
+            Datacratic::jsonDecode(value, info.nurl);
+            if (info.nurl.empty()) {
+                throw std::invalid_argument("nurl is required");
+            }
+
+            return true;
+    }).required();
+}
+/*         */
+ExchangeConnector::ExchangeCompatibility
+AppodealExchangeConnector::getCampaignCompatibility(
+        const AgentConfig& config,
+        bool includeReasons) const
+{
+    ExchangeCompatibility result;
+    result.setCompatible();
+
+    std::string exchange = exchangeName();
+    const char* name = exchange.c_str();
+    if (!config.providerConfig.isMember(exchange)) {
+        result.setIncompatible(
+                ML::format("providerConfig.%s is null", name), includeReasons);
+        return result;
+    }
+
+    const auto& provConf = config.providerConfig[exchange];
+    if (!provConf.isMember("seat")) {
+        result.setIncompatible(
+               ML::format("providerConfig.%s.seat is null", name), includeReasons);
+        return result;
+    }
+
+    const auto& seat = provConf["seat"];
+    if (!seat.isIntegral()) {
+        result.setIncompatible(
+                ML::format("providerConfig.%s.seat is not merdiumint or unsigned", name),
+                includeReasons);
+        return result;
+    }
+
+    uint64_t value = seat.asUInt();
+    if (value > CampaignInfo::MaxSeatValue) {
+        result.setIncompatible(
+                ML::format("providerConfig.%s.seat > %lld", name, CampaignInfo::MaxSeatValue),
+                includeReasons);
+        return result;
+    }
+
+    auto info = std::make_shared<CampaignInfo>();
+    info->seat = value;
+
+    result.info = info;
+    return result;
+}
+ExchangeConnector::ExchangeCompatibility
+AppodealExchangeConnector::getCreativeCompatibility(
+        const Creative& creative,
+        bool includeReasons) const
+{
+    return creativeConfig.handleCreativeCompatibility(creative, includeReasons);
 }
 
 std::shared_ptr<BidRequest>
@@ -204,7 +290,7 @@ getTimeAvailableMs(HttpAuctionHandler & connection,
     static const std::string toFind = "\"tmax\":";
     std::string::size_type pos = payload.find(toFind);
     if (pos == std::string::npos)
-        return 45.0;
+        return 450.0;
 
     int tmax = atoi(payload.c_str() + pos + toFind.length());
     return (absoluteTimeMax < tmax) ? absoluteTimeMax : tmax;
@@ -287,7 +373,7 @@ getBidSourceConfiguration() const
                       ML::fqdn_hostname(suffix) + ":" + suffix);
 }
 
-void
+/*void
 AppodealExchangeConnector::
 setSeatBid(Auction const & auction,
            int spotNum,
@@ -315,8 +401,69 @@ setSeatBid(Auction const & auction,
     b.id = Id(auction.id, auction.request->imp[0].id);
     b.impid = auction.request->imp[spotNum].id;
     b.price.val = getAmountIn<CPM>(resp.price.maxPrice);
-}
+} */
+void
+AppodealExchangeConnector::setSeatBid(
+        const Auction& auction,
+        int spotNum,
+        OpenRTB::BidResponse& response) const {
 
+    const Auction::Data *current = auction.getCurrentData();
+
+    auto& resp = current->winningResponse(spotNum);
+
+    const AgentConfig* config
+        = std::static_pointer_cast<const AgentConfig>(resp.agentConfig).get();
+    std::string name = exchangeName();
+
+    auto campaignInfo = config->getProviderData<CampaignInfo>(name);
+    int creativeIndex = resp.agentCreativeIndex;
+
+    auto& creative = config->creatives[creativeIndex];
+    auto creativeInfo = creative.getProviderData<CreativeInfo>(name);
+
+    // Find the index in the seats array
+    int seatIndex = indexOf(response.seatbid, &OpenRTB::SeatBid::seat, Id(campaignInfo->seat));
+
+    OpenRTB::SeatBid* seatBid;
+
+    // Creative the seat if it does not exist
+    if (seatIndex == -1) {
+        OpenRTB::SeatBid sbid;
+        sbid.seat = Id(campaignInfo->seat);
+
+        response.seatbid.push_back(std::move(sbid));
+
+        seatBid = &response.seatbid.back();
+    }
+    else {
+        seatBid = &response.seatbid[seatIndex];
+    }
+
+    ExcAssert(seatBid);
+    seatBid->bid.emplace_back();
+    auto& bid = seatBid->bid.back();
+
+    AppodealCreativeConfiguration::Context context {
+        creative,
+        resp,
+        *auction.request,
+        spotNum
+    };
+
+    bid.cid = Id(resp.agent);
+    bid.crid = Id(resp.creativeId);
+    bid.impid = auction.request->imp[spotNum].id;
+    bid.id = Id(auction.id, auction.request->imp[0].id);
+    bid.price.val = USD_CPM(resp.price.maxPrice);
+    /* Prices are in Cents CPM */
+    bid.price.val *= 100;
+
+    //if (!creativeInfo->adomain.empty()) bid.adomain = creativeInfo->adomain;
+    bid.adm = creativeConfig.expand(creativeInfo->adm, context);
+    bid.nurl = creativeConfig.expand(creativeInfo->nurl, context);
+
+}
 } // namespace RTBKIT
 
 namespace {

@@ -7,7 +7,8 @@
 #pragma once
 
 #include "rtbkit/plugins/exchange/http_exchange_connector.h"
-
+#include "rtbkit/common/creative_configuration.h"
+#include "soa/utils/generic_utils.h"
 namespace RTBKIT {
 
 /*****************************************************************************/
@@ -32,6 +33,23 @@ struct AppodealExchangeConnector : public HttpExchangeConnector {
     virtual std::string exchangeName() const {
         return exchangeNameString();
     }
+
+    struct CampaignInfo {
+        static constexpr uint64_t MaxSeatValue = 16777215;
+        ///< ID of the Casale exchange seat if DSP is used by multiple agencies
+        uint64_t seat; // [0, 16777215]
+    };
+
+    ExchangeCompatibility
+    getCampaignCompatibility(
+            const AgentConfig& config,
+            bool includeReasons) const;
+
+    ExchangeCompatibility
+    getCreativeCompatibility(
+            const Creative& creative,
+            bool includeReasons) const;
+
 
     virtual std::shared_ptr<BidRequest>
     parseBidRequest(HttpAuctionHandler & connection,
@@ -58,11 +76,23 @@ struct AppodealExchangeConnector : public HttpExchangeConnector {
 
     virtual std::string getBidSourceConfiguration() const;
 
+    struct CreativeInfo {
+        std::string adm;
+        std::string nurl;
+    };
+
+    typedef CreativeConfiguration<CreativeInfo> AppodealCreativeConfiguration;
+
 private:
+
+    void initCreativeConfiguration();
 
     virtual Json::Value
     getResponseExt(const HttpAuctionHandler & connection,
                    const Auction & auction) const;
+
+    AppodealCreativeConfiguration creativeConfig;
+
 protected:
 
     virtual void setSeatBid(Auction const & auction,
