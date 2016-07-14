@@ -126,19 +126,15 @@ void AppodealExchangeConnector::initCreativeConfiguration()
             }
 
             return true;
-    }).snippet();
+    }).optional().snippet();
 
+    // nurl might contain macros
     creativeConfig.addField(
         "nurl",
-        [](const Json::Value& value, CreativeInfo& info) {
-
+        [](const Json::Value & value, CreativeInfo & info) {
             Datacratic::jsonDecode(value, info.nurl);
-            if (info.nurl.empty()) {
-                throw std::invalid_argument("nurl is required");
-            }
-
             return true;
-    }).required();
+        }).optional().snippet();
 }
 /*         */
 ExchangeConnector::ExchangeCompatibility
@@ -156,7 +152,7 @@ AppodealExchangeConnector::getCampaignCompatibility(
                 ML::format("providerConfig.%s is null", name), includeReasons);
         return result;
     }
-
+ /*
     const auto& provConf = config.providerConfig[exchange];
     if (!provConf.isMember("seat")) {
         result.setIncompatible(
@@ -164,7 +160,7 @@ AppodealExchangeConnector::getCampaignCompatibility(
         return result;
     }
 
-    const auto& seat = provConf["seat"];
+   const auto& seat = provConf["seat"];
    if (!seat.isIntegral()) {
         result.setIncompatible(
                 ML::format("providerConfig.%s.seat is not merdiumint or unsigned", name),
@@ -179,9 +175,9 @@ AppodealExchangeConnector::getCampaignCompatibility(
                 includeReasons);
         return result;
     }
-
+*/
     auto info = std::make_shared<CampaignInfo>();
-    info->seat = value;
+ //   info->seat = value;
 
     result.info = info;
     return result;
@@ -202,7 +198,7 @@ parseBidRequest(HttpAuctionHandler & connection,
 {
 
     std::shared_ptr<BidRequest> none;
-writeFile(payload);
+//writeFile(payload);
     // Check for JSON content-type
     if (!header.contentType.empty()) {
         static const std::string delimiter = ";";

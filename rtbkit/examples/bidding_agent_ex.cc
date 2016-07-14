@@ -109,7 +109,7 @@ struct FixedPriceBiddingAgent :
         config.creatives.push_back(Creative::sampleDD);
         config.creatives.push_back(Creative::sampleRR);
 
-        config.providerConfig["appodeal"]["seat"] = 12;
+    //    config.providerConfig["appodeal"]["seat"] = 12;
         config.providerConfig["appodeal"]["iurl"] = "http://www.gnu.org";
 
                 for(auto & c: config.creatives){
