@@ -119,6 +119,7 @@ void AppodealExchangeConnector::initCreativeConfiguration()
     creativeConfig.addField(
         "adm",
         [](const Json::Value& value, CreativeInfo& info) {
+
             Datacratic::jsonDecode(value, info.adm);
             if (info.adm.empty()) {
                 throw std::invalid_argument("adm is required");
@@ -130,6 +131,7 @@ void AppodealExchangeConnector::initCreativeConfiguration()
     creativeConfig.addField(
         "nurl",
         [](const Json::Value& value, CreativeInfo& info) {
+
             Datacratic::jsonDecode(value, info.nurl);
             if (info.nurl.empty()) {
                 throw std::invalid_argument("nurl is required");
@@ -163,7 +165,7 @@ AppodealExchangeConnector::getCampaignCompatibility(
     }
 
     const auto& seat = provConf["seat"];
-    if (!seat.isIntegral()) {
+   if (!seat.isIntegral()) {
         result.setIncompatible(
                 ML::format("providerConfig.%s.seat is not merdiumint or unsigned", name),
                 includeReasons);
@@ -290,7 +292,7 @@ getTimeAvailableMs(HttpAuctionHandler & connection,
     static const std::string toFind = "\"tmax\":";
     std::string::size_type pos = payload.find(toFind);
     if (pos == std::string::npos)
-        return 450.0;
+        return 35.0;
 
     int tmax = atoi(payload.c_str() + pos + toFind.length());
     return (absoluteTimeMax < tmax) ? absoluteTimeMax : tmax;
@@ -329,7 +331,7 @@ getResponse(const HttpAuctionHandler & connection,
 
     StreamJsonPrintingContext context(stream);
     desc.printJsonTyped(&response, context);
-    cerr << "apposeal connector response 200:" << stream.str() << endl;
+    cerr << "appodeal connector response 200:" << stream.str() << endl;
     return HttpResponse(200, "application/json", stream.str()); 
 //return HttpResponse(204, "none", "");
 }
@@ -348,7 +350,7 @@ AppodealExchangeConnector::
 getDroppedAuctionResponse(const HttpAuctionHandler & connection,
                           const std::string & reason) const
 {
-cerr << "apposeal connector response 204: none" << endl;
+cerr << "appodeal connector response 204: none" << endl;
   return HttpResponse(204, "none", "");
 }
 
@@ -360,7 +362,7 @@ getErrorResponse(const HttpAuctionHandler & connection,
 {
     Json::Value response;
     response["error"] = message;
-cerr << "apposeal connector response 400:" << message << endl;
+cerr << "appodeal connector response 400:" << message << endl;
     return HttpResponse(400, response);
 }
 

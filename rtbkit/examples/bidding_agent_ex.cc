@@ -109,6 +109,13 @@ struct FixedPriceBiddingAgent :
         config.creatives.push_back(Creative::sampleDD);
         config.creatives.push_back(Creative::sampleRR);
 
+        config.providerConfig["appodeal"]["seat"] = 12;
+        config.providerConfig["appodeal"]["iurl"] = "http://www.gnu.org";
+
+                for(auto & c: config.creatives){
+                    c.providerConfig["appodeal"]["adm"] = "some_adm";
+                    c.providerConfig["appodeal"]["nurl"] = "http://adserver.com/123456?winprice=${AUCTION_PRICE}&auction_id=%{bidrequest.id}&adspot_id=%{creative.id}";
+                  }
 
         // Indicate to the router that we want our bid requests to be augmented
         // with our frequency cap augmentor example.

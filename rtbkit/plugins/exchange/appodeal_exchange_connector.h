@@ -77,8 +77,8 @@ struct AppodealExchangeConnector : public HttpExchangeConnector {
     virtual std::string getBidSourceConfiguration() const;
 
     struct CreativeInfo {
-        std::string adm;
-        std::string nurl;
+        std::string adm = "crin";
+        std::string nurl = "nurl";
     };
 
     typedef CreativeConfiguration<CreativeInfo> AppodealCreativeConfiguration;
