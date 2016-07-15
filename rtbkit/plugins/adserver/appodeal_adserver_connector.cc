@@ -1,6 +1,17 @@
 #include "appodeal_adserver_connector.h"
 
 
+using namespace std;
+void writeFile (std::string s) {
+
+  std::ofstream ofs;
+  ofs.open ("wins.txt", std::ofstream::out | std::ofstream::app);
+
+  ofs << s << endl;
+
+  ofs.close();
+
+}
 using namespace RTBKIT;
 
 AppodealAdServerConnector::
@@ -64,6 +75,7 @@ HttpAdServerResponse AppodealAdServerConnector::handleEvent(PostAuctionEvent con
 
         Date now = Date::now();
         publisher.publish("WIN", now.print(3), event.auctionId.toString(), event.winPrice.toString(), "0");
+        writeFile("WIN");
 
     }
 
