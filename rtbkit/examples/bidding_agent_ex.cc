@@ -114,7 +114,7 @@ struct FixedPriceBiddingAgent :
 
                 for(auto & c: config.creatives){
                     c.providerConfig["appodeal"]["adm"] = "http://52.208.150.10:17340";
-                    c.providerConfig["appodeal"]["nurl"] = "http://52.208.150.10:17340?winprice=${AUCTION_PRICE}&auction_id=%{bidrequest.id}&adspot_id=%{creative.id}";
+                    c.providerConfig["appodeal"]["nurl"] = "http://adserver.com/123456?winprice=${AUCTION_PRICE}&auction_id=%{bidrequest.id}&adspot_id=%{creative.id}";
                   }
 
         // Indicate to the router that we want our bid requests to be augmented
