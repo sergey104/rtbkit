@@ -94,7 +94,7 @@ struct FixedPriceBiddingAgent :
     void setConfig()
     {
         config = AgentConfig();
-
+        config.locationFilter.include = { L"^ES:.*:.*:((08394))" };
         // Accounts are used to control the allocation of spending budgets for
         // an agent. The whole mechanism is fully generic and can be setup in
         // whatever you feel it bests suits you.
@@ -102,12 +102,12 @@ struct FixedPriceBiddingAgent :
 
         // Specify the properties of the creatives we are trying to show.
         config.creatives.push_back(Creative::sampleLB);
-        config.creatives.push_back(Creative::sampleWS);
-        config.creatives.push_back(Creative::sampleBB);
-        config.creatives.push_back(Creative::sampleAA);
-        config.creatives.push_back(Creative::sampleCC);
-        config.creatives.push_back(Creative::sampleDD);
-        config.creatives.push_back(Creative::sampleRR);
+      //  config.creatives.push_back(Creative::sampleWS);
+      //  config.creatives.push_back(Creative::sampleBB);
+      //  config.creatives.push_back(Creative::sampleAA);
+     //   config.creatives.push_back(Creative::sampleCC);
+      //  config.creatives.push_back(Creative::sampleDD);
+     //   config.creatives.push_back(Creative::sampleRR);
 
     //    config.providerConfig["appodeal"]["seat"] = 12;
         config.providerConfig["appodeal"]["iurl"] = "http://www.gnu.org";
@@ -115,6 +115,7 @@ struct FixedPriceBiddingAgent :
                 for(auto & c: config.creatives){
                     c.providerConfig["appodeal"]["adm"] = "adm_sample";
                     c.providerConfig["appodeal"]["nurl"] = "http://52.208.150.10:17340?winprice=${AUCTION_PRICE}&auction_id=%{bidrequest.id}&adspot_id=%{creative.id}";
+                    c.providerConfig["appodeal"]["iurl"] = "http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png";
                   }
 
         // Indicate to the router that we want our bid requests to be augmented

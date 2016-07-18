@@ -128,6 +128,18 @@ void AppodealExchangeConnector::initCreativeConfiguration()
             return true;
     }).optional().snippet();
 
+    creativeConfig.addField(
+        "iurl",
+        [](const Json::Value& value, CreativeInfo& info) {
+
+            Datacratic::jsonDecode(value, info.iurl);
+            if (info.iurl.empty()) {
+                throw std::invalid_argument("iurl is required");
+            }
+
+            return true;
+    }).optional().snippet();
+
     // nurl might contain macros
     creativeConfig.addField(
         "nurl",
@@ -460,7 +472,7 @@ AppodealExchangeConnector::setSeatBid(
     //if (!creativeInfo->adomain.empty()) bid.adomain = creativeInfo->adomain;
     bid.adm = creativeConfig.expand(creativeInfo->adm, context);
     bid.nurl = creativeConfig.expand(creativeInfo->nurl, context);
-
+    bid.iurl = creativeConfig.expand(creativeInfo->iurl, context);
 }
 } // namespace RTBKIT
 

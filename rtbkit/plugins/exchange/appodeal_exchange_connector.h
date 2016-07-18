@@ -36,7 +36,7 @@ struct AppodealExchangeConnector : public HttpExchangeConnector {
 
     struct CampaignInfo {
         static constexpr uint64_t MaxSeatValue = 16777215;
-        ///< ID of the Casale exchange seat if DSP is used by multiple agencies
+        ///< ID of the Appodeal exchange seat if DSP is used by multiple agencies
         uint64_t seat; // [0, 16777215]
     };
 
@@ -79,6 +79,7 @@ struct AppodealExchangeConnector : public HttpExchangeConnector {
     struct CreativeInfo {
         std::string adm = "crin";
         std::string nurl = "nurl";
+        std::string iurl = "iurl";
     };
 
     typedef CreativeConfiguration<CreativeInfo> AppodealCreativeConfiguration;
