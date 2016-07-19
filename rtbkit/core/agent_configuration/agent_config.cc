@@ -105,7 +105,7 @@ const Creative Creative::sampleWS
 const Creative Creative::sampleBB
     (250, 300, "BigBox", 1);
 const Creative Creative::sampleLB
-   (300, 250,  "LeaderBoard", 2);
+   (300, 250,  "LeaderBoardS", 2);
 //const Creative Creative::sampleAA
  //   (600, 160, "LeaderBoard1", 3);
 //const Creative Creative::sampleRR
