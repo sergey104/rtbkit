@@ -135,6 +135,14 @@ void AppodealExchangeConnector::initCreativeConfiguration()
             Datacratic::jsonDecode(value, info.nurl);
             return true;
         }).optional().snippet();
+
+    // iurl might contain macros
+    creativeConfig.addField(
+        "iurl",
+        [](const Json::Value & value, CreativeInfo & info) {
+            Datacratic::jsonDecode(value, info.iurl);
+            return true;
+        }).optional().snippet();
 }
 /*         */
 ExchangeConnector::ExchangeCompatibility
@@ -460,6 +468,7 @@ AppodealExchangeConnector::setSeatBid(
     //if (!creativeInfo->adomain.empty()) bid.adomain = creativeInfo->adomain;
     bid.adm = creativeConfig.expand(creativeInfo->adm, context);
     bid.nurl = creativeConfig.expand(creativeInfo->nurl, context);
+    bid.iurl = creativeConfig.expand(creativeInfo->iurl, context);
 
 }
 } // namespace RTBKIT
