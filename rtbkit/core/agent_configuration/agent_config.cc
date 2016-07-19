@@ -101,9 +101,9 @@ toJson() const
 }
 
 const Creative Creative::sampleWS
-    (320, 50, "LeaderBoard", 0);
+    (300, 250, "LeaderBoard", 0);
 const Creative Creative::sampleBB
-    (300, 250, "BigBox", 1);
+    (250, 300, "BigBox", 1);
 const Creative Creative::sampleLB
    (300, 250,  "LeaderBoard", 2);
 //const Creative Creative::sampleAA
