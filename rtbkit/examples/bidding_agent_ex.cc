@@ -110,11 +110,12 @@ struct FixedPriceBiddingAgent :
         config.creatives.push_back(Creative::sampleRR);
 
     //    config.providerConfig["appodeal"]["seat"] = 12;
-        config.providerConfig["appodeal"]["iurl"] = "http://www.gnu.org";
+   //     config.providerConfig["appodeal"]["iurl"] = "http://www.gnu.org";
 
                 for(auto & c: config.creatives){
                     c.providerConfig["appodeal"]["adm"] = "some_adm";
                     c.providerConfig["appodeal"]["nurl"] = "http://adserver.com/123456?winprice=${AUCTION_PRICE}&auction_id=%{bidrequest.id}&adspot_id=%{creative.id}";
+                    c.providerConfig["appodeal"]["iurl"] = "http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png";
                   }
 
         // Indicate to the router that we want our bid requests to be augmented
