@@ -94,7 +94,7 @@ struct FixedPriceBiddingAgent :
     void setConfig()
     {
         config = AgentConfig();
-       // config.locationFilter.include = { L"^ES:.*:.*:((08394))" };
+
         // Accounts are used to control the allocation of spending budgets for
         // an agent. The whole mechanism is fully generic and can be setup in
         // whatever you feel it bests suits you.
@@ -110,14 +110,11 @@ struct FixedPriceBiddingAgent :
         config.creatives.push_back(Creative::sampleRR);
 
     //    config.providerConfig["appodeal"]["seat"] = 12;
-      //  config.providerConfig["appodeal"]["iurl"] = "http://www.gnu.org";
-   //     std::string temp = "<script src=\"mraid.js\"></script><a href=\"http://52.208.150.10:17341/click\" target=\"_blank\"><img width=\"300\" height=\"250\" style=\"border-style: none\" src=\"\"/></a><script language=\"javascript\"type=\"text/javascript\">if(mraid.isViewable()){sendImpression();}else{mraid.addEventListener(\"viewableChange\",function(viewable){if(viewable){mraid.removeEventListener(\"viewableChange\",arguments.callee);sendImpression();}});}\nfunction sendImpression(){var urls=new Array();var i=0;urls[i++]=\"http://api.whatzbuzz.net/rtb/view?buzz=gAAAAABW4oe_ZnBIMcAliFv1T5ujGaBN_vCxv6BjFLq31DtNn_WDjuh-iF0QLyOITGXWllUaseOboW5xV3SswbIN5IstgO-vK-vh2S1MUb6hcnnYsaHEXCmZsv-zN8xYVM7jFRRWBLe4dYZYWRC9oi-5xgSWLbGBRt1ooldJ5rL-XK1-i_OT1QcMWJ-yCwpICSYSflv5mMGc&view=pixel.gif\";varhiddenSpan=document.createElement(\"span\");hiddenSpan.style.display=\"none\";var i=0;for(var i=0;i<urls.length;i++){var img=document.createElement(\"img\");img.src=urls[i];hiddenSpan.appendChild(img);}\nvar body=document.getElementsByTagName(\"body\")[0];body.appendChild(hiddenSpan);}</script>";
-     std::string temp = "test_adm";
+        config.providerConfig["appodeal"]["iurl"] = "http://www.gnu.org";
 
-        for(auto & c: config.creatives){
-                    c.providerConfig["appodeal"]["adm"] = temp;
-                    c.providerConfig["appodeal"]["nurl"] = "http://52.208.150.10:17340?winprice=${AUCTION_PRICE}&auction_id=%{bidrequest.id}&adspot_id=%{creative.id}";
-                    c.providerConfig["appodeal"]["iurl"] = "http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png";
+                for(auto & c: config.creatives){
+                    c.providerConfig["appodeal"]["adm"] = "some_adm";
+                    c.providerConfig["appodeal"]["nurl"] = "http://adserver.com/123456?winprice=${AUCTION_PRICE}&auction_id=%{bidrequest.id}&adspot_id=%{creative.id}";
                   }
 
         // Indicate to the router that we want our bid requests to be augmented

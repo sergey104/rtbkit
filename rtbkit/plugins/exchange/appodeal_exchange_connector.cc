@@ -128,18 +128,6 @@ void AppodealExchangeConnector::initCreativeConfiguration()
             return true;
     }).optional().snippet();
 
-    creativeConfig.addField(
-        "iurl",
-        [](const Json::Value& value, CreativeInfo& info) {
-
-            Datacratic::jsonDecode(value, info.iurl);
-            if (info.iurl.empty()) {
-                throw std::invalid_argument("iurl is required");
-            }
-
-            return true;
-    }).optional().snippet();
-
     // nurl might contain macros
     creativeConfig.addField(
         "nurl",
@@ -300,7 +288,7 @@ getTimeAvailableMs(HttpAuctionHandler & connection,
     static const std::string toFind = "\"tmax\":";
     std::string::size_type pos = payload.find(toFind);
     if (pos == std::string::npos)
-        return 45.0;
+        return 35.0;
 
     int tmax = atoi(payload.c_str() + pos + toFind.length());
     return (absoluteTimeMax < tmax) ? absoluteTimeMax : tmax;
@@ -472,7 +460,7 @@ AppodealExchangeConnector::setSeatBid(
     //if (!creativeInfo->adomain.empty()) bid.adomain = creativeInfo->adomain;
     bid.adm = creativeConfig.expand(creativeInfo->adm, context);
     bid.nurl = creativeConfig.expand(creativeInfo->nurl, context);
-    bid.iurl = creativeConfig.expand(creativeInfo->iurl, context);
+
 }
 } // namespace RTBKIT
 
