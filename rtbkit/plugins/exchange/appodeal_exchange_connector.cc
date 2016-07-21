@@ -135,17 +135,16 @@ void AppodealExchangeConnector::initCreativeConfiguration()
             Datacratic::jsonDecode(value, info.nurl);
             return true;
         }).optional().snippet();
-
-    // iurl might contain macros
+    // nurl might contain macros
     creativeConfig.addField(
         "iurl",
         [](const Json::Value & value, CreativeInfo & info) {
             Datacratic::jsonDecode(value, info.iurl);
             return true;
-        }).optional().snippet();
+        });
 }
 /*         */
-ExchangeConnector::ExchangeCompatibility
+ ExchangeConnector::ExchangeCompatibility
 AppodealExchangeConnector::getCampaignCompatibility(
         const AgentConfig& config,
         bool includeReasons) const
@@ -296,7 +295,7 @@ getTimeAvailableMs(HttpAuctionHandler & connection,
     static const std::string toFind = "\"tmax\":";
     std::string::size_type pos = payload.find(toFind);
     if (pos == std::string::npos)
-        return 35.0;
+        return 535.0;
 
     int tmax = atoi(payload.c_str() + pos + toFind.length());
     return (absoluteTimeMax < tmax) ? absoluteTimeMax : tmax;
