@@ -295,7 +295,7 @@ getTimeAvailableMs(HttpAuctionHandler & connection,
     static const std::string toFind = "\"tmax\":";
     std::string::size_type pos = payload.find(toFind);
     if (pos == std::string::npos)
-        return 535.0;
+        return 105.0;
 
     int tmax = atoi(payload.c_str() + pos + toFind.length());
     return (absoluteTimeMax < tmax) ? absoluteTimeMax : tmax;
