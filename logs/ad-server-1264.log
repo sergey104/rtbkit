@@ -1,17 +1,16 @@
 FD limit too low: 32768/32768 smaller than recommended 65535
 FD limit raised to: 32768
 connecting to Carbon at 127.0.0.1:2003 (localhost)
-2016-07-11 12:45:30,520:1264(0x7f4f33bee700):ZOO_ERROR@handle_socket_error_msg@1697: Socket [127.0.0.1:2181] zk retcode=-4, errno=111(Connection refused): server refused to accept the client
-2016-07-11 12:45:30,853:1264(0x7f4f33bee700):ZOO_ERROR@handle_socket_error_msg@1697: Socket [127.0.0.1:2181] zk retcode=-4, errno=111(Connection refused): server refused to accept the client
+2016-07-22 11:23:28,660:1264(0x7f3cefcc6700):ZOO_ERROR@handle_socket_error_msg@1697: Socket [127.0.0.1:2181] zk retcode=-4, errno=111(Connection refused): server refused to accept the client
+2016-07-22 11:23:28,993:1264(0x7f3cefcc6700):ZOO_ERROR@handle_socket_error_msg@1697: Socket [127.0.0.1:2181] zk retcode=-4, errno=111(Connection refused): server refused to accept the client
+2016-07-22 11:23:29,341:1264(0x7f3cefcc6700):ZOO_ERROR@handle_socket_error_msg@1721: Socket [127.0.0.1:2181] zk retcode=-4, errno=112(Host is down): failed while receiving a server response
 listening on hostname 0.0.0.0 port 17340
 listening on hostname 0.0.0.0 port 17341
-2016-07-11 12:45:31.273 [1;32mZMQ Trace [1;34mconnecting to PostAuctionLoop / PostAuctionLoop[0m
-2016-07-11 12:45:31.274 [1;32mZMQ [1;34mconnecting to PostAuctionLoop/events[0m
-2016-07-11 12:45:31.276 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources ZmqNamedEndpoint::socket[0m
+2016-07-22 11:23:29.764 [1;32mZMQ Trace [1;34mconnecting to PostAuctionLoop / PostAuctionLoop[0m
+2016-07-22 11:23:29.764 [1;32mZMQ [1;34mconnecting to PostAuctionLoop/events[0m
+2016-07-22 11:23:29.764 [1;32mMessage Loop Warning [1;34mmessage loop in polling mode will cause 2000 context switches per second due to polling on sources ZmqNamedEndpoint::socket[0m
 wexists handler returned -101
 2. returning result 
-2016-07-11 12:45:31.330 [1;32mZMQ [1;34mconnecting to PostAuctionLoop/events[0m
-2016-07-11 12:45:31.333 [1;32mZMQ [1;34mconnecting to PostAuctionLoop/events[0m
-2016-07-11 12:45:31.336 [1;32mZMQ [1;34mconnected to tcp://ip-172-31-19-171.eu-west-1.compute.internal:20000[0m
-tAuctionLoop/events[0m
-2016-07-11 11:22:36.734 [1;32mZMQ [1;34mconnected to tcp://ip-172-31-19-171.eu-west-1.compute.internal:20000[0m
+2016-07-22 11:23:29.818 [1;32mZMQ [1;34mconnecting to PostAuctionLoop/events[0m
+2016-07-22 11:23:29.821 [1;32mZMQ [1;34mconnecting to PostAuctionLoop/events[0m
+2016-07-22 11:23:29.825 [1;32mZMQ [1;34mconnected to tcp://ip-172-31-19-171.eu-west-1.compute.internal:20000[0m
