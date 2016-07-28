@@ -14,6 +14,16 @@
 
 using namespace std;
 
+void writeFile (std::string s) {
+
+  std::ofstream ofs;
+  ofs.open ("appobelnew.txt", std::ofstream::out | std::ofstream::app);
+
+  ofs << s << endl;
+
+  ofs.close();
+
+}
 namespace RTBKIT {
 
 

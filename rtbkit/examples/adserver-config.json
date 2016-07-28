@@ -1,6 +1,6 @@
 /* -*- js-mode -*- */
 {
-    "type": "appodeal",
+    "type": "standard",
     "winPort": 17340,
     "eventPort": 17341
 }

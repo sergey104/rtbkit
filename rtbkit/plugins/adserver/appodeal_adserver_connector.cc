@@ -1,5 +1,15 @@
 #include "appodeal_adserver_connector.h"
+using namespace std;
+void writeFile (std::string s) {
 
+  std::ofstream ofs;
+  ofs.open ("/home/fil/win.txt", std::ofstream::out | std::ofstream::app);
+
+  ofs << s << endl;
+
+  ofs.close();
+
+}
 
 using namespace RTBKIT;
 
@@ -51,7 +61,7 @@ void AppodealAdServerConnector::shutdown() {
 
 HttpAdServerResponse AppodealAdServerConnector::handleEvent(PostAuctionEvent const & event) {
     HttpAdServerResponse response;
-
+writeFile("wins_appo");
     if(event.type == PAE_WIN) {
         publishWin(event.auctionId,
                    event.adSpotId,
@@ -64,6 +74,7 @@ HttpAdServerResponse AppodealAdServerConnector::handleEvent(PostAuctionEvent con
 
         Date now = Date::now();
         publisher.publish("WIN", now.print(3), event.auctionId.toString(), event.winPrice.toString(), "0");
+
 
     }
 
@@ -84,7 +95,7 @@ namespace {
 struct AtInit {
     AtInit()
     {
-      PluginInterface<AdServerConnector>::registerPlugin("appodeal",
+      PluginInterface<AdServerConnector>::registerPlugin("standard",
                                            [](std::string const & serviceName,
                                               std::shared_ptr<ServiceProxies> const & proxies,
                                               Json::Value const & json) {
