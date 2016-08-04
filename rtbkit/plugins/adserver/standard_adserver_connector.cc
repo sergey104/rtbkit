@@ -14,6 +14,7 @@
 
 using namespace std;
 
+
 using namespace boost::program_options;
 
 using namespace RTBKIT;
@@ -69,8 +70,8 @@ StandardAdServerConnector(std::string const & serviceName, std::shared_ptr<Servi
                           Json::Value const & json) :
     HttpAdServerConnector(serviceName, proxies),
     publisher_(getServices()->zmqContext) {
-    int winPort = json.get("winPort", 18143).asInt();
-    int eventsPort = json.get("eventsPort", 18144).asInt();
+    int winPort = json.get("winPort", 17340).asInt();
+    int eventsPort = json.get("eventsPort", 17343).asInt();
     verbose = json.get("verbose", false).asBool();
     initEventType(json);
     init(winPort, eventsPort, verbose);
@@ -99,7 +100,8 @@ void
 StandardAdServerConnector::
 init(StandardAdServerArguments & ssConfig)
 {
-    ssConfig.validate();
+
+  ssConfig.validate();
     init(ssConfig.winPort, ssConfig.eventsPort, ssConfig.verbose,
          ssConfig.analyticsOn, ssConfig.analyticsConnections);
 }
@@ -219,6 +221,7 @@ handleWinRq(const HttpHeader & header,
      *  If null, we return an error response.
      */
     if (json.isMember("bidRequestId")) {
+
         bidRequestIdStr = json["bidRequestId"].asString();
         bidRequestId = Id(bidRequestIdStr); 
     } else {
@@ -233,13 +236,15 @@ handleWinRq(const HttpHeader & header,
      *  impid is an required field.
      *  If null, we return an error response.
      */
-    if (json.isMember("impid")) {
-        impIdStr = json["impid"].asString();
+    if (json.isMember("impId")) {
+        impIdStr = json["impId"].asString();
         impId = Id(impIdStr);
+
     } else {
         errorResponseHelper(response,
                             "MISSING_IMPID",
                             "A win notice requires the impId field.");
+
         publishError(response);
         return response;
     }
@@ -248,9 +253,13 @@ handleWinRq(const HttpHeader & header,
      *  price is an required field.
      *  If null, we return an error response.
      */
-    if (json.isMember("price")) {
-        winPriceDbl = json["price"].asDouble();
+    std::string winPriceDbls;
+    if (json.isMember("winPrice")) {
+        winPriceDbl = json["winPrice"].asDouble();
+     //   winPriceDbls = json["winPrice"].asString();
+     //   winPriceDbl = std::stod(winPriceDbls);
         winPrice = USD_CPM(winPriceDbl);
+
     } else {
         errorResponseHelper(response,
                             "MISSING_WINPRICE",
@@ -293,6 +302,7 @@ handleWinRq(const HttpHeader & header,
                    AccountKey(passback), Date());
         publisher_.publish("WIN", timestamp.print(3), bidRequestIdStr,
                            impIdStr, winPrice.toString());
+
         analytics_.publish("WIN", timestamp.print(3), bidRequestIdStr,
                            impIdStr, winPrice.toString());
     }

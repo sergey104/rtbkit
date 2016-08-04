@@ -19,12 +19,21 @@
 #include "jml/arch/info.h"
 #include "jml/utils/rng.h"
 #include <sstream>
+#include <ctime>
+#include <string>
 
 using namespace std;
+
+long int unix_timestamp()
+{
+    time_t t = std::time(0);
+    long int now = static_cast<long int> (t);
+    return now;
+}
 void writeFile (std::string s) {
 
   std::ofstream ofs;
-  ofs.open ("appobelnew.txt", std::ofstream::out | std::ofstream::app);
+  ofs.open ("appodeallog.txt", std::ofstream::out | std::ofstream::app);
 
   ofs << s << endl;
 
@@ -32,7 +41,7 @@ void writeFile (std::string s) {
 
 }
 using namespace Datacratic;
-
+using namespace ML;
 namespace Datacratic {
 
 template<typename T, int I, typename S>
@@ -135,13 +144,14 @@ void AppodealExchangeConnector::initCreativeConfiguration()
             Datacratic::jsonDecode(value, info.nurl);
             return true;
         }).optional().snippet();
-    // nurl might contain macros
+    // iurl might contain macros
     creativeConfig.addField(
         "iurl",
         [](const Json::Value & value, CreativeInfo & info) {
             Datacratic::jsonDecode(value, info.iurl);
             return true;
         });
+
 }
 /*         */
  ExchangeConnector::ExchangeCompatibility
@@ -205,7 +215,8 @@ parseBidRequest(HttpAuctionHandler & connection,
 {
 
     std::shared_ptr<BidRequest> none;
-//writeFile(payload);
+writeFile(payload);
+writeFile("-----------------------------------");
     // Check for JSON content-type
     if (!header.contentType.empty()) {
         static const std::string delimiter = ";";
@@ -295,7 +306,7 @@ getTimeAvailableMs(HttpAuctionHandler & connection,
     static const std::string toFind = "\"tmax\":";
     std::string::size_type pos = payload.find(toFind);
     if (pos == std::string::npos)
-        return 605.0;
+        return 100.0;
 
     int tmax = atoi(payload.c_str() + pos + toFind.length());
     return (absoluteTimeMax < tmax) ? absoluteTimeMax : tmax;
@@ -345,7 +356,15 @@ AppodealExchangeConnector::
 getResponseExt(const HttpAuctionHandler & connection,
                const Auction & auction) const
 {
-    return {};
+
+  //auto& id = Id(auction.id, auction.request->imp[0].id);
+ // auto& priceval = USD_CPM(resp.price.maxPrice);
+ // Json::Value result;
+ // result["timestamp"] = unix_timestamp();
+
+  //return result;
+
+  return {};
 }
 
 HttpResponse
@@ -455,7 +474,8 @@ AppodealExchangeConnector::setSeatBid(
         *auction.request,
         spotNum
     };
-
+//Json::Value in;
+//in["timestamp"] = unix_timestamp();
     bid.cid = Id(resp.agent);
     bid.crid = Id(resp.creativeId);
     bid.impid = auction.request->imp[spotNum].id;
@@ -463,11 +483,13 @@ AppodealExchangeConnector::setSeatBid(
     bid.price.val = USD_CPM(resp.price.maxPrice);
     /* Prices are in Cents CPM */
     bid.price.val *= 100;
+//    bid.ext = in;
 
     //if (!creativeInfo->adomain.empty()) bid.adomain = creativeInfo->adomain;
     bid.adm = creativeConfig.expand(creativeInfo->adm, context);
     bid.nurl = creativeConfig.expand(creativeInfo->nurl, context);
     bid.iurl = creativeConfig.expand(creativeInfo->iurl, context);
+
 
 }
 } // namespace RTBKIT
