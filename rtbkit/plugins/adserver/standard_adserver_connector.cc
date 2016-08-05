@@ -223,7 +223,7 @@ handleWinRq(const HttpHeader & header,
     if (json.isMember("bidRequestId")) {
 
         bidRequestIdStr = json["bidRequestId"].asString();
-        bidRequestId = Id(bidRequestIdStr); 
+        bidRequestId = Id(bidRequestIdStr.substr(0,bidRequestIdStr.npos-2));
     } else {
         errorResponseHelper(response,
                             "MISSING_BIDREQUESTID",

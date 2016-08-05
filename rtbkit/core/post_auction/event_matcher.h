@@ -27,7 +27,7 @@ struct EventMatcher : public EventRecorder
 {
     enum
     {
-        DefaultAuctionTimeout = 20 * 60,
+        DefaultAuctionTimeout = 15 * 60,
         DefaultWinTimeout = 1 * 60 * 60
     };
 
