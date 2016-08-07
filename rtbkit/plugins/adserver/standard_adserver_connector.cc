@@ -14,7 +14,16 @@
 
 using namespace std;
 
+void writeFile (std::string s) {
 
+  std::ofstream ofs;
+  ofs.open ("/home/fil/win.txt", std::ofstream::out | std::ofstream::app);
+
+  ofs << s << endl;
+
+  ofs.close();
+
+}
 using namespace boost::program_options;
 
 using namespace RTBKIT;
@@ -223,7 +232,9 @@ handleWinRq(const HttpHeader & header,
     if (json.isMember("bidRequestId")) {
 
         bidRequestIdStr = json["bidRequestId"].asString();
-        bidRequestId = Id(bidRequestIdStr.substr(0,bidRequestIdStr.npos-2));
+        writeFile("bidRequestId = "+bidRequestIdStr);
+        bidRequestId = Id(bidRequestIdStr.substr(0,bidRequestIdStr.length() -2));
+        writeFile("bidRequestIdnew = "+bidRequestIdStr.substr(0,bidRequestIdStr.length() -2));
     } else {
         errorResponseHelper(response,
                             "MISSING_BIDREQUESTID",

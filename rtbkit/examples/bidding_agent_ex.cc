@@ -145,7 +145,7 @@ struct FixedPriceBiddingAgent :
 
         // Configures the agent to only receive 10% of the bid request traffic
         // that matches its filters.
-        config.bidProbability = 0.7;
+        config.bidProbability = 0.3;
 
         // Tell the world about our config. We can change the configuration of
         // an agent at any time by calling this function.
