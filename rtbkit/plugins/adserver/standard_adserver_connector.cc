@@ -231,10 +231,11 @@ handleWinRq(const HttpHeader & header,
      */
     if (json.isMember("bidRequestId")) {
 
-        bidRequestIdStr = json["bidRequestId"].asString();
-        writeFile("bidRequestId = "+bidRequestIdStr);
-        bidRequestId = Id(bidRequestIdStr.substr(0,bidRequestIdStr.length() -2));
-        writeFile("bidRequestIdnew = "+bidRequestIdStr.substr(0,bidRequestIdStr.length() -2));
+        bidRequestIdStr = (json["bidRequestId"].asString());
+        bidRequestIdStr =  bidRequestIdStr.substr(0,bidRequestIdStr.find_last_of(":"));
+        writeFile("bidRequestId = "+json["bidRequestId"].asString());
+        bidRequestId = Id(bidRequestIdStr);
+        writeFile("bidRequestIdnew = "+bidRequestIdStr);
     } else {
         errorResponseHelper(response,
                             "MISSING_BIDREQUESTID",
@@ -249,6 +250,8 @@ handleWinRq(const HttpHeader & header,
      */
     if (json.isMember("impId")) {
         impIdStr = json["impId"].asString();
+
+
         impId = Id(impIdStr);
 
     } else {
@@ -268,7 +271,7 @@ handleWinRq(const HttpHeader & header,
     if (json.isMember("winPrice")) {
         winPriceDbl = json["winPrice"].asDouble();
      //   winPriceDbls = json["winPrice"].asString();
-     //   winPriceDbl = std::stod(winPriceDbls);
+      //  winPriceDbl = std::stod(winPriceDbls);
         winPrice = USD_CPM(winPriceDbl);
 
     } else {
@@ -311,6 +314,7 @@ handleWinRq(const HttpHeader & header,
     if(response.valid) {
         publishWin(bidRequestId, impId, winPrice, timestamp, Json::Value(), userIds,
                    AccountKey(passback), Date());
+        writeFile("WIN WIN");
         publisher_.publish("WIN", timestamp.print(3), bidRequestIdStr,
                            impIdStr, winPrice.toString());
 

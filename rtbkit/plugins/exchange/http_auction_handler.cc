@@ -556,7 +556,7 @@ sendResponse()
         .push_back({"X-Processing-Time-Ms", to_string(timeTaken)});
 
     putResponseOnWire(response, onSendFinished);
-    cerr << "response: " << response.body << endl;
+  //  cerr << "response: " << response.body << endl;
 }
 
 void

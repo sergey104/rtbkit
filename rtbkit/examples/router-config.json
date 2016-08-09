@@ -7,6 +7,7 @@
         "auctionVerb": "POST",
         "auctionResource": "/auctions",
         "performNameLookup": false,
-        "numThreads": 2
+        "numThreads": 2,
+        "slowModeTimeout":100000000
     }
 ]

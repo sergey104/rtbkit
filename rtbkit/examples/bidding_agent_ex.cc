@@ -110,7 +110,7 @@ struct FixedPriceBiddingAgent :
         config.creatives.push_back(Creative::sampleRR);
 
         config.providerConfig["appodeal"]["seat"] = 12;
-        config.providerConfig["appodeal"]["iurl"] = "http://www.gnu.org";
+      //  config.providerConfig["appodeal"]["iurl"] = "http://www.gnu.org";
 
                 for(auto & c: config.creatives){
                     c.providerConfig["appodeal"]["adm"] = "<script src=\"mraid.js\"></script><a href=\"http://52.208.150.10:17341\" target=\"_blank\"><img width=\"300\" height=\"250\" style=\"border-style: none\" src=\"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png\"/></a><script language=\"javascript\"type=\"text/javascript\">if(mraid.isViewable()){sendImpression();}else{mraid.addEventListener(\"viewableChange\",function(viewable){if(viewable){mraid.removeEventListener(\"viewableChange\",arguments.callee);sendImpression();}});}\nfunction sendImpression(){var urls=new Array();var i=0;urls[i++]=\"http://api.whatzbuzz.net/rtb/view?buzz=gAAAAABW4oe_ZnBIMcAliFv1T5ujGaBN_vCxv6BjFLq31DtNn_WDjuh-iF0QLyOITGXWllUaseOboW5xV3SswbIN5IstgO-vK-vh2S1MUb6hcnnYsaHEXCmZsv-zN8xYVM7jFRRWBLe4dYZYWRC9oi-5xgSWLbGBRt1ooldJ5rL-XK1-i_OT1QcMWJ-yCwpICSYSflv5mMGc&view=pixel.gif\";varhiddenSpan=document.createElement(\"span\");hiddenSpan.style.display=\"none\";var i=0;for(var i=0;i<urls.length;i++){var img=document.createElement(\"img\");img.src=urls[i];hiddenSpan.appendChild(img);}\nvar body=document.getElementsByTagName(\"body\")[0];body.appendChild(hiddenSpan);}</script>";
@@ -145,7 +145,7 @@ struct FixedPriceBiddingAgent :
 
         // Configures the agent to only receive 10% of the bid request traffic
         // that matches its filters.
-        config.bidProbability = 0.3;
+        config.bidProbability = 0.7;
 
         // Tell the world about our config. We can change the configuration of
         // an agent at any time by calling this function.
