@@ -178,7 +178,7 @@ struct FixedPriceBiddingAgent :
             // there should only ever be one biddable creative. Note that that
             // the router won't ask for bids on imp that don't have any
             // biddable creatives.
-            ExcAssertGreater(bid.availableCreatives.size(), 1);
+            ExcAssertGreaterEqual(bid.availableCreatives.size(), 1);
 
             int availableCreative = bid.availableCreatives.front();
 
