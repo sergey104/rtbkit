@@ -535,7 +535,7 @@ doBidResult(
 
     Amount bidPrice = response.price.maxPrice;
 
-    if (winPrice*0.001 > bidPrice) {
+    if (winPrice > bidPrice) {
         doError("doBidResult.winPriceExceedsBidPrice",
                 ML::format("win price %s exceeds bid price %s",
                         winPrice.toString(), bidPrice.toString()));

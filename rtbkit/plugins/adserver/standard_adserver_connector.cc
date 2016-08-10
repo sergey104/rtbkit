@@ -269,7 +269,7 @@ handleWinRq(const HttpHeader & header,
      */
     std::string winPriceDbls;
     if (json.isMember("winPrice")) {
-        winPriceDbl = json["winPrice"].asDouble();
+        winPriceDbl = (json["winPrice"].asDouble())*0.001;
      //   winPriceDbls = json["winPrice"].asString();
       //  winPriceDbl = std::stod(winPriceDbls);
      //   writeFile("winprice: " + std::to_string(winPriceDbl));
