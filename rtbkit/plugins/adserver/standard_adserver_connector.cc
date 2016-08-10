@@ -233,9 +233,9 @@ handleWinRq(const HttpHeader & header,
 
         bidRequestIdStr = (json["bidRequestId"].asString());
         bidRequestIdStr =  bidRequestIdStr.substr(0,bidRequestIdStr.find_last_of(":"));
-        writeFile("bidRequestId = "+json["bidRequestId"].asString());
+    //    writeFile("bidRequestId = "+json["bidRequestId"].asString());
         bidRequestId = Id(bidRequestIdStr);
-        writeFile("bidRequestIdnew = "+bidRequestIdStr);
+   //     writeFile("bidRequestIdnew = "+bidRequestIdStr);
     } else {
         errorResponseHelper(response,
                             "MISSING_BIDREQUESTID",
@@ -272,7 +272,7 @@ handleWinRq(const HttpHeader & header,
         winPriceDbl = json["winPrice"].asDouble();
      //   winPriceDbls = json["winPrice"].asString();
       //  winPriceDbl = std::stod(winPriceDbls);
-        writeFile("winprice: " + std::to_string(winPriceDbl));
+     //   writeFile("winprice: " + std::to_string(winPriceDbl));
         winPrice = USD_CPM(winPriceDbl);
 
     } else {
@@ -315,7 +315,7 @@ handleWinRq(const HttpHeader & header,
     if(response.valid) {
         publishWin(bidRequestId, impId, winPrice, timestamp, Json::Value(), userIds,
                    AccountKey(passback), Date());
-        writeFile("WIN WIN");
+      //  writeFile("WIN WIN");
         publisher_.publish("WIN", timestamp.print(3), bidRequestIdStr,
                            impIdStr, winPrice.toString());
 

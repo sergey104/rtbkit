@@ -215,8 +215,8 @@ parseBidRequest(HttpAuctionHandler & connection,
 {
 
     std::shared_ptr<BidRequest> none;
-writeFile(payload);
-writeFile("-----------------------------------");
+//writeFile(payload);
+//writeFile("-----------------------------------");
     // Check for JSON content-type
     if (!header.contentType.empty()) {
         static const std::string delimiter = ";";
