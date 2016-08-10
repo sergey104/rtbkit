@@ -109,11 +109,20 @@ const Creative Creative::sampleLB
 const Creative Creative::sampleAA
     (600, 160, "LeaderBoard1", 3);
 const Creative Creative::sampleRR
-    (50, 320, "LeaderBoard2", 4);
+    (320, 50, "LeaderBoard2", 4);
 const Creative Creative::sampleCC
     (300, 50, "LeaderBoard3", 5);
 const Creative Creative::sampleDD
     (90, 728, "LeaderBoard4", 6);
+const Creative Creative::sample1
+    (300, 250, "Extra1",7);
+const Creative Creative::sample2
+    (300, 250, "Extra2", 8);
+const Creative Creative::sample3
+    (320, 50, "Extra3", 9);
+const Creative Creative::sample4
+    (728, 90, "Extra4", 10);
+
 
 bool
 Creative::

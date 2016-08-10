@@ -272,6 +272,7 @@ handleWinRq(const HttpHeader & header,
         winPriceDbl = json["winPrice"].asDouble();
      //   winPriceDbls = json["winPrice"].asString();
       //  winPriceDbl = std::stod(winPriceDbls);
+        writeFile("winprice: " + std::to_string(winPriceDbl));
         winPrice = USD_CPM(winPriceDbl);
 
     } else {

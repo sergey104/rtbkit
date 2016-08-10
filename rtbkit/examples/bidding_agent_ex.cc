@@ -108,6 +108,10 @@ struct FixedPriceBiddingAgent :
         config.creatives.push_back(Creative::sampleCC);
         config.creatives.push_back(Creative::sampleDD);
         config.creatives.push_back(Creative::sampleRR);
+        config.creatives.push_back(Creative::sample1);
+        config.creatives.push_back(Creative::sample2);
+        config.creatives.push_back(Creative::sample3);
+        config.creatives.push_back(Creative::sample4);
 
         config.providerConfig["appodeal"]["seat"] = 12;
       //  config.providerConfig["appodeal"]["iurl"] = "http://www.gnu.org";
@@ -134,7 +138,7 @@ struct FixedPriceBiddingAgent :
 
             // Config parameter sent used by the augmentor to determine which
             // tag to set.
-            augConfig.config = Json::Value(1112);
+            augConfig.config = Json::Value(8112);
 
             // Instruct to router to filter out all bid requests who have not
             // been tagged by our frequency cap augmentor.
@@ -174,7 +178,7 @@ struct FixedPriceBiddingAgent :
             // there should only ever be one biddable creative. Note that that
             // the router won't ask for bids on imp that don't have any
             // biddable creatives.
-            ExcAssertEqual(bid.availableCreatives.size(), 1);
+            ExcAssertGreater(bid.availableCreatives.size(), 1);
 
             int availableCreative = bid.availableCreatives.front();
 

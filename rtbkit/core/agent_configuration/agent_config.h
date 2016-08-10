@@ -44,7 +44,10 @@ struct Creative {
     static const Creative sampleCC;
     static const Creative sampleDD;
     static const Creative sampleRR;
-
+    static const Creative sample1;
+    static const Creative sample2;
+    static const Creative sample3;
+    static const Creative sample4;
 
 
     void fromJson(const Json::Value & val);
