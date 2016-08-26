@@ -132,7 +132,13 @@ struct FixedPriceBiddingAgent :
                 for(auto & c: config.creatives){
                     c.providerConfig["appodeal"]["adm"] = mr + s1 + s2 + s3 + s4 + s5 +img;
 
+                    std::string s = c.["name"].asString();
 
+                    int jj = c["id"].asInt();
+
+                    std::string z = to_string(jj);
+
+                    c.providerConfig["appodeal"]["uniq_id"] = "world:" + s +":"+z;
 
                     c.providerConfig["appodeal"]["nurl"] = "http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/nurl?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}";
 

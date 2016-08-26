@@ -80,6 +80,7 @@ struct AppodealExchangeConnector : public HttpExchangeConnector {
         std::string adm = "crin";
         std::string nurl = "nurl";
         std::string iurl = "iurl";
+        std::string uniq_id = "uniq_id";
 
     };
 
