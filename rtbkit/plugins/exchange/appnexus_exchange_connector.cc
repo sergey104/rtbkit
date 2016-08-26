@@ -122,7 +122,13 @@ getResponse(const HttpAuctionHandler & connection,
 #if 0
 	cerr << " ---> BID_RESPONSE=" << retval.toString() << endl ;
 #endif
-	return HttpResponse(200, "application/json", retval.toString());
+//	return HttpResponse(200, "application/json", retval.toString());
+    std::string rv = retval.toString();
+
+    rv.erase(std::remove(rv.begin(), rv.end(), '\\'),
+                   rv.end());
+cerr << " ---> BID_RESPONSE=" << rv << endl ;
+    return HttpResponse(200, "application/json", rv);
 }
 
 HttpResponse

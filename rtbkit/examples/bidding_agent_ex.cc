@@ -115,9 +115,25 @@ struct FixedPriceBiddingAgent :
 
         config.providerConfig["appodeal"]["seat"] = 12;
       //  config.providerConfig["appodeal"]["iurl"] = "http://www.gnu.org";
+        std::string mr = R"(<script src='mraid.js'></script>)";
+
+        std::string s1 = R"(<script> var impressionTrackers = ["http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var clickTrackers = ["http://178.124.156.242:17342?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var targetLink = "http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; )";
+
+        std::string s2 = R"(var showAd = function(){if (mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) {  if (viewable) {  mraid.removeEventListener('viewableChange', showAd); sendImpression(); }  }); } }; )";
+
+        std::string s3 = R"(var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker;  hiddenSpan.appendChild(img);  document.body.appendChild(hiddenSpan);  });    }; )";
+
+        std::string s4 = R"( var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img');  img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan);  });  }; )";
+
+        std::string s5 = R"(if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd();  }</script>)";
+
+        std::string img = R"(<img style='height: 100%; width: auto;' src='http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png' onclick='trackClick()'> )";
 
                 for(auto & c: config.creatives){
-                    c.providerConfig["appodeal"]["adm"] = "<a href=\"http://178.124.156.242:17341\"><img src=\"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png\" style=\"margin:0 !important; padding: 0 !important; width: 36px; height: 36px; float: left; !important\" /><div style=\"float: left !important; margin-left: 5px !important; margin-top: 2px !important;\"><div style=\"background-color: #fff !important; white-space: nowrap !important; text-overflow: ellipsis !important; font-size: 16px !important; color: #000 !important; width: 160px !important; text-align: left !important; overflow: hidden !important; text-align: left !important;\">Vikings: War of Clans</div><div style=\"display: block !important; background-color: #fff !important; color: #979797 !important; font-size: 11px !important; text-align: left !important;\">Free for download</div></div><div style=\"background-color: #fff !important; float: right !important; height: 27px !important; vertical-align: middle !important; width: 96px !important; line-height: 27px !important; border: 1px solid #9A9A9A !important; border-radius: 5px !important; color: #67686A !important; text-decoration: none !important; text-align: center !important; font-size: 17px !important; margin-top: 3px !important\">Download</div></a><link href=\"https://appnext.hs.llnwd.net/bidder/style.css\" rel=\"stylesheet\" media=\"all\" /> <a href=\"appodeal://\"><img src=\"http://s3.amazonaws.com/appodeal-campaign-images/campaign_images/images/000/001/639/original/banner.png?1447692756\" /></a> <script language=\"javascript\"> if (mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener(\"viewableChange\", function (viewable) { if (viewable) { mraid.removeEventListener(\"viewableChange\", arguments.callee); sendImpression(); } }); } function sendImpression() { var urls = new Array(); var i = 0; urls[i++] = \"http://178.124.156.242:17341?price=${AUCTION_PRICE}\"; urls[i++] = \"http://178.124.156.242:17341?price=${AUCTION_PRICE}\"; var hiddenSpan = document.createElement(\"span\"); hiddenSpan.style.display = \"none\"; var i = 0; for (var i = 0; i < urls.length; i++) { var img = document.createElement(\"img\"); img.src = urls[i]; hiddenSpan.appendChild(img); } var body = document.getElementsByTagName(\"body\")[0]; body.appendChild(hiddenSpan); } </script><";
+                    c.providerConfig["appodeal"]["adm"] = mr + s1 + s2 + s3 + s4 + s5 +img;
+
+
+
                     c.providerConfig["appodeal"]["nurl"] = "http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/nurl?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}";
 
                     c.providerConfig["appodeal"]["iurl"] = "http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png";

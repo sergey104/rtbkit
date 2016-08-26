@@ -80,7 +80,7 @@ StandardAdServerConnector(std::string const & serviceName, std::shared_ptr<Servi
     HttpAdServerConnector(serviceName, proxies),
     publisher_(getServices()->zmqContext) {
     int winPort = json.get("winPort", 17340).asInt();
-    int eventsPort = json.get("eventsPort", 17343).asInt();
+    int eventsPort = json.get("eventsPort", 17341).asInt();
     verbose = json.get("verbose", false).asBool();
     initEventType(json);
     init(winPort, eventsPort, verbose);
@@ -311,6 +311,8 @@ handleWinRq(const HttpHeader & header,
         "\"bidRequestId\":\"" << bidRequestId << "\"," <<
         "\"impId\":\"" << impId << "\"," <<
         "\"winPrice\":\"" << winPrice.toString() << "\" }";
+  //  string s =  "{\"timestamp\":\"" + timestamp.print(3) + "\","+"\"bidRequestId\":\"" + bidRequestIdStr + "\"," +"\"winPrice\":\"" + json["winPrice"].asString() +"\" }";
+  //  writeFile("WIN: "+ s );
 
     if(response.valid) {
         publishWin(bidRequestId, impId, winPrice, timestamp, Json::Value(), userIds,
@@ -364,7 +366,7 @@ handleDeliveryRq(const HttpHeader & header,
      *  type is an required field.
      *  If null, we return an error response.
      */
-    if (json.isMember("type")) {
+  /*  if (json.isMember("type")) {
 
         event = (json["type"].asString());
         
@@ -383,13 +385,14 @@ handleDeliveryRq(const HttpHeader & header,
                             "A campaign event requires the type field.");
         publishError(response);
         return response;
-    }
+    } */
+    event = "CONVERSION";
 
     /*
      *  impid is an required field.
      *  If null, we return an error response.
      */
-    if (json.isMember("impid")) {
+    if (json.isMember("impId")) {
 
     } else {
         errorResponseHelper(response,
@@ -412,7 +415,6 @@ handleDeliveryRq(const HttpHeader & header,
         publishError(response);
         return response;
     }
-
     /*
      *  UserIds is an optional field.
      *  If null, we just put an empty array.
@@ -428,6 +430,7 @@ handleDeliveryRq(const HttpHeader & header,
     }
 
     bidRequestIdStr = json["bidRequestId"].asString();
+    bidRequestIdStr =  bidRequestIdStr.substr(0,bidRequestIdStr.find_last_of(":"));
     impIdStr = json["impid"].asString();
     bidRequestId = Id(bidRequestIdStr);
     impId = Id(impIdStr);
@@ -438,7 +441,11 @@ handleDeliveryRq(const HttpHeader & header,
         "\"event\":\"" << event << 
         "\"userIds\":" << userIds.toString() << "\"}";
 
+    //string s = "{\"timestamp\":\"" + timestamp.print(3) + "\"," + "\"bidRequestId\":\"" + bidRequestIdStr +"\","+"\"impId\":\"" + impIdStr + "\"}";
+   // writeFile("IMPRESSION: "+s);
+
     if(response.valid) {
+        writeFile("register event");
         publishCampaignEvent(eventType[event], bidRequestId, impId, timestamp,
                                  Json::Value(), userIds);
         publisher_.publish(eventType[event], timestamp.print(3), bidRequestIdStr,

@@ -23,7 +23,14 @@
 #include <string>
 
 using namespace std;
-
+void find_and_replace(string& source, string const& find, string const& replace)
+{
+    for(string::size_type i = 0; (i = source.find(find, i)) != string::npos;)
+    {
+        source.replace(i, find.length(), replace);
+        i += replace.length();
+    }
+}
 long int unix_timestamp()
 {
     time_t t = std::time(0);
@@ -345,8 +352,12 @@ getResponse(const HttpAuctionHandler & connection,
 
     StreamJsonPrintingContext context(stream);
     desc.printJsonTyped(&response, context);
-    cerr << "appodeal connector response 200:" << stream.str() << endl;
-    return HttpResponse(200, "application/json", stream.str()); 
+    string rv = stream.str();
+ //find_and_replace(rv,"\\","");
+cerr << "appodeal connector response 200:" << rv << endl;
+
+
+    return HttpResponse(200, "application/json", rv);
 //return HttpResponse(204, "none", "");
 }
 
