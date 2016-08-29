@@ -512,7 +512,7 @@ AppodealExchangeConnector::setSeatBid(
     bid.adm = creativeConfig.expand(creativeInfo->adm, context);
     bid.nurl = creativeConfig.expand(creativeInfo->nurl, context);
     bid.iurl = creativeConfig.expand(creativeInfo->iurl, context);
-    bid.uniq_id = creativeConfig.expand(creativeInfo->uniq_id, context);
+    bid.ext["uniq_id"] = creativeConfig.expand(creativeInfo->uniq_id, context);
 
 }
 } // namespace RTBKIT

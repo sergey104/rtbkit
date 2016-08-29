@@ -117,7 +117,7 @@ struct FixedPriceBiddingAgent :
       //  config.providerConfig["appodeal"]["iurl"] = "http://www.gnu.org";
         std::string mr = R"(<script src='mraid.js'></script>)";
 
-        std::string s1 = R"(<script> var impressionTrackers = ["http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var clickTrackers = ["http://178.124.156.242:17342?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var targetLink = "http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; )";
+        std::string s1 = R"(<script> var impressionTrackers = ["http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var clickTrackers = ["http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var targetLink = "http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; )";
 
         std::string s2 = R"(var showAd = function(){if (mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) {  if (viewable) {  mraid.removeEventListener('viewableChange', showAd); sendImpression(); }  }); } }; )";
 
@@ -132,9 +132,9 @@ struct FixedPriceBiddingAgent :
                 for(auto & c: config.creatives){
                     c.providerConfig["appodeal"]["adm"] = mr + s1 + s2 + s3 + s4 + s5 +img;
 
-                    std::string s = c.["name"].asString();
+                    std::string s = c.name;
 
-                    int jj = c["id"].asInt();
+                    int jj = c.providerConfig["id"].asInt();
 
                     std::string z = to_string(jj);
 
@@ -201,7 +201,17 @@ struct FixedPriceBiddingAgent :
             // the router won't ask for bids on imp that don't have any
             // biddable creatives.
             ExcAssertGreaterEqual(bid.availableCreatives.size(), 1);
+        /*    cerr << "-----" << endl;
+            cerr << "size: " << bid.availableCreatives.size() << endl;
 
+
+            for (auto& z : bid.availableCreatives) {
+
+
+            cerr << "index:" << z << ";  spotindex: " << bid.spotIndex << endl;
+            }
+            cerr << "-----" << endl; */
+            std::random_shuffle (  bid.availableCreatives.begin(),  bid.availableCreatives.end() );
             int availableCreative = bid.availableCreatives.front();
 
             // We don't really need it here but this is how you can get the

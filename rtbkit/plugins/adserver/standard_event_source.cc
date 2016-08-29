@@ -29,7 +29,7 @@ sendImpression(const BidRequest& bidRequest, const Bid& bid)
     json["bidRequestId"] = bidRequest.auctionId.toString();
     json["impid"] = bid.adSpotId.toString();
     json["userIds"] = bidRequest.userIds.toJsonArray();
-    json["type"] = "CONVERSION";
+    json["type"] = "IMPRESSION";
     sendEvent(json); 
 }
 

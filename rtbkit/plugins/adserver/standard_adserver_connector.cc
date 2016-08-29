@@ -93,7 +93,7 @@ initEventType(const Json::Value &json) {
     // Default value
     eventType["CLICK"] =  "CLICK";
     eventType["CONVERSION"] =  "CONVERSION";
-
+    eventType["IMPRESSION"] =  "IMPRESSION";
     // User value
     if(json.isMember("eventType")) {
         auto item = json["eventType"];
@@ -366,7 +366,7 @@ handleDeliveryRq(const HttpHeader & header,
      *  type is an required field.
      *  If null, we return an error response.
      */
-  /*  if (json.isMember("type")) {
+    if (json.isMember("type")) {
 
         event = (json["type"].asString());
         
@@ -385,9 +385,9 @@ handleDeliveryRq(const HttpHeader & header,
                             "A campaign event requires the type field.");
         publishError(response);
         return response;
-    } */
-    event = "CONVERSION";
-
+    }
+    //event = "CONVERSION";
+writeFile("type");
     /*
      *  impid is an required field.
      *  If null, we return an error response.
