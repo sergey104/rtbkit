@@ -134,7 +134,7 @@ struct FixedPriceBiddingAgent :
 
                     std::string s = c.name;
 
-                    int jj = c.providerConfig["id"].asInt();
+                    int jj = c.id;
 
                     std::string z = to_string(jj);
 
