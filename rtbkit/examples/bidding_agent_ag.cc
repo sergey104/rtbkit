@@ -78,7 +78,6 @@ struct FixedPriceBiddingAgent :
         BiddingAgent::start();
 
         // Build our configuration and tell the world about it.
-        std::cout << "pid:" << getpid() << std::endl;
         setConfig();
 
     }

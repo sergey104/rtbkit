@@ -117,6 +117,7 @@ AppodealExchangeConnector(ServiceBase & owner, const std::string & name)
   this->auctionResource = "/auctions";
   this->auctionVerb = "POST";
   initCreativeConfiguration();
+ // KinesisProducer producer("kinesis-sample", "announcements");
 }
 
 AppodealExchangeConnector::
@@ -127,6 +128,7 @@ AppodealExchangeConnector(const std::string & name,
   this->auctionResource = "/auctions";
   this->auctionVerb = "POST";
   initCreativeConfiguration();
+ // KinesisProducer producer("kinesis-sample", "announcements");
 }
 
 

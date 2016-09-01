@@ -3,12 +3,14 @@
    Copyright (c) 2013 Datacratic Inc.  All rights reserved.
 
 */
-
+#ifndef APPODEAL_CONNECTOR_H
+#define APPODEAL_CONNECTOR_H
 #pragma once
 
 #include "rtbkit/plugins/exchange/http_exchange_connector.h"
 #include "rtbkit/common/creative_configuration.h"
 #include "soa/utils/generic_utils.h"
+
 namespace RTBKIT {
 
 /*****************************************************************************/
@@ -86,6 +88,7 @@ struct AppodealExchangeConnector : public HttpExchangeConnector {
 
     typedef CreativeConfiguration<CreativeInfo> AppodealCreativeConfiguration;
 
+
 private:
 
     void initCreativeConfiguration();
@@ -104,3 +107,4 @@ protected:
 };
 
 } // namespace RTBKIT
+#endif
