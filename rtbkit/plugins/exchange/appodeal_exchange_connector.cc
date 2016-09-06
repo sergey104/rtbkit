@@ -158,6 +158,17 @@ void AppodealExchangeConnector::initCreativeConfiguration()
             return true;
     }).optional().snippet();
 
+    creativeConfig.addField(
+        "group_class",
+        [](const Json::Value& value, CreativeInfo& info) {
+
+            Datacratic::jsonDecode(value, info.uniq_id);
+            if (info.group_class.empty()) {
+                throw std::invalid_argument("group_class is required");
+            }
+
+            return true;
+    }).optional().snippet();
     // nurl might contain macros
     creativeConfig.addField(
         "nurl",
@@ -511,10 +522,11 @@ AppodealExchangeConnector::setSeatBid(
 //    bid.ext = in;
 
     //if (!creativeInfo->adomain.empty()) bid.adomain = creativeInfo->adomain;
-    bid.adm = creativeConfig.expand(creativeInfo->adm, context);
-    bid.nurl = creativeConfig.expand(creativeInfo->nurl, context);
-    bid.iurl = creativeConfig.expand(creativeInfo->iurl, context);
-    bid.ext["uniq_id"] = creativeConfig.expand(creativeInfo->uniq_id, context);
+    if (!creativeInfo->adm.empty()) bid.adm = creativeConfig.expand(creativeInfo->adm, context);
+    if (!creativeInfo->nurl.empty()) bid.nurl = creativeConfig.expand(creativeInfo->nurl, context);
+    if (!creativeInfo->iurl.empty()) bid.iurl = creativeConfig.expand(creativeInfo->iurl, context);
+    if (!creativeInfo->uniq_id.empty()) bid.ext["uniq_id"] = creativeConfig.expand(creativeInfo->uniq_id, context);
+    if (!creativeInfo->group_class.empty()) bid.ext["group_class"] = creativeConfig.expand(creativeInfo->group_class, context);
 
 }
 } // namespace RTBKIT

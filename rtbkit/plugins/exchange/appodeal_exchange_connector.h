@@ -79,10 +79,11 @@ struct AppodealExchangeConnector : public HttpExchangeConnector {
     virtual std::string getBidSourceConfiguration() const;
 
     struct CreativeInfo {
-        std::string adm = "crin";
+        std::string adm = "adm";
         std::string nurl = "nurl";
         std::string iurl = "iurl";
         std::string uniq_id = "uniq_id";
+        std::string group_class = "group_class";
 
     };
 
