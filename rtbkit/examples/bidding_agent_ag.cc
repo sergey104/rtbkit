@@ -43,9 +43,9 @@ struct FixedPriceBiddingAgent :
 {
     FixedPriceBiddingAgent(
             std::shared_ptr<Datacratic::ServiceProxies> services,
-            const string& serviceName) :
-        BiddingAgent(services, serviceName),
-        accountSetup(false)
+            const string& serviceName, const string& cfg) :
+        BiddingAgent(services, serviceName), 
+        accountSetup(false), cfgfile(cfg)
     {}
 
 
@@ -94,7 +94,23 @@ struct FixedPriceBiddingAgent :
     void setConfig()
     {
         config = AgentConfig();
-
+	
+	if(!cfgfile.empty()) {
+	    try {
+		std::ifstream cf(cfgfile);
+		std::string cfg((std::istreambuf_iterator<char>(cf)),  std::istreambuf_iterator<char>());	
+		config.parse(cfg);
+	    }
+	    catch(const std::exception& ex) {
+		std::cerr << ML::format("threw exception: %s", ex.what());
+		exit(-1)
+	    }
+	    catch(...) {
+		exit(-2);
+	    }
+	}
+	
+	/*
         // Accounts are used to control the allocation of spending budgets for
         // an agent. The whole mechanism is fully generic and can be setup in
         // whatever you feel it bests suits you.
@@ -172,11 +188,18 @@ struct FixedPriceBiddingAgent :
         // Configures the agent to only receive 10% of the bid request traffic
         // that matches its filters.
         config.bidProbability = 0.7;
-
+	*/
+        
         // Tell the world about our config. We can change the configuration of
         // an agent at any time by calling this function.
-        doConfig(config);
-
+	{
+	    /* logging agent configuration */
+	    std::cerr << "--- <configuration> ---" << std::endl;
+	    Json::Value value = config.toJson();
+	    std::cerr << value << std::endl << "--- </configuration> ---" << std::endl;
+	}
+        
+	doConfig(config);
     }
 
 
@@ -201,7 +224,8 @@ struct FixedPriceBiddingAgent :
             // the router won't ask for bids on imp that don't have any
             // biddable creatives.
             ExcAssertGreaterEqual(bid.availableCreatives.size(), 1);
-        /*    cerr << "-----" << endl;
+	    /*
+            cerr << "-----" << endl;
             cerr << "size: " << bid.availableCreatives.size() << endl;
 
 
@@ -210,7 +234,8 @@ struct FixedPriceBiddingAgent :
 
             cerr << "index:" << z << ";  spotindex: " << bid.spotIndex << endl;
             }
-            cerr << "-----" << endl; */
+            cerr << "-----" << endl;
+	    */
             std::random_shuffle (  bid.availableCreatives.begin(),  bid.availableCreatives.end() );
             int availableCreative = bid.availableCreatives.front();
 
@@ -255,10 +280,28 @@ struct FixedPriceBiddingAgent :
 
     bool accountSetup;
     SlaveBudgetController budgetController;
+    //
+    std::string cfgfile;
 };
 
 } // namepsace RTBKIT
 
+volatile bool to_shutdown = false;
+
+// signal handler
+static void sig_handler(int signal)
+{
+    switch(signal)
+    {
+	case SIGTERM:
+	case SIGKILL:
+	case SIGINT:
+	    to_shutdown = true;
+	    break;
+	default:
+	    break;
+    }
+}
 
 /******************************************************************************/
 /* MAIN                                                                       */
@@ -267,6 +310,7 @@ struct FixedPriceBiddingAgent :
 int main(int argc, char** argv)
 {
     using namespace boost::program_options;
+    string cfgfile;
 
     Datacratic::ServiceProxyArguments args;
     RTBKIT::SlaveBankerArguments bankerArgs;
@@ -274,7 +318,14 @@ int main(int argc, char** argv)
     options_description options = args.makeProgramOptions();
     options.add_options()
         ("help,h", "Print this message");
+	
+    // add option "-f" description
+    options.add_options()
+	(",f", value(&cfgfile), "Configuration file");
+	
     options.add(bankerArgs.makeProgramOptions());
+    
+
 
     variables_map vm;
     store(command_line_parser(argc, argv).options(options).run(), vm);
@@ -286,13 +337,21 @@ int main(int argc, char** argv)
     }
 
     auto serviceProxies = args.makeServiceProxies();
-    RTBKIT::FixedPriceBiddingAgent agent(serviceProxies, "fixed-price-agent-ex");
+    RTBKIT::FixedPriceBiddingAgent agent(serviceProxies, "fixed-price-agent-ex", cfgfile);
     agent.init(bankerArgs.makeApplicationLayer(serviceProxies));
+
+    signal(SIGKILL, sig_handler);
+    signal(SIGTERM, sig_handler);
+    signal(SIGINT, sig_handler);
+    
     agent.start();
 
-    while (true) this_thread::sleep_for(chrono::seconds(10));
+    // ouput pid to stderr
+    std::cerr << "pid:" << getpid();
+    
+    while (!to_shutdown) this_thread::sleep_for(chrono::seconds(10));
 
-    // Won't ever reach this point but this is how you shutdown an agent.
+    // shutdown
     agent.shutdown();
 
     return 0;
