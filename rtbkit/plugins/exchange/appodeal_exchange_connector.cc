@@ -117,7 +117,16 @@ AppodealExchangeConnector(ServiceBase & owner, const std::string & name)
   this->auctionResource = "/auctions";
   this->auctionVerb = "POST";
   initCreativeConfiguration();
- // KinesisProducer producer("kinesis-sample", "announcements");
+  rc = redisConnect(connection.c_str(), rport);
+  rc1 = redisConnect(connection.c_str(), rport);
+  if (rc == NULL || rc->err) {
+      if (rc) {
+          throw ML::Exception("Error",rc->errstr);
+          // handle error
+      } else {
+          throw ML::Exception("Can't allocate redis context\n");
+      }
+  }
 }
 
 AppodealExchangeConnector::
@@ -128,9 +137,31 @@ AppodealExchangeConnector(const std::string & name,
   this->auctionResource = "/auctions";
   this->auctionVerb = "POST";
   initCreativeConfiguration();
- // KinesisProducer producer("kinesis-sample", "announcements");
+  rc = redisConnect(connection.c_str(), rport);
+  rc1 = redisConnect(connection.c_str(), rport);
+  if (rc == NULL || rc->err) {
+      if (rc) {
+          throw ML::Exception("Error",rc->errstr);
+          // handle error
+      } else {
+          throw ML::Exception("Can't allocate redis context\n");
+      }
+  }
+}
+void AppodealExchangeConnector::record_request(std::string s) const
+{
+    std::string request = "RPUSH \"requests:1\" \" " + s+"\"";
+    redisCommand(rc, request.c_str());
+
 }
 
+void AppodealExchangeConnector::record_response(std::string s) const
+{
+     std::string request = "RPUSH \"responses:2\" \"" + s +"\"";
+     cerr << endl << endl << "inside responses" << request << endl;
+     redisCommand(rc, request.c_str());
+
+}
 
 void AppodealExchangeConnector::initCreativeConfiguration()
 {
@@ -247,8 +278,7 @@ parseBidRequest(HttpAuctionHandler & connection,
 {
 
     std::shared_ptr<BidRequest> none;
-//writeFile(payload);
-//writeFile("-----------------------------------");
+    record_request(payload);
     // Check for JSON content-type
     if (!header.contentType.empty()) {
         static const std::string delimiter = ";";
@@ -377,10 +407,10 @@ getResponse(const HttpAuctionHandler & connection,
 
     StreamJsonPrintingContext context(stream);
     desc.printJsonTyped(&response, context);
-    string rv = stream.str();
+    std::string rv = stream.str();
  //find_and_replace(rv,"\\","");
 cerr << "appodeal connector response 200:" << rv << endl;
-
+record_response("rv");
 
     return HttpResponse(200, "application/json", rv);
 //return HttpResponse(204, "none", "");
