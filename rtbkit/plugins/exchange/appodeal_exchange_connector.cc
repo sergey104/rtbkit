@@ -118,10 +118,19 @@ AppodealExchangeConnector(ServiceBase & owner, const std::string & name)
   this->auctionVerb = "POST";
   initCreativeConfiguration();
   rc = redisConnect(connection.c_str(), rport);
-  rc1 = redisConnect(connection.c_str(), rport);
+
   if (rc == NULL || rc->err) {
       if (rc) {
           throw ML::Exception("Error",rc->errstr);
+          // handle error
+      } else {
+          throw ML::Exception("Can't allocate redis context\n");
+      }
+  }
+  rc1 = redisConnect(connection.c_str(), rport);
+  if (rc1 == NULL || rc1->err) {
+      if (rc1) {
+          throw ML::Exception("Error",rc1->errstr);
           // handle error
       } else {
           throw ML::Exception("Can't allocate redis context\n");
@@ -138,7 +147,7 @@ AppodealExchangeConnector(const std::string & name,
   this->auctionVerb = "POST";
   initCreativeConfiguration();
   rc = redisConnect(connection.c_str(), rport);
-  rc1 = redisConnect(connection.c_str(), rport);
+
   if (rc == NULL || rc->err) {
       if (rc) {
           throw ML::Exception("Error",rc->errstr);
@@ -147,7 +156,25 @@ AppodealExchangeConnector(const std::string & name,
           throw ML::Exception("Can't allocate redis context\n");
       }
   }
+  rc1 = redisConnect(connection.c_str(), rport);
+  if (rc1 == NULL || rc1->err) {
+      if (rc1) {
+          throw ML::Exception("Error",rc1->errstr);
+          // handle error
+      } else {
+          throw ML::Exception("Can't allocate redis context\n");
+      }
+  }
 }
+
+AppodealExchangeConnector::~
+AppodealExchangeConnector()
+{
+redisFree(rc);
+redisFree(rc1);
+}
+
+
 void AppodealExchangeConnector::record_request(std::string s) const
 {
     std::string request = "RPUSH \"requests:1\" \" " + s+"\"";

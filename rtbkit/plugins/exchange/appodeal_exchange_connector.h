@@ -28,6 +28,7 @@ struct AppodealExchangeConnector : public HttpExchangeConnector {
 	AppodealExchangeConnector(ServiceBase & owner, const std::string & name);
 	AppodealExchangeConnector(const std::string & name,
                              std::shared_ptr<ServiceProxies> proxies);
+   ~AppodealExchangeConnector();
 
     static std::string exchangeNameString() {
         return "appodeal";
