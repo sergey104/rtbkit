@@ -177,17 +177,26 @@ redisFree(rc1);
 
 void AppodealExchangeConnector::record_request(std::string s) const
 {
-    std::string request = "RPUSH \"requests:1\" \" " + s+"\"";
-    redisCommand(rc, request.c_str());
+
+
+   // redisCommand(rc,"INCR id:requests");
+    int i = 101;
+    for (i =0;i<=200;i++) {
+    std::string request = "SET request:" + std::to_string(i) +  " \""+s+"\"";
+    cerr << request << endl;
+   redisCommand(rc, request.c_str());
+    }
+
+    //redisCommand(rc,"SADD requests {id}");
+
 
 }
 
 void AppodealExchangeConnector::record_response(std::string s) const
 {
-     std::string request = "RPUSH \"responses:2\" \"" + s +"\"";
-     cerr << endl << endl << "inside responses" << request << endl;
-     redisCommand(rc, request.c_str());
-
+    redisCommand(rc1,"INCR response:id");
+    std::string request = "SET response:id " + s;
+    redisCommand(rc1, request.c_str());
 }
 
 void AppodealExchangeConnector::initCreativeConfiguration()
@@ -305,7 +314,7 @@ parseBidRequest(HttpAuctionHandler & connection,
 {
 
     std::shared_ptr<BidRequest> none;
-    record_request(payload);
+    //record_request(payload);
     // Check for JSON content-type
     if (!header.contentType.empty()) {
         static const std::string delimiter = ";";
@@ -437,7 +446,7 @@ getResponse(const HttpAuctionHandler & connection,
     std::string rv = stream.str();
  //find_and_replace(rv,"\\","");
 cerr << "appodeal connector response 200:" << rv << endl;
-record_response("rv");
+//record_response("rv");
 
     return HttpResponse(200, "application/json", rv);
 //return HttpResponse(204, "none", "");
