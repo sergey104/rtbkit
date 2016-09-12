@@ -178,15 +178,16 @@ redisFree(rc1);
 void AppodealExchangeConnector::record_request(std::string s) const
 {
 
-
-   // redisCommand(rc,"INCR id:requests");
-    int i = 101;
-    for (i =0;i<=200;i++) {
-    std::string request = "SET request:" + std::to_string(i) +  " \""+s+"\"";
-    cerr << request << endl;
-   redisCommand(rc, request.c_str());
+    redisReply *reply;
+    reply = (redisReply *)redisCommand(rc,"INCR request_counter");
+    int i = reply->integer;
+    freeReplyObject(reply);
+    string z = "request:"+std::to_string(i);
+    reply = (redisReply *)redisCommand(rc,"SET %s %s ", z.c_str(), s.c_str());
+    if (reply->type == REDIS_REPLY_ERROR) {
+    cerr << reply->str << endl;
     }
-
+    freeReplyObject(reply);
     //redisCommand(rc,"SADD requests {id}");
 
 
@@ -314,7 +315,7 @@ parseBidRequest(HttpAuctionHandler & connection,
 {
 
     std::shared_ptr<BidRequest> none;
-    //record_request(payload);
+    record_request(payload);
     // Check for JSON content-type
     if (!header.contentType.empty()) {
         static const std::string delimiter = ";";
