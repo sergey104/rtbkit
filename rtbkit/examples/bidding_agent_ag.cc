@@ -103,8 +103,8 @@ struct FixedPriceBiddingAgent :
 	    }
 	    catch(const std::exception& ex) {
 		std::cerr << ML::format("threw exception: %s", ex.what());
-		exit(-1)
-	    }
+        exit(-1);
+        }
 	    catch(...) {
 		exit(-2);
 	    }

@@ -118,7 +118,7 @@ struct FixedPriceBiddingAgent :
       //  config.providerConfig["appodeal"]["iurl"] = "http://www.gnu.org";
         std::string mr = R"(<script src='mraid.js'></script>)";
 
-        std::string s1 = R"(<script> var impressionTrackers = ["http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=fil&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var clickTrackers = ["http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var targetLink = "http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; )";
+        std::string s1 = R"(<script> var impressionTrackers = ["http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=fil&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var clickTrackers = ["http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var targetLink = "http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; )";
 
         std::string s2 = R"(var showAd = function(){if (mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) {  if (viewable) {  mraid.removeEventListener('viewableChange', showAd); sendImpression(); }  }); } }; )";
 
@@ -141,7 +141,7 @@ struct FixedPriceBiddingAgent :
 
                     c.providerConfig["appodeal"]["uniq_id"] = "world:" + s +":"+z;
 
-                    c.providerConfig["appodeal"]["nurl"] = "http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=fil&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}";
+                    c.providerConfig["appodeal"]["nurl"] = "http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=fil&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}";
 
                     c.providerConfig["appodeal"]["iurl"] = "http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png";
 

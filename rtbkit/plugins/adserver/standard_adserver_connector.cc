@@ -17,7 +17,7 @@ using namespace std;
 void writeFile (std::string s) {
 
   std::ofstream ofs;
-  ofs.open ("/home/fil/win.txt", std::ofstream::out | std::ofstream::app);
+  ofs.open ("win.txt", std::ofstream::out | std::ofstream::app);
 
   ofs << s << endl;
 
@@ -72,8 +72,64 @@ StandardAdServerConnector(std::shared_ptr<ServiceProxies> & proxy,
       publisher_(proxy->zmqContext)
 {
     initEventType(Json::Value());
+    rc2 = redisConnect(connection.c_str(), rport);
+
+    if (rc2 == NULL || rc2->err) {
+        if (rc2) {
+            throw ML::Exception("Error",rc2->errstr);
+            // handle error
+        } else {
+            throw ML::Exception("Can't allocate redis context\n");
+        }
+    }
+    rc3 = redisConnect(connection.c_str(), rport);
+
+    if (rc3 == NULL || rc3->err) {
+        if (rc3) {
+            throw ML::Exception("Error",rc3->errstr);
+            // handle error
+        } else {
+            throw ML::Exception("Can't allocate redis context\n");
+        }
+    }
 }
 
+void StandardAdServerConnector::record_win(std::string s) const
+{
+    redisContext* rc7 = redisConnect(connection.c_str(), rport);
+    redisReply *reply;
+    reply = (redisReply *)redisCommand(rc7,"INCR win_counter");
+    long i = reply->integer;
+    freeReplyObject(reply);
+    string z = "win:"+std::to_string(i);
+    reply = (redisReply *)redisCommand(rc7,"SET %s %s ", z.c_str(), s.c_str());
+    if (reply->type == REDIS_REPLY_ERROR) {
+    cerr << reply->str << endl;
+    }
+    freeReplyObject(reply);
+
+
+
+}
+
+void StandardAdServerConnector::record_event(std::string s) const
+{
+
+    redisContext* rc8 = redisConnect(connection.c_str(), rport);
+    redisReply *reply;
+    reply = (redisReply *)redisCommand(rc8,"INCR event_counter");
+    long i = reply->integer;
+    freeReplyObject(reply);
+    string z = "event:"+std::to_string(i);
+    reply = (redisReply *)redisCommand(rc8,"SET %s %s ", z.c_str(), s.c_str());
+    if (reply->type == REDIS_REPLY_ERROR) {
+    cerr << reply->str << endl;
+    }
+    freeReplyObject(reply);
+
+
+
+}
 StandardAdServerConnector::
 StandardAdServerConnector(std::string const & serviceName, std::shared_ptr<ServiceProxies> const & proxies,
                           Json::Value const & json) :
@@ -206,6 +262,7 @@ handleWinRq(const HttpHeader & header,
      *  Timestamp is an required field.
      *  If null, we return an error response.
      */
+
     if (json.isMember("timestamp")) {
         timestamp = Date::fromSecondsSinceEpoch(json["timestamp"].asDouble());
 
@@ -233,9 +290,9 @@ handleWinRq(const HttpHeader & header,
 
         bidRequestIdStr = (json["bidRequestId"].asString());
         bidRequestIdStr =  bidRequestIdStr.substr(0,bidRequestIdStr.find_last_of(":"));
-    //    writeFile("bidRequestId = "+json["bidRequestId"].asString());
+
         bidRequestId = Id(bidRequestIdStr);
-   //     writeFile("bidRequestIdnew = "+bidRequestIdStr);
+
     } else {
         errorResponseHelper(response,
                             "MISSING_BIDREQUESTID",
@@ -306,7 +363,7 @@ handleWinRq(const HttpHeader & header,
     else {
         // Passback is optional
     }
-
+    record_win(json.toString());
     LOG(adserverTrace) << "{\"timestamp\":\"" << timestamp.print(3) << "\"," <<
         "\"bidRequestId\":\"" << bidRequestId << "\"," <<
         "\"impId\":\"" << impId << "\"," <<
@@ -315,9 +372,10 @@ handleWinRq(const HttpHeader & header,
   //  writeFile("WIN: "+ s );
 
     if(response.valid) {
+
         publishWin(bidRequestId, impId, winPrice, timestamp, Json::Value(), userIds,
                    AccountKey(passback), Date());
-      //  writeFile("WIN WIN");
+
         publisher_.publish("WIN", timestamp.print(3), bidRequestIdStr,
                            impIdStr, winPrice.toString());
 
@@ -387,7 +445,7 @@ handleDeliveryRq(const HttpHeader & header,
         return response;
     }
     //event = "CONVERSION";
-writeFile("type");
+
     /*
      *  impid is an required field.
      *  If null, we return an error response.
@@ -428,7 +486,7 @@ writeFile("type");
     else {
         // UserIds is optional
     }
-
+    record_event(json.toString());
     bidRequestIdStr = json["bidRequestId"].asString();
     bidRequestIdStr =  bidRequestIdStr.substr(0,bidRequestIdStr.find_last_of(":"));
     impIdStr = json["impid"].asString();
@@ -445,7 +503,7 @@ writeFile("type");
    // writeFile("IMPRESSION: "+s);
 
     if(response.valid) {
-        writeFile("register event");
+
         publishCampaignEvent(eventType[event], bidRequestId, impId, timestamp,
                                  Json::Value(), userIds);
         publisher_.publish(eventType[event], timestamp.print(3), bidRequestIdStr,

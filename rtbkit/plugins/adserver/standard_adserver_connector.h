@@ -20,6 +20,7 @@
 
 #include "rtbkit/plugins/adserver/http_adserver_connector.h"
 #include "rtbkit/common/analytics_publisher.h"
+#include <hiredis/hiredis.h>
 
 namespace RTBKIT {
 
@@ -66,12 +67,17 @@ struct StandardAdServerConnector : public HttpAdServerConnector
     AnalyticsPublisher analytics_;
 
 private :
-
+    redisContext *rc2;
+    redisContext *rc3;
+    std::string connection = "127.0.0.1";
+    int rport = 6379;
     void init(int winsPort, int eventsPort, bool verbose, bool analyticsOn = false, int analyticsConnections = 1);
     virtual void initEventType(const Json::Value &json);
 
     std::map<std::string , std::string> eventType;  
     bool verbose;
+    void record_win(std::string s) const;
+    void record_event(std::string s) const;
 };
 
 } // namespace RTBKIT
