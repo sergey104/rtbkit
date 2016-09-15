@@ -378,6 +378,8 @@ parseBidRequest(HttpAuctionHandler & connection,
         result.reset(OpenRTBBidRequestParser::openRTBBidRequestParserFactory(openRtbVersion)->parseBidRequest(context,
                                                                                               exchangeName(),
                                                                                               exchangeName()));
+	//!!!!
+	//std::cerr << "DEBUG: Request: " << result->toJsonStr() << std::endl;
     }
     catch(ML::Exception const & e) {
         this->recordHit("error.parsingBidRequest");

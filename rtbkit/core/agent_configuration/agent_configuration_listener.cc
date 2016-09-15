@@ -74,6 +74,8 @@ onMessage(const std::vector<std::string> & message)
     const std::string & agent = message.at(1);
     const std::string & configStr = message.at(2);
 
+    //std::cerr << "DEBUG: agent config: " << configStr << std::endl;
+    
     std::shared_ptr<AgentConfig> config;
 
     if (!configStr.empty()) {

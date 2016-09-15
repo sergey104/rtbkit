@@ -118,7 +118,7 @@ struct FixedPriceBiddingAgent :
       //  config.providerConfig["appodeal"]["iurl"] = "http://www.gnu.org";
         std::string mr = R"(<script src='mraid.js'></script>)";
 
-        std::string s1 = R"(<script> var impressionTrackers = ["http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=default&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var clickTrackers = ["http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var targetLink = "http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; )";
+        std::string s1 = R"(<script> var impressionTrackers = ["http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=alex&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var clickTrackers = ["http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var targetLink = "http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; )";
 
         std::string s2 = R"(var showAd = function(){if (mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) {  if (viewable) {  mraid.removeEventListener('viewableChange', showAd); sendImpression(); }  }); } }; )";
 
@@ -138,13 +138,18 @@ struct FixedPriceBiddingAgent :
 
                     c.providerConfig["appodeal"]["uniq_id"] = "world:" + s;
 
-                    c.providerConfig["appodeal"]["nurl"] = "http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=default&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}";
+                    c.providerConfig["appodeal"]["nurl"] = "http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=alex&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}";
 
                     c.providerConfig["appodeal"]["iurl"] = "http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png";
 
                     c.providerConfig["appodeal"]["group_class"] = "group_class";
 
                 }
+        RTBKIT::AgentConfig::SegmentInfo gender;
+	gender.include.add("F");
+	gender.exclude.add("M");
+        config.segments["gender"] = gender;
+        
 
         // Indicate to the router that we want our bid requests to be augmented
         // with our frequency cap augmentor example.
@@ -160,7 +165,7 @@ struct FixedPriceBiddingAgent :
 
             // Config parameter sent used by the augmentor to determine which
             // tag to set.
-            augConfig.config = Json::Value(8112);
+            augConfig.config = Json::Value(5);
 
             // Instruct to router to filter out all bid requests who have not
             // been tagged by our frequency cap augmentor.
@@ -172,7 +177,7 @@ struct FixedPriceBiddingAgent :
         // Configures the agent to only receive 10% of the bid request traffic
         // that matches its filters.
         config.bidProbability = 0.7;
-
+	
         // Tell the world about our config. We can change the configuration of
         // an agent at any time by calling this function.
         doConfig(config);

@@ -19,11 +19,12 @@
 #include <unordered_map>
 #include <mutex>
 
-
 using namespace std;
 
 namespace RTBKIT {
 
+    const chrono::hours aWaitPeriod(24);
+//    const chrono::seconds aWaitPeriod(60);
 
 /******************************************************************************/
 /* FREQUENCY CAP STORAGE                                                      */
@@ -57,10 +58,32 @@ struct FrequencyCapStorage
         counters[uids.exchangeId][account[0]]++;
     }
 
+    void reset(const RTBKIT::AccountKey& account, const RTBKIT::UserIds& uids)
+    {
+        lock_guard<mutex> guard(lock);
+        counters[uids.exchangeId][account[0]] = 0;
+    }
+    
+    chrono::system_clock::time_point get_time(const RTBKIT::AccountKey& account, const RTBKIT::UserIds& uids)
+    {
+        lock_guard<mutex> guard(lock);
+        return time_points[uids.exchangeId][account[0]];
+    }
+
+    /** Increments the number of times an ad for the given account has been
+        shown to the given user.
+     */
+    void set_time(const RTBKIT::AccountKey& account, const RTBKIT::UserIds& uids)
+    {
+        lock_guard<mutex> guard(lock);
+        time_points[uids.exchangeId][account[0]] = chrono::system_clock::now();
+    }
+    
 private:
 
     mutex lock;
     unordered_map<Datacratic::Id, unordered_map<string, size_t> > counters;
+    unordered_map<Datacratic::Id, unordered_map<string, chrono::system_clock::time_point> > time_points;
 
 };
 
@@ -110,15 +133,14 @@ init()
     palEvents.messageHandler = [&] (const vector<zmq::message_t>& msg)
         {
             RTBKIT::AccountKey account(msg[19].toString());
-            RTBKIT::UserIds uids =
-                RTBKIT::UserIds::createFromString(msg[15].toString());
+            RTBKIT::UserIds uids = RTBKIT::UserIds::createFromString(msg[15].toString());
 
+//	    std::cerr << "DEBUG: " << "account: " << account << "/uids: " << uids.toString() << " inc " << std::endl;
             storage->inc(account, uids);
             recordHit("wins");
         };
 
-    palEvents.connectAllServiceProviders(
-            "rtbPostAuctionService", "logger", {"MATCHEDWIN"});
+    palEvents.connectAllServiceProviders("rtbPostAuctionService", "logger", {"MATCHEDWIN"});
     addSource("FrequencyCapAugmentor::palEvents", palEvents);
 }
 
@@ -142,6 +164,9 @@ onRequest(const RTBKIT::AugmentationRequest& request)
     for (const string& agent : request.agents) {
 
         RTBKIT::AgentConfigEntry config = agentConfig.getAgentEntry(agent);
+	
+	std::string gender = request.bidRequest->user->gender;
+  //      std::cerr << "DEBUG: gender: " << gender << std::endl;
 
         /* When a new agent comes online there's a race condition where the
            router may send us a bid request for that agent before we receive
@@ -155,6 +180,7 @@ onRequest(const RTBKIT::AugmentationRequest& request)
         const RTBKIT::AccountKey& account = config.config->account;
 
         size_t count = storage->get(account, uids);
+//	std::cerr << "DEBUG: " << "account: " << account << "/uids: " << uids.toString() << " count: " << count << std::endl;
 
         /* The number of times a user has been seen by a given agent can be
            useful to make bid decisions so attach this data to the bid
@@ -164,18 +190,34 @@ onRequest(const RTBKIT::AugmentationRequest& request)
            after the augmentor from which it originated.
         */
         result[account[0]].data = count;
-
+	
         /* We tag bid requests that pass the frequency cap filtering because
            if the augmentation doesn't terminate in time or if an error
            occured, then the bid request will not receive any tags and will
            therefor be filtered out for agents that require the frequency
            capping.
         */
-        if (count < getCap(request.augmentor, agent, config)) {
-            result[account].tags.insert("pass-frequency-cap-ex");
-            recordHit("accounts." + account[0] + ".passed");
-        }
-        else recordHit("accounts." + account[0] + ".capped");
+	if(gender != "F") {
+	    result[account].tags.insert("nopass-frequency-cap-ex");
+	} else {
+	    size_t cap = getCap(request.augmentor, agent, config);
+	    if (count < cap) {
+		result[account].tags.insert("pass-frequency-cap-ex");
+		recordHit("accounts." + account[0] + ".passed");
+		if((cap - count) >= 1) 
+		{
+		    storage->set_time(account, uids);
+		}
+	    }
+	    else 
+	    {
+		recordHit("accounts." + account[0] + ".capped");
+		if(chrono::system_clock::now() - storage->get_time(account, uids) > aWaitPeriod)
+		{
+		    storage->reset(account, uids);
+		}
+	    }
+	}
     }
 
     return result;
