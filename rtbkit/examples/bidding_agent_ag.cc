@@ -109,7 +109,9 @@ struct FixedPriceBiddingAgent :
 		exit(-2);
 	    }
 	}
-	
+
+	//config.locationFilter.include = { L"Minsk" };
+
 	/*
         // Accounts are used to control the allocation of spending budgets for
         // an agent. The whole mechanism is fully generic and can be setup in
@@ -176,7 +178,7 @@ struct FixedPriceBiddingAgent :
 
             // Config parameter sent used by the augmentor to determine which
             // tag to set.
-            augConfig.config = Json::Value(8112);
+            augConfig.config = Json::Value(5);
 
             // Instruct to router to filter out all bid requests who have not
             // been tagged by our frequency cap augmentor.
