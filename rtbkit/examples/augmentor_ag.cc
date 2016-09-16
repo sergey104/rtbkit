@@ -135,7 +135,7 @@ init()
             RTBKIT::AccountKey account(msg[19].toString());
             RTBKIT::UserIds uids = RTBKIT::UserIds::createFromString(msg[15].toString());
 
-//	    std::cerr << "DEBUG: " << "account: " << account << "/uids: " << uids.toString() << " inc " << std::endl;
+	    //std::cerr << "DEBUG: " << "account: " << account << "/uids: " << uids.toString() << " inc " << std::endl;
             storage->inc(account, uids);
             recordHit("wins");
         };
@@ -156,6 +156,8 @@ FrequencyCapAugmentor::
 onRequest(const RTBKIT::AugmentationRequest& request)
 {
     Datacratic::Utf8String Minsk("Minsk");
+    //Datacratic::Utf8String Gurgaon("Gurgaon");
+    //Datacratic::Utf8String Tbilisi("Tbilisi");
     recordHit("requests");
 
     RTBKIT::AugmentationList result;
@@ -203,7 +205,7 @@ onRequest(const RTBKIT::AugmentationRequest& request)
            capping.
         */
 	
-	if((gender != "F") && (city != Minsk)) {
+	if((gender == "M") || (city != Minsk)) {
 	    result[account].tags.insert("nopass-frequency-cap-ex");
 	} else {
 	    size_t cap = getCap(request.augmentor, agent, config);
