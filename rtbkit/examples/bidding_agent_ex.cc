@@ -145,7 +145,6 @@ struct FixedPriceBiddingAgent :
                     c.providerConfig["appodeal"]["group_class"] = "group_class";
 
                 }
-        
 
         // Indicate to the router that we want our bid requests to be augmented
         // with our frequency cap augmentor example.
@@ -230,7 +229,7 @@ struct FixedPriceBiddingAgent :
 
         // A value that will be passed back to us when we receive the result of
         // our bid.
-        Json::Value metadata = 42;
+        Json::Value metadata = 9142;
 
         // Send our bid back to the agent.
         doBid(id, bids, metadata);
