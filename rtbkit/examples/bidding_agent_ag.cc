@@ -120,7 +120,7 @@ struct FixedPriceBiddingAgent :
         // Specify the properties of the creatives we are trying to show.
         config.creatives.push_back(Creative::sampleLB);
         config.creatives.push_back(Creative::sampleWS);
-        config.creatives.push_back(Creative::sampleBB);
+      /*  config.creatives.push_back(Creative::sampleBB);
         config.creatives.push_back(Creative::sampleAA);
         config.creatives.push_back(Creative::sampleCC);
         config.creatives.push_back(Creative::sampleDD);
@@ -128,7 +128,7 @@ struct FixedPriceBiddingAgent :
         config.creatives.push_back(Creative::sample1);
         config.creatives.push_back(Creative::sample2);
         config.creatives.push_back(Creative::sample3);
-        config.creatives.push_back(Creative::sample4);
+        config.creatives.push_back(Creative::sample4); */
 
         config.providerConfig["appodeal"]["seat"] = 12;
         //config.providerConfig["appodeal"]["iurl"] = "http://www.gnu.org";
@@ -146,19 +146,30 @@ struct FixedPriceBiddingAgent :
 
         std::string s5 = R"(if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd();  }</script>)";
 
-        std::string img = R"(<img style='height: 100%; width: auto;' src='http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png' onclick='trackClick()'> )";
+        std::string img1 = R"(<img style='height: 100%; width: auto;' src='http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/Banner2-320x50.gif' onclick='trackClick()'> )";
+        std::string img2 = R"(<img style='height: 100%; width: auto;' src='http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/Banner2-728x90.gif' onclick='trackClick()'> )";
 
-                for(auto & c: config.creatives){
-                    c.providerConfig["appodeal"]["adm"] = mr + s1 + s2 + s3 + s4 + s5 +img;
+
+        for(auto & c: config.creatives){
 
                     std::string s = c.name;
+                    if(s == "Banner0") {
+                    c.providerConfig["appodeal"]["adm"] = mr + s1 + s2 + s3 + s4 + s5 +img1;
+                    c.providerConfig["appodeal"]["iurl"] = "http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/Banner2-320x50.gif";
+
+                    }
+                    else {
+                    c.providerConfig["appodeal"]["adm"] = mr + s1 + s2 + s3 + s4 + s5 +img2;
+                    c.providerConfig["appodeal"]["iurl"] = "http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/Banner2-728x90.gif";
+
+                    }
+
+
 
 
                     c.providerConfig["appodeal"]["uniq_id"] = "world:" + s;
 
                     c.providerConfig["appodeal"]["nurl"] = "http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=default&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}";
-
-                    c.providerConfig["appodeal"]["iurl"] = "http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png";
 
                     c.providerConfig["appodeal"]["group_class"] = "group_class";
 
@@ -224,7 +235,7 @@ struct FixedPriceBiddingAgent :
 
         // Configures the agent to only receive 10% of the bid request traffic
         // that matches its filters.
-        config.bidProbability = 0.7;
+        config.bidProbability = 0.1;
         
         // Tell the world about our config. We can change the configuration of
         // an agent at any time by calling this function.
