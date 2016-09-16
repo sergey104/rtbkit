@@ -24,6 +24,7 @@ using namespace std;
 namespace RTBKIT {
 
     const chrono::hours aWaitPeriod(24);
+    const chrono::seconds aDelayPeriod(300);
 //    const chrono::seconds aWaitPeriod(60);
 
 /******************************************************************************/
@@ -78,12 +79,28 @@ struct FrequencyCapStorage
         lock_guard<mutex> guard(lock);
         time_points[uids.exchangeId][account[0]] = chrono::system_clock::now();
     }
+
+    chrono::system_clock::time_point get_delay_point(const RTBKIT::AccountKey& account, const RTBKIT::UserIds& uids)
+    {
+        lock_guard<mutex> guard(lock);
+        return delay_points[uids.exchangeId][account[0]];
+    }
+
+    /** Increments the number of times an ad for the given account has been
+        shown to the given user.
+     */
+    void set_delay_point(const RTBKIT::AccountKey& account, const RTBKIT::UserIds& uids)
+    {
+        lock_guard<mutex> guard(lock);
+        delay_points[uids.exchangeId][account[0]] = chrono::system_clock::now();
+    }
     
 private:
 
     mutex lock;
     unordered_map<Datacratic::Id, unordered_map<string, size_t> > counters;
     unordered_map<Datacratic::Id, unordered_map<string, chrono::system_clock::time_point> > time_points;
+    unordered_map<Datacratic::Id, unordered_map<string, chrono::system_clock::time_point> > delay_points;
 
 };
 
@@ -137,6 +154,7 @@ init()
 
 	    //std::cerr << "DEBUG: " << "account: " << account << "/uids: " << uids.toString() << " inc " << std::endl;
             storage->inc(account, uids);
+	    storage->set_delay_point(account, uids);
             recordHit("wins");
         };
 
@@ -155,6 +173,7 @@ RTBKIT::AugmentationList
 FrequencyCapAugmentor::
 onRequest(const RTBKIT::AugmentationRequest& request)
 {
+    bool delay = false;
     Datacratic::Utf8String Minsk("Minsk");
     //Datacratic::Utf8String Gurgaon("Gurgaon");
     //Datacratic::Utf8String Tbilisi("Tbilisi");
@@ -189,6 +208,11 @@ onRequest(const RTBKIT::AugmentationRequest& request)
         size_t count = storage->get(account, uids);
 	//std::cerr << "DEBUG: " << "account: " << account << "/uids: " << uids.toString() << " count: " << count << std::endl;
 
+	if(count == 0) {
+	    delay = false;
+	} else if(chrono::system_clock::now() - storage->get_delay_point(account, uids) < aDelayPeriod) {
+	    delay = true;
+	}
         /* The number of times a user has been seen by a given agent can be
            useful to make bid decisions so attach this data to the bid
            request.
@@ -205,7 +229,7 @@ onRequest(const RTBKIT::AugmentationRequest& request)
            capping.
         */
 	
-	if((gender != "F") || (city != Minsk)) {
+	if((gender != "F") || (city != Minsk) || delay) {
 	    result[account].tags.insert("nopass-frequency-cap-ex");
 	} else {
 	    size_t cap = getCap(request.augmentor, agent, config);
