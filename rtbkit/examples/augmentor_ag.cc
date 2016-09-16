@@ -7,7 +7,7 @@
 
 */
 
-#include "augmentor_ex.h"
+#include "augmentor_ag.h"
 
 #include "rtbkit/core/agent_configuration/agent_configuration_listener.h"
 #include "rtbkit/core/agent_configuration/agent_config.h"
@@ -155,6 +155,7 @@ RTBKIT::AugmentationList
 FrequencyCapAugmentor::
 onRequest(const RTBKIT::AugmentationRequest& request)
 {
+    Datacratic::Utf8String Minsk("Minsk");
     recordHit("requests");
 
     RTBKIT::AugmentationList result;
@@ -166,7 +167,11 @@ onRequest(const RTBKIT::AugmentationRequest& request)
         RTBKIT::AgentConfigEntry config = agentConfig.getAgentEntry(agent);
 	
 	std::string gender = request.bidRequest->user->gender;
-  //      std::cerr << "DEBUG: gender: " << gender << std::endl;
+	Datacratic::Utf8String city = request.bidRequest->location.cityName;
+	
+        //std::cerr << "DEBUG: gender: " << gender << std::endl;
+        //std::cerr << "DEBUG: city: " << city << std::endl;
+	
 
         /* When a new agent comes online there's a race condition where the
            router may send us a bid request for that agent before we receive
@@ -180,7 +185,7 @@ onRequest(const RTBKIT::AugmentationRequest& request)
         const RTBKIT::AccountKey& account = config.config->account;
 
         size_t count = storage->get(account, uids);
-	std::cerr << "DEBUG: " << "account: " << account << "/uids: " << uids.toString() << " count: " << count << std::endl;
+	//std::cerr << "DEBUG: " << "account: " << account << "/uids: " << uids.toString() << " count: " << count << std::endl;
 
         /* The number of times a user has been seen by a given agent can be
            useful to make bid decisions so attach this data to the bid
@@ -197,7 +202,8 @@ onRequest(const RTBKIT::AugmentationRequest& request)
            therefor be filtered out for agents that require the frequency
            capping.
         */
-	if(gender != "F") {
+	
+	if((gender != "F") && (city != Minsk)) {
 	    result[account].tags.insert("nopass-frequency-cap-ex");
 	} else {
 	    size_t cap = getCap(request.augmentor, agent, config);

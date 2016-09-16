@@ -110,9 +110,8 @@ struct FixedPriceBiddingAgent :
 	    }
 	}
 
-	//config.locationFilter.include = { L"Minsk" };
 
-	/*
+	
         // Accounts are used to control the allocation of spending budgets for
         // an agent. The whole mechanism is fully generic and can be setup in
         // whatever you feel it bests suits you.
@@ -132,7 +131,42 @@ struct FixedPriceBiddingAgent :
         config.creatives.push_back(Creative::sample4);
 
         config.providerConfig["appodeal"]["seat"] = 12;
-      //  config.providerConfig["appodeal"]["iurl"] = "http://www.gnu.org";
+        //config.providerConfig["appodeal"]["iurl"] = "http://www.gnu.org";
+	// form _ex 
+	
+        std::string mr = R"(<script src='mraid.js'></script>)";
+
+        std::string s1 = R"(<script> var impressionTrackers = ["http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=default&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var clickTrackers = ["http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var targetLink = "http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; )";
+
+        std::string s2 = R"(var showAd = function(){if (mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) {  if (viewable) {  mraid.removeEventListener('viewableChange', showAd); sendImpression(); }  }); } }; )";
+
+        std::string s3 = R"(var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker;  hiddenSpan.appendChild(img);  document.body.appendChild(hiddenSpan);  });    }; )";
+
+        std::string s4 = R"( var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img');  img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan);  });  }; )";
+
+        std::string s5 = R"(if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd();  }</script>)";
+
+        std::string img = R"(<img style='height: 100%; width: auto;' src='http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png' onclick='trackClick()'> )";
+
+                for(auto & c: config.creatives){
+                    c.providerConfig["appodeal"]["adm"] = mr + s1 + s2 + s3 + s4 + s5 +img;
+
+                    std::string s = c.name;
+
+
+                    c.providerConfig["appodeal"]["uniq_id"] = "world:" + s;
+
+                    c.providerConfig["appodeal"]["nurl"] = "http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=default&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}";
+
+                    c.providerConfig["appodeal"]["iurl"] = "http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png";
+
+                    c.providerConfig["appodeal"]["group_class"] = "group_class";
+
+                }
+	 
+	
+	// from _ag
+	/*
         std::string mr = R"(<script src='mraid.js'></script>)";
 
         std::string s1 = R"(<script> var impressionTrackers = ["http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var clickTrackers = ["http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var targetLink = "http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; )";
@@ -163,7 +197,8 @@ struct FixedPriceBiddingAgent :
                     c.providerConfig["appodeal"]["iurl"] = "http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png";
 
                   }
-
+        */
+	
         // Indicate to the router that we want our bid requests to be augmented
         // with our frequency cap augmentor example.
         {
@@ -190,17 +225,18 @@ struct FixedPriceBiddingAgent :
         // Configures the agent to only receive 10% of the bid request traffic
         // that matches its filters.
         config.bidProbability = 0.7;
-	*/
         
         // Tell the world about our config. We can change the configuration of
         // an agent at any time by calling this function.
+	/*
 	{
-	    /* logging agent configuration */
+	    // logging agent configuration
 	    std::cerr << "--- <configuration> ---" << std::endl;
 	    Json::Value value = config.toJson();
 	    std::cerr << value << std::endl << "--- </configuration> ---" << std::endl;
 	}
-        
+        */
+	    
 	doConfig(config);
     }
 

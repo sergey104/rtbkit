@@ -7,9 +7,11 @@
 #------------------------------------------------------------------------------#
 
 $(eval $(call library,augmentor_ex,augmentor_ex.cc,augmentor_base rtb bid_request agent_configuration))
+$(eval $(call library,augmentor_ag,augmentor_ag.cc,augmentor_base rtb bid_request agent_configuration))
 $(eval $(call library,mock_exchange,mock_exchange_connector.cc,exchange))
 
 $(eval $(call program,augmentor_ex_runner,augmentor_ex boost_program_options))
+$(eval $(call program,augmentor_ag_runner,augmentor_ag boost_program_options))
 $(eval $(call program,data_logger_ex,data_logger data_logger boost_program_options services))
 $(eval $(call program,bidding_agent_console,bidding_agent rtb_router boost_program_options services))
 $(eval $(call program,bidding_agent_ex,bidding_agent rtb_router boost_program_options services))
