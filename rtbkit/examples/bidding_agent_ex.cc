@@ -176,7 +176,7 @@ struct FixedPriceBiddingAgent :
 
         // Configures the agent to only receive 10% of the bid request traffic
         // that matches its filters.
-        config.bidProbability = 0.1;
+        config.bidProbability = 0.7;
 	
         // Tell the world about our config. We can change the configuration of
         // an agent at any time by calling this function.
@@ -234,7 +234,7 @@ struct FixedPriceBiddingAgent :
 
         // A value that will be passed back to us when we receive the result of
         // our bid.
-        Json::Value metadata = 42;
+        Json::Value metadata = 9142;
 
         // Send our bid back to the agent.
         doBid(id, bids, metadata);
