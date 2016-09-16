@@ -145,10 +145,10 @@ struct FixedPriceBiddingAgent :
                     c.providerConfig["appodeal"]["group_class"] = "group_class";
 
                 }
-        RTBKIT::AgentConfig::SegmentInfo gender;
-	gender.include.add("F");
-	gender.exclude.add("M");
-        config.segments["gender"] = gender;
+   //     RTBKIT::AgentConfig::SegmentInfo gender;
+//	gender.include.add("F");
+    //gender.exclude.add("M");
+     //   config.segments["gender"] = gender;
         
 
         // Indicate to the router that we want our bid requests to be augmented
@@ -165,7 +165,7 @@ struct FixedPriceBiddingAgent :
 
             // Config parameter sent used by the augmentor to determine which
             // tag to set.
-            augConfig.config = Json::Value(5);
+           // augConfig.config = Json::Value(5);
 
             // Instruct to router to filter out all bid requests who have not
             // been tagged by our frequency cap augmentor.
