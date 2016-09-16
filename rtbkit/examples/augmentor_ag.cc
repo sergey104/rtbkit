@@ -205,7 +205,7 @@ onRequest(const RTBKIT::AugmentationRequest& request)
            capping.
         */
 	
-	if((gender == "M") || (city != Minsk)) {
+	if((gender != "F") || (city != Minsk)) {
 	    result[account].tags.insert("nopass-frequency-cap-ex");
 	} else {
 	    size_t cap = getCap(request.augmentor, agent, config);
