@@ -115,11 +115,11 @@ struct FixedPriceBiddingAgent :
         // Accounts are used to control the allocation of spending budgets for
         // an agent. The whole mechanism is fully generic and can be setup in
         // whatever you feel it bests suits you.
-        config.account = {"main", "first"};
+        config.account = {"rec", "second"};
 
         // Specify the properties of the creatives we are trying to show.
-        config.creatives.push_back(Creative::sampleLB);
-        config.creatives.push_back(Creative::sampleWS);
+        config.creatives.push_back(Creative::sample1);
+        config.creatives.push_back(Creative::sample2);
       /*  config.creatives.push_back(Creative::sampleBB);
         config.creatives.push_back(Creative::sampleAA);
         config.creatives.push_back(Creative::sampleCC);
@@ -146,8 +146,8 @@ struct FixedPriceBiddingAgent :
 
         std::string s5 = R"(if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd();  }</script>)";
 
-        std::string img1 = R"(<img style='height: 100%; width: auto;' src='http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/Banner2-320x50.gif' onclick='trackClick()'> )";
-        std::string img2 = R"(<img style='height: 100%; width: auto;' src='http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/Banner2-728x90.gif' onclick='trackClick()'> )";
+        std::string img1 = R"(<img style='height: 100%; width: auto;' src='http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/Banner1-480x320.jpg' onclick='trackClick()'> )";
+        std::string img2 = R"(<img style='height: 100%; width: auto;' src='http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/Banner1-320x480.jpg' onclick='trackClick()'> )";
 
 
         for(auto & c: config.creatives){
@@ -155,12 +155,12 @@ struct FixedPriceBiddingAgent :
                     std::string s = c.name;
                     if(s == "Banner0") {
                     c.providerConfig["appodeal"]["adm"] = mr + s1 + s2 + s3 + s4 + s5 +img1;
-                    c.providerConfig["appodeal"]["iurl"] = "http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/Banner2-320x50.gif";
+                    c.providerConfig["appodeal"]["iurl"] = "http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/Banner1-480x320.jpg";
 
                     }
                     else {
                     c.providerConfig["appodeal"]["adm"] = mr + s1 + s2 + s3 + s4 + s5 +img2;
-                    c.providerConfig["appodeal"]["iurl"] = "http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/Banner2-728x90.gif";
+                    c.providerConfig["appodeal"]["iurl"] = "http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/Banner1-320x480.jpg.gif";
 
                     }
 
