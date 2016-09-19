@@ -378,7 +378,10 @@ parseBidRequest(HttpAuctionHandler & connection,
         result.reset(OpenRTBBidRequestParser::openRTBBidRequestParserFactory(openRtbVersion)->parseBidRequest(context,
                                                                                               exchangeName(),
                                                                                               exchangeName()));
-	//!!!!
+	// Save Device.ifa in userIds.exchnageId
+	result->userIds.add(Id(result->device->ifa), ID_EXCHANGE);
+	//std::cerr << "DEBUG: exchangeId: " << result->userIds.exchangeId << std::endl;
+	//std::cerr << "DEBUG: Request: " << payload << std::endl;
 	//std::cerr << "DEBUG: Request: " << result->toJsonStr() << std::endl;
     }
     catch(ML::Exception const & e) {
