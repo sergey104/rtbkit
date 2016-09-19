@@ -100,11 +100,11 @@ toJson() const
     return result;
 }
 
-const Creative Creative::sampleWS
+const Creative Creative::sampleWS //
     (320, 50, "Banner0", 0);
 const Creative Creative::sampleBB
     (300, 250, "BigBox", 1);
-const Creative Creative::sampleLB
+const Creative Creative::sampleLB  //
     (728, 90,  "Banner1", 2);
 const Creative Creative::sampleAA
     (320, 50, "LeaderBoard1", 3);
@@ -115,9 +115,9 @@ const Creative Creative::sampleCC
 const Creative Creative::sampleDD
     (728, 90, "LeaderBoard4", 6);
 const Creative Creative::sample1
-    (300, 250, "Extra1",7);
+    (480, 320, "Extra1",7);
 const Creative Creative::sample2
-    (300, 250, "Extra2", 8);
+    (320, 480, "Extra2", 8);
 const Creative Creative::sample3
     (320, 50, "Extra3", 9);
 const Creative Creative::sample4

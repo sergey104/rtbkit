@@ -37,8 +37,8 @@ struct Creative {
             const std::string dealId = "");
 
     // Three samples that can be used for testing...
-    static const Creative sampleLB;
-    static const Creative sampleBB;
+    static const Creative sampleLB; //
+    static const Creative sampleBB; //
     static const Creative sampleWS;
     static const Creative sampleAA;
     static const Creative sampleCC;
