@@ -115,7 +115,7 @@ struct FixedPriceBiddingAgent :
         // Accounts are used to control the allocation of spending budgets for
         // an agent. The whole mechanism is fully generic and can be setup in
         // whatever you feel it bests suits you.
-        config.account = {"hello", "world"};
+        config.account = {"main", "first"};
 
         // Specify the properties of the creatives we are trying to show.
         config.creatives.push_back(Creative::sampleLB);
@@ -235,7 +235,7 @@ struct FixedPriceBiddingAgent :
 
         // Configures the agent to only receive 10% of the bid request traffic
         // that matches its filters.
-        config.bidProbability = 0.1;
+        config.bidProbability = 0.5;
         
         // Tell the world about our config. We can change the configuration of
         // an agent at any time by calling this function.
