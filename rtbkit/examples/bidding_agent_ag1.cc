@@ -153,7 +153,7 @@ struct FixedPriceBiddingAgent :
         for(auto & c: config.creatives){
 
                     std::string s = c.name;
-                    if(s == "Banner0") {
+                    if(s == "Extra1") {
                     c.providerConfig["appodeal"]["adm"] = mr + s1 + s2 + s3 + s4 + s5 +img1;
                     c.providerConfig["appodeal"]["iurl"] = "http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/Banner1-480x320.jpg";
 
