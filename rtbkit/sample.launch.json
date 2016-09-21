@@ -95,6 +95,15 @@
                         "-B", "rtbkit/sample.bootstrap.json"
                     ],
                     "log": true
+                },
+                {
+                    "name": "fixed-price-agent2",
+                    "root": ".",
+                    "path": "build/x86_64/bin/bidding_agent_ag2",
+                    "arg": [
+                        "-B", "rtbkit/sample.bootstrap.json"
+                    ],
+                    "log": true
                 }
 
 
