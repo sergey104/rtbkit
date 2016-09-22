@@ -172,6 +172,8 @@ onRequest(const RTBKIT::AugmentationRequest& request)
 
         RTBKIT::AgentConfigEntry config = agentConfig.getAgentEntry(agent);
 	bool toSkip = false;
+	size_t cap = 0;
+	size_t minInterval = 0;
 
 	
         /* When a new agent comes online there's a race condition where the
@@ -205,12 +207,17 @@ onRequest(const RTBKIT::AugmentationRequest& request)
            therefor be filtered out for agents that require the frequency
            capping.
         */
-	size_t cap = getCap(request.augmentor, agent, config);
+	cap = getCap(request.augmentor, agent, config);
 	//std::cerr << "DEBUG: cap: " << cap << std::endl;
+	minInterval = getInterval(request.augmentor, agent, config);
+	if(!cap || !minInterval) {
+	    recordHit("badConfig");
+	    //std::cerr << "DEBUG: bad Config" << std::endl;
+	    continue;
+	}
 
 	if (count > 0) {
 	    
-	    size_t minInterval = getInterval(request.augmentor, agent, config);
 		
 	    if(!minInterval)
 		minInterval = defaultInterval;
@@ -271,7 +278,9 @@ getCap( const string& augmentor,
 {
     for (const auto& augConfig : config.config->augmentations) {
         if (augConfig.name != augmentor) continue;
-        return augConfig.config["maxPerDay"].asInt();
+	if(augConfig.config.isArray() && augConfig.config.isMember("maxPerDay")) {
+	    return augConfig.config["maxPerDay"].asInt();
+	}
     }
 
     /* There's a race condition here where if an agent removes our augmentor
@@ -296,7 +305,9 @@ getInterval( const string& augmentor,
 {
     for (const auto& augConfig : config.config->augmentations) {
         if (augConfig.name != augmentor) continue;
-        return augConfig.config["minInterval"].asInt();
+	if(augConfig.config.isArray() && augConfig.config.isMember("minInterval")) {
+	    return augConfig.config["minInterval"].asInt();
+	}
     }
 
     /* There's a race condition here where if an agent removes our augmentor

@@ -381,10 +381,14 @@ parseBidRequest(HttpAuctionHandler & connection,
                                                                                               exchangeName()));
 	// Save Device.ifa in userIds.exchnageId
 	Id ifa(result->device->ifa);
-	try {
+	
+	if(result->userIds.find(result->userIds.domainToString(ID_EXCHANGE)) == result->userIds.end()) {
 	    result->userIds.add(ifa, ID_EXCHANGE);
-	} catch(ML::Exception const & e) {
+	    //std::cerr << "DEBUG: exchangeId added" << std::endl;
+	}
+	else {
 	    result->userIds.setStatic(ifa, ID_EXCHANGE);
+	    //std::cerr << "DEBUG: exchangeId changed" << std::endl;
 	}
 	
 	// add gender to segments
