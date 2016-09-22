@@ -6,12 +6,6 @@
 # Makefile for various RTBkit examples. 
 #------------------------------------------------------------------------------#
 
-$(eval $(call program,bidding_agent_1,bidding_agent rtb_router boost_program_options services))
-$(eval $(call program,augmentor_1_runner,augmentor_1 boost_program_options))
-#----------------------
-$(eval $(call library,augmentor_1,augmentor_1.cc,augmentor_base rtb bid_request agent_configuration))
-#----------------------
-
 $(eval $(call library,augmentor_ex,augmentor_ex.cc,augmentor_base rtb bid_request agent_configuration))
 $(eval $(call library,augmentor_ag,augmentor_ag.cc,augmentor_base rtb bid_request agent_configuration))
 $(eval $(call library,mock_exchange,mock_exchange_connector.cc,exchange))
