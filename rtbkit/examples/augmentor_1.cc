@@ -278,7 +278,7 @@ getCap( const string& augmentor,
 {
     for (const auto& augConfig : config.config->augmentations) {
         if (augConfig.name != augmentor) continue;
-	if(augConfig.config.isArray() && augConfig.config.isMember("maxPerDay")) {
+	if(augConfig.config.isMember("maxPerDay")) {
 	    return augConfig.config["maxPerDay"].asInt();
 	}
     }
@@ -305,7 +305,7 @@ getInterval( const string& augmentor,
 {
     for (const auto& augConfig : config.config->augmentations) {
         if (augConfig.name != augmentor) continue;
-	if(augConfig.config.isArray() && augConfig.config.isMember("minInterval")) {
+	if(augConfig.config.isMember("minInterval")) {
 	    return augConfig.config["minInterval"].asInt();
 	}
     }
