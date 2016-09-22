@@ -119,9 +119,9 @@ const Creative Creative::sample1
 const Creative Creative::sample2
     (320, 480, "Extra2", 8);
 const Creative Creative::sample3
-    (320, 50, "Extra3", 9);
+    (1024, 768, "Extra3", 9);
 const Creative Creative::sample4
-    (728, 90, "Extra4", 10);
+    (768, 1024, "Extra4", 10);
 
 
 bool
