@@ -112,10 +112,10 @@ struct FixedPriceBiddingAgent :
 	    }
 	}
 	    
-	std::cerr << "DEBUG: doConfig" << std::endl;
-	std::cerr << "--- <configuration> ---" << std::endl;
-	Json::Value value = config.toJson();
-	std::cerr << value << std::endl << "--- </configuration> ---" << std::endl;
+	//std::cerr << "DEBUG: doConfig" << std::endl;
+	//std::cerr << "--- <configuration> ---" << std::endl;
+	//Json::Value value = config.toJson();
+	//std::cerr << value << std::endl << "--- </configuration> ---" << std::endl;
 	
 	doConfig(config);
     }
