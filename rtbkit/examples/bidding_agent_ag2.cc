@@ -386,7 +386,7 @@ int main(int argc, char** argv)
     }
 
     auto serviceProxies = args.makeServiceProxies();
-    RTBKIT::FixedPriceBiddingAgent agent(serviceProxies, "fixed-price-agent-ag2", cfgfile);
+    RTBKIT::FixedPriceBiddingAgent agent(serviceProxies, "fixed-price-agent-ex", cfgfile);
     agent.init(bankerArgs.makeApplicationLayer(serviceProxies));
 
     signal(SIGKILL, sig_handler);
