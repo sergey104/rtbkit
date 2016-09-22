@@ -289,6 +289,14 @@ handleWinRq(const HttpHeader & header,
     if (json.isMember("bidRequestId")) {
 
         bidRequestIdStr = (json["bidRequestId"].asString());
+        if(bidRequestIdStr.find(":") == string::npos)
+        {
+            errorResponseHelper(response,
+                                "WRONG_BIDREQUESTID",
+                                "A win notice requires correct bidRequestId field.");
+            publishError(response);
+            return response;
+        }
         bidRequestIdStr =  bidRequestIdStr.substr(0,bidRequestIdStr.find_last_of(":"));
 
         bidRequestId = Id(bidRequestIdStr);
@@ -488,6 +496,14 @@ handleDeliveryRq(const HttpHeader & header,
     }
     record_event(json.toString());
     bidRequestIdStr = json["bidRequestId"].asString();
+    if(bidRequestIdStr.find(":") == string::npos)
+    {
+        errorResponseHelper(response,
+                            "WRONG_BIDREQUESTID",
+                            "Event requires correct bidRequestId field.");
+        publishError(response);
+        return response;
+    }
     bidRequestIdStr =  bidRequestIdStr.substr(0,bidRequestIdStr.find_last_of(":"));
     impIdStr = json["impid"].asString();
     bidRequestId = Id(bidRequestIdStr);
