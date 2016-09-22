@@ -47,6 +47,7 @@ void writeFile (std::string s) {
   ofs.close();
 
 }
+
 using namespace Datacratic;
 using namespace ML;
 namespace Datacratic {
@@ -379,10 +380,50 @@ parseBidRequest(HttpAuctionHandler & connection,
                                                                                               exchangeName(),
                                                                                               exchangeName()));
 	// Save Device.ifa in userIds.exchnageId
-	result->userIds.add(Id(result->device->ifa), ID_EXCHANGE);
-	//std::cerr << "DEBUG: exchangeId: " << result->userIds.exchangeId << std::endl;
-	//std::cerr << "DEBUG: Request: " << payload << std::endl;
-	//std::cerr << "DEBUG: Request: " << result->toJsonStr() << std::endl;
+	Id ifa(result->device->ifa);
+	try {
+	    result->userIds.add(ifa, ID_EXCHANGE);
+	} catch(ML::Exception const & e) {
+	    result->userIds.setStatic(ifa, ID_EXCHANGE);
+	}
+	
+	// add gender to segments
+	if(!result->user->gender.empty()) {
+	    result->segments.add("gender", result->user->gender);
+	}
+	
+	// add age to segments
+	Datacratic::UnicodeString keyBirthDay("birthday");
+	string birthDay("");
+	
+	for(auto data: result->user->data) {
+	    for(auto segment: data.segment) {
+		if(segment.name == keyBirthDay) {
+		    birthDay = segment.value.extractAscii();
+		    break;
+		}
+	    }
+	    if(!birthDay.empty()) {
+		std::string s_year(birthDay, birthDay.find_last_of("/") + 1);
+		if (s_year.length() == 4) {
+		    int birth_year =  std::stoi(s_year);
+		    std::time_t tm = std::time(nullptr);
+		    std::tm utc_tm = *std::gmtime(&tm);
+		    int cur_year = utc_tm.tm_year + 1900;
+		    int age = cur_year - birth_year;
+		    result->segments.add("age", age);
+		}
+		break;
+	    }
+	}
+	
+
+	
+//	std::cerr << "DEBUG: exchangeId: " << result->userIds.exchangeId << std::endl;
+//	std::cerr << "DEBUG: Request: " << payload << std::endl;
+//	std::cerr << "DEBUG: Request: " << result->toJsonStr() << std::endl;
+	std::cerr << "DEBUG: Request seg: " << result->segments.toJson() << std::endl;
+	
     }
     catch(ML::Exception const & e) {
         this->recordHit("error.parsingBidRequest");
