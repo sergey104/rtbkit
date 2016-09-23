@@ -9,11 +9,13 @@ tmux new-window -d -t rtb:3 -n 'logger' 'tail -F ./logs/logger.log'
 tmux new-window -d -t rtb:4 -n 'agent-configuration' 'tail -F ./logs/agent-configuration.log'
 tmux new-window -d -t rtb:5 -n 'banker' 'tail -F ./logs/banker.log'
 tmux new-window -d -t rtb:6 -n 'augmentor' 'tail -F ./logs/augmentor.log'
-tmux new-window -d -t rtb:7 -n 'router' 'tail -F ./logs/router.log'
-tmux new-window -d -t rtb:8 -n 'post-auction' 'tail -F ./logs/post-auction.log'
-tmux new-window -d -t rtb:9 -n 'fixed-price-agent' 'tail -F ./logs/fixed-price-agent.log'
-tmux new-window -d -t rtb:10 -n 'fixed-price-agent1' 'tail -F ./logs/fixed-price-agent1.log'
-tmux new-window -d -t rtb:11 -n 'fixed-price-agent2' 'tail -F ./logs/fixed-price-agent2.log'
+tmux new-window -d -t rtb:7 -n 'augmentor1' 'tail -F ./logs/augmentor1.log'
+tmux new-window -d -t rtb:8 -n 'router' 'tail -F ./logs/router.log'
+tmux new-window -d -t rtb:9 -n 'post-auction' 'tail -F ./logs/post-auction.log'
+tmux new-window -d -t rtb:10 -n 'fixed-price-agent' 'tail -F ./logs/fixed-price-agent.log'
+tmux new-window -d -t rtb:11 -n 'fixed-price-agent1' 'tail -F ./logs/fixed-price-agent1.log'
+tmux new-window -d -t rtb:12 -n 'fixed-price-agent2' 'tail -F ./logs/fixed-price-agent2.log'
+tmux new-window -d -t rtb:13 -n 'fixed-price-agent3' 'tail -F ./logs/fixed-price-agent3.log'
 if [[ "$*" != *--quiet* ]]
 then
     tmux attach -t rtb
