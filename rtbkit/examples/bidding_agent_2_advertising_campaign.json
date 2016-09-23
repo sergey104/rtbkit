@@ -1,0 +1,193 @@
+{
+    "account":["hello","world"],
+    "augmentations":{
+	"frequency-cap-1":{
+	    "config":{"maxPerDay":5, "minInterval":300},
+	    "filters":{
+		"include":["pass-frequency-cap-1"],
+		"exclude":[]
+	    },
+	    "required":true
+	},
+	"random":null
+    },
+    "bidControl":{
+	"fixedBidCpmInMicros":0,
+	"type":"RELAY"
+    },
+    "bidProbability":0.7,
+    "creatives":
+    [
+	{
+	    "format":"728x90",
+	    "id":2,
+	    "name":"LeaderBoardz",
+	    "providerConfig":{
+		"appodeal":{
+		    "adm": "<script src='mraid.js'></script><script> var impressionTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=alex&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var clickTrackers = [\"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var targetLink = \"http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"; var trackClick = function() { sendClicks(); mraid.open(targetLink); }; var showAd = function(){ if(mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) { if(viewable) { mraid.removeEventListener('viewableChange', showAd); sendImpression(); }}); }}; var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker;  hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img');  img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd(); }</script><img style='height: 100%; width: auto;' src='http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png' onclick='trackClick()'>",
+		    "group_class":"group_class",
+		    "iurl":"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png",
+		    "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=alex&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
+		    "uniq_id":"world:LeaderBoardz"
+		}
+	    }
+	},
+	{
+	    "format":"320x50",
+	    "id":0,
+	    "name":"LeaderBoard0",
+	    "providerConfig":{
+		"appodeal":{
+		    "adm":"<script src='mraid.js'></script><script> var impressionTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=alex&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var clickTrackers = [\"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var targetLink = \"http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; var showAd = function(){if (mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) { if (viewable) { mraid.removeEventListener('viewableChange', showAd); sendImpression(); }}); }}; var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker;  hiddenSpan.appendChild(img);  document.body.appendChild(hiddenSpan); }); }; var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd(); }</script><img style='height: 100%; width: auto;' src='http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png' onclick='trackClick()'>",
+		    "group_class":"group_class",
+		    "iurl":"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png",
+		    "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=alex&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
+		    "uniq_id":"world:LeaderBoard0"
+		}
+	    }
+	},
+	{
+	    "format":"300x250",
+	    "id":1,
+	    "name":"BigBox",
+	    "providerConfig":{
+		"appodeal":{
+		    "adm":"<script src='mraid.js'></script><script> var impressionTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=alex&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var clickTrackers = [\"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var targetLink = \"http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; var showAd = function(){ if(mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) { if(viewable) { mraid.removeEventListener('viewableChange', showAd); sendImpression(); }}); }}; var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd(); }</script><img style='height: 100%; width: auto;' src='http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png' onclick='trackClick()'>",
+		    "group_class":"group_class",
+		    "iurl":"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png",
+		    "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=alex&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
+		    "uniq_id":"world:BigBox"
+		}
+	    }
+	},
+	{
+	    "format":"320x50",
+	    "id":3,
+	    "name":"LeaderBoard1",
+	    "providerConfig":{
+		"appodeal":{
+		    "adm":"<script src='mraid.js'></script><script> var impressionTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=alex&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var clickTrackers = [\"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var targetLink = \"http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"; var trackClick = function() { sendClicks(); mraid.open(targetLink); }; var showAd = function(){ if(mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) { if(viewable) {  mraid.removeEventListener('viewableChange', showAd); sendImpression(); }}); }}; var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker;  hiddenSpan.appendChild(img);  document.body.appendChild(hiddenSpan); }); }; var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd(); }</script><img style='height: 100%; width: auto;' src='http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png' onclick='trackClick()'>",
+		    "group_class":"group_class",
+		    "iurl":"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png",
+		    "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=alex&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
+		    "uniq_id":"world:LeaderBoard1"
+		}
+	    }
+	},
+	{
+	    "format":"300x250",
+	    "id":5,
+	    "name":"LeaderBoard3",
+	    "providerConfig":{
+		"appodeal":{
+		    "adm":"<script src='mraid.js'></script><script> var impressionTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=alex&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var clickTrackers = [\"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var targetLink = \"http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; var showAd = function(){ if(mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) { if(viewable) {  mraid.removeEventListener('viewableChange', showAd); sendImpression(); }}); }}; var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker;  hiddenSpan.appendChild(img);  document.body.appendChild(hiddenSpan); }); }; var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd(); }</script><img style='height: 100%; width: auto;' src='http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png' onclick='trackClick()'>",
+		    "group_class":"group_class",
+		    "iurl":"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png",
+		    "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=alex&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
+		    "uniq_id":"world:LeaderBoard3"
+		}
+	    }
+	},
+	{
+	    "format":"728x90",
+	    "id":6,
+	    "name":"LeaderBoard4",
+	    "providerConfig":{
+		"appodeal":{
+		    "adm":"<script src='mraid.js'></script><script> var impressionTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=alex&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var clickTrackers = [\"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var targetLink = \"http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; var showAd = function(){ if(mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) { if(viewable) {  mraid.removeEventListener('viewableChange', showAd); sendImpression(); }}); }}; var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker;  hiddenSpan.appendChild(img);  document.body.appendChild(hiddenSpan); }); }; var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd(); }</script><img style='height: 100%; width: auto;' src='http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png' onclick='trackClick()'>",
+		    "group_class":"group_class",
+		    "iurl":"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png",
+		    "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=alex&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
+		    "uniq_id":"world:LeaderBoard4"
+		}
+	    }
+	},
+	{
+	    "format":"320x50",
+	    "id":4,
+	    "name":"LeaderBoard2",
+	    "providerConfig":{
+		"appodeal":{
+		    "adm":"<script src='mraid.js'></script><script> var impressionTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=alex&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var clickTrackers = [\"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var targetLink = \"http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; var showAd = function(){ if(mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) { if(viewable) { mraid.removeEventListener('viewableChange', showAd); sendImpression(); }}); }}; var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker;  hiddenSpan.appendChild(img);  document.body.appendChild(hiddenSpan); }); }; var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd(); }</script><img style='height: 100%; width: auto;' src='http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png' onclick='trackClick()'>",
+		    "group_class":"group_class",
+		    "iurl":"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png",
+		    "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=alex&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
+		    "uniq_id":"world:LeaderBoard2"
+		}
+	    }
+	},
+	{
+	    "format":"300x250",
+	    "id":7,
+	    "name":"Extra1",
+	    "providerConfig":{
+		"appodeal":{
+		    "adm":"<script src='mraid.js'></script><script> var impressionTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=alex&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var clickTrackers = [\"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var targetLink = \"http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"; var trackClick = function() { sendClicks(); mraid.open(targetLink); }; var showAd = function(){ if(mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) { if(viewable) { mraid.removeEventListener('viewableChange', showAd); sendImpression(); }}); }}; var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker;  hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd(); }</script><img style='height: 100%; width: auto;' src='http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png' onclick='trackClick()'>",
+		    "group_class":"group_class",
+		    "iurl":"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png",
+		    "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=alex&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
+		    "uniq_id":"world:Extra1"
+		}
+	    }
+	},
+	{
+	    "format":"300x250",
+	    "id":8,
+	    "name":"Extra2",
+	    "providerConfig":{
+		"appodeal":{
+		    "adm":"<script src='mraid.js'></script><script> var impressionTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=alex&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var clickTrackers = [\"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var targetLink = \"http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; var showAd = function(){ if(mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) { if(viewable) { mraid.removeEventListener('viewableChange', showAd); sendImpression(); }}); }}; var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker;  hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd(); }</script><img style='height: 100%; width: auto;' src='http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png' onclick='trackClick()'>",
+		    "group_class":"group_class",
+		    "iurl":"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png",
+		    "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=alex&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
+		    "uniq_id":"world:Extra2"
+		}
+	    }
+	},
+	{
+	    "format":"320x50",
+	    "id":9,
+	    "name":"Extra3",
+	    "providerConfig":{
+		"appodeal":{
+		    "adm":"<script src='mraid.js'></script><script> var impressionTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=alex&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var clickTrackers = [\"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var targetLink = \"http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"; var trackClick = function() { sendClicks(); mraid.open(targetLink); }; var showAd = function(){ if(mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) { if(viewable) { mraid.removeEventListener('viewableChange', showAd); sendImpression(); }}); }}; var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker;  hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd(); }</script><img style='height: 100%; width: auto;' src='http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png' onclick='trackClick()'>",
+		    "group_class":"group_class",
+		    "iurl":"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png",
+		    "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=alex&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
+		    "uniq_id":"world:Extra3"
+		}
+	    }
+	},
+	{
+	    "format":"728x90",
+	    "id":10,
+	    "name":"Extra4",
+	    "providerConfig":{
+		"appodeal":{
+		    "adm":"<script src='mraid.js'></script><script> var impressionTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=alex&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var clickTrackers = [\"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/api/v1/event?type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var targetLink = \"http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; var showAd = function(){ if(mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) { if(viewable) { mraid.removeEventListener('viewableChange', showAd); sendImpression(); }}); }}; var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker;  hiddenSpan.appendChild(img);  document.body.appendChild(hiddenSpan); }); }; var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd(); }</script><img style='height: 100%; width: auto;' src='http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png' onclick='trackClick()'>",
+		    "group_class":"group_class",
+		    "iurl":"http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png",
+		    "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=alex&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
+		    "uniq_id":"world:Extra4"
+		}
+	    }
+	}
+    ],
+	
+    "errorFormat":"lightweight",
+    "external":false,
+    "externalId":0,
+    "lossFormat":"lightweight",
+    "minTimeAvailableMs":5.0,
+    "providerConfig":{
+	"appodeal":{
+	    "seat":12
+	}
+    },
+    "test":false,
+    "winFormat":"full",
+    
+    "locationFilter": { 
+	"include": { "BLR" } 
+    },
+}
