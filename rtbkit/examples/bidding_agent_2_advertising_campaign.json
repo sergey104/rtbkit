@@ -188,7 +188,7 @@
     "winFormat":"full",
     
     "locationFilter": { 
-	"include": { "BLR" } 
+	"include": [ "BLR" ] 
     },
     
     "segmentFilter": { 
