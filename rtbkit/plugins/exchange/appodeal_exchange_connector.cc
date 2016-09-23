@@ -426,7 +426,7 @@ parseBidRequest(HttpAuctionHandler & connection,
 //	std::cerr << "DEBUG: exchangeId: " << result->userIds.exchangeId << std::endl;
 //	std::cerr << "DEBUG: Request: " << payload << std::endl;
 //	std::cerr << "DEBUG: Request: " << result->toJsonStr() << std::endl;
-	std::cerr << "DEBUG: Request seg: " << result->segments.toJson() << std::endl;
+//	std::cerr << "DEBUG: Request seg: " << result->segments.toJson() << std::endl;
 	
     }
     catch(ML::Exception const & e) {
