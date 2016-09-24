@@ -49,14 +49,14 @@
 	{
 	    "format":"320x480",
 	    "id":1,
-	    "name":"f3",
+	    "name":"b3",
 	    "providerConfig":{
 		"appodeal":{
 		    "adm":"<script src='mraid.js'></script><script> var impressionTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=default&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var clickTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=default&type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var targetLink = \"http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; var showAd = function(){ if(mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) { if(viewable) { mraid.removeEventListener('viewableChange', showAd); sendImpression(); }}); }}; var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd(); }</script><img style='height: 100%; width: auto;' src='http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/2/320x480.png ' onclick='trackClick()'>",
 		    "group_class":"group_class",
 		    "iurl":"http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/2/320x480.png ",
 		    "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=alex&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
-		    "uniq_id":"world:f3"
+		    "uniq_id":"allo:b3"
 		}
 	    }
 	},
@@ -70,7 +70,7 @@
 		    "group_class":"group_class",
 		    "iurl":"http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/2/728x90.png",
 		    "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=alex&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
-		    "uniq_id":"world:b4"
+		    "uniq_id":"allo:b4"
 		}
 	    }
 	},
@@ -110,7 +110,7 @@
     "segmentFilter": { 
 	"age": {
 	    "include":[28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45],
-	    "excludeIfNotPresent":false 
+	    "excludeIfNotPresent":true 
 	}
     }
 }
