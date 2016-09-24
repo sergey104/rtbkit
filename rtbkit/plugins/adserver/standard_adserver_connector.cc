@@ -494,7 +494,7 @@ handleDeliveryRq(const HttpHeader & header,
     else {
         // UserIds is optional
     }
-    record_event(json.toString());
+
     bidRequestIdStr = json["bidRequestId"].asString();
     if(bidRequestIdStr.find(":") == string::npos)
     {
@@ -508,7 +508,7 @@ handleDeliveryRq(const HttpHeader & header,
     impIdStr = json["impid"].asString();
     bidRequestId = Id(bidRequestIdStr);
     impId = Id(impIdStr);
-    
+    record_event(json.toString());
     LOG(adserverTrace) << "{\"timestamp\":\"" << timestamp.print(3) << "\"," <<
         "\"bidRequestId\":\"" << bidRequestIdStr << "\"," <<
         "\"impId\":\"" << impIdStr << "\"," <<
