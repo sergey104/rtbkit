@@ -1,0 +1,5 @@
+ http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/2/300x250.png
+http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/2/320x50.png
+http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/2/320x480.png 
+http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/2/728x90.png
+http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/2/768x1024.png

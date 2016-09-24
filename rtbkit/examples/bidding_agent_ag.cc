@@ -167,7 +167,7 @@ struct FixedPriceBiddingAgent :
 
 
 
-                    c.providerConfig["appodeal"]["uniq_id"] = "world:" + s;
+                    c.providerConfig["appodeal"]["uniq_id"] = "main:" + s;
 
                     c.providerConfig["appodeal"]["nurl"] = "http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=default&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}";
 
@@ -235,7 +235,7 @@ struct FixedPriceBiddingAgent :
 
         // Configures the agent to only receive 10% of the bid request traffic
         // that matches its filters.
-        config.bidProbability = 0.5;
+        config.bidProbability = 0.7;
         
         // Tell the world about our config. We can change the configuration of
         // an agent at any time by calling this function.
