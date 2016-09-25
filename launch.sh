@@ -15,7 +15,6 @@ tmux new-window -d -t rtb:9 -n 'post-auction' 'tail -F ./logs/post-auction.log'
 tmux new-window -d -t rtb:10 -n 'fixed-price-agent' 'tail -F ./logs/fixed-price-agent.log'
 tmux new-window -d -t rtb:11 -n 'fixed-price-agent1' 'tail -F ./logs/fixed-price-agent1.log'
 tmux new-window -d -t rtb:12 -n 'fixed-price-agent2' 'tail -F ./logs/fixed-price-agent2.log'
-tmux new-window -d -t rtb:13 -n 'fixed-price-agent3' 'tail -F ./logs/fixed-price-agent3.log'
 if [[ "$*" != *--quiet* ]]
 then
     tmux attach -t rtb
