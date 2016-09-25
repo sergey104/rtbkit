@@ -59,15 +59,6 @@
                     "log": true
                 },
                 {
-                    "name": "augmentor_1",
-                    "root": ".",
-                    "path": "build/x86_64/bin/augmentor_1_runner",
-                    "arg": [
-                        "-B", "rtbkit/sample.bootstrap.json"
-                    ],
-                    "log": true
-                },
-                {
                     "name": "router",
                     "root": ".",
                     "path": "build/x86_64/bin/router_runner",
@@ -113,17 +104,8 @@
                         "-B", "rtbkit/sample.bootstrap.json"
                     ],
                     "log": true
-                },
-                {
-                    "name": "fixed-price-agent3",
-                    "root": ".",
-                    "path": "build/x86_64/bin/bidding_agent_1",
-                    "arg": [
-                        "-B", "rtbkit/sample.bootstrap.json",
-                        "-f", "rtbkit/2.json"
-                    ],
-                    "log": true
                 }
+                
 
 
             ]
