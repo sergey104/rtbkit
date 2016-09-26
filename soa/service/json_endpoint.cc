@@ -56,7 +56,7 @@ handleHttpPayload(const HttpHeader & header,
             //cerr << "JSON parsing error" << endl;
             doError("parsing JSON payload: "
                     + reader.getFormattedErrorMessages());
-       //     return;
+          return;
         }
     } catch (const std::exception & exc) {
         doError("parsing JSON request: " + string(exc.what()));
