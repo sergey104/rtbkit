@@ -1,5 +1,6 @@
 #ifndef APPODEAL_ADSERVER_CONNECTOR_H
 #define APPODEAL_ADSERVER_CONNECTOR_H
+
 #include "soa/service/service_utils.h"
 #include "soa/service/service_base.h"
 #include "soa/service/json_endpoint.h"

@@ -7,6 +7,8 @@
 #pragma once
 
 #include "rtbkit/common/testing/exchange_source.h"
+#include <thread>
+#include <mutex>
 
 namespace RTBKIT {
 
