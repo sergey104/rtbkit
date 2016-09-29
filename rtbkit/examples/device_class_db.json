@@ -1,0 +1,35 @@
+{
+    "device_classes":
+    [
+	{
+	    "class_name": "className1",
+	    "devices":
+	    [
+		"device1_class_1",
+		"device2_class_1",
+		"device3_class_1"
+	    ]
+	},
+	{
+	    "class_name": "className2",
+	    "devices":
+	    [
+		"device1_class_2",
+		"device2_class_2",
+		"device3_class_2",
+		"device4_class_2"
+	    ]
+	},
+	{
+	    "class_name": "className3",
+	    "devices":
+	    [
+		"device1_class_3",
+		"device2_class_3",
+		"device3_class_3",
+		"device4_class_3",
+		"device5_class_3"
+	    ]
+	}
+    ]
+}

@@ -1,0 +1,29 @@
+{
+    "account" : ["hello","world"],
+    "bidProbability": 0.9,
+    "maxInFlight": 10,
+    "minTimeAvailableMs": 5,
+    "externalId": 456,
+    "creatives": [
+       {
+        "id": 1,
+        "name": "creativ01",
+        "width": 160,
+        "height": 600,
+        "languageFilter": { "include": ["ru"], "exclude": ["en"] },
+        "locationFilter": { "include" : ["New York"], "exclude": ["Minsk"] },
+        "providerConfig": {
+        }
+       },
+       {
+        "id": 2,
+        "name": "creativ02",
+        "width": 160,
+        "height": 600,
+        "languageFilter": { "include": ["en"], "exclude": ["ru"] },
+        "locationFilter": { "include" : ["Minsk"], "exclude":["New York"] }
+       }
+    ],
+    "languageFilter": { "include" : ["ru", "en"], "exclude": ["fr"] },
+    "locationFilter": { "include" : ["Minsk", "New York"], "exclude":[] }
+}

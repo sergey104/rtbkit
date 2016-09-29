@@ -186,7 +186,7 @@ void AppodealExchangeConnector::record_request(std::string s) const
     string z = "request:"+std::to_string(i);
     reply = (redisReply *)redisCommand(rc,"SET %s %s ", z.c_str(), s.c_str());
     if (reply->type == REDIS_REPLY_ERROR) {
-    cerr << reply->str << endl;
+	cerr << reply->str << endl;
     }
     freeReplyObject(reply);
 
@@ -397,36 +397,64 @@ parseBidRequest(HttpAuctionHandler & connection,
 	}
 	
 	// add age to segments
-	Datacratic::UnicodeString keyBirthDay("birthday");
-	string birthDay("");
-	
-	for(auto data: result->user->data) {
-	    for(auto segment: data.segment) {
-		if(segment.name == keyBirthDay) {
-		    birthDay = segment.value.extractAscii();
+	if(result->user->yob.value() != -1) {
+	    result->segments.add("age", result->user->yob.value());
+	}
+	else {
+	    Datacratic::UnicodeString keyBirthDay("birthday");
+	    string birthDay("");
+	    
+	    for(auto data: result->user->data) {
+		for(auto segment: data.segment) {
+		    if(segment.name == keyBirthDay) {
+			birthDay = segment.value.extractAscii();
+			break;
+		    }
+		}
+		if(!birthDay.empty()) {
+		    std::string s_year(birthDay, birthDay.find_last_of("/") + 1);
+		    if (s_year.length() == 4) {
+			int birth_year =  std::stoi(s_year);
+			std::time_t tm = std::time(nullptr);
+			std::tm utc_tm = *std::gmtime(&tm);
+			int cur_year = utc_tm.tm_year + 1900;
+			int age = cur_year - birth_year;
+			result->segments.add("age", age);
+		    }
 		    break;
 		}
 	    }
-	    if(!birthDay.empty()) {
-		std::string s_year(birthDay, birthDay.find_last_of("/") + 1);
-		if (s_year.length() == 4) {
-		    int birth_year =  std::stoi(s_year);
-		    std::time_t tm = std::time(nullptr);
-		    std::tm utc_tm = *std::gmtime(&tm);
-		    int cur_year = utc_tm.tm_year + 1900;
-		    int age = cur_year - birth_year;
-		    result->segments.add("age", age);
-		}
-		break;
-	    }
 	}
-	
 
+	// add interests or intent to segments
+	if(!result->user->keywords.empty()) {
+	    std::string buffer = result->user->keywords.rawString();
+	    std::vector<std::string> keywords;
+	    while(!buffer.empty()) {
+		std::string tmp;
+		size_t pos = buffer.find_first_of(",");
+		if(pos != std::string::npos) {
+		    tmp = buffer.substr(0, pos);
+		    keywords.push_back(tmp);
+		    buffer.erase(0, pos + 1);
+		}
+		else {
+		    keywords.push_back(buffer);
+		    break;
+		}
+	    }
+	    result->segments.add("keywords", std::make_shared<SegmentList>(keywords));
+	}
 	
 //	std::cerr << "DEBUG: exchangeId: " << result->userIds.exchangeId << std::endl;
 //	std::cerr << "DEBUG: Request: " << payload << std::endl;
 //	std::cerr << "DEBUG: Request: " << result->toJsonStr() << std::endl;
 //	std::cerr << "DEBUG: Request seg: " << result->segments.toJson() << std::endl;
+//	std::cerr << "DEBUG: Request device.model: " << result->device->model << std::endl;
+//	std::cerr << "DEBUG: Request coordinates (lat/lon): " << result->device->geo->lat.val << "/" << result->device->geo->lon.val << std::endl;
+//	std::cerr << "DEBUG: Request keywords: " << result->user->keywords << std::endl;
+//	std::cerr << "DEBUG: Request Y.O.B: " << result->user->yob.value() << std::endl;
+//	std::cerr << "DEBUG: Request gender: " << result->user->gender << std::endl;
 	
     }
     catch(ML::Exception const & e) {

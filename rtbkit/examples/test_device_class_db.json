@@ -1,0 +1,53 @@
+{
+    "device_classes":
+    [
+	{
+	    "class_name": "className1",
+	    "devices":
+	    [
+		"SM-J100H",
+		"SM-J120G",
+		"XT1033",
+		"SM-J700H",
+		"M-G7102",
+		"SM-G318H",
+		"GT-I9505",
+		"SM-G900F",
+		"LG-E986",
+		"HTC Desire 626"
+	    ]
+	},
+	{
+	    "class_name": "className2",
+	    "devices":
+	    [
+		"SM-G900I",
+		"MotoE2(4G-LTE)",
+		"Redmi 3",
+		"GT-S7582",
+		"4009A",
+		"vivo Y21",
+		"HT7",
+		"HTC D626w",
+		"LT22i",
+		"BQS-5002"
+	    ]
+	},
+	{
+	    "class_name": "className3",
+	    "devices":
+	    [
+		"SM-A300FU",
+		"ALE-L21",
+		"MI 4LTE",
+		"SM-T113",
+		"Z00D",
+		"SM-G360G",
+		"SUNSET2",
+		"Lenovo A2010-a",
+		"GT-I9300",
+		"SM-A510F"
+	    ]
+	}
+    ]
+}

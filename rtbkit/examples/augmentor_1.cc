@@ -23,7 +23,6 @@ using namespace std;
 
 namespace RTBKIT {
 
-const chrono::hours waitPeriod(24);
 const size_t defaultInterval = 300;
 
 /******************************************************************************/
@@ -248,7 +247,7 @@ onRequest(const RTBKIT::AugmentationRequest& request)
 	    if(!toSkip) {
 		result[account].tags.insert("pass-frequency-cap-1");
 		recordHit("accounts." + account[0] + ".passed");
-//		    std::cerr << "DEBUG: passed" << std::endl;
+//	        std::cerr << "DEBUG: passed" << std::endl;
 	    }
 	    else {
 		    recordHit("accounts." + account[0] + ".toofften");

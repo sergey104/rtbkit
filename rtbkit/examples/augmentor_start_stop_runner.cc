@@ -1,12 +1,10 @@
-/** augmentor_ex_runner.cc                                 -*- C++ -*-
-    Rémi Attab, 22 Feb 2013
-    Copyright (c) 2013 Datacratic.  All rights reserved.
+/** augmentor_start_stop_runner.cc                                 -*- C++ -*-
 
-    Runner for our augmentor example.
+    Runner for our augmentor start/stop.
 
 */
 
-#include "augmentor_1.h"
+#include "augmentor_start_stop_time.h"
 #include "soa/service/service_utils.h"
 
 #include <boost/program_options/cmdline.hpp>
@@ -45,7 +43,7 @@ int main(int argc, char** argv)
     }
 
     auto serviceProxies = args.makeServiceProxies();
-    RTBKIT::FrequencyCapAugmentor augmentor(serviceProxies, "frequency-cap-1");
+    RTBKIT::StartStopAugmentor augmentor(serviceProxies, "start-stop-time");
     augmentor.init();
     augmentor.start();
 
