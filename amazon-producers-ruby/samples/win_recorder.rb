@@ -24,6 +24,8 @@ class SampleProducer
     @shard_count = shard_count
     @sleep_between_puts = sleep_between_puts
     @kinesis = service
+    @redis = Redis.new(:host => "127.0.0.1", :port => 6379, :db => 0)
+    @limit = 80
   end
 
   def run(timeout=0)
@@ -40,7 +42,7 @@ class SampleProducer
       @kinesis.delete_stream(:stream_name => @stream_name)
       puts "Deleted stream #{@stream_name}"
     rescue Aws::Kinesis::Errors::ResourceNotFoundException
-      # nothing to do 
+      # nothing to do
     end
   end
 
@@ -65,37 +67,53 @@ class SampleProducer
   end
 
   def put_record
-    data = get_data
+    kkeys = Array.new
+    kkeys = get_keys
+    if kkeys == nil then   puts "no keys for data"
+    return end
+    data = get_data(kkeys)
     if data == nil then   puts "no data"
-          return end
+    return end
     data_blob = MultiJson.dump(data)
     r = @kinesis.put_record(:stream_name => @stream_name,
                             :data => data_blob,
                             :partition_key => data["sensor"])
     puts "Put record to shard '#{r[:shard_id]}' (#{r[:sequence_number]}): '#{MultiJson.dump(data)}'"
+    del_keys(kkeys)
   end
 
   private
-  def get_data
-    redis = Redis.new
-    ary = Array.new
+  def get_data(rkeys)
+
     out = Array.new
-    redis = Redis.new(:host => "127.0.0.1", :port => 6379, :db => 0)
-    ary = redis.keys("win:*")
-    if ary.size == 0 then return nil end
-    out = redis.mget(ary)
-    redis.del(ary)
+    out = @redis.mget(rkeys)
+
     {
-    "sensor"=>"snsr-#{rand(1_000).to_s.rjust(4,'0')}",
-     "record" =>out.to_s
+        "sensor"=>"snsr-#{rand(1_000).to_s.rjust(4,'0')}",
+        "record" =>out.to_s
     }
 
   end
+  def get_keys
+    rkeys = Array.new
+    rkeys = @redis.keys("win:*")
+    if rkeys.size == 0 then return nil end
+    rkeys.sort
+    if rkeys.size < @limit then return rkeys end
+    rkeys.first(@limit)
 
+  end
   def get_stream_description
     r = @kinesis.describe_stream(:stream_name => @stream_name)
     r[:stream_description]
   end
+
+  def del_keys(kkeys)
+
+    @redis.del(kkeys)
+
+  end
+
 
   def wait_for_stream_to_become_active
     sleep_time_seconds = 3
@@ -110,7 +128,7 @@ end
 
 if __FILE__ == $0
   Aws_region = nil
-  stream_name = 'KinesisStreamBwin'
+  stream_name = '"KinesisStreamBrq'
   shard_count = nil
   sleep_between_puts = 0.25
   timeout = 0
@@ -154,6 +172,8 @@ if __FILE__ == $0
   kconfig[:region] = Aws_region  if Aws_region
   kinesis = Aws::Kinesis::Client.new(kconfig)
 
-  producer = SampleProducer.new(kinesis,"KinesisStreamBwin", 10, nil)
+
+
+  producer = SampleProducer.new(kinesis,"KinesisStreamBwin", 3, nil)
   producer.run(timeout)
 end

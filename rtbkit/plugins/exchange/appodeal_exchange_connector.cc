@@ -23,6 +23,33 @@
 #include <string>
 
 using namespace std;
+
+std::mutex resp_lock;
+std::mutex req_lock;
+
+long get_response_id(redisContext *rc) {
+    resp_lock.lock();
+    redisReply *reply;
+    reply = (redisReply *)redisCommand(rc,"INCR response_counter");
+    long i = reply->integer;
+    freeReplyObject(reply);
+    resp_lock.unlock();
+    return i;
+
+}
+
+long get_request_id(redisContext *rc) {
+    req_lock.lock();
+    redisReply *reply;
+    reply = (redisReply *)redisCommand(rc,"INCR request_counter");
+    long i = reply->integer;
+    freeReplyObject(reply);
+    req_lock.unlock();
+    return i;
+
+}
+
+
 void find_and_replace(string& source, string const& find, string const& replace)
 {
     for(string::size_type i = 0; (i = source.find(find, i)) != string::npos;)
@@ -178,11 +205,8 @@ AppodealExchangeConnector()
 
 void AppodealExchangeConnector::record_request(std::string s) const
 {
-
     redisReply *reply;
-    reply = (redisReply *)redisCommand(rc,"INCR request_counter");
-    int i = reply->integer;
-    freeReplyObject(reply);
+    long i = get_request_id(rc);
     string z = "request:"+std::to_string(i);
     reply = (redisReply *)redisCommand(rc,"SET %s %s ", z.c_str(), s.c_str());
     if (reply->type == REDIS_REPLY_ERROR) {
@@ -197,9 +221,7 @@ void AppodealExchangeConnector::record_request(std::string s) const
 void AppodealExchangeConnector::record_response(std::string s) const
 {
     redisReply *reply;
-    reply = (redisReply *)redisCommand(rc,"INCR response_counter");
-    int i = reply->integer;
-    freeReplyObject(reply);
+    long i = get_response_id(rc);
     string z = "response:"+std::to_string(i);
     reply = (redisReply *)redisCommand(rc,"SET %s %s ", z.c_str(), s.c_str());
     if (reply->type == REDIS_REPLY_ERROR) {
@@ -323,7 +345,7 @@ parseBidRequest(HttpAuctionHandler & connection,
 {
 
     std::shared_ptr<BidRequest> none;
-    //record_request(payload);
+    record_request(payload);
     // Check for JSON content-type
     if (!header.contentType.empty()) {
         static const std::string delimiter = ";";

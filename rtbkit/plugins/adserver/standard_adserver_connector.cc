@@ -14,6 +14,33 @@
 
 using namespace std;
 
+std::mutex win_lock;
+std::mutex event_lock;
+
+long get_win_id(redisContext *rc) {
+    win_lock.lock();
+    redisReply *reply;
+    reply = (redisReply *)redisCommand(rc,"INCR win_counter");
+    long i = reply->integer;
+    freeReplyObject(reply);
+    win_lock.unlock();
+    return i;
+
+}
+
+long get_event_id(redisContext *rc) {
+    event_lock.lock();
+    redisReply *reply;
+    reply = (redisReply *)redisCommand(rc,"INCR event_counter");
+    long i = reply->integer;
+    freeReplyObject(reply);
+    event_lock.unlock();
+    return i;
+
+}
+
+
+
 void writeFile (std::string s) {
 
   std::ofstream ofs;
@@ -98,9 +125,7 @@ void StandardAdServerConnector::record_win(std::string s) const
 {
     redisContext* rc7 = redisConnect(connection.c_str(), rport);
     redisReply *reply;
-    reply = (redisReply *)redisCommand(rc7,"INCR win_counter");
-    long i = reply->integer;
-    freeReplyObject(reply);
+    long i = get_win_id(rc7);
     string z = "win:"+std::to_string(i);
     reply = (redisReply *)redisCommand(rc7,"SET %s %s ", z.c_str(), s.c_str());
     if (reply->type == REDIS_REPLY_ERROR) {
@@ -117,9 +142,7 @@ void StandardAdServerConnector::record_event(std::string s) const
 
     redisContext* rc8 = redisConnect(connection.c_str(), rport);
     redisReply *reply;
-    reply = (redisReply *)redisCommand(rc8,"INCR event_counter");
-    long i = reply->integer;
-    freeReplyObject(reply);
+    long i = get_win_id(rc8);
     string z = "event:"+std::to_string(i);
     reply = (redisReply *)redisCommand(rc8,"SET %s %s ", z.c_str(), s.c_str());
     if (reply->type == REDIS_REPLY_ERROR) {
@@ -494,7 +517,7 @@ handleDeliveryRq(const HttpHeader & header,
     else {
         // UserIds is optional
     }
-    record_event(json.toString());
+
     bidRequestIdStr = json["bidRequestId"].asString();
     if(bidRequestIdStr.find(":") == string::npos)
     {
@@ -508,7 +531,7 @@ handleDeliveryRq(const HttpHeader & header,
     impIdStr = json["impid"].asString();
     bidRequestId = Id(bidRequestIdStr);
     impId = Id(impIdStr);
-    
+    record_event(json.toString());
     LOG(adserverTrace) << "{\"timestamp\":\"" << timestamp.print(3) << "\"," <<
         "\"bidRequestId\":\"" << bidRequestIdStr << "\"," <<
         "\"impId\":\"" << impIdStr << "\"," <<

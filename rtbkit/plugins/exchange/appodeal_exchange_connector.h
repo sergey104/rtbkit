@@ -7,6 +7,8 @@
 #define APPODEAL_CONNECTOR_H
 #pragma once
 
+#include <thread>
+#include <mutex>
 #include "rtbkit/plugins/exchange/http_exchange_connector.h"
 #include "rtbkit/common/creative_configuration.h"
 #include "soa/utils/generic_utils.h"
