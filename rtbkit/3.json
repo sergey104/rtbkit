@@ -28,7 +28,7 @@
 		    "group_class":"group_class",
             "iurl":"<a href=\"http://alloplus.by/stocks/skidka_30/?ban=480\"><img src=\"http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/3/300x250.png\" ></a>",
             "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=default&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
-		    "uniq_id":"allo:b3"
+		    "uniq_id":"allo:b7"
 		}
 	    }
 	}
