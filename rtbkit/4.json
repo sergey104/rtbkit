@@ -1,0 +1,67 @@
+{
+    "account":["allonew","2"],
+    "augmentations":{
+	"frequency-cap-1":{
+	    "config":{"maxPerDay":5, "minInterval":300},
+	    "filters":{
+		"include":["pass-frequency-cap-1"],
+		"exclude":[]
+	    },
+	    "required":true
+	},
+	"random":null
+    },
+    "bidControl":{
+	"fixedBidCpmInMicros":0,
+	"type":"RELAY"
+    },
+    "bidProbability":0.7,
+    "creatives":
+    [
+	{
+	    "format":"320x50",
+	    "id":1,
+	    "name":"b3",
+	    "providerConfig":{
+		"appodeal":{
+		    "adm":"<script src='mraid.js'></script><script> var impressionTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=default&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var clickTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=default&type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var targetLink = \"http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; var showAd = function(){ if(mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) { if(viewable) { mraid.removeEventListener('viewableChange', showAd); sendImpression(); }}); }}; var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd(); }</script><img style='height: 100%; width: auto;' src='<a href=\"http://alloplus.by/stocks/skidka_30/?ban=320\"><img src=\"http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/3/320x50.png\" ></a>' onclick='trackClick()'>",
+		    "group_class":"group_class",
+		    "iurl":"<a href=\"http://alloplus.by/stocks/skidka_30/?ban=320\"><img src=\"http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/3/320x50.png\" ></a>",
+            "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=default&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
+		    "uniq_id":"allo:b3"
+		}
+	    }
+	},
+	{
+	    "format":"728x90",
+	    "id":5,
+	    "name":"b5",
+	    "providerConfig":{
+		"appodeal":{
+		    "adm":"<script src='mraid.js'></script><script> var impressionTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=default&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var clickTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=default&type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var targetLink = \"http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; var showAd = function(){ if(mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) { if(viewable) {  mraid.removeEventListener('viewableChange', showAd); sendImpression(); }}); }}; var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker;  hiddenSpan.appendChild(img);  document.body.appendChild(hiddenSpan); }); }; var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd(); }</script><img style='height: 100%; width: auto;' src='<a href=\"http://alloplus.by/stocks/skidka_30/?ban=728\"><img src=\"http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/3/728x90.png\" ></a></p>' onclick='trackClick()'>",
+		    "group_class":"group_class",
+		    "iurl":"<a href=\"http://alloplus.by/stocks/skidka_30/?ban=728\"><img src=\"http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/3/728x90.png\" ></a>",
+            "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=default&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
+		    "uniq_id":"allo:b5"
+		}
+	    }
+	}
+    ],
+	
+    "errorFormat":"lightweight",
+    "external":false,
+    "externalId":0,
+    "lossFormat":"lightweight",
+    "minTimeAvailableMs":5.0,
+    "providerConfig":{
+	"appodeal":{
+	    "seat":12
+	}
+    },
+    "test":false,
+    "winFormat":"full",
+    
+    "locationFilter": { 
+	"include": [ "BLR" ] 
+    }
+}
