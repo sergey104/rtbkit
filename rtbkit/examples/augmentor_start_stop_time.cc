@@ -119,23 +119,22 @@ onRequest(const RTBKIT::AugmentationRequest& request)
 //	std::cerr << "DEBUG: " << "account: " << account <<  std::endl;
 	
 	std::time_t cur_time = std::time(nullptr);
-	std::tm cur_tm = *std::localtime(&cur_time);
+//	std::tm cur_tm = *std::localtime(&cur_time);
     
 	std::tm start_tm;
 	std::tm stop_tm;
 	
 	if(getStartTime(request.augmentor, agent, config, &start_tm) && 
 	    getStopTime(request.augmentor, agent, config, &stop_tm)) {
-	    
+
 //	    std::cerr << "DEBUG: Start: " << start_tm.tm_mday << "." << start_tm.tm_mon + 1 << "." << start_tm.tm_year + 1900 << " " << start_tm.tm_hour << ":" << start_tm.tm_min << std::endl;
 //	    std::cerr << "DEBUG: Current: " << cur_tm.tm_mday << "." << cur_tm.tm_mon + 1 << "." << cur_tm.tm_year + 1900 << " " << cur_tm.tm_hour << ":" << cur_tm.tm_min << std::endl;
 //	    std::cerr << "DEBUG: Stop: " << stop_tm.tm_mday << "." << stop_tm.tm_mon + 1 << "." << stop_tm.tm_year + 1900 << " " << stop_tm.tm_hour << ":" << stop_tm.tm_min << std::endl;
+
+	    std::time_t start_time = mktime(&start_tm);
+	    std::time_t stop_time = mktime(&stop_tm);
 	    
-	    if((cur_tm.tm_year >= start_tm.tm_year) && (cur_tm.tm_year <= stop_tm.tm_year) &&
-		(cur_tm.tm_mon >= start_tm.tm_mon) && (cur_tm.tm_mon <= stop_tm.tm_mon) &&
-		(cur_tm.tm_mday >= start_tm.tm_mday) && (cur_tm.tm_mday <= stop_tm.tm_mday) &&
-		(cur_tm.tm_hour >= start_tm.tm_hour) && (cur_tm.tm_hour <= stop_tm.tm_hour) &&
-		(cur_tm.tm_min >= start_tm.tm_min) && (cur_tm.tm_min <= stop_tm.tm_min)) {
+	    if((start_time <= cur_time) && (cur_time <= stop_time)) {
 
 		    result[account].tags.insert("pass-start-stop-time");
 		    recordHit("accounts." + account[0] + ".passed");

@@ -41,7 +41,7 @@ struct DeviceClassStorage
      */
     void loadData(const std::string& jsondata)
     {
-	std::cerr << "Load data" << std::endl;
+//	std::cerr << "DEBUG: Load data" << std::endl;
 	data.clear();
 
 	if(!jsondata.empty()) {
@@ -132,8 +132,6 @@ DeviceClassAugmentor::
 init(const std::string& data)
 {
     storage->loadData(data);
-    
-    std::cerr << "device type of device device4_class_3 is: " << storage->findClass(std::string("device4_class_3")) << std::endl;
     
     SyncAugmentor::init(2 /* numThreads */);
 

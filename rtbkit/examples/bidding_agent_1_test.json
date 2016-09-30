@@ -10,6 +10,14 @@
 	    },
 	    "required":true
 	},
+	"flexible-frequency-cap":{
+	    "config":{"period":"1D", "maxTimes":5, "minInterval":"5m"},
+	    "filters":{
+		"include":["pass-frequency-cap"],
+		"exclude":[]
+	    },
+	    "required":false
+	},
 	"device-class":{
 	    "config":{ },
 	    "filters":{
@@ -222,10 +230,10 @@
 	    "exclude":[200],
 	    "excludeIfNotPresent":false 
 	},
-	"keywords": {
-	    "include":["space", "science", "physics"],
+	"iab-categories": {
+	    "include":["IAB9-30","IAB9-30"],
 	    "exclude":[],
-	    "excludeIfNotPresent":false 
+	    "excludeIfNotPresent":true 
 	}
     }
 }

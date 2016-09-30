@@ -401,73 +401,57 @@ parseBidRequest(HttpAuctionHandler & connection,
         result.reset(OpenRTBBidRequestParser::openRTBBidRequestParserFactory(openRtbVersion)->parseBidRequest(context,
                                                                                               exchangeName(),
                                                                                               exchangeName()));
-	// Save Device.ifa in userIds.exchnageId
-	Id ifa(result->device->ifa);
-	
-	if(result->userIds.find(result->userIds.domainToString(ID_EXCHANGE)) == result->userIds.end()) {
-	    result->userIds.add(ifa, ID_EXCHANGE);
-	    //std::cerr << "DEBUG: exchangeId added" << std::endl;
-	}
-	else {
-	    result->userIds.setStatic(ifa, ID_EXCHANGE);
-	    //std::cerr << "DEBUG: exchangeId changed" << std::endl;
-	}
-	
-	// add gender to segments
-	if(!result->user->gender.empty()) {
-	    result->segments.add("gender", result->user->gender);
-	}
-	
-	// add age to segments
-	if(result->user->yob.value() != -1) {
-	    result->segments.add("age", result->user->yob.value());
-	}
-	else {
-	    Datacratic::UnicodeString keyBirthDay("birthday");
-	    string birthDay("");
+	if(result->device) {
+	    // Save Device.ifa in userIds.exchnageId
+	    Id ifa(result->device->ifa);
 	    
-	    for(auto data: result->user->data) {
-		for(auto segment: data.segment) {
-		    if(segment.name == keyBirthDay) {
-			birthDay = segment.value.extractAscii();
+	    if(result->userIds.find(result->userIds.domainToString(ID_EXCHANGE)) == result->userIds.end()) {
+		result->userIds.add(ifa, ID_EXCHANGE);
+		//std::cerr << "DEBUG: exchangeId added" << std::endl;
+	    }
+	    else {
+		result->userIds.setStatic(ifa, ID_EXCHANGE);
+		//std::cerr << "DEBUG: exchangeId changed" << std::endl;
+	    }
+	}
+	
+	if(result->user) {
+	    // add gender to segments
+	    if(!result->user->gender.empty()) {
+		result->segments.add("gender", result->user->gender);
+	    }
+	    
+	    // add age to segments
+	    if(result->user->yob.value() != -1) {
+		result->segments.add("age", result->user->yob.value());
+	    }
+	    else {
+		Datacratic::UnicodeString keyBirthDay("birthday");
+		string birthDay("");
+		
+		for(auto data: result->user->data) {
+		    for(auto segment: data.segment) {
+			if(segment.name == keyBirthDay) {
+			    birthDay = segment.value.extractAscii();
+			    break;
+			}
+		    }
+		    if(!birthDay.empty()) {
+			std::string s_year(birthDay, birthDay.find_last_of("/") + 1);
+			if (s_year.length() == 4) {
+			    int birth_year =  std::stoi(s_year);
+			    std::time_t tm = std::time(nullptr);
+			    std::tm utc_tm = *std::gmtime(&tm);
+			    int cur_year = utc_tm.tm_year + 1900;
+			    int age = cur_year - birth_year;
+			    result->segments.add("age", age);
+			}
 			break;
 		    }
-		}
-		if(!birthDay.empty()) {
-		    std::string s_year(birthDay, birthDay.find_last_of("/") + 1);
-		    if (s_year.length() == 4) {
-			int birth_year =  std::stoi(s_year);
-			std::time_t tm = std::time(nullptr);
-			std::tm utc_tm = *std::gmtime(&tm);
-			int cur_year = utc_tm.tm_year + 1900;
-			int age = cur_year - birth_year;
-			result->segments.add("age", age);
-		    }
-		    break;
 		}
 	    }
 	}
 
-	// add interests or intent to segments
-	if(!result->user->keywords.empty()) {
-	    std::string buffer = result->user->keywords.rawString();
-	    std::vector<std::string> keywords;
-	    while(!buffer.empty()) {
-		std::string tmp;
-		size_t pos = buffer.find_first_of(",");
-		if(pos != std::string::npos) {
-		    tmp = buffer.substr(0, pos);
-		    keywords.push_back(tmp);
-		    buffer.erase(0, pos + 1);
-		}
-		else {
-		    keywords.push_back(buffer);
-		    break;
-		}
-	    }
-	    result->segments.add("keywords", std::make_shared<SegmentList>(keywords));
-	}
-	
 //	std::cerr << "DEBUG: exchangeId: " << result->userIds.exchangeId << std::endl;
 //	std::cerr << "DEBUG: Request: " << payload << std::endl;
 //	std::cerr << "DEBUG: Request: " << result->toJsonStr() << std::endl;
