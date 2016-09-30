@@ -52,7 +52,7 @@
                 {
                     "name": "augmentor",
                     "root": ".",
-                    "path": "build/x86_64/bin/augmentor_ex_runner",
+                    "path": "build/x86_64/bin/augmentor_1_runner",
                     "arg": [
                         "-B", "rtbkit/sample.bootstrap.json"
                     ],
@@ -79,15 +79,16 @@
                     "log": true
                 },
                 {
-                    "name": "fixed-price-agent",
+                    "name": "fixed-price-agent2",
                     "root": ".",
-                    "path": "build/x86_64/bin/bidding_agent_ex",
+                    "path": "build/x86_64/bin/bidding_agent_1",
                     "arg": [
-                        "-B", "rtbkit/sample.bootstrap.json"
+                        "-B", "rtbkit/sample.bootstrap.json",
+                        "-f", "/rtbkit/2.json"
                     ],
                     "log": true
                 }
-                
+            
 
 
             ]
