@@ -52,7 +52,7 @@
                 {
                     "name": "augmentor",
                     "root": ".",
-                    "path": "build/x86_64/bin/augmentor_ag_runner",
+                    "path": "build/x86_64/bin/augmentor_1_runner",
                     "arg": [
                         "-B", "rtbkit/sample.bootstrap.json"
                     ],
@@ -79,32 +79,36 @@
                     "log": true
                 },
                 {
-                    "name": "fixed-price-agent",
-                    "root": ".",
-                    "path": "build/x86_64/bin/bidding_agent_ag",
-                    "arg": [
-                        "-B", "rtbkit/sample.bootstrap.json"
-                    ],
-                    "log": true
-                },
-{
-                    "name": "fixed-price-agent1",
-                    "root": ".",
-                    "path": "build/x86_64/bin/bidding_agent_ag1",
-                    "arg": [
-                        "-B", "rtbkit/sample.bootstrap.json"
-                    ],
-                    "log": true
-                },
-{
                     "name": "fixed-price-agent2",
                     "root": ".",
-                    "path": "build/x86_64/bin/bidding_agent_ag2",
+                    "path": "build/x86_64/bin/bidding_agent_1",
                     "arg": [
-                        "-B", "rtbkit/sample.bootstrap.json"
+                        "-B", "rtbkit/sample.bootstrap.json",
+                        "-f", "rtbkit/2.json"
+                    ],
+                    "log": true
+                },
+                {
+                    "name": "fixed-price-agent3",
+                    "root": ".",
+                    "path": "build/x86_64/bin/bidding_agent_1",
+                    "arg": [
+                        "-B", "rtbkit/sample.bootstrap.json",
+                        "-f", "rtbkit/3.json"
+                    ],
+                    "log": true
+                },
+{
+                    "name": "fixed-price-agent4",
+                    "root": ".",
+                    "path": "build/x86_64/bin/bidding_agent_1",
+                    "arg": [
+                        "-B", "rtbkit/sample.bootstrap.json",
+                        "-f", "rtbkit/4.json"
                     ],
                     "log": true
                 }
+            
 
 
             ]

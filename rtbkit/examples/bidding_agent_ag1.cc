@@ -115,7 +115,7 @@ struct FixedPriceBiddingAgent :
         // Accounts are used to control the allocation of spending budgets for
         // an agent. The whole mechanism is fully generic and can be setup in
         // whatever you feel it bests suits you.
-        config.account = {"rec", "second"};
+        config.account = {"main", "second"};
 
         // Specify the properties of the creatives we are trying to show.
         config.creatives.push_back(Creative::sample1);
