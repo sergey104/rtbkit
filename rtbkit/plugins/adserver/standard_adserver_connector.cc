@@ -142,7 +142,7 @@ void StandardAdServerConnector::record_event(std::string s) const
 
     redisContext* rc8 = redisConnect(connection.c_str(), rport);
     redisReply *reply;
-    long i = get_win_id(rc8);
+    long i = get_event_id(rc8);
     string z = "event:"+std::to_string(i);
     reply = (redisReply *)redisCommand(rc8,"SET %s %s ", z.c_str(), s.c_str());
     if (reply->type == REDIS_REPLY_ERROR) {
