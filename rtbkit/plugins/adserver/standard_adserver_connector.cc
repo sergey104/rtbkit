@@ -397,7 +397,7 @@ handleWinRq(const HttpHeader & header,
     else {
         // Passback is optional
     }
-    record_win(json.toString());
+    //record_win(json.toString());
     LOG(adserverTrace) << "{\"timestamp\":\"" << timestamp.print(3) << "\"," <<
         "\"bidRequestId\":\"" << bidRequestId << "\"," <<
         "\"impId\":\"" << impId << "\"," <<
@@ -534,7 +534,7 @@ handleDeliveryRq(const HttpHeader & header,
     impIdStr = json["impid"].asString();
     bidRequestId = Id(bidRequestIdStr);
     impId = Id(impIdStr);
-    record_event(json.toString());
+    //record_event(json.toString());
     LOG(adserverTrace) << "{\"timestamp\":\"" << timestamp.print(3) << "\"," <<
         "\"bidRequestId\":\"" << bidRequestIdStr << "\"," <<
         "\"impId\":\"" << impIdStr << "\"," <<
