@@ -132,7 +132,7 @@ void StandardAdServerConnector::record_win(std::string s) const
     cerr << reply->str << endl;
     }
     freeReplyObject(reply);
-
+    redisFree(rc7);
 
 
 }
@@ -149,6 +149,7 @@ void StandardAdServerConnector::record_event(std::string s) const
     cerr << reply->str << endl;
     }
     freeReplyObject(reply);
+    redisFree(rc8);
 
 
 
@@ -247,6 +248,8 @@ void
 StandardAdServerConnector::
 shutdown()
 {
+    redisFree(rc2);
+    redisFree(rc3);
     publisher_.shutdown();
     analytics_.shutdown();
     HttpAdServerConnector::shutdown();

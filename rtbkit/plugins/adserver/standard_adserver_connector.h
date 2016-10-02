@@ -47,6 +47,7 @@ struct StandardAdServerConnector : public HttpAdServerConnector
     StandardAdServerConnector(std::string const & serviceName, std::shared_ptr<Datacratic::ServiceProxies> const & proxy,
                               Json::Value const & json);
 
+
     void init(StandardAdServerArguments & ssConfig);
     void init(int winsPort, int eventsPort);
     void start();
