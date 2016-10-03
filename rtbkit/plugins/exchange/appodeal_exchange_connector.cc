@@ -24,32 +24,6 @@
 
 using namespace std;
 
-std::mutex resp_lock;
-std::mutex req_lock;
-
-long get_response_id(redisContext *rc) {
-    resp_lock.lock();
-    redisReply *reply;
-    reply = (redisReply *)redisCommand(rc,"INCR response_counter");
-    long i = reply->integer;
-    freeReplyObject(reply);
-    resp_lock.unlock();
-    return i;
-
-}
-
-long get_request_id(redisContext *rc) {
-    req_lock.lock();
-    redisReply *reply;
-    reply = (redisReply *)redisCommand(rc,"INCR request_counter");
-    long i = reply->integer;
-    freeReplyObject(reply);
-    req_lock.unlock();
-    return i;
-
-}
-
-
 void find_and_replace(string& source, string const& find, string const& replace)
 {
     for(string::size_type i = 0; (i = source.find(find, i)) != string::npos;)
@@ -145,25 +119,7 @@ AppodealExchangeConnector(ServiceBase & owner, const std::string & name)
   this->auctionResource = "/auctions";
   this->auctionVerb = "POST";
   initCreativeConfiguration();
-  rc = redisConnect(connection.c_str(), rport);
 
-  if (rc == NULL || rc->err) {
-      if (rc) {
-          throw ML::Exception("Error",rc->errstr);
-          // handle error
-      } else {
-          throw ML::Exception("Can't allocate redis context\n");
-      }
-  }
-  rc1 = redisConnect(connection.c_str(), rport);
-  if (rc1 == NULL || rc1->err) {
-      if (rc1) {
-          throw ML::Exception("Error",rc1->errstr);
-          // handle error
-      } else {
-          throw ML::Exception("Can't allocate redis context\n");
-      }
-  }
 }
 
 AppodealExchangeConnector::
@@ -174,61 +130,11 @@ AppodealExchangeConnector(const std::string & name,
   this->auctionResource = "/auctions";
   this->auctionVerb = "POST";
   initCreativeConfiguration();
-  rc = redisConnect(connection.c_str(), rport);
-
-  if (rc == NULL || rc->err) {
-      if (rc) {
-          throw ML::Exception("Error",rc->errstr);
-          // handle error
-      } else {
-          throw ML::Exception("Can't allocate redis context\n");
-      }
-  }
-  rc1 = redisConnect(connection.c_str(), rport);
-  if (rc1 == NULL || rc1->err) {
-      if (rc1) {
-          throw ML::Exception("Error",rc1->errstr);
-          // handle error
-      } else {
-          throw ML::Exception("Can't allocate redis context\n");
-      }
-  }
-}
-
-AppodealExchangeConnector::~
-AppodealExchangeConnector()
-{
-    redisFree(rc);
-    redisFree(rc1);
-}
-
-
-void AppodealExchangeConnector::record_request(std::string s) const
-{
-    redisReply *reply;
-    long i = get_request_id(rc);
-    string z = "request:"+std::to_string(i);
-    reply = (redisReply *)redisCommand(rc,"SET %s %s ", z.c_str(), s.c_str());
-    if (reply->type == REDIS_REPLY_ERROR) {
-	cerr << reply->str << endl;
-    }
-    freeReplyObject(reply);
-
-
 
 }
 
-void AppodealExchangeConnector::record_response(std::string s) const
-{
-    redisReply *reply;
-    long i = get_response_id(rc);
-    string z = "response:"+std::to_string(i);
-    reply = (redisReply *)redisCommand(rc,"SET %s %s ", z.c_str(), s.c_str());
-    if (reply->type == REDIS_REPLY_ERROR) {
-    cerr << reply->str << endl;
-    }
-    freeReplyObject(reply);
-}
+
+
 
 void AppodealExchangeConnector::initCreativeConfiguration()
 {
