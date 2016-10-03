@@ -155,12 +155,12 @@ struct FixedPriceBiddingAgent :
                     std::string s = c.name;
                     if(s == "Banner0") {
                     c.providerConfig["appodeal"]["adm"] = mr + s1 + s2 + s3 + s4 + s5 +img1;
-                    c.providerConfig["appodeal"]["iurl"] = "http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/Banner2-320x50.gif";
+                    c.providerConfig["appodeal"]["iurl"] = "<a href='http://ef-fi.by'><img src='http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/Banner2-320x50.gif'</a>";
 
                     }
                     else {
                     c.providerConfig["appodeal"]["adm"] = mr + s1 + s2 + s3 + s4 + s5 +img2;
-                    c.providerConfig["appodeal"]["iurl"] = "http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/Banner2-728x90.gif";
+                    c.providerConfig["appodeal"]["iurl"] = "<a href='http://ef-fi.by'><img src='http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/Banner2-728x90.gif'</a>";
 
                     }
 
