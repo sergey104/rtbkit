@@ -563,7 +563,14 @@ onUser(OpenRTB::User & user) {
             // TODO Validate if this valid behaviour
             // If we receive m, f or o, toUpper()
             user.gender = std::toupper(user.gender[0]);
-
+	    
+	    /* Fix for appodeal gender code */
+	    if(user.gender.compare("1") == 0)
+		user.gender = "F";
+	    else if(user.gender.compare("2") == 0)
+		user.gender = "M";
+	    else
+	    /* */
             if(user.gender.compare("M") == 0) {
             
             } else if(user.gender.compare("F") == 0) {
