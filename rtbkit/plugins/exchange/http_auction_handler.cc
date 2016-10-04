@@ -482,7 +482,7 @@ sendResponse()
     addActivityS("sendResponse");
 
     //cerr << "locked by " << bid->lock.get_thread_id() << endl;
-    cerr << "my thread " << ACE_OS::thr_self() << endl;
+    //cerr << "my thread " << ACE_OS::thr_self() << endl;
 
     Date before = Date::now();
 
