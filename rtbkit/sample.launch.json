@@ -63,7 +63,7 @@
                     "root": ".",
                     "path": "build/x86_64/bin/router_runner",
                     "arg": [
-                        "-B", "rtbkit/sample.bootstrap.json", "--exchange-configuration","rtbkit/examples/router-config.json","--log-auctions", "--log-bids"
+                        "-B", "rtbkit/sample.bootstrap.json", "--exchange-configuration","rtbkit/examples/router-config.json"
                     ],
                     "log": true
                 },
