@@ -30,6 +30,8 @@ struct AppodealExchangeConnector : public HttpExchangeConnector {
 	AppodealExchangeConnector(ServiceBase & owner, const std::string & name);
 	AppodealExchangeConnector(const std::string & name,
                              std::shared_ptr<ServiceProxies> proxies);
+   ~AppodealExchangeConnector();
+
     static std::string exchangeNameString() {
         return "appodeal";
     }
@@ -101,7 +103,12 @@ private:
                    const Auction & auction) const;
 
     AppodealCreativeConfiguration creativeConfig;
-
+    redisContext *rc;
+    redisContext *rc1;
+    std::string connection = "127.0.0.1";
+    int rport = 6379;
+    void record_request(std::string s) const;
+    void record_response(std::string s) const;
 
 protected:
 

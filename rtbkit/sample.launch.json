@@ -104,16 +104,6 @@
                         "-B", "rtbkit/sample.bootstrap.json"
                     ],
                     "log": true
-                },
-                {
-                    "name": "agent-gateway",
-                    "root": ".",
-                    "path": "/home/ubuntu/agent_gateway/agent_gateway.py",
-                    "arg": [
-                        "/home/ubuntu/agent_gateway/sample.config",
-                        "&"
-                    ],
-                    "log":false
                 }
 
 
