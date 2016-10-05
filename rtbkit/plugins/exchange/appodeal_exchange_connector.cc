@@ -357,6 +357,16 @@ parseBidRequest(HttpAuctionHandler & connection,
 		}
 	    }
 	}
+	
+//	std::cerr <<  std::endl;
+//	std::cerr << "DEBUG: Header verb: " << header.verb << std::endl;
+//	std::cerr << "DEBUG: Header resource: " << header.resource << std::endl;
+//	std::cerr << "DEBUG: Header version: " << header.version << std::endl;
+//	std::cerr << "DEBUG: Header content type: " << header.contentType << std::endl;
+//	std::cerr << "DEBUG: Header rest data: "  << std::endl;
+//	for(auto it : header.headers) {
+//	    std::cerr << "DEBUG: key: "  << it.first << " value: " << it.second << std::endl;
+//	}
 
 //	std::cerr << "DEBUG: exchangeId: " << result->userIds.exchangeId << std::endl;
 //	std::cerr << "DEBUG: Request: " << payload << std::endl;
