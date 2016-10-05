@@ -28,23 +28,23 @@ std::mutex resp_lock;
 std::mutex req_lock;
 
 long get_response_id(redisContext *rc) {
-    resp_lock.lock();
+  //  resp_lock.lock();
     redisReply *reply;
     reply = (redisReply *)redisCommand(rc,"INCR response_counter");
     long i = reply->integer;
     freeReplyObject(reply);
-    resp_lock.unlock();
+ //   resp_lock.unlock();
     return i;
 
 }
 
 long get_request_id(redisContext *rc) {
-    req_lock.lock();
+ //   req_lock.lock();
     redisReply *reply;
     reply = (redisReply *)redisCommand(rc,"INCR request_counter");
     long i = reply->integer;
     freeReplyObject(reply);
-    req_lock.unlock();
+  //  req_lock.unlock();
     return i;
 
 }
