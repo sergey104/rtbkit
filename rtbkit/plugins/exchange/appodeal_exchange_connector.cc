@@ -345,7 +345,7 @@ parseBidRequest(HttpAuctionHandler & connection,
 {
 
     std::shared_ptr<BidRequest> none;
-    record_request(payload);
+   // record_request(payload);
     // Check for JSON content-type
     if (!header.contentType.empty()) {
         static const std::string delimiter = ";";
@@ -538,7 +538,7 @@ getResponse(const HttpAuctionHandler & connection,
     std::string rv = stream.str();
  //find_and_replace(rv,"\\","");
 cerr << "appodeal connector response 200:"  << endl;
-record_response(rv);
+//record_response(rv);
 
     return HttpResponse(200, "application/json", rv);
 //return HttpResponse(204, "none", "");
