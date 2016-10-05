@@ -63,7 +63,7 @@
                     "root": ".",
                     "path": "build/x86_64/bin/router_runner",
                     "arg": [
-                        "-B", "rtbkit/sample.bootstrap.json", "--exchange-configuration","rtbkit/examples/router-config.json"
+                        "-B", "rtbkit/sample.bootstrap.json", "--exchange-configuration","rtbkit/examples/router-config.json","--log-auctions", "--log-bids"
                     ],
                     "log": true
                 },
@@ -104,16 +104,6 @@
                         "-B", "rtbkit/sample.bootstrap.json"
                     ],
                     "log": true
-                },
-                {
-                    "name": "agent-gateway",
-                    "root": ".",
-                    "path": "/home/ubuntu/agent_gateway/agent_gateway.py",
-                    "arg": [
-                        "/home/ubuntu/agent_gateway/sample.config",
-                        "&"
-                    ],
-                    "log":false
                 }
 
 
