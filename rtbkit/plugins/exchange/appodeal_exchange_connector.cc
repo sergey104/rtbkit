@@ -537,7 +537,7 @@ getResponse(const HttpAuctionHandler & connection,
     desc.printJsonTyped(&response, context);
     std::string rv = stream.str();
  //find_and_replace(rv,"\\","");
-cerr << "appodeal connector response 200:" << rv << endl;
+cerr << "appodeal connector response 200:"  << endl;
 record_response(rv);
 
     return HttpResponse(200, "application/json", rv);
