@@ -38,7 +38,7 @@
     "external":false,
     "externalId":0,
     "lossFormat":"lightweight",
-    "minTimeAvailableMs":5.0,
+    "minTimeAvailableMs":65.0,
     "providerConfig":{
 	"appodeal":{
 	    "seat":12
