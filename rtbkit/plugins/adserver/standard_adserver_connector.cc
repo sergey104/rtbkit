@@ -14,8 +14,43 @@
 
 using namespace std;
 
+std::mutex win_lock;
+std::mutex event_lock;
+
+long get_win_id(redisContext *rc) {
+    win_lock.lock();
+    redisReply *reply;
+    reply = (redisReply *)redisCommand(rc,"INCR win_counter");
+    long i = reply->integer;
+    freeReplyObject(reply);
+    win_lock.unlock();
+    return i;
+
+}
+
+long get_event_id(redisContext *rc) {
+    event_lock.lock();
+    redisReply *reply;
+    reply = (redisReply *)redisCommand(rc,"INCR event_counter");
+    long i = reply->integer;
+    freeReplyObject(reply);
+    event_lock.unlock();
+    return i;
+
+}
 
 
+
+void writeFile (std::string s) {
+
+  std::ofstream ofs;
+  ofs.open ("win.txt", std::ofstream::out | std::ofstream::app);
+
+  ofs << s << endl;
+
+  ofs.close();
+
+}
 using namespace boost::program_options;
 
 using namespace RTBKIT;
@@ -67,7 +102,39 @@ StandardAdServerConnector(std::shared_ptr<ServiceProxies> & proxy,
 
 }
 
+void StandardAdServerConnector::record_win(std::string s) const
+{
+    redisContext* rc7 = redisConnect(connection.c_str(), rport);
+    redisReply *reply;
+    long i = get_win_id(rc7);
+    string z = "win:"+std::to_string(i);
+    reply = (redisReply *)redisCommand(rc7,"SET %s %s ", z.c_str(), s.c_str());
+    if (reply->type == REDIS_REPLY_ERROR) {
+    cerr << reply->str << endl;
+    }
+    freeReplyObject(reply);
+    redisFree(rc7);
 
+
+}
+
+void StandardAdServerConnector::record_event(std::string s) const
+{
+
+    redisContext* rc8 = redisConnect(connection.c_str(), rport);
+    redisReply *reply;
+    long i = get_event_id(rc8);
+    string z = "event:"+std::to_string(i);
+    reply = (redisReply *)redisCommand(rc8,"SET %s %s ", z.c_str(), s.c_str());
+    if (reply->type == REDIS_REPLY_ERROR) {
+    cerr << reply->str << endl;
+    }
+    freeReplyObject(reply);
+    redisFree(rc8);
+
+
+
+}
 StandardAdServerConnector::
 StandardAdServerConnector(std::string const & serviceName, std::shared_ptr<ServiceProxies> const & proxies,
                           Json::Value const & json) :
