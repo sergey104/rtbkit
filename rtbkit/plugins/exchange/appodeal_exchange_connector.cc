@@ -67,14 +67,23 @@ long int unix_timestamp()
 void writeFile (std::string s) {
 
   std::ofstream ofs;
-  ofs.open ("appodeallog.txt", std::ofstream::out | std::ofstream::app);
+  ofs.open ("appodealreqlog.txt", std::ofstream::out | std::ofstream::app);
 
   ofs << s << endl;
 
   ofs.close();
 
 }
+void writeFileResponse (std::string s) {
 
+  std::ofstream ofs;
+  ofs.open ("appodealreslog.txt", std::ofstream::out | std::ofstream::app);
+
+  ofs << s << endl;
+
+  ofs.close();
+
+}
 using namespace Datacratic;
 using namespace ML;
 namespace Datacratic {
@@ -345,7 +354,8 @@ parseBidRequest(HttpAuctionHandler & connection,
 {
 
     std::shared_ptr<BidRequest> none;
-    record_request(payload);
+    //record_request(payload);
+    writeFile(payload);
     // Check for JSON content-type
     if (!header.contentType.empty()) {
         static const std::string delimiter = ";";
@@ -451,16 +461,6 @@ parseBidRequest(HttpAuctionHandler & connection,
 		}
 	    }
 	}
-	
-//	std::cerr <<  std::endl;
-//	std::cerr << "DEBUG: Header verb: " << header.verb << std::endl;
-//	std::cerr << "DEBUG: Header resource: " << header.resource << std::endl;
-//	std::cerr << "DEBUG: Header version: " << header.version << std::endl;
-//	std::cerr << "DEBUG: Header content type: " << header.contentType << std::endl;
-//	std::cerr << "DEBUG: Header rest data: "  << std::endl;
-//	for(auto it : header.headers) {
-//	    std::cerr << "DEBUG: key: "  << it.first << " value: " << it.second << std::endl;
-//	}
 
 //	std::cerr << "DEBUG: exchangeId: " << result->userIds.exchangeId << std::endl;
 //	std::cerr << "DEBUG: Request: " << payload << std::endl;
@@ -548,7 +548,8 @@ getResponse(const HttpAuctionHandler & connection,
     std::string rv = stream.str();
  //find_and_replace(rv,"\\","");
 cerr << "appodeal connector response 200:"  << endl;
-record_response(rv);
+//record_response(rv);
+writeFileResponse(rv);
 
     return HttpResponse(200, "application/json", rv);
 //return HttpResponse(204, "none", "");
