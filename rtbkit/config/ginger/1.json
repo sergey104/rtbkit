@@ -15,7 +15,7 @@
 	"fixedBidCpmInMicros":0,
 	"type":"RELAY"
     },
-    "bidProbability":0.7,
+    "bidProbability":0.9,
     "creatives":
     [
 	{
@@ -52,7 +52,7 @@
     "external":false,
     "externalId":0,
     "lossFormat":"lightweight",
-    "minTimeAvailableMs":5.0,
+    "minTimeAvailableMs":25.0,
     "providerConfig":{
 	"appodeal":{
 	    "seat":12
