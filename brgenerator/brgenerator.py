@@ -101,14 +101,14 @@ class Server:
             "x-openrtb-version": "2.3"
         }
 
-	print "Headers: ", headers
+#	print "Headers: ", headers
 	try:
 #	    print "Try to connect: ", self.host, ":", self.port
-	    conn = httplib.HTTPConnection(self.host, self.port, timeout = 10)
+#	    conn = httplib.HTTPConnection(self.host, self.port, timeout = 10)
 	    conn = httplib.HTTPConnection('127.0.0.1', 17339, timeout = 10)
 	    conn.request("POST", "/auctions", params, headers)
 	    resp = conn.getresponse()
-	    print resp.status, ":", resp.reason
+#	    print resp.status, ":", resp.reason
 	    return resp
 	except:
 	    print "Connection error"
@@ -139,6 +139,7 @@ class RequestThread:
         self.delay = jsondata["delay"]
         self.rupdate = jsondata["request"]
         self.requests = []
+        self.rqNumber = 0
 
     def load(self):
         rqbase = open(self.file, "r")
@@ -153,7 +154,12 @@ class RequestThread:
     def run(self):
         for rdi in self.requests:
             self.server.sendRequest(rdi)
-            time.sleep(self.delay)
+            self.rqNumber = self.rqNumber + 1
+            if self.delay != 0:
+		time.sleep(self.delay)
+            
+    def getRQNumber(self):
+	return self.rqNumber
 
 #-----------------------------------------------------------------------------------------------------------------------
 
@@ -161,6 +167,8 @@ class BRGenerator:
     def __init__(self, file):
         self.servers = ServerList()
         self.threads = {}
+        self.T0 = 0
+        self.T1 = 0
 
         self.config = json.load(file)
 
@@ -184,6 +192,7 @@ class BRGenerator:
 
     def run(self):
         threads = []
+        self.T0 = time.time()
         for key in self.threads:
             p = threading.Thread(target = self.threads[key].run())
             p.start()
@@ -191,6 +200,16 @@ class BRGenerator:
             
         for thr in threads:
             thr.join()
+	self.T1 = time.time()
+
+    def getTime(self):
+	return self.T1 - self.T0
+    
+    def getRQNumber(self):
+	number = 0
+	for key in self.threads:
+	    number = number + self.threads[key].getRQNumber()
+	return number
 
 #-----------------------------------------------------------------------------------------------------------------------
 
@@ -200,7 +219,11 @@ def main(filename):
         brg = BRGenerator(file)
 
         brg.load()
+        brg.load()
+        brg.load()
         brg.run()
+        print "Time: ", brg.getTime()
+        print "Number of requests: ", brg.getRQNumber()
 
 if len(sys.argv) < 2:
     print("No config file")
