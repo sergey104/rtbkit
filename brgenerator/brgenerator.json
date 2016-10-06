@@ -1,0 +1,121 @@
+{
+  "servers":
+  [
+    {
+      "name": "svr1",
+      "config": {
+        "host": "127.0.0.1",
+        "port": 17399
+      }
+    },
+    {
+      "name": "svr2",
+      "config": {
+        "host": "192.168.1.115",
+        "port": 17399
+      }
+    }
+  ],
+  "threads":
+  [
+    {
+      "name": "thread1",
+      "config": {
+        "file": "requests.txt",
+        "server": "svr1",
+        "delay": 0.05,
+        "request": {
+          "gender": [
+            "F",
+            "M"
+          ],
+          "yob": [
+            1965,
+            1966,
+            1967,
+            1968
+          ],
+          "birthday": [],
+          "location": [
+            {
+              "country": "BLR",
+              "city": "Minsk"
+            }
+          ],
+          "imp": [
+            {
+              "w": 320,
+              "h": 480
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "thread2",
+      "config": {
+        "file": "requests.txt",
+        "server": "svr1",
+        "delay": 0.05,
+        "request": {
+          "gender": [
+            "F",
+            "M"
+          ],
+          "yob": [
+            1969,
+            1970,
+            1971,
+            1972
+          ],
+          "birthday": [],
+          "location": [
+            {
+              "country": "BLR",
+              "city": "Minsk"
+            }
+          ],
+          "imp": [
+            {
+              "w": 320,
+              "h": 480
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "thread3",
+      "config": {
+        "file": "requests.txt",
+        "server": "svr1",
+        "delay": 0.05,
+        "request": {
+          "gender": [
+            "F",
+            "M"
+          ],
+          "yob": [
+            1969,
+            1970,
+            1971,
+            1972
+          ],
+          "birthday": [],
+          "location": [
+            {
+              "country": "BLR",
+              "city": "Minsk"
+            }
+          ],
+          "imp": [
+            {
+              "w": 320,
+              "h": 480
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
