@@ -5,7 +5,6 @@ import uuid
 import threading
 import time
 import httplib
-from httplib import HTTPConnection
 import sys
 import threading
 
@@ -102,16 +101,17 @@ class Server:
         }
 
 #	print "Headers: ", headers
-	try:
-#	    print "Try to connect: ", self.host, ":", self.port
-#	    conn = httplib.HTTPConnection(self.host, self.port, timeout = 10)
-	    conn = httplib.HTTPConnection('127.0.0.1', 17339, timeout = 10)
-	    conn.request("POST", "/auctions", params, headers)
-	    resp = conn.getresponse()
-#	    print resp.status, ":", resp.reason
-	    return resp
-	except:
-	    print "Connection error"
+        try:
+            print "Try to connect: ", self.host, ":", self.port
+            conn = httplib.HTTPConnection(host = self.host, port = self.port, timeout = 10)
+            conn.set_debuglevel(5)
+#           conn = httplib.HTTPConnection('127.0.0.1', 17339, timeout = 10)
+            conn.request("POST", "/auctions", params, headers)
+            resp = conn.getresponse()
+#           print resp.status, ":", resp.reason
+            return resp
+        except:
+            print "Connection error"
 
 class ServerList:
     def __init__(self):
@@ -135,11 +135,13 @@ class RequestThread:
     def __init__(self, jsondata, servers):
         self.file = jsondata["file"]
         server = jsondata["server"]
-        self.server = servers.getServer(server)
         self.delay = jsondata["delay"]
         self.rupdate = jsondata["request"]
         self.requests = []
         self.rqNumber = 0
+        self.server = Server()
+        self.server.host = servers.getServer(server).host
+        self.server.port = servers.getServer(server).port
 
     def load(self):
         rqbase = open(self.file, "r")
@@ -218,8 +220,6 @@ def main(filename):
         file = open(filename, "r")
         brg = BRGenerator(file)
 
-        brg.load()
-        brg.load()
         brg.load()
         brg.run()
         print "Time: ", brg.getTime()
