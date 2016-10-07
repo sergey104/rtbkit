@@ -41,10 +41,20 @@ long get_event_id(redisContext *rc) {
 
 
 
-void writeFile (std::string s) {
+void writeFileWin (std::string s) {
 
   std::ofstream ofs;
   ofs.open ("win.txt", std::ofstream::out | std::ofstream::app);
+
+  ofs << s << endl;
+
+  ofs.close();
+
+}
+void writeFileEvent (std::string s) {
+
+  std::ofstream ofs;
+  ofs.open ("event.txt", std::ofstream::out | std::ofstream::app);
 
   ofs << s << endl;
 
@@ -377,7 +387,7 @@ handleWinRq(const HttpHeader & header,
     else {
         // Passback is optional
     }
-    record_win(json.toString());
+    writeFileWin(json.toString());
     LOG(adserverTrace) << "{\"timestamp\":\"" << timestamp.print(3) << "\"," <<
         "\"bidRequestId\":\"" << bidRequestId << "\"," <<
         "\"impId\":\"" << impId << "\"," <<
@@ -514,7 +524,7 @@ handleDeliveryRq(const HttpHeader & header,
     impIdStr = json["impid"].asString();
     bidRequestId = Id(bidRequestIdStr);
     impId = Id(impIdStr);
-    record_event(json.toString());
+    writeFileEvent(json.toString());
     LOG(adserverTrace) << "{\"timestamp\":\"" << timestamp.print(3) << "\"," <<
         "\"bidRequestId\":\"" << bidRequestIdStr << "\"," <<
         "\"impId\":\"" << impIdStr << "\"," <<
