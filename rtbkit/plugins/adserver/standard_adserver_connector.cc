@@ -496,11 +496,11 @@ handleDeliveryRq(const HttpHeader & header,
     long size1 = getFilesize("win.txt");
     long size2 = getFilesize("event.txt");
     if (size1 >= 3000000) {
-     string newname = "stat/win" + string_unix_timestamp();
+     string newname = "win" + string_unix_timestamp();
      rename("win.txt", newname.c_str()) ;
     }
     if (size2 >= 3000000) {
-     string newname = "stat/event" + string_unix_timestamp();
+     string newname = "event" + string_unix_timestamp();
      rename("event.txt", newname.c_str()) ;
     }
     if(response.valid) {

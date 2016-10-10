@@ -491,11 +491,11 @@ getResponseExt(const HttpAuctionHandler & connection,
 long size1 = getFilesize("appodealreqlog.txt");
 long size2 = getFilesize("appodealreslog.txt");
 if (size1 >= 5000000) {
- string newname = "stat//req" + string_unix_timestamp();
+ string newname = "req" + string_unix_timestamp();
  rename("appodealreqlog.txt", newname.c_str()) ;
 }
 if (size2 >= 5000000) {
- string newname = "stat//res" + string_unix_timestamp();
+ string newname = "res" + string_unix_timestamp();
  rename("appodealreslog.txt", newname.c_str()) ;
 }
   return {};
