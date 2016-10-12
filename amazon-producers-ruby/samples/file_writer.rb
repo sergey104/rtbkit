@@ -86,7 +86,7 @@ class SampleProducer
     ary = redis.keys("event:*")
     if ary.size == 0 then return nil end
     out = redis.mget(ary)
-   # redis.del(ary)
+    #redis.del(ary)
     return out
 
   end

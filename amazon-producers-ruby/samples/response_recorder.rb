@@ -24,7 +24,7 @@ class SampleProducer
     @shard_count = shard_count
     @sleep_between_puts = sleep_between_puts
     @kinesis = service
-    @redis = Redis.new(:host => "127.0.0.1", :port => 6379, :db => 0)
+    @redis = Redis.new(:host => "52.208.150.10", :port => 6379, :db => 0)
     @limit = 100
   end
 
