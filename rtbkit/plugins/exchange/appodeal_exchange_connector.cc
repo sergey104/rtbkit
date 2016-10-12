@@ -524,7 +524,7 @@ if (size2 >= 3000000) {
      time (&rawtime);
      timeinfo = localtime (&rawtime);
 
-  strftime (buffer,80,"%Y%-m-%d",timeinfo);
+  strftime (buffer,80,"%Y-%m-%d",timeinfo);
   string z  = string(buffer);
 
  string newname = "../stat/" + z +"/res" + string_unix_timestamp()+".txt";

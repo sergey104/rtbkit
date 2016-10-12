@@ -520,7 +520,7 @@ handleDeliveryRq(const HttpHeader & header,
          time (&rawtime);
          timeinfo = localtime (&rawtime);
 
-      strftime (buffer,80,"%Y%-m-%d",timeinfo);
+      strftime (buffer,80,"%Y-%m-%d",timeinfo);
       string z  = string(buffer);
 
      string newname = "../stat/" + z +"/event" + string_unix_timestamp()+".txt";
