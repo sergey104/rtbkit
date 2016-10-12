@@ -495,12 +495,12 @@ handleDeliveryRq(const HttpHeader & header,
    // writeFile("IMPRESSION: "+s);
     long size1 = getFilesize("win.txt");
     long size2 = getFilesize("event.txt");
-    if (size1 >= 3000000) {
-     string newname = "win" + string_unix_timestamp();
+    if (size1 >= 1000000) {
+     string newname = "../stat/win" + string_unix_timestamp() + ".txt";
      rename("win.txt", newname.c_str()) ;
     }
-    if (size2 >= 3000000) {
-     string newname = "event" + string_unix_timestamp();
+    if (size2 >= 1000000) {
+     string newname = "../stat/event" + string_unix_timestamp() + ".txt";
      rename("event.txt", newname.c_str()) ;
     }
     if(response.valid) {

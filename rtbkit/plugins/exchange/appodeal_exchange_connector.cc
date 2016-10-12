@@ -280,8 +280,12 @@ parseBidRequest(HttpAuctionHandler & connection,
 {
 
     std::shared_ptr<BidRequest> none;
-    //record_request(payload);
-    writeFile(payload);
+    Json::Value v1;
+    v1["payload"] = payload;
+    time_t seconds; time(&seconds);
+    unsigned long long millis = (unsigned long long)seconds * 1000;
+    v1["timestamp"] = std::to_string(millis);
+    writeFile(v1.toString());
     // Check for JSON content-type
     if (!header.contentType.empty()) {
         static const std::string delimiter = ";";
@@ -472,13 +476,13 @@ getResponse(const HttpAuctionHandler & connection,
     StreamJsonPrintingContext context(stream);
     desc.printJsonTyped(&response, context);
     std::string rv = stream.str();
- //find_and_replace(rv,"\\","");
-cerr << "appodeal connector response 200:"  << endl;
-//record_response(rv);
-writeFileResponse(rv);
+
+    cerr << "appodeal connector response 200:"  << endl;
+
+    writeFileResponse(rv);
 
     return HttpResponse(200, "application/json", rv);
-//return HttpResponse(204, "none", "");
+    //return HttpResponse(204, "none", "");
 }
 
 
@@ -490,12 +494,13 @@ getResponseExt(const HttpAuctionHandler & connection,
 
 long size1 = getFilesize("appodealreqlog.txt");
 long size2 = getFilesize("appodealreslog.txt");
-if (size1 >= 5000000) {
- string newname = "req" + string_unix_timestamp();
+if (size1 >= 3000000) {
+ string newname = "../stat/req" + string_unix_timestamp()+".txt";
  rename("appodealreqlog.txt", newname.c_str()) ;
+
 }
-if (size2 >= 5000000) {
- string newname = "res" + string_unix_timestamp();
+if (size2 >= 3000000) {
+ string newname = "../stat/res" + string_unix_timestamp()+".txt";
  rename("appodealreslog.txt", newname.c_str()) ;
 }
   return {};
