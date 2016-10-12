@@ -478,8 +478,12 @@ getResponse(const HttpAuctionHandler & connection,
     std::string rv = stream.str();
 
     cerr << "appodeal connector response 200:"  << endl;
-
-    writeFileResponse(rv);
+    Json::Value v1;
+    v1["response"] = rv;
+    time_t seconds; time(&seconds);
+    unsigned long long millis = (unsigned long long)seconds * 1000;
+    v1["timestamp"] = std::to_string(millis);
+    writeFileResponse(v1.toString());
 
     return HttpResponse(200, "application/json", rv);
     //return HttpResponse(204, "none", "");
@@ -492,15 +496,41 @@ getResponseExt(const HttpAuctionHandler & connection,
                const Auction & auction) const
 {
 
-long size1 = getFilesize("appodealreqlog.txt");
-long size2 = getFilesize("appodealreslog.txt");
+    long size1 = getFilesize("appodealreqlog.txt");
+    long size2 = getFilesize("appodealreslog.txt");
+
 if (size1 >= 3000000) {
- string newname = "../stat/req" + string_unix_timestamp()+".txt";
+    time_t rawtime;
+    struct tm * timeinfo;
+     char buffer [80];
+
+     time (&rawtime);
+     timeinfo = localtime (&rawtime);
+
+  strftime (buffer,80,"%Y-%m-%d",timeinfo);
+  string z  = string(buffer);
+
+ string newname = "../stat/" + z +"/req" + string_unix_timestamp()+".txt";
+ string newdir = "../stat/" + z;
+ mkdir(newdir.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
  rename("appodealreqlog.txt", newname.c_str()) ;
 
 }
 if (size2 >= 3000000) {
- string newname = "../stat/res" + string_unix_timestamp()+".txt";
+    time_t rawtime;
+    struct tm * timeinfo;
+     char buffer [80];
+
+     time (&rawtime);
+     timeinfo = localtime (&rawtime);
+
+  strftime (buffer,80,"%Y%-m-%d",timeinfo);
+  string z  = string(buffer);
+
+ string newname = "../stat/" + z +"/res" + string_unix_timestamp()+".txt";
+ string newdir = "../stat/" + z;
+ mkdir(newdir.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+
  rename("appodealreslog.txt", newname.c_str()) ;
 }
   return {};

@@ -496,11 +496,37 @@ handleDeliveryRq(const HttpHeader & header,
     long size1 = getFilesize("win.txt");
     long size2 = getFilesize("event.txt");
     if (size1 >= 1000000) {
-     string newname = "../stat/win" + string_unix_timestamp() + ".txt";
+        time_t rawtime;
+        struct tm * timeinfo;
+         char buffer [80];
+
+         time (&rawtime);
+         timeinfo = localtime (&rawtime);
+
+      strftime (buffer,80,"%Y-%m-%d",timeinfo);
+      string z  = string(buffer);
+
+     string newname = "../stat/" + z +"/win" + string_unix_timestamp()+".txt";
+     string newdir = "../stat/" + z;
+     mkdir(newdir.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
      rename("win.txt", newname.c_str()) ;
+
     }
-    if (size2 >= 1000000) {
-     string newname = "../stat/event" + string_unix_timestamp() + ".txt";
+    if (size2 >= 500000) {
+        time_t rawtime;
+        struct tm * timeinfo;
+         char buffer [80];
+
+         time (&rawtime);
+         timeinfo = localtime (&rawtime);
+
+      strftime (buffer,80,"%Y%-m-%d",timeinfo);
+      string z  = string(buffer);
+
+     string newname = "../stat/" + z +"/event" + string_unix_timestamp()+".txt";
+     string newdir = "../stat/" + z;
+     mkdir(newdir.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+
      rename("event.txt", newname.c_str()) ;
     }
     if(response.valid) {
