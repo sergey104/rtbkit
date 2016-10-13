@@ -1,0 +1,53 @@
+{
+    "account":["ginger","4"],
+    
+    "bidControl":{
+	"fixedBidCpmInMicros":0,
+	"type":"RELAY"
+    },
+    "bidProbability":0.8,
+    "creatives":
+    [
+	{
+	    "format":"320x480",
+	    "id":6,
+	    "name":"6",
+	    "providerConfig":{
+		"appodeal":{
+		    "adm":"<script src='mraid.js'></script><script> var impressionTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=default&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var clickTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=default&type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var targetLink = \"http://jozclub.by\"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; var showAd = function(){ if(mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) { if(viewable) { mraid.removeEventListener('viewableChange', showAd); sendImpression(); }}); }}; var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd(); }</script><img style='height: 100%; width: auto;' src=\"http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/9/320x480.jpg\" onclick='trackClick()'>",
+		    "group_class":"group_class1",
+		    "iurl":"http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/9/320x480.jpg",
+            "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=default&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
+		    "uniq_id":"ginger:6"
+		}
+	    }
+	},
+	{
+	    "format":"768x1024",
+	    "id":7,
+	    "name":"7",
+	    "providerConfig":{
+		"appodeal":{
+		    "adm":"<script src='mraid.js'></script><script> var impressionTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=default&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var clickTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=default&type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var targetLink = \"http://jozclub.by\"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; var showAd = function(){ if(mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) { if(viewable) {  mraid.removeEventListener('viewableChange', showAd); sendImpression(); }}); }}; var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker;  hiddenSpan.appendChild(img);  document.body.appendChild(hiddenSpan); }); }; var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd(); }</script><img style='height: 100%; width: auto;' src=\"http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/9/768x1024.jpg\" onclick='trackClick()'>",
+		    "group_class":"group_class1",
+		    "iurl":"http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/9/768x1024.jpg",
+            "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=default&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
+		    "uniq_id":"ginger:7"
+		}
+	    }
+	}
+    ],
+	
+    "errorFormat":"lightweight",
+    "external":false,
+    "externalId":0,
+    "lossFormat":"lightweight",
+    "minTimeAvailableMs":115.0,
+    "providerConfig":{
+	"appodeal":{
+	    "seat":12
+	}
+    },
+    "test":false,
+    "winFormat":"full"
+}

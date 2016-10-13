@@ -13,6 +13,10 @@ $(eval $(call program,augmentor_start_stop_runner,augmentor_start_stop_time boos
 $(eval $(call library,augmentor_device_class,augmentor_device_class.cc,augmentor_base rtb bid_request agent_configuration))
 $(eval $(call program,augmentor_device_class_runner,augmentor_device_class boost_program_options))
 #----------------------
+$(eval $(call program,bidding_agent_0.02CPM,bidding_agent rtb_router boost_program_options services))
+$(eval $(call program,bidding_agent_0.05CPM,bidding_agent rtb_router boost_program_options services))
+$(eval $(call program,bidding_agent_0.15CPM,bidding_agent rtb_router boost_program_options services))
+$(eval $(call program,bidding_agent_10CPM,bidding_agent rtb_router boost_program_options services))
 $(eval $(call program,bidding_agent_1,bidding_agent rtb_router boost_program_options services))
 $(eval $(call library,augmentor_1,augmentor_1.cc,augmentor_base rtb bid_request agent_configuration))
 $(eval $(call program,augmentor_1_runner,augmentor_1 boost_program_options))
