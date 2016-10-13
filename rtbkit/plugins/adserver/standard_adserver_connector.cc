@@ -308,12 +308,13 @@ handleWinRq(const HttpHeader & header,
      *  price is an required field.
      *  If null, we return an error response.
      */
-    std::string winPriceDbls;
+//  std::string winPriceDbls;
     if (json.isMember("winPrice")) {
-        winPriceDbl = (json["winPrice"].asDouble())*0.001;
-     //   winPriceDbls = json["winPrice"].asString();
-      //  winPriceDbl = std::stod(winPriceDbls);
-     //   writeFile("winprice: " + std::to_string(winPriceDbl));
+//      winPriceDbl = (json["winPrice"].asDouble())*0.001;
+        winPriceDbl = json["winPrice"].asDouble();
+//      winPriceDbls = json["winPrice"].asString();
+//      winPriceDbl = std::stod(winPriceDbls);
+//      writeFile("winprice: " + std::to_string(winPriceDbl));
         winPrice = USD_CPM(winPriceDbl);
 
     } else {
