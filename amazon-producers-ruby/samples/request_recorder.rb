@@ -24,7 +24,7 @@ class SampleProducer
     @shard_count = shard_count
     @sleep_between_puts = sleep_between_puts
     @kinesis = service
-    @redis = Redis.new(:host => "127.0.0.1", :port => 6379, :db => 0)
+    @redis = Redis.new(:host => "52.208.150.10", :port => 6379, :db => 0)
     @limit = 80
   end
 
@@ -83,25 +83,29 @@ class SampleProducer
   end
 
   private
-  def get_data(rkeys)
-
+  def get_data(file)
+    i = 0
     out = Array.new
-    out = @redis.mget(rkeys)
+    file = File.open(file)
+    file.each do | line |
+      out[i] = line
+      i = i + 1
 
+    end
+    file.close
+    return out
     {
     "sensor"=>"snsr-#{rand(1_000).to_s.rjust(4,'0')}",
      "record" =>out.to_s
     }
 
   end
-  def get_keys
-    rkeys = Array.new
-    rkeys = @redis.keys("request:*")
-    if rkeys.size == 0 then return nil end
-    rkeys.sort
-    if rkeys.size < @limit then return rkeys end
-    rkeys.first(@limit)
-
+  def get_file
+    a = Dir["../../stat/req*"]
+    if a == nil then
+      return nil
+    end
+    return [a.sort].first
   end
   def get_stream_description
     r = @kinesis.describe_stream(:stream_name => @stream_name)

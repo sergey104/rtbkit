@@ -13,38 +13,40 @@
 
 
 using namespace std;
-
-std::mutex win_lock;
-std::mutex event_lock;
-
-long get_win_id(redisContext *rc) {
-    win_lock.lock();
-    redisReply *reply;
-    reply = (redisReply *)redisCommand(rc,"INCR win_counter");
-    long i = reply->integer;
-    freeReplyObject(reply);
-    win_lock.unlock();
-    return i;
-
+/**
+ * Get the size of a file.
+ * @param filename The name of the file to check size for
+ * @return The filesize, or 0 if the file does not exist.
+ */
+size_t getFilesize(const std::string& filename) {
+    struct stat st;
+    if(stat(filename.c_str(), &st) != 0) {
+        return 0;
+    }
+    return st.st_size;
 }
 
-long get_event_id(redisContext *rc) {
-    event_lock.lock();
-    redisReply *reply;
-    reply = (redisReply *)redisCommand(rc,"INCR event_counter");
-    long i = reply->integer;
-    freeReplyObject(reply);
-    event_lock.unlock();
-    return i;
-
+string string_unix_timestamp()
+{
+    time_t t = std::time(0);
+    long int now = static_cast<long int> (t);
+    return std::to_string(now);
 }
 
-
-
-void writeFile (std::string s) {
+void writeFileWin (std::string s) {
 
   std::ofstream ofs;
   ofs.open ("win.txt", std::ofstream::out | std::ofstream::app);
+
+  ofs << s << endl;
+
+  ofs.close();
+
+}
+void writeFileEvent (std::string s) {
+
+  std::ofstream ofs;
+  ofs.open ("event.txt", std::ofstream::out | std::ofstream::app);
 
   ofs << s << endl;
 
@@ -102,39 +104,7 @@ StandardAdServerConnector(std::shared_ptr<ServiceProxies> & proxy,
 
 }
 
-void StandardAdServerConnector::record_win(std::string s) const
-{
-    redisContext* rc7 = redisConnect(connection.c_str(), rport);
-    redisReply *reply;
-    long i = get_win_id(rc7);
-    string z = "win:"+std::to_string(i);
-    reply = (redisReply *)redisCommand(rc7,"SET %s %s ", z.c_str(), s.c_str());
-    if (reply->type == REDIS_REPLY_ERROR) {
-    cerr << reply->str << endl;
-    }
-    freeReplyObject(reply);
-    redisFree(rc7);
 
-
-}
-
-void StandardAdServerConnector::record_event(std::string s) const
-{
-
-    redisContext* rc8 = redisConnect(connection.c_str(), rport);
-    redisReply *reply;
-    long i = get_event_id(rc8);
-    string z = "event:"+std::to_string(i);
-    reply = (redisReply *)redisCommand(rc8,"SET %s %s ", z.c_str(), s.c_str());
-    if (reply->type == REDIS_REPLY_ERROR) {
-    cerr << reply->str << endl;
-    }
-    freeReplyObject(reply);
-    redisFree(rc8);
-
-
-
-}
 StandardAdServerConnector::
 StandardAdServerConnector(std::string const & serviceName, std::shared_ptr<ServiceProxies> const & proxies,
                           Json::Value const & json) :
@@ -377,7 +347,7 @@ handleWinRq(const HttpHeader & header,
     else {
         // Passback is optional
     }
-    record_win(json.toString());
+    writeFileWin(json.toString());
     LOG(adserverTrace) << "{\"timestamp\":\"" << timestamp.print(3) << "\"," <<
         "\"bidRequestId\":\"" << bidRequestId << "\"," <<
         "\"impId\":\"" << impId << "\"," <<
@@ -514,7 +484,7 @@ handleDeliveryRq(const HttpHeader & header,
     impIdStr = json["impid"].asString();
     bidRequestId = Id(bidRequestIdStr);
     impId = Id(impIdStr);
-    record_event(json.toString());
+    writeFileEvent(json.toString());
     LOG(adserverTrace) << "{\"timestamp\":\"" << timestamp.print(3) << "\"," <<
         "\"bidRequestId\":\"" << bidRequestIdStr << "\"," <<
         "\"impId\":\"" << impIdStr << "\"," <<
@@ -523,7 +493,42 @@ handleDeliveryRq(const HttpHeader & header,
 
     //string s = "{\"timestamp\":\"" + timestamp.print(3) + "\"," + "\"bidRequestId\":\"" + bidRequestIdStr +"\","+"\"impId\":\"" + impIdStr + "\"}";
    // writeFile("IMPRESSION: "+s);
+    long size1 = getFilesize("win.txt");
+    long size2 = getFilesize("event.txt");
+    if (size1 >= 1000000) {
+        time_t rawtime;
+        struct tm * timeinfo;
+         char buffer [80];
 
+         time (&rawtime);
+         timeinfo = localtime (&rawtime);
+
+      strftime (buffer,80,"%Y-%m-%d",timeinfo);
+      string z  = string(buffer);
+
+     string newname = "../stat/" + z +"/win" + string_unix_timestamp()+".txt";
+     string newdir = "../stat/" + z;
+     mkdir(newdir.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+     rename("win.txt", newname.c_str()) ;
+
+    }
+    if (size2 >= 500000) {
+        time_t rawtime;
+        struct tm * timeinfo;
+         char buffer [80];
+
+         time (&rawtime);
+         timeinfo = localtime (&rawtime);
+
+      strftime (buffer,80,"%Y-%m-%d",timeinfo);
+      string z  = string(buffer);
+
+     string newname = "../stat/" + z +"/event" + string_unix_timestamp()+".txt";
+     string newdir = "../stat/" + z;
+     mkdir(newdir.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+
+     rename("event.txt", newname.c_str()) ;
+    }
     if(response.valid) {
 
         publishCampaignEvent(eventType[event], bidRequestId, impId, timestamp,
