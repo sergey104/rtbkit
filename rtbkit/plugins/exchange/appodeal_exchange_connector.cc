@@ -282,9 +282,8 @@ parseBidRequest(HttpAuctionHandler & connection,
     std::shared_ptr<BidRequest> none;
     Json::Value v1;
     v1["payload"] = payload;
-    time_t seconds; time(&seconds);
-    unsigned long long millis = (unsigned long long)seconds * 1000;
-    v1["timestamp"] = std::to_string(millis);
+
+    v1["timestamp"] = string_unix_timestamp();
     writeFile(v1.toString());
     // Check for JSON content-type
     if (!header.contentType.empty()) {
@@ -480,9 +479,8 @@ getResponse(const HttpAuctionHandler & connection,
     cerr << "appodeal connector response 200:"  << endl;
     Json::Value v1;
     v1["response"] = rv;
-    time_t seconds; time(&seconds);
-    unsigned long long millis = (unsigned long long)seconds * 1000;
-    v1["timestamp"] = std::to_string(millis);
+
+    v1["timestamp"] = string_unix_timestamp();
     writeFileResponse(v1.toString());
 
     return HttpResponse(200, "application/json", rv);
