@@ -1,0 +1,82 @@
+{
+    "agent": {
+        "data": [
+            {
+                "id": 1,
+                "price": 0.02,
+                "markup": 10
+            },
+            {
+                "id": 2,
+                "price": 0.02,
+                "markup": 20
+            }
+        ]
+    },
+    "creatives" : {
+        "account": ["ginger","1"],
+        "augmentations": {
+            "frequency-cap-1": {
+                "config": {"maxPerDay": 5, "minInterval": 300},
+                "filters": {
+                    "include": ["pass-frequency-cap-1"],
+                    "exclude": []
+                },
+                "required": true
+            },
+            "random": null
+        },
+        "bidControl": {
+        "fixedBidCpmInMicros": 0,
+        "type": "RELAY"
+        },
+        "bidProbability": 0.9,
+        "creatives": [
+            {
+                "format": "320x480",
+                "id": 1,
+                "name": "1",
+                "providerConfig": {
+                    "appodeal": {
+                        "adm": "adm data",
+                        "group_class": "group_class1",
+                        "iurl": "iurl data",
+                        "nurl": "nurl data",
+                        "uniq_id": "ginger:1"
+                    }
+                }
+            },
+            {
+                "format": "768x1024",
+                "id": 2,
+                "name": "2",
+                "providerConfig": {
+                    "appodeal": {
+                        "adm": "adm data",
+                        "group_class": "group_class1",
+                        "iurl": "iurl data",
+                        "nurl": "nurl data",
+                        "uniq_id": "ginger:2"
+                    }
+                }
+            }
+        ],
+    
+        "errorFormat": "lightweight",
+        "external": false,
+        "externalId": 0,
+        "lossFormat": "lightweight",
+        "minTimeAvailableMs": 25.0,
+        "providerConfig": {
+            "appodeal": {
+                "seat": 12
+            }
+        },
+        "test": false,
+        "winFormat": "full",
+    
+        "locationFilter": { 
+            "include": [ "BLR" ] 
+        }
+    }
+}
