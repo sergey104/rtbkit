@@ -623,7 +623,7 @@ AppodealExchangeConnector::setSeatBid(
     bid.id = Id(auction.id, auction.request->imp[0].id);
     bid.price.val = USD_CPM(resp.price.maxPrice);
     /* Prices are in Cents CPM */
-    bid.price.val *= 100;
+//    bid.price.val *= 100;
 //    bid.ext = in;
 
     //if (!creativeInfo->adomain.empty()) bid.adomain = creativeInfo->adomain;
