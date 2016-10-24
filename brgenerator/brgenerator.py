@@ -5,14 +5,20 @@ import uuid
 import threading
 import time
 import httplib
+from httplib import HTTPConnection
+from httplib import HTTPResponse
 import sys
 import threading
 
-#-----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+
+
 class RequestUpdate:
     def __init__(self, jsonvalue):
         self.data = json.loads(jsonvalue)
-#-----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
+
+
 class RequestData:
     def __init__(self, requestStr):
         self.jsonRequest = json.loads(requestStr)
@@ -79,6 +85,7 @@ class RequestData:
 
 # -----------------------------------------------------------------------------------------------------------------------
 
+
 class Server:
     def __init__(self):
         self.host = "127.0.0.1"
@@ -87,8 +94,78 @@ class Server:
     def setConfig(self, jsonvalue):
         self.host = jsonvalue["host"]
         self.port = jsonvalue["port"]
-
+        
+    def sendImpressionResponse(self, data):
+        jsonResponse = json.loads('{"timestamp":0, "bidTimestamp":0, "auctionId":"", "impId": "1", "bidRequestId":"", "winPrice":0.032, "type":"IMPRESSION"}')
+        jsonResponse["timestamp"] = time.time()
+        aucId = data["id"]
+        jsonResponse["auctionId"] = aucId + ":1"
+        jsonResponse["bidRequestId"] = aucId + ":1"
+        jsonResponse["impId"] = data["seatbid"][0]["bid"][0]["impid"]
+        
+        print "send impression: ", jsonResponse
+        
+        params = json.dumps(jsonResponse)
+        
+        headers = {
+            "Accept": "*/*",
+            "Content-type": "application/json"
+        }
+        
+        print "Try to connect: ", self.host, ":", 17341
+        try:
+            conn = httplib.HTTPConnection(str(self.host), 17341)
+            conn.request("POST", "/events", params, headers)
+            resp = conn.getresponse()
+            print resp.status, ":", resp.reason
+            impdata = resp.read()
+            if impdata:
+                print "data: ", impdata
+            conn.close()
+        except:
+            print "Connection error"
+        return
+        
+    def sendWinResponse(self, data):
+        windata = None
+        jsonResponse = json.loads('{"timestamp":0, "bidTimestamp":0, "auctionId":"", "impId": "1", "bidRequestId":"", "winPrice":0.032, "type": null, "event":"win"}')
+        jsonResponse["timestamp"] = time.time()
+        aucId = data["id"]
+        jsonResponse["auctionId"] = aucId + ":1"
+        jsonResponse["bidRequestId"] = aucId + ":1"
+        jsonResponse["impId"] = data["seatbid"][0]["bid"][0]["impid"]
+        
+        print "send win: ", jsonResponse
+        
+        params = json.dumps(jsonResponse)
+        
+        headers = {
+            "Accept": "*/*",
+            "Content-type": "application/json"
+        }
+        
+        print "Try to connect: ", self.host, ":", 17340
+        try:
+            conn = httplib.HTTPConnection(str(self.host), 17340)
+            conn.request("POST", "/", params, headers)
+            resp = conn.getresponse()
+        except:
+            print "Connection error"
+            return
+            
+        print resp.status, ":", resp.reason
+        windata = resp.read()
+        conn.close()
+        if windata:
+            print "windata: ", windata
+        if resp.status == 200:
+            time.sleep(0.1)
+            print "send impression"
+            self.sendImpressionResponse(data)
+        return
+        
     def sendRequest(self, request):
+        data = None
         request.update()
         params = json.dumps(request.getJsonData())
         headers = {
@@ -99,19 +176,26 @@ class Server:
             "Accept-Encoding": "gzip",
             "x-openrtb-version": "2.3"
         }
-
-#	print "Headers: ", headers
+        print "Try to connect: ", self.host, ":", self.port
         try:
-            print "Try to connect: ", self.host, ":", self.port
-            conn = httplib.HTTPConnection(host = self.host, port = self.port, timeout = 10)
-            conn.set_debuglevel(5)
-#           conn = httplib.HTTPConnection('127.0.0.1', 17339, timeout = 10)
+            conn = httplib.HTTPConnection(str(self.host), self.port)
             conn.request("POST", "/auctions", params, headers)
+            print "Sent: ", params, "\n\n"
             resp = conn.getresponse()
-#           print resp.status, ":", resp.reason
-            return resp
         except:
             print "Connection error"
+            return
+        
+        print resp.status, ":", resp.reason
+        if resp.status == 200:
+            data = json.loads(resp.read())
+            print "data: ", data, "\n\n"
+        conn.close()
+        if data:
+            time.sleep(0.1)
+            print "send win"
+            self.sendWinResponse(data)
+        return
 
 class ServerList:
     def __init__(self):
@@ -150,8 +234,8 @@ class RequestThread:
             if jsonline[0] == '{':
                 rd = RequestData(jsonline)
                 self.requests.append(rd)
-	    jsonline = rqbase.readline(4096)
-	rqbase.close()
+            jsonline = rqbase.readline(4096)
+        rqbase.close()
         
     def run(self):
         for rdi in self.requests:
@@ -202,16 +286,16 @@ class BRGenerator:
             
         for thr in threads:
             thr.join()
-	self.T1 = time.time()
+        self.T1 = time.time()
 
     def getTime(self):
-	return self.T1 - self.T0
+        return self.T1 - self.T0
     
     def getRQNumber(self):
-	number = 0
-	for key in self.threads:
-	    number = number + self.threads[key].getRQNumber()
-	return number
+        number = 0
+        for key in self.threads:
+            number = number + self.threads[key].getRQNumber()
+        return number
 
 #-----------------------------------------------------------------------------------------------------------------------
 

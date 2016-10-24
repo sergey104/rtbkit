@@ -5,14 +5,14 @@
       "name": "svr1",
       "config": {
         "host": "127.0.0.1",
-        "port": 17399
+        "port": 17339
       }
     },
     {
       "name": "svr2",
       "config": {
         "host": "127.0.0.1",
-        "port": 17399
+        "port": 17339
       }
     }
   ],
@@ -21,7 +21,7 @@
     {
       "name": "thread1",
       "config": {
-        "file": "requests.txt",
+        "file": "one.request.txt",
         "server": "svr1",
         "delay": 0,
         "request": {
