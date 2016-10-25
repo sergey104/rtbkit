@@ -199,48 +199,35 @@ onRequest(const RTBKIT::AugmentationRequest& request)
             RTBKIT::Amount maxPerDay = getMaxPerDay(request.augmentor, agent, config);
             //std::cerr << "DEBUG: maxPerHour: " << maxPerHour.toString() << ", maxPerDay: " << maxPerDay.toString() << std::endl;
         
-	
-            if(maxPerHour.isNegative() || maxPerDay.isNegative()) {
-                recordHit("badConfig");
-                //std::cerr << "DEBUG: bad Config" << std::endl;
-                continue;
-            }
-            if(!maxPerHour.isZero() || !maxPerDay.isZero()) {
-                std::time_t cur_tm = std::time(nullptr);
-                std::tm cur_utc_tm = *std::gmtime(&cur_tm);
+            std::time_t cur_tm = std::time(nullptr);
+            std::tm cur_utc_tm = *std::gmtime(&cur_tm);
+        
+            std::time_t sav_tmPerHour = std::chrono::system_clock::to_time_t(spentMoney.startHourPeriod);
+            std::tm sav_utc_tmPerHour = *std::gmtime(&sav_tmPerHour);
+            std::time_t sav_tmPerDay = std::chrono::system_clock::to_time_t(spentMoney.startDayPeriod);
+            std::tm sav_utc_tmPerDay = *std::gmtime(&sav_tmPerDay);
             
-                std::time_t sav_tmPerHour = std::chrono::system_clock::to_time_t(spentMoney.startHourPeriod);
-                std::tm sav_utc_tmPerHour = *std::gmtime(&sav_tmPerHour);
-                std::time_t sav_tmPerDay = std::chrono::system_clock::to_time_t(spentMoney.startDayPeriod);
-                std::tm sav_utc_tmPerDay = *std::gmtime(&sav_tmPerDay);
-                
-                if(cur_utc_tm.tm_hour != sav_utc_tmPerHour.tm_hour) {
-                    spentMoney.startHourPeriod = std::chrono::system_clock::now();
-                    spentMoney.amountPerHour = Amount("USD/1M", 0);
-                    //std::cerr << "DEBUG: Reset hour amount" << std::endl;
-                    storage->setSpentMoney(account, spentMoney);
-                }
-                else {
-                    //std::cerr << "DEBUG: amountPerHour: " << spentMoney.amountPerHour.toString() << std::endl;
-                    if(spentMoney.amountPerHour >= maxPerHour)
-                        toSkip = true;
-                }
-                if(cur_utc_tm.tm_mday != sav_utc_tmPerHour.tm_mday) {
-                    spentMoney.startDayPeriod = std::chrono::system_clock::now();
-                    spentMoney.amountPerDay = Amount("USD/1M", 0);
-                    //std::cerr << "DEBUG: Reset day amount" << std::endl;
-                    storage->setSpentMoney(account, spentMoney);
-                }
-                else {
-                    //std::cerr << "DEBUG: amountPerDay: " << spentMoney.amountPerDay.toString() << std::endl;
-                    if(spentMoney.amountPerDay >= maxPerDay)
-                        toSkip = true;
-                }
+            if(cur_utc_tm.tm_hour != sav_utc_tmPerHour.tm_hour) {
+                spentMoney.startHourPeriod = std::chrono::system_clock::now();
+                spentMoney.amountPerHour = Amount("USD/1M", 0);
+                //std::cerr << "DEBUG: Reset hour amount" << std::endl;
+                storage->setSpentMoney(account, spentMoney);
             }
             else {
-                recordHit("ZeroConfig");
-                //std::cerr << "DEBUG: Zero Config" << std::endl;
-                continue;
+                //std::cerr << "DEBUG: amountPerHour: " << spentMoney.amountPerHour.toString() << std::endl;
+                if(!maxPerHour.isNegative() && spentMoney.amountPerHour >= maxPerHour)
+                    toSkip = true;
+            }
+            if(cur_utc_tm.tm_mday != sav_utc_tmPerHour.tm_mday) {
+                spentMoney.startDayPeriod = std::chrono::system_clock::now();
+                spentMoney.amountPerDay = Amount("USD/1M", 0);
+                //std::cerr << "DEBUG: Reset day amount" << std::endl;
+                storage->setSpentMoney(account, spentMoney);
+            }
+            else {
+                //std::cerr << "DEBUG: amountPerDay: " << spentMoney.amountPerDay.toString() << std::endl;
+                if(!maxPerDay.isNegative() && spentMoney.amountPerDay >= maxPerDay)
+                    toSkip = true;
             }
         }
         if(!toSkip) {

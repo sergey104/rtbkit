@@ -131,22 +131,26 @@ init()
     */
     palEvents.messageHandler = [&] (const vector<zmq::message_t>& msg)
         {
-            RTBKIT::AccountKey account(msg[19].toString());
-            RTBKIT::UserIds uids = RTBKIT::UserIds::createFromString(msg[15].toString());
+            RTBKIT::AccountKey account(msg[11].toString());
+            Json::Value req = Json::parse(msg[4].toString());
+            RTBKIT::UserIds uids = RTBKIT::UserIds::createFromString(req["userIds"].toString());
 
-	    /*
-	    for(auto it: msg) {
-		std::cerr << "DEBUG: " << it.toString() << std::endl;
-	    }
-	    */
-	    
+            /*
+            int idx = 0;
+            for(auto it: msg) {
+                std::cerr << "DEBUG: " << idx++ << ": " << it.toString() << std::endl;
+            }
+            */
+            
+            //std::cerr << "DEBUG: account: " << account << std::endl;
+            //std::cerr << "DEBUG: uids: " << uids.toString() << std::endl;
             storage->inc(account, uids);
-	    storage->set_delay_point(account, uids);
-//	    std::cerr << "DEBUG: Wins. Request id: " << msg[2].toString() << std::endl;
-            recordHit("wins");
+            storage->set_delay_point(account, uids);
+            //std::cerr << "DEBUG: Wins. Request id: " << msg[2].toString() << std::endl;
+            recordHit("Impression");
         };
 
-    palEvents.connectAllServiceProviders("rtbPostAuctionService", "logger", {"MATCHEDWIN"});
+    palEvents.connectAllServiceProviders("rtbPostAuctionService", "logger", {"MATCHEDIMPRESSION"});
     addSource("FrequencyCapAugmentor::palEvents", palEvents);
 }
 
@@ -170,9 +174,9 @@ onRequest(const RTBKIT::AugmentationRequest& request)
     for (const string& agent : request.agents) {
 
         RTBKIT::AgentConfigEntry config = agentConfig.getAgentEntry(agent);
-	bool toSkip = false;
-	size_t cap = 0;
-	size_t minInterval = 0;
+        bool toSkip = false;
+        size_t cap = 0;
+        size_t minInterval = 0;
 
 	
         /* When a new agent comes online there's a race condition where the
@@ -181,14 +185,14 @@ onRequest(const RTBKIT::AugmentationRequest& request)
         */
         if (!config.valid()) {
             recordHit("unknownConfig");
-//	    std::cerr << "DEBUG: unknown Config" << std::endl;
+	        //std::cerr << "DEBUG: unknown Config" << std::endl;
             continue;
         }
 
         const RTBKIT::AccountKey& account = config.config->account;
 
         size_t count = storage->get(account, uids);
-//	std::cerr << "DEBUG: " << "account: " << account << "/uids: " << uids.toString() << " count: " << count << std::endl;
+        //std::cerr << "DEBUG: " << "account: " << account << "/uids: " << uids.toString() << " count: " << count << std::endl;
 	
         /* The number of times a user has been seen by a given agent can be
            useful to make bid decisions so attach this data to the bid
@@ -206,58 +210,58 @@ onRequest(const RTBKIT::AugmentationRequest& request)
            therefor be filtered out for agents that require the frequency
            capping.
         */
-	cap = getCap(request.augmentor, agent, config);
-//	std::cerr << "DEBUG: cap: " << cap << std::endl;
-	minInterval = getInterval(request.augmentor, agent, config);
-	if(!cap || !minInterval) {
-	    recordHit("badConfig");
-//	    std::cerr << "DEBUG: bad Config" << std::endl;
-	    continue;
-	}
+        cap = getCap(request.augmentor, agent, config);
+    	//std::cerr << "DEBUG: cap: " << cap << std::endl;
+        minInterval = getInterval(request.augmentor, agent, config);
+        if(!cap || !minInterval) {
+            recordHit("badConfig");
+    	    //std::cerr << "DEBUG: bad Config" << std::endl;
+            continue;
+        }
 
-	if (count > 0) {
-	    
-		
-	    if(!minInterval)
-		minInterval = defaultInterval;
-		
-	    auto startInterval = storage->get_delay_point(account, uids);
-	    auto curInterval = chrono::system_clock::now() - storage->get_delay_point(account, uids);
-	    if(curInterval < chrono::seconds(minInterval)) 
-		toSkip = true;
-		
-//	    std::cerr << "DEBUG: waiting/interval: " << chrono::duration_cast<chrono::seconds>(curInterval).count() << "/" << minInterval << std::endl;
-	    
-	    
-	    std::time_t cur_tm = std::time(nullptr);
-	    std::tm cur_utc_tm = *std::gmtime(&cur_tm);
-	
-	    std::time_t sav_tm = std::chrono::system_clock::to_time_t(startInterval);
-	    std::tm sav_utc_tm = *std::gmtime(&sav_tm);
-	
-//	    std::cerr << "DEBUG: day/day: " << cur_utc_tm.tm_yday << "/" << sav_utc_tm.tm_yday << std::endl;
-	    
-	    if(cur_utc_tm.tm_yday != sav_utc_tm.tm_yday) {
-		count = 0;
-		storage->reset(account, uids);
-	    }
-	}
-	    
-	if (count < cap) {
-	    if(!toSkip) {
-		result[account].tags.insert("pass-frequency-cap-1");
-		recordHit("accounts." + account[0] + ".passed");
-//	        std::cerr << "DEBUG: passed" << std::endl;
-	    }
-	    else {
-		    recordHit("accounts." + account[0] + ".toofften");
-//		    std::cerr << "DEBUG: skipped" << std::endl;
-	    }
-	}
-	else {
-	    recordHit("accounts." + account[0] + ".capped");
-//	    std::cerr << "DEBUG: capped" << std::endl;
-	}
+        if (count > 0) {
+            
+            
+            if(!minInterval)
+            minInterval = defaultInterval;
+            
+            auto startInterval = storage->get_delay_point(account, uids);
+            auto curInterval = chrono::system_clock::now() - storage->get_delay_point(account, uids);
+            if(curInterval < chrono::seconds(minInterval)) 
+            toSkip = true;
+            
+    	    //std::cerr << "DEBUG: waiting/interval: " << chrono::duration_cast<chrono::seconds>(curInterval).count() << "/" << minInterval << std::endl;
+            
+            
+            std::time_t cur_tm = std::time(nullptr);
+            std::tm cur_utc_tm = *std::gmtime(&cur_tm);
+        
+            std::time_t sav_tm = std::chrono::system_clock::to_time_t(startInterval);
+            std::tm sav_utc_tm = *std::gmtime(&sav_tm);
+        
+    //	    std::cerr << "DEBUG: day/day: " << cur_utc_tm.tm_yday << "/" << sav_utc_tm.tm_yday << std::endl;
+            
+            if(cur_utc_tm.tm_yday != sav_utc_tm.tm_yday) {
+                count = 0;
+                storage->reset(account, uids);
+            }
+        }
+            
+        if (count < cap) {
+            if(!toSkip) {
+                result[account].tags.insert("pass-frequency-cap-1");
+                recordHit("accounts." + account[0] + ".passed");
+                //std::cerr << "DEBUG: passed" << std::endl;
+            }
+            else {
+                recordHit("accounts." + account[0] + ".toofften");
+                //std::cerr << "DEBUG: skipped" << std::endl;
+            }
+        }
+        else {
+            recordHit("accounts." + account[0] + ".capped");
+            //std::cerr << "DEBUG: capped" << std::endl;
+        }
     }
 
     return result;
@@ -277,16 +281,10 @@ getCap( const string& augmentor,
 {
     for (const auto& augConfig : config.config->augmentations) {
         if (augConfig.name != augmentor) continue;
-	if(augConfig.config.isMember("maxPerDay")) {
-	    return augConfig.config["maxPerDay"].asInt();
-	}
+        if(augConfig.config.isMember("maxPerDay")) {
+            return augConfig.config["maxPerDay"].asInt();
+        }
     }
-
-    /* There's a race condition here where if an agent removes our augmentor
-       from its configuration while there are bid requests being augmented
-       for that agent then we may not find its config. A sane default is
-       good to have in this scenario.
-    */
 
     return 0;
 }
@@ -304,16 +302,11 @@ getInterval( const string& augmentor,
 {
     for (const auto& augConfig : config.config->augmentations) {
         if (augConfig.name != augmentor) continue;
-	if(augConfig.config.isMember("minInterval")) {
-	    return augConfig.config["minInterval"].asInt();
-	}
+        if(augConfig.config.isMember("minInterval")) {
+            return augConfig.config["minInterval"].asInt();
+        }
     }
 
-    /* There's a race condition here where if an agent removes our augmentor
-       from its configuration while there are bid requests being augmented
-       for that agent then we may not find its config. A sane default is
-       good to have in this scenario.
-    */
 
     return 0;
 }

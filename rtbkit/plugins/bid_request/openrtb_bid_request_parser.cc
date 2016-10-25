@@ -566,9 +566,11 @@ onUser(OpenRTB::User & user) {
 	    
 	    /* Fix for appodeal gender code */
 	    if(user.gender.compare("1") == 0)
-		user.gender = "F";
+            user.gender = "F";
 	    else if(user.gender.compare("2") == 0)
-		user.gender = "M";
+            user.gender = "M";
+        else if(user.gender.compare("0") == 0)
+            user.gender = "O";
 	    else
 	    /* */
             if(user.gender.compare("M") == 0) {

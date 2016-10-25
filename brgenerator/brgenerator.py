@@ -95,13 +95,14 @@ class Server:
         self.host = jsonvalue["host"]
         self.port = jsonvalue["port"]
         
-    def sendImpressionResponse(self, data):
+    def sendImpressionResponse(self, data, price):
         jsonResponse = json.loads('{"timestamp":0, "bidTimestamp":0, "auctionId":"", "impId": "1", "bidRequestId":"", "winPrice":0.032, "type":"IMPRESSION"}')
         jsonResponse["timestamp"] = time.time()
         aucId = data["id"]
         jsonResponse["auctionId"] = aucId + ":1"
         jsonResponse["bidRequestId"] = aucId + ":1"
         jsonResponse["impId"] = data["seatbid"][0]["bid"][0]["impid"]
+        jsonResponse["winPrice"] = price
         
         print "send impression: ", jsonResponse
         
@@ -134,6 +135,9 @@ class Server:
         jsonResponse["auctionId"] = aucId + ":1"
         jsonResponse["bidRequestId"] = aucId + ":1"
         jsonResponse["impId"] = data["seatbid"][0]["bid"][0]["impid"]
+        price = data["seatbid"][0]["bid"][0]["price"]
+        price = price - (price * 5 / 100)
+        jsonResponse["winPrice"] = price
         
         print "send win: ", jsonResponse
         
@@ -161,7 +165,7 @@ class Server:
         if resp.status == 200:
             time.sleep(0.1)
             print "send impression"
-            self.sendImpressionResponse(data)
+            self.sendImpressionResponse(data, price)
         return
         
     def sendRequest(self, request):

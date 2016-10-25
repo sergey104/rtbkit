@@ -167,7 +167,6 @@ struct FixedPriceBiddingAgent :
             // Note that by default, the bid price is set to 0 which indicates
             // that we don't wish to bid on the given spot.
             bid.bid(availableCreative, USD_CPM(0.02));
-
         }
 
         // A value that will be passed back to us when we receive the result of
