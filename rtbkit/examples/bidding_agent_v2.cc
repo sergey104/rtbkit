@@ -29,6 +29,12 @@ using namespace ML;
 
 namespace RTBKIT {
 
+// V2 data
+typedef struct { 
+    double _price; 
+    double _markup; 
+} PriceData_t;
+
 /******************************************************************************/
 /* FIXED PRICE BIDDING AGENT                                                  */
 /******************************************************************************/
@@ -106,6 +112,19 @@ struct FixedPriceBiddingAgent :
                 Json::Value agent = jcfg.get("agent", "");
                 Json::Value creatives = jcfg.get("creatives", "");
                 config.fromJson(creatives);
+                
+                //
+                for(auto cr_it: config.creatives) {
+                    for(auto pd_it: agent["data"]) {
+                        if(cr_it.id == pd_it["id"].asInt()) {
+                            PriceData_t data;
+                            data._price = pd_it["price"].asDouble();
+                            data._markup = pd_it["markup"].asDouble();
+                            priceTable.push_back(data);
+                            break;
+                        }
+                    }
+                }
             }
             catch(const std::exception& ex) {
                 std::cerr << ML::format("threw exception: %s", ex.what());
@@ -116,10 +135,10 @@ struct FixedPriceBiddingAgent :
             }
         }
 	    
-        std::cerr << "DEBUG: doConfig" << std::endl;
-        std::cerr << "--- <configuration> ---" << std::endl;
-        Json::Value value = config.toJson();
-        std::cerr << value << std::endl << "--- </configuration> ---" << std::endl;
+        //std::cerr << "DEBUG: doConfig" << std::endl;
+        //std::cerr << "--- <configuration> ---" << std::endl;
+        //Json::Value value = config.toJson();
+        //std::cerr << value << std::endl << "--- </configuration> ---" << std::endl;
 	
         doConfig(config);
     }
@@ -163,6 +182,7 @@ struct FixedPriceBiddingAgent :
 
             // We don't really need it here but this is how you can get the
             // AdSpot and Creative object from the indexes.
+            
             (void) br->imp[bid.spotIndex];
 
             (void) config.creatives[availableCreative];
@@ -170,8 +190,10 @@ struct FixedPriceBiddingAgent :
             // Create a 0.0001$ CPM bid with our available creative.
             // Note that by default, the bid price is set to 0 which indicates
             // that we don't wish to bid on the given spot.
-            std::cerr << "DEBUG: Creative: " << bid.availableCreatives[availableCreative] << std::endl;
-            bid.bid(availableCreative, USD_CPM(0.03));
+            if(availableCreative < priceTable.size()) {
+                double price = priceTable[availableCreative]._price * (1 + priceTable[availableCreative]._markup / 100);
+                bid.bid(availableCreative, USD_CPM(price));
+            }
             //bid.bid(availableCreative, USD_CPM(MicroUSD_CPM(200)));
 
         }
@@ -209,11 +231,7 @@ struct FixedPriceBiddingAgent :
     std::string cfgfile;
     
     // V2 data
-    typedef struct { 
-        double _price; 
-        double _markup; 
-    } price_data;
-    std::vector<price_data> price_table;
+    std::vector<PriceData_t> priceTable;
 };
 
 } // namepsace RTBKIT
