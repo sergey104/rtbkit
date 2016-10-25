@@ -59,6 +59,15 @@
                     "log": true
                 },
                 {
+                    "name": "spending_money_control",
+                    "root": ".",
+                    "path": "build/x86_64/bin/augmentor_fin_runner",
+                    "arg": [
+                        "-B", "rtbkit/sample.bootstrap.json"
+                    ],
+                    "log": true
+                },
+                {
                     "name": "router",
                     "root": ".",
                     "path": "build/x86_64/bin/router_runner",

@@ -9,9 +9,10 @@ tmux new-window -d -t rtb:3 -n 'logger' 'tail -F ./logs/logger.log'
 tmux new-window -d -t rtb:4 -n 'agent-configuration' 'tail -F ./logs/agent-configuration.log'
 tmux new-window -d -t rtb:5 -n 'banker' 'tail -F ./logs/banker.log'
 tmux new-window -d -t rtb:6 -n 'augmentor' 'tail -F ./logs/augmentor.log'
-tmux new-window -d -t rtb:7 -n 'router' 'tail -F ./logs/router.log'
-tmux new-window -d -t rtb:8 -n 'post-auction' 'tail -F ./logs/post-auction.log'
-tmux new-window -d -t rtb:9 -n 'agent-gateway' 'tail -F ./logs/agent-gateway.log'
+tmux new-window -d -t rtb:7 -n 'spending_money_control' 'tail -F ./logs/spending_money_control.log'
+tmux new-window -d -t rtb:8 -n 'router' 'tail -F ./logs/router.log'
+tmux new-window -d -t rtb:9 -n 'post-auction' 'tail -F ./logs/post-auction.log'
+tmux new-window -d -t rtb:10 -n 'agent-gateway' 'tail -F ./logs/agent-gateway.log'
 if [[ "$*" != *--quiet* ]]
 then
     tmux attach -t rtb

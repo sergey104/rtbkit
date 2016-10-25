@@ -223,12 +223,12 @@ onRequest(const RTBKIT::AugmentationRequest& request)
             
             
             if(!minInterval)
-            minInterval = defaultInterval;
+                minInterval = defaultInterval;
             
             auto startInterval = storage->get_delay_point(account, uids);
             auto curInterval = chrono::system_clock::now() - storage->get_delay_point(account, uids);
             if(curInterval < chrono::seconds(minInterval)) 
-            toSkip = true;
+                toSkip = true;
             
     	    //std::cerr << "DEBUG: waiting/interval: " << chrono::duration_cast<chrono::seconds>(curInterval).count() << "/" << minInterval << std::endl;
             

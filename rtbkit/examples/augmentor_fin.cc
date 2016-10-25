@@ -116,15 +116,15 @@ init()
     */
     palEvents.messageHandler = [&] (const vector<zmq::message_t>& msg)
         {
-            RTBKIT::AccountKey account(msg[19].toString());
+            RTBKIT::AccountKey account(msg[11].toString());
 
             /*
             for(auto it: msg) {
                 std::cerr << "DEBUG: " << it.toString() << std::endl;
             }
             */
-            
-            RTBKIT::Amount winPrice = RTBKIT::Amount::parse(msg[6].toString());
+            Json::Value data = Json::parse(msg[6].toString());
+            RTBKIT::Amount winPrice = RTBKIT::Amount::fromJson(data["winPrice"]);
             SpentMoney_t spentMoney;
             if(storage->isKeyExist(account)) {
                 spentMoney = storage->getSpentMoney(account);
@@ -146,10 +146,10 @@ init()
             storage->setSpentMoney(account, spentMoney);
 	        //std::cerr << "DEBUG: Wins. Request id: " << msg[2].toString() << std::endl;
             //std::cerr << "DEBUG: Wins. Price: " << winPrice.toString() << std::endl;
-            recordHit("wins");
+            recordHit("impression");
         };
 
-    palEvents.connectAllServiceProviders("rtbPostAuctionService", "logger", {"MATCHEDWIN"});
+    palEvents.connectAllServiceProviders("rtbPostAuctionService", "logger", {"MATCHEDIMPRESSION"});
     addSource("FinancialAugmentor::palEvents", palEvents);
 }
 

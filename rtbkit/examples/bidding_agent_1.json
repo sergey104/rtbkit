@@ -9,6 +9,14 @@
             },
             "required":true
         },
+        "spending-money-control":{
+            "config": {"maxPerHour":"2000USD/1M", "maxPerDay":"5000USD/1M"},
+            "filters":{
+                "include":["pass-spending-money-control"],
+                "exclude":[]
+            },
+            "required":true
+        },
         "random":null
     },
     "bidControl":{

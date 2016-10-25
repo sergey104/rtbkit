@@ -21,7 +21,7 @@
     {
       "name": "thread1",
       "config": {
-        "file": "requests.txt",
+        "file": "one.request.txt",
         "server": "svr1",
         "delay": 0,
         "request": {

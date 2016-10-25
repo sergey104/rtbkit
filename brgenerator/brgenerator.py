@@ -136,7 +136,10 @@ class Server:
         jsonResponse["bidRequestId"] = aucId + ":1"
         jsonResponse["impId"] = data["seatbid"][0]["bid"][0]["impid"]
         price = data["seatbid"][0]["bid"][0]["price"]
-        price = price - (price * 5 / 100)
+        delta = price * 5 / 100
+        if delta < 0.001:
+            delta = 0.001
+        price = price - delta
         jsonResponse["winPrice"] = price
         
         print "send win: ", jsonResponse

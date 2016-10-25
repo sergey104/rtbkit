@@ -3,18 +3,28 @@
         "data": [
             {
                 "id": 1,
-                "price": 0.02,
+                "price": 0.010,
                 "markup": 10
             },
             {
                 "id": 2,
-                "price": 0.02,
-                "markup": 20
+                "price": 0.015,
+                "markup": 10
+            },
+            {
+                "id": 3,
+                "price": 0.020,
+                "markup": 10
+            },
+            {
+                "id": 4,
+                "price": 0.025,
+                "markup": 10
             }
         ]
     },
     "creatives" : {
-        "account": ["ginger","1"],
+        "account": ["hello","world"],
         "augmentations": {
             "frequency-cap-1": {
                 "config": {"maxPerDay": 5, "minInterval": 300},
@@ -24,44 +34,80 @@
                 },
                 "required": true
             },
+            "spending-money-control":{
+                "config": {"maxPerHour":"200000USD/1M", "maxPerDay":"500000USD/1M"},
+                "filters":{
+                    "include":["pass-spending-money-control"],
+                    "exclude":[]
+                },
+                "required":true
+            },
             "random": null
         },
         "bidControl": {
-        "fixedBidCpmInMicros": 0,
-        "type": "RELAY"
+            "fixedBidCpmInMicros": 0,
+            "type": "RELAY"
         },
         "bidProbability": 0.9,
-        "creatives": [
-            {
-                "format": "320x480",
-                "id": 1,
-                "name": "1",
-                "providerConfig": {
-                    "appodeal": {
-                        "adm": "adm data",
-                        "group_class": "group_class1",
-                        "iurl": "iurl data",
-                        "nurl": "nurl data",
-                        "uniq_id": "ginger:1"
-                    }
-                }
-            },
-            {
-                "format": "768x1024",
-                "id": 2,
-                "name": "2",
-                "providerConfig": {
-                    "appodeal": {
-                        "adm": "adm data",
-                        "group_class": "group_class1",
-                        "iurl": "iurl data",
-                        "nurl": "nurl data",
-                        "uniq_id": "ginger:2"
-                    }
-                }
+        "creatives":
+        [
+        {
+            "format":"320x50",
+            "id":1,
+            "name":"1",
+            "providerConfig":{
+            "appodeal":{
+                "adm":"<script src='mraid.js'></script><script> var impressionTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=default&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var clickTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=default&type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var targetLink = \"http://www.gingerfitness.by/\"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; var showAd = function(){ if(mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) { if(viewable) { mraid.removeEventListener('viewableChange', showAd); sendImpression(); }}); }}; var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd(); }</script><img style='height: 100%; width: auto;' src=\"http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/7/320x50.jpg\" onclick='trackClick()'>",
+                "group_class":"group_class2",
+                "iurl":"http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/7/320x50.jpg",
+                "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=default&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
+                "uniq_id":"ginger:3"
             }
+            }
+        },
+        {
+            "format":"728x90",
+            "id":2,
+            "name":"2",
+            "providerConfig":{
+            "appodeal":{
+                "adm":"<script src='mraid.js'></script><script> var impressionTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=default&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var clickTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=default&type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var targetLink = \"http://www.gingerfitness.by/\"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; var showAd = function(){ if(mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) { if(viewable) {  mraid.removeEventListener('viewableChange', showAd); sendImpression(); }}); }}; var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker;  hiddenSpan.appendChild(img);  document.body.appendChild(hiddenSpan); }); }; var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd(); }</script><img style='height: 100%; width: auto;' src=\"http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/6/768x1024.jpg\" onclick='trackClick()'>",
+                "group_class":"group_class1",
+                "iurl":"http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/7/728x90.jpg",
+                "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=default&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
+                "uniq_id":"ginger:4"
+            }
+            }
+        },
+        {
+            "format":"320x480",
+            "id":3,
+            "name":"3",
+            "providerConfig":{
+            "appodeal":{
+                "adm":"<script src='mraid.js'></script><script> var impressionTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=default&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var clickTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=default&type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var targetLink = \"http://www.gingerfitness.by/\"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; var showAd = function(){ if(mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) { if(viewable) { mraid.removeEventListener('viewableChange', showAd); sendImpression(); }}); }}; var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd(); }</script><img style='height: 100%; width: auto;' src=\"http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/6/320x480.jpg\" onclick='trackClick()'>",
+                "group_class":"group_class1",
+                "iurl":"http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/6/320x480.jpg",
+                "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=default&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
+                "uniq_id":"ginger:1"
+            }
+            }
+        },
+        {
+            "format":"768x1024",
+            "id":4,
+            "name":"4",
+            "providerConfig":{
+            "appodeal":{
+                "adm":"<script src='mraid.js'></script><script> var impressionTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=default&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var clickTrackers = [\"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=default&type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}\"]; var targetLink = \"http://www.gingerfitness.by/\"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; var showAd = function(){ if(mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) { if(viewable) {  mraid.removeEventListener('viewableChange', showAd); sendImpression(); }}); }}; var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker;  hiddenSpan.appendChild(img);  document.body.appendChild(hiddenSpan); }); }; var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan); }); }; if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd(); }</script><img style='height: 100%; width: auto;' src=\"http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/6/768x1024.jpg\" onclick='trackClick()'>",
+                "group_class":"group_class1",
+                "iurl":"http://ec2-54-194-239-30.eu-west-1.compute.amazonaws.com/banners/6/768x1024.jpg",
+                "nurl":"http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=nurl&user=default&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}",
+                "uniq_id":"ginger:2"
+            }
+            }
+        }
         ],
-    
         "errorFormat": "lightweight",
         "external": false,
         "externalId": 0,
