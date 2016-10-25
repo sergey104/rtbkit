@@ -68,6 +68,15 @@
                     "log": true
                 },
                 {
+                    "name": "start_stop_augmentor",
+                    "root": ".",
+                    "path": "build/x86_64/bin/augmentor_start_stop_runner",
+                    "arg": [
+                        "-B", "rtbkit/sample.bootstrap.json"
+                    ],
+                    "log": true
+                },
+                {
                     "name": "router",
                     "root": ".",
                     "path": "build/x86_64/bin/router_runner",

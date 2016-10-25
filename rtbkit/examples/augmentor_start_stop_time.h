@@ -48,21 +48,21 @@ private:
     virtual RTBKIT::AugmentationList
     onRequest(const RTBKIT::AugmentationRequest& request);
 
-    size_t getTime( const std::string& augmentor,
-		    const std::string& agent,
-		    const RTBKIT::AgentConfigEntry& config,
-		    const std::string key,
-		    std::tm* ptime) const;
+    int getTime( const std::string& augmentor,
+		 const std::string& agent,
+		 const RTBKIT::AgentConfigEntry& config,
+		 const std::string key,
+		 std::tm* ptime) const;
 		    
-    size_t getStartTime( const std::string& augmentor,
-			 const std::string& agent,
-			 const RTBKIT::AgentConfigEntry& config,
-			 std::tm* pstart_time) const;
+    int getStartTime( const std::string& augmentor,
+		      const std::string& agent,
+		      const RTBKIT::AgentConfigEntry& config,
+		      std::tm* pstart_time) const;
 			 
-    size_t getStopTime(  const std::string& augmentor,
-			 const std::string& agent,
-			 const RTBKIT::AgentConfigEntry& config,
-			 std::tm* pstop_time) const;   
+    int getStopTime( const std::string& augmentor,
+		     const std::string& agent,
+		     const RTBKIT::AgentConfigEntry& config,
+		     std::tm* pstop_time) const;   
 			 
     RTBKIT::AgentConfigurationListener agentConfig;
     Datacratic::ZmqNamedMultipleSubscriber palEvents;

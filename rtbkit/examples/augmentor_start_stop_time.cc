@@ -71,13 +71,13 @@ init()
             RTBKIT::AccountKey account(msg[19].toString());
             RTBKIT::UserIds uids = RTBKIT::UserIds::createFromString(msg[15].toString());
 
-	    /*
-	    for(auto it: msg) {
-		std::cerr << "DEBUG: " << it.toString() << std::endl;
-	    }
-	    */
-	    
-//	    std::cerr << "DEBUG: Wins. Request id: " << msg[2].toString() << std::endl;
+            /*
+            for(auto it: msg) {
+            std::cerr << "DEBUG: " << it.toString() << std::endl;
+            }
+            */
+            
+            //std::cerr << "DEBUG: Wins. Request id: " << msg[2].toString() << std::endl;
             recordHit("wins");
         };
 
@@ -111,47 +111,45 @@ onRequest(const RTBKIT::AugmentationRequest& request)
         */
         if (!config.valid()) {
             recordHit("unknownConfig");
-//	    std::cerr << "DEBUG: unknown Config" << std::endl;
+            //std::cerr << "DEBUG: unknown Config" << std::endl;
             continue;
         }
 
         const RTBKIT::AccountKey& account = config.config->account;
-//	std::cerr << "DEBUG: " << "account: " << account <<  std::endl;
+        //std::cerr << "DEBUG: " << "account: " << account <<  std::endl;
 	
-	std::time_t cur_time = std::time(nullptr);
-//	std::tm cur_tm = *std::localtime(&cur_time);
+        std::time_t cur_time = std::time(nullptr);
+        std::tm cur_tm = *std::localtime(&cur_time);
     
-	std::tm start_tm;
-	std::tm stop_tm;
+        std::tm start_tm;
+        std::tm stop_tm;
 	
-	if(getStartTime(request.augmentor, agent, config, &start_tm) && 
-	    getStopTime(request.augmentor, agent, config, &stop_tm)) {
+        if((getStartTime(request.augmentor, agent, config, &start_tm) > 0) && 
+        (getStopTime(request.augmentor, agent, config, &stop_tm) >= 0)) {
 
-//	    std::cerr << "DEBUG: Start: " << start_tm.tm_mday << "." << start_tm.tm_mon + 1 << "." << start_tm.tm_year + 1900 << " " << start_tm.tm_hour << ":" << start_tm.tm_min << std::endl;
-//	    std::cerr << "DEBUG: Current: " << cur_tm.tm_mday << "." << cur_tm.tm_mon + 1 << "." << cur_tm.tm_year + 1900 << " " << cur_tm.tm_hour << ":" << cur_tm.tm_min << std::endl;
-//	    std::cerr << "DEBUG: Stop: " << stop_tm.tm_mday << "." << stop_tm.tm_mon + 1 << "." << stop_tm.tm_year + 1900 << " " << stop_tm.tm_hour << ":" << stop_tm.tm_min << std::endl;
+            //std::cerr << "DEBUG: Start: " << start_tm.tm_mday << "." << start_tm.tm_mon + 1 << "." << start_tm.tm_year + 1900 << " " << start_tm.tm_hour << ":" << start_tm.tm_min << std::endl;
+            //std::cerr << "DEBUG: Current: " << cur_tm.tm_mday << "." << cur_tm.tm_mon + 1 << "." << cur_tm.tm_year + 1900 << " " << cur_tm.tm_hour << ":" << cur_tm.tm_min << std::endl;
+            //std::cerr << "DEBUG: Stop: " << stop_tm.tm_mday << "." << stop_tm.tm_mon + 1 << "." << stop_tm.tm_year + 1900 << " " << stop_tm.tm_hour << ":" << stop_tm.tm_min << std::endl;
 
-	    std::time_t start_time = mktime(&start_tm);
-	    std::time_t stop_time = mktime(&stop_tm);
-	    
-	    if((start_time <= cur_time) && (cur_time <= stop_time)) {
-
-		    result[account].tags.insert("pass-start-stop-time");
-		    recordHit("accounts." + account[0] + ".passed");
-//		    std::cerr << "DEBUG: passed" << std::endl;
-		}
-		else {
-		    recordHit("accounts." + account[0] + ".at-a-wrong-time");
-//		    std::cerr << "DEBUG: at a wrong time." << std::endl;
-		    continue;
-		}
-	    
-	}
-	else {
-	    recordHit("badConfig");
-//	    std::cerr << "DEBUG: bad config or bad data" << std::endl;
- 	    continue;
-	}
+            std::time_t start_time = mktime(&start_tm);
+            std::time_t stop_time = mktime(&stop_tm);
+            
+            if((start_time <= cur_time) && (cur_time <= stop_time)) {
+                result[account].tags.insert("pass-start-stop-time");
+                recordHit("accounts." + account[0] + ".passed");
+                //std::cerr << "DEBUG: passed" << std::endl;
+            }
+            else {
+                recordHit("accounts." + account[0] + ".at-a-wrong-time");
+                //std::cerr << "DEBUG: at a wrong time." << std::endl;
+                continue;
+            }
+        }
+        else {
+            recordHit("badConfig");
+            //std::cerr << "DEBUG: bad config or bad data" << std::endl;
+            continue;
+        }
     }
 
     return result;
@@ -160,7 +158,7 @@ onRequest(const RTBKIT::AugmentationRequest& request)
 /** Returns the start time configured by the agent.
 
 */
-size_t
+int
 StartStopAugmentor::
 getTime( const std::string& augmentor,
 	 const std::string& agent,
@@ -171,11 +169,16 @@ getTime( const std::string& augmentor,
     std::string time_str;
     for (const auto& augConfig : config.config->augmentations) {
         if (augConfig.name != augmentor) continue;
-	if(augConfig.config.isMember(key.c_str())) {
-	    time_str = augConfig.config[key.c_str()].asString();
-	    const char *p = time_str.c_str();
-	    return (strptime(p, "%d.%m.%Y %H:%M", ptime) - p);
-	}
+        if(augConfig.config.isMember(key.c_str())) {
+            time_str = augConfig.config[key.c_str()].asString();
+            size_t length = time_str.length();
+            if(length) {
+                const char *p = time_str.c_str();
+                char *result = strptime(p, "%d.%m.%Y %H:%M", ptime);
+                if(result && !*result)
+                    return length;
+            }
+        }
     }
 
     return 0;
@@ -184,7 +187,7 @@ getTime( const std::string& augmentor,
 /** Returns the start time configured by the agent.
 
 */
-size_t
+int
 StartStopAugmentor::
 getStartTime( const std::string& augmentor,
 	      const std::string& agent,
@@ -197,14 +200,20 @@ getStartTime( const std::string& augmentor,
 /** Returns the stop time configured by the agent.
 
 */
-size_t
+int
 StartStopAugmentor::
 getStopTime( const std::string& augmentor,
 	     const std::string& agent,
 	     const RTBKIT::AgentConfigEntry& config,
 	     std::tm* pstop_time) const
 {
-    return getTime(augmentor, agent, config, std::string("stop"), pstop_time);
+    if(getTime(augmentor, agent, config, std::string("stop"), pstop_time) == 0) {
+        std::time_t cur_time = std::time(nullptr);
+        *pstop_time = *std::localtime(&cur_time);
+        pstop_time->tm_year += 100;
+        return 0;
+    }
+    return -1;
 }
 
 } // namespace RTBKIT

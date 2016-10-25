@@ -34,11 +34,19 @@
                 },
                 "required": true
             },
-            "spending-money-control":{
+            "spending-money-control": {
                 "config": {"maxPerHour":"200000USD/1M", "maxPerDay":"500000USD/1M"},
-                "filters":{
-                    "include":["pass-spending-money-control"],
-                    "exclude":[]
+                "filters": {
+                    "include": ["pass-spending-money-control"],
+                    "exclude": []
+                },
+                "required":true
+            },
+            "start-stop-time": {
+                "config": {"start": "25.10.2016 16:29" },
+                "filters": {
+                    "include": ["pass-start-stop-time"],
+                    "exclude": []
                 },
                 "required":true
             },
