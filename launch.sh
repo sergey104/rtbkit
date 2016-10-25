@@ -11,12 +11,7 @@ tmux new-window -d -t rtb:5 -n 'banker' 'tail -F ./logs/banker.log'
 tmux new-window -d -t rtb:6 -n 'augmentor' 'tail -F ./logs/augmentor.log'
 tmux new-window -d -t rtb:7 -n 'router' 'tail -F ./logs/router.log'
 tmux new-window -d -t rtb:8 -n 'post-auction' 'tail -F ./logs/post-auction.log'
-tmux new-window -d -t rtb:9 -n 'fixed-price-agent1' 'tail -F ./logs/fixed-price-agent1.log'
-tmux new-window -d -t rtb:10 -n 'fixed-price-agent2' 'tail -F ./logs/fixed-price-agent2.log'
-tmux new-window -d -t rtb:11 -n 'fixed-price-agent3' 'tail -F ./logs/fixed-price-agent3.log'
-tmux new-window -d -t rtb:12 -n 'fixed-price-agent4' 'tail -F ./logs/fixed-price-agent4.log'
-tmux new-window -d -t rtb:13 -n 'fixed-price-agent5' 'tail -F ./logs/fixed-price-agent5.log'
-tmux new-window -d -t rtb:14 -n 'fixed-price-agent6' 'tail -F ./logs/fixed-price-agent6.log'
+tmux new-window -d -t rtb:9 -n 'agent-gateway' 'tail -F ./logs/agent-gateway.log'
 if [[ "$*" != *--quiet* ]]
 then
     tmux attach -t rtb

@@ -297,7 +297,7 @@ struct FixedPriceBiddingAgent :
             // Create a 0.0001$ CPM bid with our available creative.
             // Note that by default, the bid price is set to 0 which indicates
             // that we don't wish to bid on the given spot.
-            bid.bid(availableCreative, MicroUSD(50));
+            bid.bid(availableCreative, USD_CPM(0.02));
 
         }
 
