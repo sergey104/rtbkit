@@ -192,11 +192,11 @@ onRequest(const RTBKIT::AugmentationRequest& request)
         }
 
         const RTBKIT::AccountKey& account = config.config->account;
-	std::string device_class = storage->findClass(request.bidRequest->device->model.extractAscii());
-//	std::cerr << "DEBUG: model: "<< request.bidRequest->device->model << " / class: " << device_class << std::endl;
+        std::string device_class = storage->findClass(request.bidRequest->device->model.extractAscii());
+        //std::cerr << "DEBUG: model: "<< request.bidRequest->device->model << " / class: " << device_class << std::endl;
 
-	result[account].tags.insert(device_class.c_str());
-	recordHit("accounts." + account[0] + ".passed");
+        result[account].tags.insert(device_class.c_str());
+        recordHit("accounts." + account[0] + ".passed");
     }
 
     return result;

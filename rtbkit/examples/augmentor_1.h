@@ -56,8 +56,24 @@ private:
 
     virtual RTBKIT::AugmentationList
     onRequest(const RTBKIT::AugmentationRequest& request);
+    
+    size_t getCapLimit(
+            const std::string& augmentor,
+            const std::string& agent,
+            const RTBKIT::AgentConfigEntry& config,
+            const char* key) const;
+    
+    size_t getCommonLimit(
+            const std::string& augmentor,
+            const std::string& agent,
+            const RTBKIT::AgentConfigEntry& config) const;
 
-    size_t getCap(
+    size_t getDayLimit(
+            const std::string& augmentor,
+            const std::string& agent,
+            const RTBKIT::AgentConfigEntry& config) const;
+            
+    size_t getHourLimit(
             const std::string& augmentor,
             const std::string& agent,
             const RTBKIT::AgentConfigEntry& config) const;

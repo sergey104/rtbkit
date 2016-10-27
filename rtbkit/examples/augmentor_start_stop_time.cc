@@ -1,10 +1,5 @@
 /** augmentor_start_stop.cc                                 -*- C++ -*-
-    Rémi Attab, 14 Feb 2013
-    Copyright (c) 2013 Datacratic.  All rights reserved.
-
-    Augmentor example that can be used to do extremely simplistic frequency
-    capping.
-
+    Alexander Poznyak, 25.10.2016
 */
 
 #include "augmentor_start_stop_time.h"

@@ -1,4 +1,4 @@
-/** augmentor_ex.cc                                 -*- C++ -*-
+/** augmentor_1.cc                                 -*- C++ -*-
     Rémi Attab, 14 Feb 2013
     Copyright (c) 2013 Datacratic.  All rights reserved.
 
@@ -23,7 +23,20 @@ using namespace std;
 
 namespace RTBKIT {
 
+typedef struct {
+    size_t counter;
+    chrono::system_clock::time_point startPoint;
+} CounterData_t;
+    
+typedef struct {
+    CounterData_t perHourCounter;
+    CounterData_t perDayCounter;
+    size_t commonCounter;
+    chrono::system_clock::time_point startInterval;
+} Counters_t;
+
 const size_t defaultInterval = 300;
+const size_t NO_LIMIT = static_cast<size_t>(-1);
 
 /******************************************************************************/
 /* FREQUENCY CAP STORAGE                                                      */
@@ -39,51 +52,38 @@ const size_t defaultInterval = 300;
  */
 struct FrequencyCapStorage
 {
-    /** Returns the number of times an ad for the given account has been shown
-        to the given user.
-     */
-    size_t get(const RTBKIT::AccountKey& account, const RTBKIT::UserIds& uids)
+    bool isKeysExist(const RTBKIT::AccountKey& account, const RTBKIT::UserIds& uids)
     {
+        //std::cerr << "DEBUG: check key: " << account << "/" << uids.exchangeId.toString() << std::endl;
         lock_guard<mutex> guard(lock);
-        return counters[uids.exchangeId][account[0]];
-    }
-
-    /** Increments the number of times an ad for the given account has been
-        shown to the given user.
-     */
-    void inc(const RTBKIT::AccountKey& account, const RTBKIT::UserIds& uids)
-    {
-        lock_guard<mutex> guard(lock);
-        counters[uids.exchangeId][account[0]]++;
-    }
-
-    void reset(const RTBKIT::AccountKey& account, const RTBKIT::UserIds& uids)
-    {
-        lock_guard<mutex> guard(lock);
-        counters[uids.exchangeId][account[0]] = 0;
-    }
+        auto it = counters.find(account.toString());
+        if(it == counters.end())
+            return false;
+        else if(it->second.find(uids.exchangeId.toString()) == it->second.end())
+            return false;
+        
+        //std::cerr << "DEBUG: check key: " << account << "/" << uids.exchangeId.toString() << " found."<< std::endl;
+        return true;
+    }    
     
-    chrono::system_clock::time_point get_delay_point(const RTBKIT::AccountKey& account, const RTBKIT::UserIds& uids)
+    Counters_t getCounters(const RTBKIT::AccountKey& account, const RTBKIT::UserIds& uids)
     {
+        //std::cerr << "DEBUG: get counters: " << account << "/" << uids.exchangeId.toString() << std::endl;
         lock_guard<mutex> guard(lock);
-        return delay_points[uids.exchangeId][account[0]];
+        return counters[account.toString()][uids.exchangeId.toString()];
     }
 
-    /** Increments the number of times an ad for the given account has been
-        shown to the given user.
-     */
-    void set_delay_point(const RTBKIT::AccountKey& account, const RTBKIT::UserIds& uids)
+    void setCounters(const RTBKIT::AccountKey& account, const RTBKIT::UserIds& uids, Counters_t& cntrs)
     {
+        //std::cerr << "DEBUG: set counters: " << account << "/" << uids.exchangeId.toString() << std::endl;
         lock_guard<mutex> guard(lock);
-        delay_points[uids.exchangeId][account[0]] = chrono::system_clock::now();
+        counters[account.toString()][uids.exchangeId.toString()] = cntrs;
     }
-    
+
 private:
 
     mutex lock;
-    unordered_map<Datacratic::Id, unordered_map<string, size_t> > counters;
-    unordered_map<Datacratic::Id, unordered_map<string, chrono::system_clock::time_point> > delay_points;
-
+    unordered_map<std::string, unordered_map<std::string, Counters_t>> counters;
 };
 
 /******************************************************************************/
@@ -135,6 +135,18 @@ init()
             Json::Value req = Json::parse(msg[4].toString());
             RTBKIT::UserIds uids = RTBKIT::UserIds::createFromString(req["userIds"].toString());
 
+            //std::cerr << "DEBUG: account/uids: " << account << "/" << uids.exchangeId.toString() << std::endl;
+            
+            Counters_t counters;
+            if(storage->isKeysExist(account, uids))
+                counters = storage->getCounters(account, uids);
+            else {
+                counters.perHourCounter.counter = 0;
+                counters.perDayCounter.counter = 0;
+                counters.commonCounter = 0;
+                counters.perHourCounter.startPoint = counters.perDayCounter.startPoint = std::chrono::system_clock::now();
+            }
+            
             /*
             int idx = 0;
             for(auto it: msg) {
@@ -142,11 +154,12 @@ init()
             }
             */
             
-            //std::cerr << "DEBUG: account: " << account << std::endl;
-            //std::cerr << "DEBUG: uids: " << uids.toString() << std::endl;
-            storage->inc(account, uids);
-            storage->set_delay_point(account, uids);
-            //std::cerr << "DEBUG: Wins. Request id: " << msg[2].toString() << std::endl;
+            ++counters.perHourCounter.counter;
+            ++counters.perDayCounter.counter;
+            ++counters.commonCounter;
+            counters.startInterval = std::chrono::system_clock::now();
+            
+            storage->setCounters(account, uids, counters);
             recordHit("Impression");
         };
 
@@ -175,8 +188,6 @@ onRequest(const RTBKIT::AugmentationRequest& request)
 
         RTBKIT::AgentConfigEntry config = agentConfig.getAgentEntry(agent);
         bool toSkip = false;
-        size_t cap = 0;
-        size_t minInterval = 0;
 
 	
         /* When a new agent comes online there's a race condition where the
@@ -191,76 +202,69 @@ onRequest(const RTBKIT::AugmentationRequest& request)
 
         const RTBKIT::AccountKey& account = config.config->account;
 
-        size_t count = storage->get(account, uids);
-        //std::cerr << "DEBUG: " << "account: " << account << "/uids: " << uids.toString() << " count: " << count << std::endl;
-	
-        /* The number of times a user has been seen by a given agent can be
-           useful to make bid decisions so attach this data to the bid
-           request.
+        if (storage->isKeysExist(account, uids)) {
 
-           It's also recomended to place your data in an object labeled
-           after the augmentor from which it originated.
-        */
-        result[account[0]].data = count;
-	
-	
-        /* We tag bid requests that pass the frequency cap filtering because
-           if the augmentation doesn't terminate in time or if an error
-           occured, then the bid request will not receive any tags and will
-           therefor be filtered out for agents that require the frequency
-           capping.
-        */
-        cap = getCap(request.augmentor, agent, config);
-    	//std::cerr << "DEBUG: cap: " << cap << std::endl;
-        minInterval = getInterval(request.augmentor, agent, config);
-        if(!cap || !minInterval) {
-            recordHit("badConfig");
-    	    //std::cerr << "DEBUG: bad Config" << std::endl;
-            continue;
-        }
-
-        if (count > 0) {
+            Counters_t counters = storage->getCounters(account, uids);
+            //std::cerr << "DEBUG: " << "account: " << account << "  uids: " << uids.exchangeId.toString() << " counts: " << std::endl;
+            //std::cerr << "DEBUG: \t\t\t    per hour: " << counters.perHourCounter.counter << std::endl;
+            //std::cerr << "DEBUG: \t\t\t     per day: " << counters.perDayCounter.counter << std::endl;
+            //std::cerr << "DEBUG: \t\t\t      common: " << counters.commonCounter << std::endl;
+        
+            size_t hourLimit = getHourLimit(request.augmentor, agent, config);
+            size_t dayLimit = getDayLimit(request.augmentor, agent, config);
+            size_t commonLimit = getCommonLimit(request.augmentor, agent, config);
+            //std::cerr << "DEBUG: \t\t\t  hour limit: " << hourLimit << std::endl;
+            //std::cerr << "DEBUG: \t\t\t   day limit: " << dayLimit << std::endl;
+            //std::cerr << "DEBUG: \t\t\tcommon limit: " << commonLimit << std::endl;
             
+            size_t minInterval = getInterval(request.augmentor, agent, config);
+            //std::cerr << "DEBUG: interval: " << minInterval << std::endl;
             
-            if(!minInterval)
-                minInterval = defaultInterval;
+            auto curInterval = chrono::system_clock::now() - counters.startInterval;
             
-            auto startInterval = storage->get_delay_point(account, uids);
-            auto curInterval = chrono::system_clock::now() - storage->get_delay_point(account, uids);
+            //std::cerr << "DEBUG: waiting/interval: " << chrono::duration_cast<chrono::seconds>(curInterval).count() << "/" << minInterval << std::endl;
+            
             if(curInterval < chrono::seconds(minInterval)) 
                 toSkip = true;
-            
-    	    //std::cerr << "DEBUG: waiting/interval: " << chrono::duration_cast<chrono::seconds>(curInterval).count() << "/" << minInterval << std::endl;
-            
-            
-            std::time_t cur_tm = std::time(nullptr);
-            std::tm cur_utc_tm = *std::gmtime(&cur_tm);
+            else if(counters.commonCounter >= commonLimit)
+                toSkip = true;
+            else {
+                std::time_t cur_tm = std::time(nullptr);
+                std::tm cur_utc_tm = *std::gmtime(&cur_tm);
         
-            std::time_t sav_tm = std::chrono::system_clock::to_time_t(startInterval);
-            std::tm sav_utc_tm = *std::gmtime(&sav_tm);
+                std::time_t savd_tm = std::chrono::system_clock::to_time_t(counters.perDayCounter.startPoint);
+                std::tm savd_utc_tm = *std::gmtime(&savd_tm);
+                std::time_t savh_tm = std::chrono::system_clock::to_time_t(counters.perHourCounter.startPoint);
+                std::tm savh_utc_tm = *std::gmtime(&savh_tm);
         
-    //	    std::cerr << "DEBUG: day/day: " << cur_utc_tm.tm_yday << "/" << sav_utc_tm.tm_yday << std::endl;
-            
-            if(cur_utc_tm.tm_yday != sav_utc_tm.tm_yday) {
-                count = 0;
-                storage->reset(account, uids);
+                //std::cerr << "DEBUG: day/day: " << cur_utc_tm.tm_yday << "/" << savd_utc_tm.tm_yday << std::endl;
+                //std::cerr << "DEBUG: hour/hour: " << cur_utc_tm.tm_hour << "/" << savh_utc_tm.tm_hour << std::endl;
+
+                bool changed = false;
+                if(cur_utc_tm.tm_yday != savd_utc_tm.tm_yday) {
+                    counters.perDayCounter.counter = 0;
+                    counters.perDayCounter.startPoint = std::chrono::system_clock::now();
+                    changed = true;
+                }
+                if(cur_utc_tm.tm_hour != savh_utc_tm.tm_hour) {
+                    counters.perHourCounter.counter = 0;
+                    counters.perHourCounter.startPoint = std::chrono::system_clock::now();
+                    changed = true;
+                }
+                if(changed)
+                    storage->setCounters(account, uids, counters);
+                if((counters.perDayCounter.counter >= dayLimit) || (counters.perHourCounter.counter >= hourLimit))
+                    toSkip = true;
             }
         }
-            
-        if (count < cap) {
-            if(!toSkip) {
-                result[account].tags.insert("pass-frequency-cap-1");
-                recordHit("accounts." + account[0] + ".passed");
-                //std::cerr << "DEBUG: passed" << std::endl;
-            }
-            else {
-                recordHit("accounts." + account[0] + ".toofften");
-                //std::cerr << "DEBUG: skipped" << std::endl;
-            }
+        if(!toSkip) {
+            result[account].tags.insert("pass-frequency-cap-1");
+            recordHit("accounts." + account[0] + ".passed");
+            //std::cerr << "DEBUG: passed" << std::endl;
         }
         else {
-            recordHit("accounts." + account[0] + ".capped");
-            //std::cerr << "DEBUG: capped" << std::endl;
+            recordHit("accounts." + account[0] + ".skipped");
+            //std::cerr << "DEBUG: skipped" << std::endl;
         }
     }
 
@@ -275,18 +279,48 @@ onRequest(const RTBKIT::AugmentationRequest& request)
 */
 size_t
 FrequencyCapAugmentor::
-getCap( const string& augmentor,
+getCapLimit( const string& augmentor,
         const string& agent,
-        const RTBKIT::AgentConfigEntry& config) const
+        const RTBKIT::AgentConfigEntry& config,
+        const char* key) const
 {
+    size_t limit = NO_LIMIT;
+    
     for (const auto& augConfig : config.config->augmentations) {
         if (augConfig.name != augmentor) continue;
-        if(augConfig.config.isMember("maxPerDay")) {
-            return augConfig.config["maxPerDay"].asInt();
+        if(augConfig.config.isMember(key)) {
+            limit = augConfig.config[key].asInt();
         }
     }
 
-    return 0;
+    return limit;
+}
+
+size_t
+FrequencyCapAugmentor::
+getHourLimit( const string& augmentor,
+        const string& agent,
+        const RTBKIT::AgentConfigEntry& config) const
+{
+    return getCapLimit(augmentor, agent, config, "maxPerHour");
+}
+
+size_t
+FrequencyCapAugmentor::
+getDayLimit( const string& augmentor,
+        const string& agent,
+        const RTBKIT::AgentConfigEntry& config) const
+{
+    return getCapLimit(augmentor, agent, config, "maxPerDay");
+}
+
+size_t
+FrequencyCapAugmentor::
+getCommonLimit( const string& augmentor,
+        const string& agent,
+        const RTBKIT::AgentConfigEntry& config) const
+{
+    return getCapLimit(augmentor, agent, config, "maxLimit");
 }
 
 /** Returns the interval configured by the agent.
@@ -300,15 +334,15 @@ getInterval( const string& augmentor,
 	     const string& agent,
 	     const RTBKIT::AgentConfigEntry& config) const
 {
+    size_t interval = defaultInterval;
     for (const auto& augConfig : config.config->augmentations) {
         if (augConfig.name != augmentor) continue;
         if(augConfig.config.isMember("minInterval")) {
-            return augConfig.config["minInterval"].asInt();
+            interval = augConfig.config["minInterval"].asInt();
         }
     }
 
-
-    return 0;
+    return interval;
 }
 
 } // namespace RTBKIT

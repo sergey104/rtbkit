@@ -27,7 +27,7 @@
         "account": ["hello","world"],
         "augmentations": {
             "frequency-cap-1": {
-                "config": {"maxPerDay": 5, "minInterval": 300},
+                "config": {"maxPerHour":10, "maxPerDay": 50, "minInterval": 60},
                 "filters": {
                     "include": ["pass-frequency-cap-1"],
                     "exclude": []

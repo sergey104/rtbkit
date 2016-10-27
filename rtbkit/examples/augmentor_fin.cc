@@ -45,8 +45,8 @@ struct FinancialCapStorage
     bool isKeyExist(const RTBKIT::AccountKey& account)
     {
         lock_guard<mutex> guard(lock);
-        //std::cerr << "DEBUG: check key: " << account << std::endl;
-        if(dbSpentMoney.find(account) == dbSpentMoney.end()) {
+        //std::cerr << "DEBUG: check key: " << account.toString() << std::endl;
+        if(dbSpentMoney.find(account.toString()) == dbSpentMoney.end()) {
             return false;
         }
         return true;
@@ -55,21 +55,21 @@ struct FinancialCapStorage
     void setSpentMoney(const RTBKIT::AccountKey& account, const SpentMoney_t& spentMoney)
     {
         lock_guard<mutex> guard(lock);
-        //std::cerr << "DEBUG: set key: " << account << std::endl;
-        dbSpentMoney[account] = spentMoney;
+        //std::cerr << "DEBUG: set key: " << account.toString() << std::endl;
+        dbSpentMoney[account.toString()] = spentMoney;
     }
 
     SpentMoney_t getSpentMoney(const RTBKIT::AccountKey& account)
     {
         lock_guard<mutex> guard(lock);
         //std::cerr << "DEBUG: get key: " << account << std::endl;
-        return dbSpentMoney[account];
+        return dbSpentMoney[account.toString()];
     }
     
 private:
 
     mutex lock;
-    unordered_map<RTBKIT::AccountKey, SpentMoney_t> dbSpentMoney;
+    unordered_map<std::string, SpentMoney_t> dbSpentMoney;
 };
 
 /******************************************************************************/
@@ -188,11 +188,11 @@ onRequest(const RTBKIT::AugmentationRequest& request)
 
         
         const RTBKIT::AccountKey& account = config.config->account;
-        //std::cerr << "DEBUG: " << "account: " << account << std::endl;
+        //std::cerr << "DEBUG: " << "account: " << account.toString() << std::endl;
 
         dataExist = storage->isKeyExist(account);
         if(dataExist) {
-            //std::cerr << "DEBUG: found key: " << account << std::endl;
+            //std::cerr << "DEBUG: found key: " << account.toString() << std::endl;
             spentMoney = storage->getSpentMoney(account);
             
             RTBKIT::Amount maxPerHour = getMaxPerHour(request.augmentor, agent, config);
@@ -236,7 +236,6 @@ onRequest(const RTBKIT::AugmentationRequest& request)
             //std::cerr << "DEBUG: passed" << std::endl;
         }
         else {
-            recordHit("accounts." + account[0] + ".toofften");
             //std::cerr << "DEBUG: skipped" << std::endl;
         }
     }
