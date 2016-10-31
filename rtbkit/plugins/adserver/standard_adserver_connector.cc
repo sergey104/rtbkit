@@ -348,7 +348,7 @@ handleWinRq(const HttpHeader & header,
     else {
         // Passback is optional
     }
-    writeFileWin(json.toString());
+  //  writeFileWin(json.toString());
     LOG(adserverTrace) << "{\"timestamp\":\"" << timestamp.print(3) << "\"," <<
         "\"bidRequestId\":\"" << bidRequestId << "\"," <<
         "\"impId\":\"" << impId << "\"," <<
@@ -485,7 +485,7 @@ handleDeliveryRq(const HttpHeader & header,
     impIdStr = json["impid"].asString();
     bidRequestId = Id(bidRequestIdStr);
     impId = Id(impIdStr);
-    writeFileEvent(json.toString());
+    //writeFileEvent(json.toString());
     LOG(adserverTrace) << "{\"timestamp\":\"" << timestamp.print(3) << "\"," <<
         "\"bidRequestId\":\"" << bidRequestIdStr << "\"," <<
         "\"impId\":\"" << impIdStr << "\"," <<
@@ -494,8 +494,8 @@ handleDeliveryRq(const HttpHeader & header,
 
     //string s = "{\"timestamp\":\"" + timestamp.print(3) + "\"," + "\"bidRequestId\":\"" + bidRequestIdStr +"\","+"\"impId\":\"" + impIdStr + "\"}";
    // writeFile("IMPRESSION: "+s);
-    long size1 = getFilesize("win.txt");
-    long size2 = getFilesize("event.txt");
+    long size1 = 1;//getFilesize("win.txt");
+    long size2 = 1;//getFilesize("event.txt");
     if (size1 >= 1000000) {
         time_t rawtime;
         struct tm * timeinfo;

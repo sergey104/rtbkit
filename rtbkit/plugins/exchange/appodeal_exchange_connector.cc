@@ -284,7 +284,7 @@ parseBidRequest(HttpAuctionHandler & connection,
     v1["payload"] = payload;
 
     v1["timestamp"] = string_unix_timestamp();
-    writeFile(v1.toString());
+ //   writeFile(v1.toString());
     // Check for JSON content-type
     if (!header.contentType.empty()) {
         static const std::string delimiter = ";";
@@ -481,7 +481,7 @@ getResponse(const HttpAuctionHandler & connection,
     v1["response"] = rv;
 
     v1["timestamp"] = string_unix_timestamp();
-    writeFileResponse(v1.toString());
+  //  writeFileResponse(v1.toString());
 
     return HttpResponse(200, "application/json", rv);
     //return HttpResponse(204, "none", "");
@@ -494,8 +494,8 @@ getResponseExt(const HttpAuctionHandler & connection,
                const Auction & auction) const
 {
 
-    long size1 = getFilesize("appodealreqlog.txt");
-    long size2 = getFilesize("appodealreslog.txt");
+    long size1 = 1;//getFilesize("appodealreqlog.txt");
+    long size2 = 1;//getFilesize("appodealreslog.txt");
 
 if (size1 >= 3000000) {
     time_t rawtime;
