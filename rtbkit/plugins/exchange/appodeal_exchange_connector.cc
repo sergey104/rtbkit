@@ -284,7 +284,7 @@ parseBidRequest(HttpAuctionHandler & connection,
     v1["payload"] = payload;
 
     v1["timestamp"] = string_unix_timestamp();
-    writeFile(v1.toString());
+ //   writeFile(v1.toString());
     // Check for JSON content-type
     if (!header.contentType.empty()) {
         static const std::string delimiter = ";";
