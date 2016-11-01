@@ -1,0 +1,59 @@
+{
+  "servers":
+  [
+    {
+      "name": "svr1",
+      "config": {
+        "host": "54.171.211.54",
+        "port": 17339,
+        "winport": 17340,
+        "impport": 17341
+      }
+    },
+    {
+      "name": "svr2",
+      "config": {
+        "host": "54.171.211.54",
+        "port": 17339,
+        "winport": 17340,
+        "impport": 17341
+      }
+    }
+  ],
+  "threads":
+  [
+    {
+      "name": "thread1",
+      "config": {
+        "file": "one.request.txt",
+        "server": "svr2",
+        "delay": 0.0,
+        "request": {
+          "gender": [
+            "F",
+            "M"
+          ],
+          "yob": [
+            1965,
+            1966,
+            1967,
+            1968
+          ],
+          "birthday": [],
+          "location": [
+            {
+              "country": "BLR",
+              "city": "Minsk"
+            }
+          ],
+          "imp": [
+            {
+              "w": 320,
+              "h": 480
+            }
+          ]
+        }
+      }
+    }
+  ]
+}
