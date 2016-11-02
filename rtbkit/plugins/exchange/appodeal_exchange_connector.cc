@@ -373,7 +373,6 @@ parseBidRequest(HttpAuctionHandler & connection,
             Datacratic::UnicodeString keyBirthDay("birthday");
             Datacratic::UnicodeString keyAge("age");
             string birthDay("");
-            string s_age("");
 		
             for(auto data: result->user->data) {
                 for(auto segment: data.segment) {
@@ -381,27 +380,34 @@ parseBidRequest(HttpAuctionHandler & connection,
                         birthDay = segment.value.extractAscii();
                         break;
                     }
-                    if(segment.name == keyAge) {
-                        s_age = segment.value.extractAscii();
-                        int i_age = std::stoi(s_age);
-                        result->segments.add("age", i_age);
-                        break;
-                    }
-                }
-                if(!birthDay.empty()) {
-                    std::string s_year(birthDay, birthDay.find_last_of("/") + 1);
-                    if (s_year.length() == 4) {
-                        int birth_year =  std::stoi(s_year);
-                        std::time_t tm = std::time(nullptr);
-                        std::tm utc_tm = *std::gmtime(&tm);
-                        int cur_year = utc_tm.tm_year + 1900;
-                        int age = cur_year - birth_year;
-                        result->segments.add("age", age);
-                    }
-                    break;
                 }
             }
-	    }
+            if(!birthDay.empty()) {
+                std::string s_year(birthDay, birthDay.find_last_of("/") + 1);
+                if (s_year.length() == 4) {
+                    int birth_year =  std::stoi(s_year);
+                    std::time_t tm = std::time(nullptr);
+                    std::tm utc_tm = *std::gmtime(&tm);
+                    int cur_year = utc_tm.tm_year + 1900;
+                    int age = cur_year - birth_year;
+                    result->segments.add("age", age);
+                }
+            } 
+            else {
+                string s_age("");
+                for(auto data: result->user->data) {
+                    for(auto segment: data.segment) {
+                        if(segment.name == keyAge) {
+                            s_age = segment.value.extractAscii();
+                            int i_age = std::stoi(s_age);
+                            if(i_age)
+                                result->segments.add("age", i_age);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
 	}
 
 //	std::cerr << "DEBUG: exchangeId: " << result->userIds.exchangeId << std::endl;
