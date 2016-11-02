@@ -357,37 +357,50 @@ parseBidRequest(HttpAuctionHandler & connection,
 	if(result->user) {
 	    // add gender to segments
 	    if(!result->user->gender.empty()) {
-		result->segments.add("gender", result->user->gender);
+            result->segments.add("gender", result->user->gender);
 	    }
 	    
 	    // add age to segments
 	    if(result->user->yob.value() != -1) {
-		result->segments.add("age", result->user->yob.value());
+            int yob = result->user->yob.value();
+            std::time_t tm = std::time(nullptr);
+            std::tm utc_tm = *std::gmtime(&tm);
+            int cur_year = utc_tm.tm_year + 1900;
+            int age = cur_year - yob;
+            result->segments.add("age", age);
 	    }
 	    else {
-		Datacratic::UnicodeString keyBirthDay("birthday");
-		string birthDay("");
+            Datacratic::UnicodeString keyBirthDay("birthday");
+            Datacratic::UnicodeString keyAge("age");
+            string birthDay("");
+            string s_age("");
 		
-		for(auto data: result->user->data) {
-		    for(auto segment: data.segment) {
-			if(segment.name == keyBirthDay) {
-			    birthDay = segment.value.extractAscii();
-			    break;
-			}
-		    }
-		    if(!birthDay.empty()) {
-			std::string s_year(birthDay, birthDay.find_last_of("/") + 1);
-			if (s_year.length() == 4) {
-			    int birth_year =  std::stoi(s_year);
-			    std::time_t tm = std::time(nullptr);
-			    std::tm utc_tm = *std::gmtime(&tm);
-			    int cur_year = utc_tm.tm_year + 1900;
-			    int age = cur_year - birth_year;
-			    result->segments.add("age", age);
-			}
-			break;
-		    }
-		}
+            for(auto data: result->user->data) {
+                for(auto segment: data.segment) {
+                    if(segment.name == keyBirthDay) {
+                        birthDay = segment.value.extractAscii();
+                        break;
+                    }
+                    if(segment.name == keyAge) {
+                        s_age = segment.value.extractAscii();
+                        int i_age = std::stoi(s_age);
+                        result->segments.add("age", i_age);
+                        break;
+                    }
+                }
+                if(!birthDay.empty()) {
+                    std::string s_year(birthDay, birthDay.find_last_of("/") + 1);
+                    if (s_year.length() == 4) {
+                        int birth_year =  std::stoi(s_year);
+                        std::time_t tm = std::time(nullptr);
+                        std::tm utc_tm = *std::gmtime(&tm);
+                        int cur_year = utc_tm.tm_year + 1900;
+                        int age = cur_year - birth_year;
+                        result->segments.add("age", age);
+                    }
+                    break;
+                }
+            }
 	    }
 	}
 
