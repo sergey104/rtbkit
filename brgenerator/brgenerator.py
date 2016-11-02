@@ -25,6 +25,9 @@ class RequestData:
         self.genderI = 0
         self.locationI = 0
         self.coordsI = 0
+        self.yobI = 0
+        self.bdI = 0
+        self.ifaI = 0
 
     def changeId(self):
         self.jsonRequest["id"] = str(uuid.uuid4())
@@ -57,22 +60,32 @@ class RequestData:
             if lat:
                 self.jsonRequest["device"]["geo"]["lat"] = lat
             self.coordsI = self.coordsI + 1
-            if self.coordsI > len(coords):
+            if self.coordsI >= len(coords):
                 self.coordsI = 0
 
     def changeYob(self, yob):
-        if yob:
-            self.jsonRequest["user"]["yob"] = yob
+        if yob and len(yob):
+            self.jsonRequest["user"]["yob"] = yob[self.yobI]
+            self.yobI = self.yobI + 1
+            if self.yobI >= len(yob):
+                self.yobI = 0
 
     def changeBirthday(self, birthday):
-        if birthday:
+        if birthday and len(birthday):
             for segment in self.jsonRequest["user"]["data"]["segment"]:
                 if segment["id"] == "birthday":
-                    segment["value"] = birthday
+                    segment["value"] = birthday[self.bdI]
+                    self.bdI = self.bdI + 1
+                    if self.bdI >= len(birthday):
+                        self.bdI = 0
 
     def changeIfa(self, ifa):
-        if ifa:
-            self.jsonRequest["device"]["ifa"] = ifa
+        if ifa and len(ifa):
+            self.jsonRequest["device"]["ifa"] = ifa[self.ifaI]
+            self.ifaI = self.ifaI + 1
+            if self.ifaI >= len(ifa):
+                self.ifaI = 0
+
 
     def update(self, data = None):
         self.changeId()
@@ -90,13 +103,66 @@ class Server:
     def __init__(self):
         self.host = "127.0.0.1"
         self.port = 17339
+        self.winport = 17340
+        self.impport = 17341
+        self.reqNumber = 0
+        self.winNumber = 0
+        self.impNumber = 0
+
+    def getReqNumber(self):
+        return self.reqNumber
+    
+    def getWinNumber(self):
+        return self.winNumber
+    
+    def getImpNumber(self):
+        return self.impNumber
 
     def setConfig(self, jsonvalue):
-        self.host = jsonvalue["host"]
-        self.port = jsonvalue["port"]
+        if jsonvalue["host"]:
+            self.host = jsonvalue["host"]
+        if jsonvalue["port"]:
+            self.port = jsonvalue["port"]
+        if jsonvalue["winport"]:
+            self.winport = jsonvalue["winport"]
+        if jsonvalue["impport"]:
+            self.impport = jsonvalue["impport"]
+        
+    def sendClickResponse(self, data, price):
+        jsonResponse = json.loads('{"timestamp":0, "bidTimestamp":0, "auctionId":"", "impId": "1", "bidRequestId":"", "winPrice":0.0, "type":"CLICK"}')
+        jsonResponse["timestamp"] = time.time()
+        aucId = data["id"]
+        jsonResponse["auctionId"] = aucId + ":1"
+        jsonResponse["bidRequestId"] = aucId + ":1"
+        jsonResponse["impId"] = data["seatbid"][0]["bid"][0]["impid"]
+        jsonResponse["winPrice"] = price
+        
+        print "send click: ", jsonResponse
+        
+        params = json.dumps(jsonResponse)
+        
+        headers = {
+            "Accept": "*/*",
+            "Content-type": "application/json"
+        }
+        
+        print "Try to connect: ", self.host, ":", self.impport
+        try:
+            conn = httplib.HTTPConnection(str(self.host), self.impport)
+            conn.request("POST", "/events", params, headers)
+            self.impNumber = self.impNumber + 1
+            resp = conn.getresponse()
+            print resp.status, ":", resp.reason
+            clickdata = resp.read()
+            if clickdata:
+                print "data: ", clickdata
+            conn.close()
+        except:
+            print "Connection error"
+        return
         
     def sendImpressionResponse(self, data, price):
-        jsonResponse = json.loads('{"timestamp":0, "bidTimestamp":0, "auctionId":"", "impId": "1", "bidRequestId":"", "winPrice":0.032, "type":"IMPRESSION"}')
+        jsonResponse = json.loads('{"timestamp":0, "bidTimestamp":0, "auctionId":"", "impId": "1", "bidRequestId":"", "winPrice":0.0, "type":"IMPRESSION"}')
         jsonResponse["timestamp"] = time.time()
         aucId = data["id"]
         jsonResponse["auctionId"] = aucId + ":1"
@@ -113,10 +179,11 @@ class Server:
             "Content-type": "application/json"
         }
         
-        print "Try to connect: ", self.host, ":", 17341
+        print "Try to connect: ", self.host, ":", self.impport
         try:
-            conn = httplib.HTTPConnection(str(self.host), 17341)
+            conn = httplib.HTTPConnection(str(self.host), self.impport)
             conn.request("POST", "/events", params, headers)
+            self.impNumber = self.impNumber + 1
             resp = conn.getresponse()
             print resp.status, ":", resp.reason
             impdata = resp.read()
@@ -129,7 +196,7 @@ class Server:
         
     def sendWinResponse(self, data):
         windata = None
-        jsonResponse = json.loads('{"timestamp":0, "bidTimestamp":0, "auctionId":"", "impId": "1", "bidRequestId":"", "winPrice":0.032, "type": null, "event":"win"}')
+        jsonResponse = json.loads('{"timestamp":0, "bidTimestamp":0, "auctionId":"", "impId": "1", "bidRequestId":"", "winPrice":0.0, "type": null, "event":"win"}')
         jsonResponse["timestamp"] = time.time()
         aucId = data["id"]
         jsonResponse["auctionId"] = aucId + ":1"
@@ -155,6 +222,7 @@ class Server:
         try:
             conn = httplib.HTTPConnection(str(self.host), 17340)
             conn.request("POST", "/", params, headers)
+            self.winNumber = self.winNumber + 1
             resp = conn.getresponse()
         except:
             print "Connection error"
@@ -187,6 +255,7 @@ class Server:
         try:
             conn = httplib.HTTPConnection(str(self.host), self.port)
             conn.request("POST", "/auctions", params, headers)
+            self.reqNumber = self.reqNumber + 1
             print "Sent: ", params, "\n\n"
             resp = conn.getresponse()
         except:
@@ -233,8 +302,11 @@ class RequestThread:
         self.server = Server()
         self.server.host = servers.getServer(server).host
         self.server.port = servers.getServer(server).port
+        self.server.winport = servers.getServer(server).winport
+        self.server.impport = servers.getServer(server).impport
 
     def load(self):
+        self.requests = []
         rqbase = open(self.file, "r")
         jsonline = rqbase.readline(4096)
         while len(jsonline):
@@ -249,11 +321,17 @@ class RequestThread:
             self.server.sendRequest(rdi)
             self.rqNumber = self.rqNumber + 1
             if self.delay != 0:
-		time.sleep(self.delay)
+                time.sleep(self.delay)
             
-    def getRQNumber(self):
-	return self.rqNumber
+    def getReqNumber(self):
+        return self.server.getReqNumber()
+    
+    def getWinNumber(self):
+        return self.server.getWinNumber()
 
+    def getImpNumber(self):
+        return self.server.getImpNumber()
+    
 #-----------------------------------------------------------------------------------------------------------------------
 
 class BRGenerator:
@@ -298,25 +376,47 @@ class BRGenerator:
     def getTime(self):
         return self.T1 - self.T0
     
-    def getRQNumber(self):
+    def getReqNumber(self):
         number = 0
         for key in self.threads:
-            number = number + self.threads[key].getRQNumber()
+            number = number + self.threads[key].getReqNumber()
         return number
 
+    def getWinNumber(self):
+        number = 0
+        for key in self.threads:
+            number = number + self.threads[key].getWinNumber()
+        return number
+
+    def getImpNumber(self):
+        number = 0
+        for key in self.threads:
+            number = number + self.threads[key].getImpNumber()
+        return number
+    
 #-----------------------------------------------------------------------------------------------------------------------
 
-def main(filename):
+def main(filename, times):
     if filename:
         file = open(filename, "r")
         brg = BRGenerator(file)
 
-        brg.load()
-        brg.run()
-        print "Time: ", brg.getTime()
-        print "Number of requests: ", brg.getRQNumber()
+        i = int(times)
+        T0 = time.time()
+        while i > 0:
+            brg.load()
+            brg.run()
+            i = i - 1
+            
+        T1 = time.time()
+        print "Time: ", T1 - T0
+        print "Number of requests   : ", brg.getReqNumber()
+        print "Number of wins       : ", brg.getWinNumber()
+        print "Number of impressions: ", brg.getImpNumber()
 
 if len(sys.argv) < 2:
     print("No config file")
+elif len(sys.argv) < 3:
+    main(sys.argv[1], 10)
 else:
-    main(sys.argv[1])
+    main(sys.argv[1], sys.argv[2])
