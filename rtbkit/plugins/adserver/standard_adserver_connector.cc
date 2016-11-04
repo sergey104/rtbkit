@@ -496,7 +496,7 @@ handleDeliveryRq(const HttpHeader & header,
    // writeFile("IMPRESSION: "+s);
     long size1 = getFilesize("win.txt");
     long size2 = getFilesize("event.txt");
-    if (size1 >= 1000000) {
+    if (size1 >= 300000) {
         time_t rawtime;
         struct tm * timeinfo;
          char buffer [80];
@@ -513,7 +513,7 @@ handleDeliveryRq(const HttpHeader & header,
      rename("win.txt", newname.c_str()) ;
 
     }
-    if (size2 >= 500000) {
+    if (size2 >= 300000) {
         time_t rawtime;
         struct tm * timeinfo;
          char buffer [80];
