@@ -443,5 +443,56 @@ struct LatLongDevFilter : public RTBKIT::FilterBaseT<LatLongDevFilter>
 
 };
 
+//************ LatLongPolygonFilter **********************
+
+struct LatLongPolygonFilter : public RTBKIT::FilterBaseT<LatLongPolygonFilter>
+{
+    static constexpr const char* name = "latLongPolygonFilter";
+	
+    unsigned priority() const { return Priority::LatLong; } //low priority
+
+    std::unordered_map<unsigned, PolygonsInfo> polygons_by_confindx;
+    ConfigSet configs_with_filt;
+
+
+    /**
+     * Save the polygons for each config index.
+     * Important: We only filter by those who has the filter.
+     */
+    virtual void addConfig(unsigned cfgIndex,
+            const std::shared_ptr<RTBKIT::AgentConfig>& config);
+
+    /**
+     * Remove the square list for the given config index.
+     */
+    virtual void removeConfig(unsigned cfgIndex,
+            const std::shared_ptr<RTBKIT::AgentConfig>& config);
+
+    /**
+     * Particular implementation of virtual method for this filter type.
+     */
+    virtual void filter(RTBKIT::FilterState& state) const ;
+
+    /**
+     * Check if it is present in the bid request:
+     * - the device
+     * - the the geo in the device
+     * - the lat and lon in the geo (from the device)
+     * If they are present, return true. Otherwise return false.
+     */
+    bool checkLatLongPresent(const RTBKIT::BidRequest & req) const ;
+
+    /**
+     * Return true is the point is inside in at least one of the given
+     * polygon of the list given. Otherwise false.
+     */
+    static bool pointInsideAnyPolygon(float lat, float lon, const PolygonList & pgs);
+
+    /**
+     * Check if the given point defined by (x, y) is inside of the polygon
+     * defined vector.
+     */
+    static bool insidePolygon(float x, float y, const Polygon & pg );
+};
 
 } // namespace RTBKIT

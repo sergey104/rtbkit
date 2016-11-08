@@ -306,6 +306,92 @@ LatLongDevFilter::pointInsideAnySquare(float lat, float lon,
     return false;
 }
 
+//************ LatLongPolygonFilter **********************
+
+void LatLongPolygonFilter::addConfig(unsigned cfgIndex,
+        const std::shared_ptr<RTBKIT::AgentConfig>& config)
+{
+    PolygonsInfo pgi;
+    for ( const RTBKIT::Polygon & pg : config->polygonsFilterInfo.include){
+        pgi.include.push_back(pg);
+    }
+    for ( const RTBKIT::Polygon & pg : config->polygonsFilterInfo.exclude){
+        pgi.exclude.push_back(pg);
+    }
+    if ( !pgi.empty() ) {
+		polygons_by_confindx[cfgIndex] = pgi;
+        configs_with_filt.set(cfgIndex);
+    }
+}
+
+void LatLongPolygonFilter::removeConfig(unsigned cfgIndex,
+        const std::shared_ptr<RTBKIT::AgentConfig>& config)
+{
+    if ( polygons_by_confindx.count(cfgIndex) > 0) {
+        polygons_by_confindx.erase(cfgIndex);
+        configs_with_filt.reset(cfgIndex);
+    }
+}
+
+void LatLongPolygonFilter::filter(RTBKIT::FilterState& state) const
+ {
+    RTBKIT::ConfigSet matches = state.configs();
+
+	auto it = polygons_by_confindx.begin();
+    if ( ! checkLatLongPresent(state.request)){
+        // If there is no geo info the filter, then filter out all the
+        // agent configs that has this filter present.
+        state.narrowConfigs(configs_with_filt.negate());
+    } else {
+        // Filter using the lat long of the request and from the configs
+        // of the agents.
+        for ( ; it != polygons_by_confindx.end(); ++it ) {
+            if (pointInsideAnyPolygon(state.request.device->geo->lat.val, state.request.device->geo->lon.val, it->second.include) &&
+				!pointInsideAnyPolygon(state.request.device->geo->lat.val, state.request.device->geo->lon.val, it->second.exclude)) {
+                continue;
+            }
+            matches.reset(it->first);
+        }
+        state.narrowConfigs(matches);
+    }
+
+ }
+
+bool LatLongPolygonFilter::checkLatLongPresent(
+        const RTBKIT::BidRequest & req) const
+{
+    if ( ! req.device) return false;
+    if ( ! req.device->geo) return false;
+    if ( req.device->geo->lat.val == std::numeric_limits<float>::quiet_NaN() ||
+         req.device->geo->lon.val == std::numeric_limits<float>::quiet_NaN() )
+        return false;
+    return true;
+}
+
+bool
+LatLongPolygonFilter::pointInsideAnyPolygon(float lat, float lon,
+        const PolygonList & pgs)
+{
+    const float y = lat;
+    const float x = lon;
+    for ( auto & pg : pgs){
+        if (insidePolygon(x, y , pg)) return true;
+    }
+    return false;
+}
+
+bool 
+LatLongPolygonFilter::insidePolygon(float x, float y, const Polygon & pg )
+{
+	bool c = false;
+	for (size_t i = 0, j = pg.size() - 1; i < pg.size(); j = i++) {
+		if ((((pg[i].y <= y) && (y < pg[j].y)) || ((pg[j].y <= y) && (y < pg[i].y))) &&
+			(x > (pg[j].x - pg[i].x) * (y - pg[i].y) / (pg[j].y - pg[i].y) + pg[i].x))
+			c = !c;
+	}
+	return c;
+}
+
 } // namespace RTBKIT
 
 
@@ -335,6 +421,7 @@ struct InitFilters
         RTBKIT::FilterRegistry::registerFilter<RTBKIT::ExchangePostFilter>();
 
         RTBKIT::FilterRegistry::registerFilter<RTBKIT::LatLongDevFilter>();
+		RTBKIT::FilterRegistry::registerFilter<RTBKIT::LatLongPolygonFilter>();
     }
 
 } initFilters;
