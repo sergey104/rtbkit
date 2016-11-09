@@ -439,7 +439,7 @@ handleHttpPayload(const HttpHeader & header,
 
     addActivity("gotAuction %s", auction->id.toString().c_str());
     
-    if (now > expiry) {
+    if (now == expiry) {
         doEvent("auctionAlreadyExpired");
 
         string msg = format("auction started after time already elapsed: "
