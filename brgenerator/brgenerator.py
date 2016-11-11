@@ -139,6 +139,9 @@ class Server:
     
 	def getImpNumber(self):
 		return self.impNumber
+
+	def getClickNumber(self):
+		return self.clickNumber
 	
 	def getMaxRequests(self):
 		return self.maxRequests
@@ -184,7 +187,7 @@ class Server:
 		try:
 			conn = httplib.HTTPConnection(str(self.host), self.impport)
 			conn.request("POST", "/events", params, headers)
-			self.impNumber = self.impNumber + 1
+			self.clickNumber = self.clickNumber + 1
 			resp = conn.getresponse()
 			print resp.status, ":", resp.reason
 			clickdata = resp.read()
@@ -224,6 +227,8 @@ class Server:
 			if impdata:
 				print "data: ", impdata
 			conn.close()
+			if resp.status == 200 and self.clickNumber < self.maxClicks:
+				self.sendClickResponse(data, price)
 		except:
 			print "Connection error"
 		return
@@ -363,6 +368,9 @@ class RequestThread:
 
 	def getImpNumber(self):
 		return self.server.getImpNumber()
+
+	def getClickNumber(self):
+		return self.server.getClickNumber()
     
 #-----------------------------------------------------------------------------------------------------------------------
 
@@ -434,6 +442,12 @@ class BRGenerator:
 		for key in self.threads:
 			number = number + self.threads[key].getImpNumber()
 		return number
+
+	def getClickNumber(self):
+		number = 0
+		for key in self.threads:
+			number = number + self.threads[key].getClickNumber()
+		return number
     
 #-----------------------------------------------------------------------------------------------------------------------
 
@@ -451,6 +465,7 @@ def main(filename):
 		print "Number of requests   : ", brg.getReqNumber()
 		print "Number of wins       : ", brg.getWinNumber()
 		print "Number of impressions: ", brg.getImpNumber()
+		print "Number of clicks     : ", brg.getClickNumber()
 
 if len(sys.argv) < 2:
 	print("No config file")

@@ -4,14 +4,14 @@
     {
       "name": "svr1",
       "config": {
-        "host": "52.212.166.68",
+        "host": "127.0.0.1",
         "port": 17339,
         "winport": 17340,
         "impport": 17341,
         "maxRequests":1000,
         "maxWins":1000,
         "maxImpressions":1000,
-        "maxClicks":1
+        "maxClicks":1000
       }
     },
     {
@@ -35,7 +35,7 @@
       "config": {
         "file": "one.request.txt",
         "server": "svr1",
-        "delay": 0.0,
+        "delay": 1.0,
         "request": {
           "gender": [
             "F",

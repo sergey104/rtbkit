@@ -7,6 +7,9 @@
 #------------------------------------------------------------------------------#
 
 #----------------------
+$(eval $(call library,augmentor_clicks,augmentor_clicks.cc,augmentor_base rtb bid_request agent_configuration))
+$(eval $(call program,augmentor_clicks_runner,augmentor_clicks boost_program_options))
+#----------------------
 $(eval $(call library,augmentor_fin,augmentor_fin.cc,augmentor_base rtb bid_request agent_configuration))
 $(eval $(call program,augmentor_fin_runner,augmentor_fin boost_program_options))
 #----------------------
