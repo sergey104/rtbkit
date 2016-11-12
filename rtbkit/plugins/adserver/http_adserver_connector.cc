@@ -31,6 +31,19 @@ handleJson(const HttpHeader & header, const Json::Value & json,
            const string & jsonStr)
 {
     string resultMsg;
+	
+	//std::cerr << "DEBUG: json = " << json << std::endl;
+	//std::cerr << "DEBUG: jsonStr = " << jsonStr << std::endl;
+	if(json.isMember("bidRequestId")) {
+		std::string bidRequestIdStr = json["bidRequestId"].asString();
+		if(bidRequestIdStr.find(":") == string::npos) {
+			bidRequestIdStr.append(":1");
+			const_cast<Json::Value&>(json["bidRequestId"]) = bidRequestIdStr;
+			const_cast<std::string&>(jsonStr) = json.toString();
+		}
+	}
+	//std::cerr << "DEBUG: json = " << json << std::endl;
+	//std::cerr << "DEBUG: jsonStr = " << jsonStr << std::endl;
 
     transport().assertLockedByThisThread();
 

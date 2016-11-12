@@ -267,15 +267,11 @@ handleWinRq(const HttpHeader & header,
         bidRequestIdStr = (json["bidRequestId"].asString());
         if(bidRequestIdStr.find(":") == string::npos)
         {
-			bidRequestIdStr.append(":1");
-//			json["bidRequestId"] = bidRequestIdStr;
-			/*
             errorResponseHelper(response,
                                 "WRONG_BIDREQUESTID",
                                 "A win notice requires correct bidRequestId field.");
             publishError(response);
             return response;
-			*/
         }
         bidRequestIdStr =  bidRequestIdStr.substr(0,bidRequestIdStr.find_last_of(":"));
 
@@ -479,15 +475,11 @@ handleDeliveryRq(const HttpHeader & header,
     bidRequestIdStr = json["bidRequestId"].asString();
     if(bidRequestIdStr.find(":") == string::npos)
     {
-		bidRequestIdStr.append(":1");
-//		json["bidRequestId"] = bidRequestIdStr;
-		/*
         errorResponseHelper(response,
                             "WRONG_BIDREQUESTID",
                             "Event requires correct bidRequestId field.");
         publishError(response);
         return response;
-		*/
     }
     bidRequestIdStr =  bidRequestIdStr.substr(0,bidRequestIdStr.find_last_of(":"));
     impIdStr = json["impid"].asString();
