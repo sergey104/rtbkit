@@ -238,7 +238,7 @@ handleWinRq(const HttpHeader & header,
      *  Timestamp is an required field.
      *  If null, we return an error response.
      */
-
+    writeFileWin(json.toString());
     if (json.isMember("timestamp")) {
         timestamp = Date::fromSecondsSinceEpoch(json["timestamp"].asDouble());
 
@@ -267,15 +267,19 @@ handleWinRq(const HttpHeader & header,
         bidRequestIdStr = (json["bidRequestId"].asString());
         if(bidRequestIdStr.find(":") == string::npos)
         {
-            errorResponseHelper(response,
+          /*  errorResponseHelper(response,
                                 "WRONG_BIDREQUESTID",
                                 "A win notice requires correct bidRequestId field.");
             publishError(response);
-            return response;
+            return response; */
+         bidRequestId = Id(bidRequestIdStr);
+
         }
+        else {
         bidRequestIdStr =  bidRequestIdStr.substr(0,bidRequestIdStr.find_last_of(":"));
 
         bidRequestId = Id(bidRequestIdStr);
+        }
 
     } else {
         errorResponseHelper(response,
@@ -348,7 +352,7 @@ handleWinRq(const HttpHeader & header,
     else {
         // Passback is optional
     }
-    writeFileWin(json.toString());
+
     LOG(adserverTrace) << "{\"timestamp\":\"" << timestamp.print(3) << "\"," <<
         "\"bidRequestId\":\"" << bidRequestId << "\"," <<
         "\"impId\":\"" << impId << "\"," <<
@@ -381,7 +385,7 @@ handleDeliveryRq(const HttpHeader & header,
     Id bidRequestId, impId, userId;
     UserIds userIds;
     Date timestamp;
-    
+    writeFileEvent(json.toString());
     /*
      *  Timestamp is an required field.
      *  If null, we return an error response.
@@ -475,17 +479,21 @@ handleDeliveryRq(const HttpHeader & header,
     bidRequestIdStr = json["bidRequestId"].asString();
     if(bidRequestIdStr.find(":") == string::npos)
     {
-        errorResponseHelper(response,
+      /*  errorResponseHelper(response,
                             "WRONG_BIDREQUESTID",
                             "Event requires correct bidRequestId field.");
         publishError(response);
-        return response;
+        return response; */
+      bidRequestId = Id(bidRequestIdStr);
     }
+    else {
     bidRequestIdStr =  bidRequestIdStr.substr(0,bidRequestIdStr.find_last_of(":"));
-    impIdStr = json["impid"].asString();
     bidRequestId = Id(bidRequestIdStr);
+    }
+    impIdStr = json["impid"].asString();
+
     impId = Id(impIdStr);
-    writeFileEvent(json.toString());
+
     LOG(adserverTrace) << "{\"timestamp\":\"" << timestamp.print(3) << "\"," <<
         "\"bidRequestId\":\"" << bidRequestIdStr << "\"," <<
         "\"impId\":\"" << impIdStr << "\"," <<
