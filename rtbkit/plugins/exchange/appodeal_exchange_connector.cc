@@ -341,16 +341,19 @@ parseBidRequest(HttpAuctionHandler & connection,
                                                                                               exchangeName(),
                                                                                               exchangeName()));
 	if(result->device) {
+		// add ifa to segments for filtering
+		result->segments.add("ifa", result->device->ifa);
+		
 	    // Save Device.ifa in userIds.exchnageId
 	    Id ifa(result->device->ifa);
 	    
 	    if(result->userIds.find(result->userIds.domainToString(ID_EXCHANGE)) == result->userIds.end()) {
-		result->userIds.add(ifa, ID_EXCHANGE);
-		//std::cerr << "DEBUG: exchangeId added" << std::endl;
+			result->userIds.add(ifa, ID_EXCHANGE);
+			//std::cerr << "DEBUG: exchangeId added" << std::endl;
 	    }
 	    else {
-		result->userIds.setStatic(ifa, ID_EXCHANGE);
-		//std::cerr << "DEBUG: exchangeId changed" << std::endl;
+			result->userIds.setStatic(ifa, ID_EXCHANGE);
+			//std::cerr << "DEBUG: exchangeId changed" << std::endl;
 	    }
 	}
 	
