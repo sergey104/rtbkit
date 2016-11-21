@@ -361,7 +361,25 @@ parseBidRequest(HttpAuctionHandler & connection,
 	    // add gender to segments
 	    if(!result->user->gender.empty()) {
             result->segments.add("gender", result->user->gender);
-	    }
+	    } else {
+			std::vector<std::string> f_app {
+				"ru.litres.android.readfree",
+				"ru.kuchaknig.android.freebooks.love",
+				"ru.kuchaknig.android.freebooks.crime",
+				"ru.kuchaknig.android.freebooks.fantasy",
+				"ru.kuchaknig.android.freebooks.psy",
+				"ru.kuchaknig.android.freebooks.ezoterika",
+				"ru.kuchaknig.android.freebooks.food"
+			};
+			if(result->app && !result->app->bundle.empty()) {
+				for(auto it: f_app) {
+					if(result->app->bundle.rawString() == it) {
+						result->segments.add("gender", "F");
+						break;
+					}
+				}
+			}
+		}
 	    
 	    // add age to segments
 	    if(result->user->yob.value() != -1) {
