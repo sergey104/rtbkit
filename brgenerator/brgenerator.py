@@ -130,6 +130,7 @@ class Server:
 		self.maxWins = 1
 		self.maxImpressions = 1
 		self.maxClicks = 1
+		self.errors = 0
 
 	def getReqNumber(self):
 		return self.reqNumber
@@ -145,6 +146,9 @@ class Server:
 	
 	def getMaxRequests(self):
 		return self.maxRequests
+
+	def getErrors(self):
+		return self.errors
 
 	def setConfig(self, jsonvalue):
 		for key in jsonvalue:
@@ -196,6 +200,7 @@ class Server:
 			conn.close()
 		except:
 			print "Connection error"
+			self.errors = self.errors + 1
 		return
         
 	def sendImpressionResponse(self, data, price):
@@ -231,6 +236,7 @@ class Server:
 				self.sendClickResponse(data, price)
 		except:
 			print "Connection error"
+			self.errors = self.errors + 1
 		return
 		
 	def sendWinResponse(self, data):
@@ -265,6 +271,7 @@ class Server:
 			resp = conn.getresponse()
 		except:
 			print "Connection error"
+			self.errors = self.errors + 1
 			return
             
 		print resp.status, ":", resp.reason
@@ -296,6 +303,7 @@ class Server:
 			resp = conn.getresponse()
 		except:
 			print "Connection error"
+			self.errors = self.errors + 1
 			return self.maxRequests - self.reqNumber
 		
 		print resp.status, ":", resp.reason
@@ -371,6 +379,9 @@ class RequestThread:
 
 	def getClickNumber(self):
 		return self.server.getClickNumber()
+
+	def getErrors(self):
+		return self.server.getErrors()
     
 #-----------------------------------------------------------------------------------------------------------------------
 
@@ -448,6 +459,12 @@ class BRGenerator:
 		for key in self.threads:
 			number = number + self.threads[key].getClickNumber()
 		return number
+
+	def getErrors(self):
+		number = 0
+		for key in self.threads:
+			number = number + self.threads[key].getErrors()
+		return number
     
 #-----------------------------------------------------------------------------------------------------------------------
 
@@ -466,6 +483,7 @@ def main(filename):
 		print "Number of wins       : ", brg.getWinNumber()
 		print "Number of impressions: ", brg.getImpNumber()
 		print "Number of clicks     : ", brg.getClickNumber()
+		print "Number of errors     : ", brg.getErrors()
 
 if len(sys.argv) < 2:
 	print("No config file")
