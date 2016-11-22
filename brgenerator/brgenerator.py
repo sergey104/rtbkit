@@ -29,6 +29,7 @@ class RequestData:
 		self.yobI = 0
 		self.bdI = 0
 		self.ifaI = 0
+		self.catI = 0
 
 	def makeData(self, maxreq, updata):
 		self.requests = []
@@ -39,6 +40,13 @@ class RequestData:
 	def changeId(self):
 		self.jsonRequest["id"] = str(uuid.uuid4())
 
+	def changeCat(self, cat):
+		if cat and len(cat):
+			self.jsonRequest["app"]["cat"] = cat[self.catI]
+			self.catI = self.catI + 1
+			if self.catI >= len(cat):
+				self.catI = 0
+				
 	def changeGender(self, gender):
 		if gender and len(gender):
 			self.jsonRequest["user"]["gender"] = gender[self.genderI]
@@ -106,6 +114,8 @@ class RequestData:
 					self.changeLocation(data["location"])
 				elif key == "ifa":
 					self.changeIfa(data["ifa"])
+				elif key == "cat":
+					self.changeCat(data["cat"])
 		self.changeId()
 
 	def getUserAgent(self):
