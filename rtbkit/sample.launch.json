@@ -59,6 +59,15 @@
                     "log": true
                 },
                 {
+                    "name": "clicks_augmentor",
+                    "root": ".",
+                    "path": "build/x86_64/bin/augmentor_clicks_runner",
+                    "arg": [
+                        "-B", "rtbkit/sample.bootstrap.json"
+                    ],
+                    "log": true
+                },
+                {
                     "name": "spending_money_control",
                     "root": ".",
                     "path": "build/x86_64/bin/augmentor_fin_runner",
