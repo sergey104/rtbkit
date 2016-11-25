@@ -39,12 +39,12 @@ struct SmaatoExchangeConnector: public OpenRTBExchangeConnector {
     double getTimeAvailableMs(HttpAuctionHandler & handler,
 			      const HttpHeader & header,
 			      const std::string & payload) {
-      return 100.0;
+      return 400.0;
     }
  
     double getRoundTripTimeMs(HttpAuctionHandler & handler,
 			      const HttpHeader & header) {
-      return 35.0;
+      return 135.0;
     }
     
     struct CampaignInfo {
@@ -65,6 +65,7 @@ struct SmaatoExchangeConnector: public OpenRTBExchangeConnector {
 
     virtual ExchangeCompatibility
       getCreativeCompatibility(const Creative & creative, bool includeReasons) const;
+
 
     virtual bool
       bidRequestCreativeFilter(const BidRequest & request,

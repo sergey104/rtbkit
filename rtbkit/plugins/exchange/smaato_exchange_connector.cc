@@ -17,6 +17,51 @@
 
  
 using namespace std;
+/**
+ * Get the size of a file.
+ * @param filename The name of the file to check size for
+ * @return The filesize, or 0 if the file does not exist.
+ */
+size_t getFilesize(const std::string& filename) {
+    struct stat st;
+    if(stat(filename.c_str(), &st) != 0) {
+        return 0;
+    }
+    return st.st_size;
+}
+
+void find_and_replace(string& source, string const& find, string const& replace)
+{
+    for(string::size_type i = 0; (i = source.find(find, i)) != string::npos;)
+    {
+        source.replace(i, find.length(), replace);
+        i += replace.length();
+    }
+}
+long int unix_timestamp()
+{
+    time_t t = std::time(0);
+    long int now = static_cast<long int> (t);
+    return now;
+}
+void writeFileSm (std::string s) {
+
+  std::ofstream ofs;
+  ofs.open ("smaatoreqlog.txt", std::ofstream::out | std::ofstream::app);
+
+  ofs << s << endl;
+
+  ofs.close();
+
+}
+
+
+string string_unix_timestamp()
+{
+    time_t t = std::time(0);
+    long int now = static_cast<long int> (t);
+    return std::to_string(now);
+}
 using namespace Datacratic;
 
 namespace {
@@ -54,12 +99,18 @@ parseBidRequest(HttpAuctionHandler & connection,
                 const std::string & payload)
 {
     std::shared_ptr<BidRequest> none;
+    Json::Value v1;
+    v1["payload"] = payload;
 
+    v1["timestamp"] = string_unix_timestamp();
+    writeFileSm(v1.toString());
     size_t found = header.queryParams.uriEscaped().find(SmaatoExchangeConnector::nobid);
-    if (found != string::npos) {
-      connection.dropAuction("nobid");
+   if (found != string::npos) {
+      connection.dropAuction("nobid in req");
+
+
       return none;
-    }   
+   }
 
     // Check for JSON content-type
     if (!header.contentType.empty()) {
@@ -302,6 +353,7 @@ setSeatBid(Auction const & auction,
     b.adomain = crinfo->adomain;
     b.nurl = crinfo->nurl;
 }
+
 
 } // namespace RTBKIT
  

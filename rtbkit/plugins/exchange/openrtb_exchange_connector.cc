@@ -17,7 +17,52 @@
 #include "jml/utils/file_functions.h"
 #include "jml/arch/info.h"
 #include "jml/utils/rng.h"
+using namespace std;
+/**
+ * Get the size of a file.
+ * @param filename The name of the file to check size for
+ * @return The filesize, or 0 if the file does not exist.
+ */
+size_t getFilesize(const std::string& filename) {
+    struct stat st;
+    if(stat(filename.c_str(), &st) != 0) {
+        return 0;
+    }
+    return st.st_size;
+}
 
+void find_and_replace(string& source, string const& find, string const& replace)
+{
+    for(string::size_type i = 0; (i = source.find(find, i)) != string::npos;)
+    {
+        source.replace(i, find.length(), replace);
+        i += replace.length();
+    }
+}
+long int unix_timestamp()
+{
+    time_t t = std::time(0);
+    long int now = static_cast<long int> (t);
+    return now;
+}
+
+void writeFileResponse (std::string s) {
+
+  std::ofstream ofs;
+  ofs.open ("smaatoreslog.txt", std::ofstream::out | std::ofstream::app);
+
+  ofs << s << endl;
+
+  ofs.close();
+
+}
+
+string string_unix_timestamp()
+{
+    time_t t = std::time(0);
+    long int now = static_cast<long int> (t);
+    return std::to_string(now);
+}
 using namespace Datacratic;
 
 namespace Datacratic {
@@ -190,7 +235,7 @@ getTimeAvailableMs(HttpAuctionHandler & connection,
     static const std::string toFind = "\"tmax\":";
     std::string::size_type pos = payload.find(toFind);
     if (pos == std::string::npos)
-        return 30.0;
+        return 430.0;
     
     int tmax = atoi(payload.c_str() + pos + toFind.length());
     return (absoluteTimeMax < tmax) ? absoluteTimeMax : tmax;
@@ -203,7 +248,7 @@ getResponse(const HttpAuctionHandler & connection,
             const Auction & auction) const
 {
     const Auction::Data * current = auction.getCurrentData();
-
+//writeFileResponse("inside responce");
     if (current->hasError())
         return getErrorResponse(connection,
                                 current->error + ": " + current->details);
@@ -220,16 +265,26 @@ getResponse(const HttpAuctionHandler & connection,
 
         setSeatBid(auction, spotNum, response);
     }
-
-    if (response.seatbid.empty())
+//writeFileResponse("inside responce2");
+    if (response.seatbid.empty()) {
+      //  writeFileResponse("inside responce3 none");
         return HttpResponse(204, "none", "");
+
+    }
 
     static Datacratic::DefaultDescription<OpenRTB::BidResponse> desc;
     std::ostringstream stream;
     StreamJsonPrintingContext context(stream);
     desc.printJsonTyped(&response, context);
+    std::string rv = stream.str();
 
-    return HttpResponse(200, "application/json", stream.str());
+    cerr << "smaato connector response 200:"  << endl;
+    Json::Value v1;
+    v1["response"] = rv;
+
+    v1["timestamp"] = string_unix_timestamp();
+    writeFileResponse(v1.toString());
+    return HttpResponse(200, "application/json", rv);
 }
 
 Json::Value
@@ -245,6 +300,7 @@ OpenRTBExchangeConnector::
 getDroppedAuctionResponse(const HttpAuctionHandler & connection,
                           const std::string & reason) const
 {
+    writeFileResponse("204-none");
     return HttpResponse(204, "none", "");
 }
 
@@ -255,6 +311,7 @@ getErrorResponse(const HttpAuctionHandler & connection,
 {
     Json::Value response;
     response["error"] = message;
+    writeFileResponse("400-none");
     return HttpResponse(400, response);
 }
 
