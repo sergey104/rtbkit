@@ -538,14 +538,15 @@ sendResponse()
                           Date::now().secondsSince(this->firstData) * 1000.0,
                           "ms",
                           { 90, 95, 98, 99 });
-
-            if (random() % 1000 == 0) {
+            this->transport().closeWhenHandlerFinished();
+          /*  if (random() % 1000 == 0) {
                 this->transport().closeWhenHandlerFinished();
             }
             else {
                 this->transport().associateWhenHandlerFinished
                 (this->makeNewHandlerShared(), "sendFinished");
             }
+            */
         };
 
     addActivityS("beforeSend");
