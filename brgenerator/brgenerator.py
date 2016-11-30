@@ -87,12 +87,13 @@ class RequestData:
 
 	def changeBirthday(self, birthday):
 		if birthday and len(birthday):
-			for segment in self.jsonRequest["user"]["data"]["segment"]:
-				if segment["id"] == "birthday":
-					segment["value"] = birthday[self.bdI]
-					self.bdI = self.bdI + 1
-					if self.bdI >= len(birthday):
-						self.bdI = 0
+			for data in self.jsonRequest["user"]["data"]:
+				for segment in data["segment"]:
+					if segment["id"] == "birthday":
+						segment["value"] = birthday[self.bdI]
+						self.bdI = self.bdI + 1
+						if self.bdI >= len(birthday):
+							self.bdI = 0
 
 	def changeIfa(self, ifa):
 		if ifa and len(ifa):
@@ -290,6 +291,7 @@ class Server:
 		if windata:
 			print "windata: ", windata
 		if resp.status == 200 and self.impNumber < self.maxImpressions:
+			time.sleep(60)
 			self.sendImpressionResponse(data, price)
 		return
         
