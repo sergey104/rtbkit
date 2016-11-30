@@ -336,6 +336,7 @@ DefaultDescription()
     addField("cur", &BidResponse::cur, "Currency in which we're bidding");
     addField("customData", &BidResponse::customData, "Custom data to be stored for user");
     addField("ext", &BidResponse::ext, "Extensions");
+
 }
 
 DefaultDescription<OpenRTB::Deal>::

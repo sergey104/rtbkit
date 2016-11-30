@@ -1,8 +1,7 @@
 /* -*- js-mode -*- */
-[
-    {
-        "exchangeType": "appodeal",
-        "listenPort": 17339,
+[    {
+        "exchangeType": "smaato",
+        "listenPort": 17338,
         "bindHost": "0.0.0.0",
         "auctionVerb": "POST",
         "auctionResource": "/auctions",
