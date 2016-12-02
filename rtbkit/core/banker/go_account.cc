@@ -57,6 +57,14 @@ GoAccount::win(Amount winPrice)
     return false;
 }
 
+bool
+GoAccount::imp(Amount winPrice)
+{
+    if (type == POST_AUCTION) return pal->imp(winPrice);
+    else throw ML::Exception("GoAccounts::win: attempt win on non POST_AUCTION account");
+    return false;
+}
+
 Json::Value
 GoAccount::toJson()
 {
@@ -142,33 +150,54 @@ GoRouterAccount::toJson(Json::Value &account)
 GoPostAuctionAccount::GoPostAuctionAccount(const AccountKey &key)
     : GoBaseAccount(key)
 {
-    imp = 0;
+    _imp = 0;
+	_win = 0;
     spend = MicroUSD(0);
+	adjustmentsOut = MicroUSD(0);
+	adjustmentsIn = MicroUSD(0);
 }
 
 GoPostAuctionAccount::GoPostAuctionAccount(Json::Value &json)
     : GoBaseAccount(json)
 {
-    if (json.isMember("imp")) imp = json["imp"].asInt();
-    else imp = 0;
-
-    if (json.isMember("spend")) spend = MicroUSD(json["spend"].asInt());
+    if (json.isMember("imp")) _imp = json["imp"].asInt();
+    else _imp = 0;
+    if (json.isMember("win")) _win = json["imp"].asInt();
+    else _win = 0;
+	
+    if (json.isMember("adjustmentsOut")) adjustmentsOut = MicroUSD(json["adjustmentsOut"].asInt());
+    else adjustmentsOut = MicroUSD(0);
+    if (json.isMember("adjustmentsIn")) adjustmentsIn = MicroUSD(json["adjustmentsIn"].asInt());
+    else adjustmentsIn = MicroUSD(0);
+	if (json.isMember("spend")) spend = MicroUSD(json["spend"].asInt());
     else spend = MicroUSD(0);
 }
 
 bool
 GoPostAuctionAccount::win(Amount winPrice)
 {
+    adjustmentsOut += winPrice;
+    _win += 1;
+    return true;
+}
+
+bool
+GoPostAuctionAccount::imp(Amount winPrice)
+{
     spend += winPrice;
-    imp += 1;
+	adjustmentsIn += winPrice;
+    _imp += 1;
     return true;
 }
 
 void
 GoPostAuctionAccount::toJson(Json::Value &account)
 {
-    account["imp"] = int64_t(imp);
+    account["win"] = int64_t(_win);
+    account["adjustmentsOut"] = adjustmentsOut.value;
+    account["imp"] = int64_t(_imp);
     account["spend"] = spend.value;
+	account["adjustmentsIn"] = adjustmentsIn.value;
     GoBaseAccount::toJson(account);
 }
 
@@ -263,8 +292,11 @@ GoAccounts::replaceFromJsonString(std::string jsonAccount)
         std::lock_guard<std::mutex> guard(this->mutex);
         GoAccount account(json);
         if (account.type == POST_AUCTION &&
-                (account.pal->imp > accounts[key].pal->imp ||
-                account.pal->spend > accounts[key].pal->spend)) {
+                (account.pal->_imp > accounts[key].pal->_imp ||
+                 account.pal->spend > accounts[key].pal->spend  ||
+                 account.pal->_win > accounts[key].pal->_win ||
+                 account.pal->adjustmentsOut > accounts[key].pal->adjustmentsOut ||
+		         account.pal->adjustmentsIn > accounts[key].pal->adjustmentsIn)) {
             accounts[key] = account;
         }
         return true;
@@ -331,6 +363,24 @@ GoAccounts::win(const AccountKey &key, Amount winPrice)
     }
 
     return account->win(winPrice);
+}
+
+bool
+GoAccounts::imp(const AccountKey &key, Amount winPrice)
+{
+    if (!exists(key)) {
+        cout << "account not found, unaccounted win: " << key.toString()
+             << " " << winPrice.toString() << endl;
+        return false;
+    }
+
+    std::lock_guard<std::mutex> guard(this->mutex);
+    auto account = get(key);
+    if (account->type != POST_AUCTION) {
+        throw ML::Exception("GoAccounts::win: attempt win on non POST_AUCTION account");
+    }
+
+    return account->imp(winPrice);
 }
 
 bool

@@ -74,7 +74,8 @@ struct AdServerConnector : public Datacratic::ServiceBase {
                               const Id & impId,
                               Date timestamp,
                               const JsonHolder & eventMeta,
-                              const UserIds & ids);
+                              const UserIds & ids,
+                              Amount winPrice);
 
     /** Publish an user-based event into the post auction loop.
 

@@ -443,6 +443,22 @@ LocalBanker::win(const AccountKey &key, Amount winPrice)
     return winAccounted;
 }
 
+bool
+LocalBanker::imp(const AccountKey &key, Amount winPrice)
+{
+    bool winAccounted = accounts.imp(key.toString() + ":" + accountSuffix, winPrice);
+
+    (winAccounted) ? recordHit("Imp") : recordHit("noImp");
+
+    if (debug) {
+        if (winAccounted)
+            recordHit("account." + key.toString() + ":" + accountSuffixNoDot + ".Imp");
+        else
+            recordHit("account." + key.toString() + ":" + accountSuffixNoDot + ".noImp");
+    }
+    return winAccounted;
+}
+
 MonitorIndicator
 LocalBanker::
 getProviderIndicators() const

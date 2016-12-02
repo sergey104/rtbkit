@@ -30,6 +30,8 @@ std::string toString(CurrencyCode code)
         return "IMP";
     if (code == CurrencyCode::CC_CLK)
         return "CLK";
+    if (code == CurrencyCode::CC_WIN)
+        return "WIN";
     throw ML::Exception("unknown currency code");
 }
 
@@ -45,6 +47,8 @@ CurrencyCode parseCurrencyCode(const std::string & code)
         return CurrencyCode::CC_IMP;
     if (code == "CLK")
         return CurrencyCode::CC_CLK;
+	if (code == "WIN")
+		return CurrencyCode::CC_WIN;
     throw ML::Exception("unknown currency code");
 }
 
@@ -99,6 +103,8 @@ getCurrencyStr(CurrencyCode currencyCode)
         return "IMP";
     case CurrencyCode::CC_CLK:
         return "CLK";
+	case CurrencyCode::CC_WIN:
+		return "WIN";
     default:
         throw ML::Exception("unknown currency code %d", (uint32_t)currencyCode);
     }
@@ -188,6 +194,8 @@ parseCurrency(const std::string & currency)
         return CurrencyCode::CC_IMP;
     if (currency == "CLK")
         return CurrencyCode::CC_CLK;
+	if (currency == "WIN")
+		return CurrencyCode::CC_WIN;
     throw ML::Exception("unknown currency code " + currency);
 }
 

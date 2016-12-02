@@ -129,7 +129,8 @@ publishCampaignEvent(const string & label,
                      const Id & impId,
                      Date timestamp,
                      const JsonHolder & impressionMeta,
-                     const UserIds & ids)
+                     const UserIds & ids,
+                     Amount winPrice)
 { 
     recordHit("receivedEvent");
     recordHit("event." + label);
@@ -142,7 +143,7 @@ publishCampaignEvent(const string & label,
     event->timestamp = timestamp;
     event->uids = ids;
     event->metadata = impressionMeta;
-
+    event->winPrice = winPrice;
     toPostAuctionService_.sendEvent(event);
 }
 

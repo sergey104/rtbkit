@@ -462,6 +462,29 @@ handleDeliveryRq(const HttpHeader & header,
         publishError(response);
         return response;
     }
+    
+    /*
+     *  price is an required field.
+     *  If null, we return an error response.
+     */
+    double winPriceDbl;
+    USD_CPM winPrice;
+	
+	if (json.isMember("winPrice")) {
+//      winPriceDbl = (json["winPrice"].asDouble())*0.001;
+        winPriceDbl = json["winPrice"].asDouble();
+//      winPriceDbls = json["winPrice"].asString();
+//      winPriceDbl = std::stod(winPriceDbls);
+//      writeFile("winprice: " + std::to_string(winPriceDbl));
+        winPrice = USD_CPM(winPriceDbl);
+
+    } else {
+        errorResponseHelper(response,
+                            "MISSING_WINPRICE",
+                            "A campaign event requires the price field.");
+        publishError(response);
+        return response;
+    }    
     /*
      *  UserIds is an optional field.
      *  If null, we just put an empty array.
@@ -541,7 +564,7 @@ handleDeliveryRq(const HttpHeader & header,
     if(response.valid) {
 
         publishCampaignEvent(eventType[event], bidRequestId, impId, timestamp,
-                                 Json::Value(), userIds);
+                                 Json::Value(), userIds, winPrice);
         publisher_.publish(eventType[event], timestamp.print(3), bidRequestIdStr,
                                 impIdStr, userIds.toString());
         analytics_.publish(eventType[event], timestamp.print(3), bidRequestIdStr,

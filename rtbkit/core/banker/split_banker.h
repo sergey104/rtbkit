@@ -78,6 +78,18 @@ struct SplitBanker : public Banker {
         }
     }
 
+    virtual void impBid(const AccountKey & account,
+                        Amount amountPaid,
+                        const LineItems & lineItems = LineItems(),
+						bool impression = true)
+    {
+        if (isLocal(account)) {
+            localBanker->impBid(account, amountPaid, lineItems, impression);
+        } else {
+            masterBanker->impBid(account, amountPaid, lineItems, impression);
+        }
+    }
+    
     virtual void attachBid(const AccountKey & account,
                            const std::string & item,
                            Amount amountAuthorized)
@@ -107,6 +119,16 @@ struct SplitBanker : public Banker {
         }
     }
 
+    virtual void commitImpBid(const AccountKey & account,
+                           Amount amountPaid,
+                           const LineItems & lineItems,
+						   bool impression)
+    {
+        if (!isLocal(account)) {
+            localBanker->commitImpBid(account, amountPaid, lineItems, impression);
+        }
+    }
+    
     virtual void forceWinBid(const AccountKey & account,
                              Amount amountPaid,
                              const LineItems & lineItems)

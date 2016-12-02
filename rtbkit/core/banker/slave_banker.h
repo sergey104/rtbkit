@@ -152,6 +152,14 @@ struct SlaveBanker : public Banker, public MessageLoop {
         accounts.commitBid(account, item, amountPaid, lineItems);
     }
 
+    virtual void commitImpBid(const AccountKey & account,
+                              Amount amountPaid,
+                              const LineItems & lineItems,
+							  bool impression)
+    {
+        accounts.commitImpBid(account, amountPaid, lineItems, impression);
+    }
+    
     virtual Amount detachBid(const AccountKey & account,
                              const std::string & item)
     {
@@ -175,6 +183,16 @@ struct SlaveBanker : public Banker, public MessageLoop {
                                           lineItems);
     }
 
+    virtual void commitImpDetachedBid(const AccountKey & account,
+                                      Amount amountAuthorized,
+                                      Amount amountPaid,
+                                      const LineItems & lineItems)
+    {
+        return accounts.commitDetachedBid(account,
+                                          amountAuthorized, amountPaid,
+                                          lineItems);
+    }
+    
     /**
      * Commit a given Amount to the given accounts
      * This function is built to commit special
@@ -186,6 +204,11 @@ struct SlaveBanker : public Banker, public MessageLoop {
         accounts.commitEvent(account,amountToCommit);
     }
 
+    void commitImpEvent(const AccountKey & account, const Amount & amountToCommit)
+    {
+        accounts.commitImpEvent(account,amountToCommit);
+    }
+    
     virtual void forceWinBid(const AccountKey & account,
                              Amount amountPaid,
                              const LineItems & lineItems)

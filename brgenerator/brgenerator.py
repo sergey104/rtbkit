@@ -33,9 +33,10 @@ class RequestData:
 
 	def makeData(self, maxreq, updata):
 		self.requests = []
-		while len(self.requests) < maxreq:
-			self.update(updata)
-			self.requests.append(copy.deepcopy(self.jsonRequest))
+#		while len(self.requests) < maxreq:
+#			self.update(updata)
+#			self.requests.append(copy.deepcopy(self.jsonRequest))
+		self.requests.append(self.jsonRequest)
 		
 	def changeId(self):
 		self.jsonRequest["id"] = str(uuid.uuid4())
@@ -91,9 +92,9 @@ class RequestData:
 				for segment in data["segment"]:
 					if segment["id"] == "birthday":
 						segment["value"] = birthday[self.bdI]
-						self.bdI = self.bdI + 1
-						if self.bdI >= len(birthday):
-							self.bdI = 0
+			self.bdI = self.bdI + 1
+			if self.bdI >= len(birthday):
+				self.bdI = 0
 
 	def changeIfa(self, ifa):
 		if ifa and len(ifa):
@@ -118,12 +119,14 @@ class RequestData:
 				elif key == "cat":
 					self.changeCat(data["cat"])
 		self.changeId()
+		return self
 
 	def getUserAgent(self):
 		return self.jsonRequest["device"]["ua"]
 
 	def getJsonData(self, idx):
-		return self.requests[idx % len(self.requests)]
+#		return self.requests[idx % len(self.requests)]
+		return self.requests[0]
 
 # -----------------------------------------------------------------------------------------------------------------------
 
@@ -202,7 +205,7 @@ class Server:
 		try:
 			conn = httplib.HTTPConnection(str(self.host), self.impport)
 			conn.request("POST", "/events", params, headers)
-			self.clickNumber = self.clickNumber + 1
+			self.clickNumber += 1
 			resp = conn.getresponse()
 			print resp.status, ":", resp.reason
 			clickdata = resp.read()
@@ -236,7 +239,7 @@ class Server:
 		try:
 			conn = httplib.HTTPConnection(str(self.host), self.impport)
 			conn.request("POST", "/events", params, headers)
-			self.impNumber = self.impNumber + 1
+			self.impNumber += 1
 			resp = conn.getresponse()
 			print resp.status, ":", resp.reason
 			impdata = resp.read()
@@ -278,7 +281,7 @@ class Server:
 		try:
 			conn = httplib.HTTPConnection(str(self.host), 17340)
 			conn.request("POST", "/", params, headers)
-			self.winNumber = self.winNumber + 1
+			self.winNumber += 1
 			resp = conn.getresponse()
 		except:
 			print "Connection error"
@@ -291,7 +294,7 @@ class Server:
 		if windata:
 			print "windata: ", windata
 		if resp.status == 200 and self.impNumber < self.maxImpressions:
-			time.sleep(60)
+			time.sleep(0)
 			self.sendImpressionResponse(data, price)
 		return
         
@@ -310,7 +313,7 @@ class Server:
 		try:
 			conn = httplib.HTTPConnection(str(self.host), self.port)
 			conn.request("POST", "/auctions", params, headers)
-			self.reqNumber = self.reqNumber + 1
+			self.reqNumber += 1
 			print "Sent: ", params, "\n\n"
 			resp = conn.getresponse()
 		except:
@@ -324,6 +327,7 @@ class Server:
 			print "data: ", data, "\n\n"
 		conn.close()
 		if data and self.winNumber < self.maxWins:
+			time.sleep(0)
 			self.sendWinResponse(data)
 		return self.maxRequests - self.reqNumber
 
@@ -376,7 +380,8 @@ class RequestThread:
 		rqbase.close()
 	
 	def run(self):
-		while self.server.sendRequest(self.rd) > 0:
+		self.rd.update(self.rupdate)
+		while self.server.sendRequest(self.rd.update(self.rupdate)) > 0:
 			if self.delay != 0:
 				time.sleep(self.delay)
 

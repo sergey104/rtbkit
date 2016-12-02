@@ -90,6 +90,14 @@ struct LocalBanker : public Banker, Datacratic::MessageLoop, Datacratic::Service
     }
 
     virtual void
+    commitImpBid(const AccountKey & account,
+                 Amount amountPaid,
+                 const LineItems & lineItems,
+				 bool impression)
+    {
+    }
+    
+    virtual void
     forceWinBid(const AccountKey & account,
                 Amount amountPaid,
                 const LineItems & lineItems)
@@ -116,6 +124,7 @@ private:
     bool bid(const AccountKey &key, Amount bidPrice);
 
     bool win(const AccountKey &key, Amount winPrice);
+    bool imp(const AccountKey &key, Amount winPrice);
 
     GoAccountType type;
     std::string accountSuffix;

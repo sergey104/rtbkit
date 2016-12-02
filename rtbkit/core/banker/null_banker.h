@@ -58,6 +58,11 @@ public:
                            Amount amountPaid,
                            const LineItems & lineItems);
 
+    virtual void commitImpBid(const AccountKey & account,
+                              Amount amountPaid,
+                              const LineItems & lineItems,
+							  bool impression);
+	
     virtual void forceWinBid(const AccountKey & account,
                              Amount amountPaid,
                              const LineItems & lineItems);

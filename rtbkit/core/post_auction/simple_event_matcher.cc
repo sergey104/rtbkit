@@ -136,6 +136,12 @@ expireFinished(const pair<Id, Id> & key, const FinishedInfo & info)
 {
     spotIdMap.erase(key.first);
 
+	if (!info.campaignEvents.hasEvent("IMPRESSION")) {
+		Amount price = info.winPrice;
+		const Auction::Response & response = info.bid;
+		const AccountKey & account = response.account;
+		banker->impBid(account, price, LineItems(), false);
+	}
     recordHit("finishedAuctionExpiry");
     return Date();
 }
@@ -409,6 +415,7 @@ doCampaignEvent(std::shared_ptr<PostAuctionEvent> event)
     Date timestamp = event->timestamp;
     const JsonHolder & meta = event->metadata;
     const UserIds & uids = event->uids;
+	Amount winPrice = event->winPrice;
 
     SubmissionInfo submissionInfo;
     FinishedInfo finishedInfo;
@@ -468,6 +475,15 @@ doCampaignEvent(std::shared_ptr<PostAuctionEvent> event)
 
         finished.get(key) = finishedInfo;
 
+		/* Added to handle impression */
+		if(event->label == "IMPRESSION") {
+			Amount price = winPrice;
+			const Auction::Response & response = finishedInfo.bid;
+			const AccountKey & account = response.account;
+		
+			banker->impBid(account, price, LineItems(), true);
+		}
+		
         doMatchedCampaignEvent(
                 std::make_shared<MatchedCampaignEvent>(label, finishedInfo));
     }
@@ -489,6 +505,7 @@ doCampaignEvent(std::shared_ptr<PostAuctionEvent> event)
         recordHit("delivery.%s.auctionNotFound", label);
         doError("doCampaignEvent.auctionNotFound" + label,
                    "auction not found for delivery message");
+
         recordUnmatched("auctionNotFound");
     }
 }

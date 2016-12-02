@@ -40,17 +40,22 @@ struct GoRouterAccount : public GoBaseAccount {
     Amount accumulateBalance(const Amount & newBalance);
     bool bid(Amount bidPrice);
     bool win(Amount winPrice) { return false; }
+    bool imp(Amount winPrice) { return false; }
     void toJson(Json::Value &account);
 };
 
 struct GoPostAuctionAccount : public GoBaseAccount {
-    std::atomic<int64_t> imp;
+    std::atomic<int64_t> _imp;
+	std::atomic<int64_t> _win;
     Amount spend;
+	Amount adjustmentsOut;
+	Amount adjustmentsIn;
 
     GoPostAuctionAccount(const AccountKey &key);
     GoPostAuctionAccount(Json::Value &jsonAccount);
     bool bid(Amount bidPrice) { return false; }
     bool win(Amount winPrice);
+	bool imp(Amount winPrice);
     void toJson(Json::Value &account);
 };
 
@@ -69,6 +74,7 @@ struct GoAccount {
     GoAccount(Json::Value &jsonAccount);
     bool bid(Amount bidPrice);
     bool win(Amount winPrice);
+	bool imp(Amount winPrice);
     Json::Value toJson();
 };
 
@@ -87,6 +93,7 @@ struct GoAccounts {
     Amount getBalance(const AccountKey &key);
     bool bid(const AccountKey &key, Amount bidPrice);
     bool win(const AccountKey &key, Amount winPrice);
+	bool imp(const AccountKey &key, Amount winPrice);
     Json::Value toJson();
 
 private:

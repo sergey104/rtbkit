@@ -317,7 +317,14 @@ public:
     {
         return commitBid(account, item, amountPaid, lineItems);
     }
-    
+
+    virtual void impBid(const AccountKey & account,
+                        Amount amountPaid,
+                        const LineItems & lineItems = LineItems(), bool impression = true)
+    {
+        return commitImpBid(account, amountPaid, lineItems, impression);
+    }
+
     virtual void attachBid(const AccountKey & account,
                            const std::string & item,
                            Amount amountAuthorized) = 0;
@@ -333,6 +340,14 @@ public:
                            Amount amountPaid,
                            const LineItems & lineItems) = 0;
 
+    /** Commit a impression of bid.  This is used internally to impress bids.
+        Asynchonous and returns no value.
+    */
+    virtual void commitImpBid(const AccountKey & account,
+                              Amount amountPaid,
+                              const LineItems & lineItems,
+							  bool impression) = 0;
+						   
     /*
      * This is for the case when bids come in late. In this case because of the
      * fact that all bids are cancelled if they time out (tryCancelBid) we will

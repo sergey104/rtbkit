@@ -257,11 +257,25 @@ public:
             ExcAssert(allocatedOut.isNonNegative());
 
             // Credit and debit sides must balance out
-            CurrencyPool credit = (budgetIncreases + recycledIn + commitmentsRetired
-                                   + adjustmentsIn + allocatedIn);
-            CurrencyPool debit = (budgetDecreases + recycledOut + commitmentsMade + spent
-                                  + adjustmentsOut + balance
-                                  + allocatedOut);
+            CurrencyPool credit = (budgetIncreases + recycledIn + commitmentsRetired + adjustmentsIn + allocatedIn);
+            CurrencyPool debit = (budgetDecreases + recycledOut + commitmentsMade + spent + adjustmentsOut + balance + allocatedOut);
+
+/*			
+			std::cerr << "DEBUG: account: " << *this << std::endl;
+			std::cerr << "DEBUG: budgetIncreases = " << budgetIncreases << std::endl;
+			std::cerr << "DEBUG: recycledIn = " << recycledIn << std::endl;
+			std::cerr << "DEBUG: commitmentsRetired = " << commitmentsRetired << std::endl;
+			std::cerr << "DEBUG: adjustmentsIn = " << adjustmentsIn << std::endl;
+			std::cerr << "DEBUG: allocatedIn = " << allocatedIn << std::endl;
+			std::cerr << "DEBUG: budgetDecreases = " << budgetDecreases << std::endl;
+			std::cerr << "DEBUG: recycledOut = " << recycledOut << std::endl;
+			std::cerr << "DEBUG: commitmentsMade = " << commitmentsMade << std::endl;
+			std::cerr << "DEBUG: spent = " << spent << std::endl;
+			std::cerr << "DEBUG: adjustmentsOut = " << adjustmentsOut << std::endl;
+			std::cerr << "DEBUG: balance = " << balance << std::endl;
+			std::cerr << "DEBUG: allocatedOut = " << allocatedOut << std::endl;
+*/			
+			
             ExcAssertEqual(credit, debit);
         } catch (...) {
             using namespace std;
@@ -290,7 +304,7 @@ public:
         balance.clear();
 
         checkInvariants();
-
+		
         return result;
     }
     
@@ -448,10 +462,12 @@ struct ShadowAccount {
     // credit
     CurrencyPool netBudget;          ///< net of fields not mentioned here
     CurrencyPool commitmentsRetired;
+	CurrencyPool adjustmentsIn;
 
     // debit
     CurrencyPool commitmentsMade;
     CurrencyPool spent;
+	CurrencyPool adjustmentsOut;
 
     CurrencyPool balance;  /// DERIVED; debit - credit
 
@@ -477,8 +493,8 @@ struct ShadowAccount {
             ExcAssert(commitmentsMade.isNonNegative());
             ExcAssert(spent.isNonNegative());
             
-            CurrencyPool credit = netBudget + commitmentsRetired;
-            CurrencyPool debit = commitmentsMade + spent + balance;
+            CurrencyPool credit = netBudget + commitmentsRetired + adjustmentsIn;
+            CurrencyPool debit = commitmentsMade + spent + balance + adjustmentsOut;
             
             ExcAssertEqual(credit, debit);
         } catch (...) {
@@ -500,6 +516,8 @@ struct ShadowAccount {
         result["commitmentsRetired"] = commitmentsRetired.toJson();
         result["commitmentsMade"] = commitmentsMade.toJson();
         result["spent"] = spent.toJson();
+		result["adjustmentsOut"] = adjustmentsOut.toJson();
+		result["adjustmentsIn"] = adjustmentsIn.toJson();
         result["lineItems"] = lineItems.toJson();
         result["balance"] = balance.toJson();
 
@@ -524,6 +542,8 @@ struct ShadowAccount {
         result.commitmentsRetired = CurrencyPool::fromJson(val["commitmentsRetired"]);
         result.commitmentsMade = CurrencyPool::fromJson(val["commitmentsMade"]);
         result.spent = CurrencyPool::fromJson(val["spent"]);
+		result.adjustmentsOut = CurrencyPool::fromJson(val["adjustmentsOut"]);
+		result.adjustmentsIn = CurrencyPool::fromJson(val["adjustmentsIn"]);
         result.balance = CurrencyPool::fromJson(val["balance"]);
         result.lineItems = LineItems::fromJson(val["lineItems"]);
 
@@ -551,27 +571,59 @@ struct ShadowAccount {
         Amount amountUnspent = amountAuthorized - amountPaid;
         balance += amountUnspent;
         commitmentsRetired += amountAuthorized;
-        spent += amountPaid;
+        //spent += amountPaid;
+		adjustmentsOut += amountPaid;
 
         if(amountPaid) {
-            // Increase the number of impressions by 1
+            // Increase the number of win by 1
             // whenever an amount is paid for a bid
-            commitEvent(Amount(CurrencyCode::CC_IMP, 1.0));
+            commitEvent(Amount(CurrencyCode::CC_WIN, 1.0));
         }
 
         this->lineItems += lineItems;
         checkInvariants();
     }
 
+    void commitImpDetachedBid(Amount amountPaid,
+                              const LineItems & lineItems,
+							  bool impression)
+    {
+        checkInvariants();
+		if(impression)
+			spent += amountPaid;
+		else
+			balance += amountPaid;
+		
+		adjustmentsIn += amountPaid;
+
+        if(impression && amountPaid) {
+            // Increase the number of impressions by 1
+            // whenever an amount is paid for a bid
+            commitImpEvent(Amount(CurrencyCode::CC_IMP, 1.0));
+        }
+		
+        this->lineItems += lineItems;
+        checkInvariants();
+    }
+    
     /// Commit a specific currency (amountToCommit)
     void commitEvent(const Amount & amountToCommit)
     {
         checkInvariants();
-        spent += amountToCommit;
-        commitmentsRetired += amountToCommit;
+		adjustmentsOut += amountToCommit;
+		commitmentsRetired += amountToCommit;
         checkInvariants();
     }
 
+    /// Commit a specific currency (amountToCommit)
+    void commitImpEvent(const Amount & amountToCommit)
+    {
+        checkInvariants();
+		spent += amountToCommit;
+		adjustmentsIn += amountToCommit;
+        checkInvariants();
+    }
+    
     /*************************************************************************/
     /* SPEND AUTHORIZATION                                                   */
     /*************************************************************************/
@@ -601,11 +653,18 @@ struct ShadowAccount {
         commitDetachedBid(detachBid(item), amountPaid, lineItems);
     }
 
+    void commitImpBid(Amount amountPaid,
+                      const LineItems & lineItems,
+					  bool impression)
+    {
+        commitImpDetachedBid(amountPaid, lineItems, impression);
+    }
+    
     void cancelBid(const std::string & item)
     {
         commitDetachedBid(detachBid(item), Amount(), LineItems());
     }
-    
+
     Amount detachBid(const std::string & item)
     {
         checkInvariants();
@@ -650,6 +709,10 @@ struct ShadowAccount {
             = commitmentsRetired - masterAccount.commitmentsRetired;
         CurrencyPool newSpend
             = spent - masterAccount.spent;
+		CurrencyPool newAdjustmentsOut
+		    = adjustmentsOut - masterAccount.adjustmentsOut;
+		CurrencyPool newAdjustmentsIn
+		    = adjustmentsIn - masterAccount.adjustmentsIn;
 
         ExcAssert(newCommitmentsMade.isNonNegative());
         ExcAssert(newCommitmentsRetired.isNonNegative());
@@ -658,9 +721,11 @@ struct ShadowAccount {
         masterAccount.commitmentsRetired = commitmentsRetired;
         masterAccount.commitmentsMade = commitmentsMade;
         masterAccount.spent = spent;
+		masterAccount.adjustmentsOut = adjustmentsOut;
+		masterAccount.adjustmentsIn = adjustmentsIn;
 
         masterAccount.balance
-            += (newCommitmentsRetired - newCommitmentsMade - newSpend);
+            += (newCommitmentsRetired - newCommitmentsMade - newSpend - newAdjustmentsOut + newAdjustmentsIn);
 
         masterAccount.lineItems = lineItems;
 
@@ -677,8 +742,8 @@ struct ShadowAccount {
 
         // net budget: balance assuming spent, commitments are zero
         netBudget = masterAccount.getNetBudget();
-        balance = netBudget + commitmentsRetired
-            - commitmentsMade - spent;
+        balance = netBudget + commitmentsRetired + adjustmentsIn
+            - commitmentsMade - spent - adjustmentsOut;
 
         status = masterAccount.status;
         checkInvariants();
@@ -706,9 +771,11 @@ struct ShadowAccount {
         commitmentsMade += masterAccount.commitmentsMade;
         commitmentsRetired += masterAccount.commitmentsRetired;
         spent += masterAccount.spent;
+		adjustmentsOut += masterAccount.adjustmentsOut;
+		adjustmentsIn += masterAccount.adjustmentsIn;
         lineItems += masterAccount.lineItems;
 
-        balance = netBudget + commitmentsRetired - commitmentsMade - spent;
+        balance = netBudget + commitmentsRetired + adjustmentsIn - commitmentsMade - spent - adjustmentsOut;
 
         checkInvariants();
     }
@@ -1526,13 +1593,22 @@ struct ShadowAccounts {
         return getAccountImpl(accountKey).commitBid(item, amountPaid, lineItems);
     }
 
+    void commitImpBid(const AccountKey & accountKey,
+                      Amount amountPaid,
+                      const LineItems & lineItems,
+					  bool impression)
+    {
+        Guard guard(lock);
+        return getAccountImpl(accountKey).commitImpBid(amountPaid, lineItems, impression);
+    }
+    
     void cancelBid(const AccountKey & accountKey,
                    const std::string & item)
     {
         Guard guard(lock);
         return getAccountImpl(accountKey).cancelBid(item);
     }
-    
+
     void forceWinBid(const AccountKey & accountKey,
                      Amount amountPaid,
                      const LineItems & lineItems)
@@ -1552,6 +1628,18 @@ struct ShadowAccounts {
             .commitDetachedBid(amountAuthorized, amountPaid, lineItems);
     }
 
+    /// Commit a bid that has been detached from its tracking
+    void commitImpDetachedBid(const AccountKey & accountKey,
+                           Amount amountAuthorized,
+                           Amount amountPaid,
+                           const LineItems & lineItems,
+						   bool impression)
+    {
+        Guard guard(lock);
+        return getAccountImpl(accountKey)
+            .commitImpDetachedBid(amountPaid, lineItems, impression);
+    }
+    
     /// Commit a specific currency (amountToCommit)
     void commitEvent(const AccountKey & accountKey, const Amount & amountToCommit)
     {
@@ -1559,6 +1647,13 @@ struct ShadowAccounts {
         return getAccountImpl(accountKey).commitEvent(amountToCommit);
     }
 
+    /// Commit a specific currency (amountToCommit)
+    void commitImpEvent(const AccountKey & accountKey, const Amount & amountToCommit)
+    {
+        Guard guard(lock);
+        return getAccountImpl(accountKey).commitImpEvent(amountToCommit);
+    }
+    
     Amount detachBid(const AccountKey & accountKey,
                      const std::string & item)
     {

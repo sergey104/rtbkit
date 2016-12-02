@@ -81,6 +81,16 @@ commitBid(const AccountKey & account,
 //----------------------------------------------------------------------
 void
 NullBanker::
+commitImpBid(const AccountKey & account,
+             Amount amountPaid,
+             const LineItems & lineItems,
+			 bool impression)
+{
+}
+
+//----------------------------------------------------------------------
+void
+NullBanker::
 forceWinBid(const AccountKey & account,
             Amount amountPaid,
             const LineItems & lineItems)

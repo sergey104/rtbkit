@@ -76,7 +76,8 @@ HttpAdServerResponse AppodealAdServerConnector::handleEvent(PostAuctionEvent con
                              event.adSpotId,
                              event.timestamp,
                              Json::Value(),
-                             event.uids);
+                             event.uids,
+                             event.winPrice);
     }
 
     return response;

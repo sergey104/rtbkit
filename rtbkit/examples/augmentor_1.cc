@@ -52,32 +52,32 @@ const size_t NO_LIMIT = static_cast<size_t>(-1);
  */
 struct FrequencyCapStorage
 {
-    bool isKeysExist(const RTBKIT::AccountKey& account, const RTBKIT::UserIds& uids)
+    bool isKeysExist(const RTBKIT::AccountKey& account, const std::string& uid)
     {
-        //std::cerr << "DEBUG: check key: " << account << "/" << uids.exchangeId.toString() << std::endl;
+        //std::cerr << "DEBUG: check key: " << account << "/" << uid << std::endl;
         lock_guard<mutex> guard(lock);
         auto it = counters.find(account.toString());
         if(it == counters.end())
             return false;
-        else if(it->second.find(uids.exchangeId.toString()) == it->second.end())
+        else if(it->second.find(uid) == it->second.end())
             return false;
         
-        //std::cerr << "DEBUG: check key: " << account << "/" << uids.exchangeId.toString() << " found."<< std::endl;
+        //std::cerr << "DEBUG: check key: " << account << "/" << uid << " found."<< std::endl;
         return true;
     }    
     
-    Counters_t getCounters(const RTBKIT::AccountKey& account, const RTBKIT::UserIds& uids)
+    Counters_t getCounters(const RTBKIT::AccountKey& account, const std::string& uid)
     {
-        //std::cerr << "DEBUG: get counters: " << account << "/" << uids.exchangeId.toString() << std::endl;
+        //std::cerr << "DEBUG: get counters: " << account << "/" << uid << std::endl;
         lock_guard<mutex> guard(lock);
-        return counters[account.toString()][uids.exchangeId.toString()];
+        return counters[account.toString()][uid];
     }
 
-    void setCounters(const RTBKIT::AccountKey& account, const RTBKIT::UserIds& uids, Counters_t& cntrs)
+    void setCounters(const RTBKIT::AccountKey& account, const std::string& uid, Counters_t& cntrs)
     {
-        //std::cerr << "DEBUG: set counters: " << account << "/" << uids.exchangeId.toString() << std::endl;
+        //std::cerr << "DEBUG: set counters: " << account << "/" << uid << std::endl;
         lock_guard<mutex> guard(lock);
-        counters[account.toString()][uids.exchangeId.toString()] = cntrs;
+        counters[account.toString()][uid] = cntrs;
     }
 
 private:
@@ -133,9 +133,17 @@ init()
         {
             RTBKIT::AccountKey account(msg[11].toString());
             Json::Value req = Json::parse(msg[4].toString());
-            RTBKIT::UserIds uids = RTBKIT::UserIds::createFromString(req["userIds"].toString());
+			Json::Value device = req["device"];
+			
+			//std::cerr << "DEBUG: devices: " << device.toString() << std::endl;
+			
+			Json::Value ifa = device["ifa"];
+			
+			//std::cerr << "DEBUG: ifa: " << ifa.asString() << std::endl;
+			
+            std::string uids = ifa.asString();
 
-            //std::cerr << "DEBUG: account/uids: " << account << "/" << uids.exchangeId.toString() << std::endl;
+            //std::cerr << "DEBUG: account/uids: " << account << "/" << uids << std::endl;
             
             Counters_t counters;
             if(storage->isKeysExist(account, uids))
@@ -153,6 +161,7 @@ init()
                 std::cerr << "DEBUG: " << idx++ << ": " << it.toString() << std::endl;
             }
             */
+            
             
             ++counters.perHourCounter.counter;
             ++counters.perDayCounter.counter;
@@ -182,7 +191,7 @@ onRequest(const RTBKIT::AugmentationRequest& request)
 
     RTBKIT::AugmentationList result;
 
-    const RTBKIT::UserIds& uids = request.bidRequest->userIds;
+    const string& uids = request.bidRequest->device->ifa;
 
     for (const string& agent : request.agents) {
 
@@ -201,11 +210,13 @@ onRequest(const RTBKIT::AugmentationRequest& request)
         }
 
         const RTBKIT::AccountKey& account = config.config->account;
+		
+		//std::cerr << "DEBUG: " << "account: " << account << "  uids: " << uids  << std::endl;
 
         if (storage->isKeysExist(account, uids)) {
 
             Counters_t counters = storage->getCounters(account, uids);
-            //std::cerr << "DEBUG: " << "account: " << account << "  uids: " << uids.exchangeId.toString() << " counts: " << std::endl;
+            //std::cerr << "DEBUG: " << "account: " << account << "  uids: " << uids << " counts: " << std::endl;
             //std::cerr << "DEBUG: \t\t\t    per hour: " << counters.perHourCounter.counter << std::endl;
             //std::cerr << "DEBUG: \t\t\t     per day: " << counters.perDayCounter.counter << std::endl;
             //std::cerr << "DEBUG: \t\t\t      common: " << counters.commonCounter << std::endl;
