@@ -114,6 +114,9 @@ struct FixedPriceBiddingAgent :
                 config.fromJson(creatives);
                 
                 //
+				if(agent.isMember("pacing")) {
+					paceRate = RTBKIT::Amount::fromJson(agent["pacing"]);
+				}
                 for(auto cr_it: config.creatives) {
                     for(auto pd_it: agent["data"]) {
                         if(cr_it.id == pd_it["id"].asInt()) {
@@ -218,7 +221,7 @@ struct FixedPriceBiddingAgent :
         }
 
         // Make sure we have 1$ to spend for the next period.
-        budgetController.topupTransferSync(config.account, USD(1));
+        budgetController.topupTransferSync(config.account, paceRate);
     }
 
 
@@ -232,6 +235,8 @@ struct FixedPriceBiddingAgent :
     
     // V2 data
     std::vector<PriceData_t> priceTable;
+	// V2.1 data
+	RTBKIT::Amount paceRate = USD(1);
 };
 
 } // namepsace RTBKIT
