@@ -67,9 +67,9 @@ struct Dummy
 using RTBKIT::CreativeConfiguration;
 typedef CreativeConfiguration<Dummy> TestCreativeConfiguration;
 
-RTBKIT::Creative example1 = RTBKIT::Creative::sampleLB;
-RTBKIT::Creative example2 = RTBKIT::Creative::sampleBB;
-RTBKIT::Creative example3 = RTBKIT::Creative::sampleWS;
+RTBKIT::Creative example1 = RTBKIT::Creative::sample1S;
+RTBKIT::Creative example2 = RTBKIT::Creative::sample2S;
+RTBKIT::Creative example3 = RTBKIT::Creative::sample3S;
 
 BOOST_AUTO_TEST_CASE(test_basic)
 {

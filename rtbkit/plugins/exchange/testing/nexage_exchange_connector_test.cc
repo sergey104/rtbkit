@@ -88,9 +88,9 @@ BOOST_AUTO_TEST_CASE( test_nexage )
     TestAgent agent(proxies, "BOB");
     agent.config.account = {"janCampaign", "janStrat"};
     agent.config.maxInFlight = 20000;
-    agent.config.creatives.push_back(RTBKIT::Creative::sampleLB);
-    agent.config.creatives.push_back(RTBKIT::Creative::sampleWS);
-    agent.config.creatives.push_back(RTBKIT::Creative::sampleBB);
+    agent.config.creatives.push_back(RTBKIT::Creative::sample1S);
+    agent.config.creatives.push_back(RTBKIT::Creative::sample2S);
+    agent.config.creatives.push_back(RTBKIT::Creative::sample3S);
     std::string portName = std::to_string(port);
     std::string hostName = ML::fqdn_hostname(portName) + ":" + portName;
 

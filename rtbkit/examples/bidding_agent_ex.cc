@@ -102,34 +102,36 @@ cerr << "bidding" << endl;
         config.account = {"hello", "world"};
 
         // Specify the properties of the creatives we are trying to show.
-        config.creatives.push_back(Creative::sampleLB);
-        config.creatives.push_back(Creative::sampleWS);
-        config.creatives.push_back(Creative::sampleBB);
-        config.creatives.push_back(Creative::sampleAA);
-        config.creatives.push_back(Creative::sampleCC);
-        config.creatives.push_back(Creative::sampleDD);
-        config.creatives.push_back(Creative::sampleRR);
-        config.creatives.push_back(Creative::sample1);
-        config.creatives.push_back(Creative::sample2);
-        config.creatives.push_back(Creative::sample3);
-        config.creatives.push_back(Creative::sample4);
+        config.creatives.push_back(Creative::sample1S);
+        config.creatives.push_back(Creative::sample2S);
+        config.creatives.push_back(Creative::sample3S);
+        config.creatives.push_back(Creative::sample4S);
+        config.creatives.push_back(Creative::sample5S);
+        config.creatives.push_back(Creative::sample6S);
+        config.creatives.push_back(Creative::sample7S);
+        config.creatives.push_back(Creative::sample8S);
+        config.creatives.push_back(Creative::sample9S);
+        config.creatives.push_back(Creative::sample10S);
+        config.creatives.push_back(Creative::sample11S);
+        config.creatives.push_back(Creative::sample1A);
+        //config.creatives.push_back(Creative::sample2A);
 
-        config.providerConfig["smaato"]["seat"] = "12";
+
       //  config.providerConfig["smaato"]["iurl"] = "http://www.gnu.org";
-  /*      std::string mr = R"(<script src='mraid.js'></script>)";
+        std::string mr = R"(<script src='mraid.js'></script>)";
 
-        std::string s1 = R"(<script> var impressionTrackers = ["http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=fil&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var clickTrackers = ["http://nurl.5kszypekn4.eu-west-1.elasticbeanstalk.com/?action=event&user=fil&type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var targetLink = "http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; )";
+        std::string z1 = R"(<script> var impressionTrackers = ["http://54.229.80.225/?action=event&user=fil&type=IMPRESSION&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var clickTrackers = ["http://54.229.80.225/?action=event&user=fil&type=CLICK&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"]; var targetLink = "http://178.124.156.242:17343?auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_BID_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}"; var trackClick = function() {  sendClicks(); mraid.open(targetLink); }; )";
 
-        std::string s2 = R"(var showAd = function(){if (mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) {  if (viewable) {  mraid.removeEventListener('viewableChange', showAd); sendImpression(); }  }); } }; )";
+        std::string z2 = R"(var showAd = function(){if (mraid.isViewable()) { sendImpression(); } else { mraid.addEventListener('viewableChange', function (viewable) {  if (viewable) {  mraid.removeEventListener('viewableChange', showAd); sendImpression(); }  }); } }; )";
 
-        std::string s3 = R"(var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker;  hiddenSpan.appendChild(img);  document.body.appendChild(hiddenSpan);  });    }; )";
+        std::string z3 = R"(var sendClicks = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display ='none'; clickTrackers.forEach(function(tracker) { var img = document.createElement('img'); img.src = tracker;  hiddenSpan.appendChild(img);  document.body.appendChild(hiddenSpan);  });    }; )";
 
-        std::string s4 = R"( var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img');  img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan);  });  }; )";
+        std::string z4 = R"( var sendImpression = function() { var hiddenSpan = document.createElement('span'); hiddenSpan.style.display = 'none'; impressionTrackers.forEach(function(tracker) { var img = document.createElement('img');  img.src = tracker; hiddenSpan.appendChild(img); document.body.appendChild(hiddenSpan);  });  }; )";
 
-        std::string s5 = R"(if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd();  }</script>)";
+        std::string z5 = R"(if (mraid.getState() === 'loading') { mraid.addEventListener('ready', showAd); } else { showAd();  }</script>)";
 
-        std::string img = R"(<img style='height: 100%; width: auto;' src='http://amadoad-dev.eu-west-1.elasticbeanstalk.com/_banners/a4/75/a4757c5908c8ed6805d23dd44c8d8098b2f7b28e.png' onclick='trackClick()'> )";
-*/
+        std::string img = R"(<img style='height: 100%; width: auto;' src='https://devdash.amadoad.com/_banners/d6/f8/d6f8c637a1dc7933dc602dd6ce1c51e7cd69a316.gif' onclick='trackClick()'> )";
+
         std::string s1 = R"(<ad xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="smaato_ad_v0.9.xsd" modelVersion="0.9"><imageAd>)";
         std::string s2 = R"(<clickUrl>http://reports.ubimo.com/fb?b=JdZQFdbCARgKMURHWGhvUVl0bSMBJeAhAA&amp;c=Mzo6&amp;)";
         std::string s3 = R"(t=https%3A%2F%2Fad.doubleclick.net%2Fddm%2Fclk%2F292804678%3B119963336%3Bw%3Fhttp%3A%2F%2Fwww.academy.com%2)";
@@ -190,6 +192,14 @@ cerr << "bidding" << endl;
                          s6 = R"(<height>50</height>)";
                          s7 = R"(<width>320</width>)";
                         break;
+                    case 11:
+                         s6 = R"(<height>50</height>)";
+                         s7 = R"(<width>320</width>)";
+                        break;
+                    case 12:
+                         s6 = R"(<height>90</height>)";
+                         s7 = R"(<width>728</width>)";
+                        break;
                     default:
                          s6 = R"(<height>50</height>)";
                         s7 = R"(<width>320</width>)";
@@ -197,6 +207,8 @@ cerr << "bidding" << endl;
 
                     }
 
+                  if(c.id <= 10)  {
+                      config.providerConfig["smaato"]["seat"] = "12";
                     c.providerConfig["smaato"]["adm"] = s1 + s2 + s3 + s4 + s5 +s6 + s7 + s8 + s9 + s10 +s11 + s12 + s13;
 
 
@@ -218,6 +230,26 @@ cerr << "bidding" << endl;
                     c.providerConfig["smaato"]["mimeTypes"][0] = "image/jpeg";
                      c.providerConfig["smaato"]["mimeTypes"][0] = "image/png";
                       c.providerConfig["smaato"]["mimeTypes"][0] = "image/gif";
+                  }
+                  else
+                  {
+                     config.providerConfig["appodeal"]["seat"] = "12";
+                      c.providerConfig["appodeal"]["adm"] = mr + z1 + z2 + z3 + z4 + z5 +img;
+                     c.providerConfig["appodeal"]["uniq_id"] = "world:" + c.name;
+
+                     c.providerConfig["appodeal"]["nurl"] = "http://54.229.80.225?action=nurl&user=fil&auctionId=${AUCTION_ID}&bidRequestId=${AUCTION_ID}&impId=${AUCTION_IMP_ID}&winPrice=${AUCTION_PRICE}";
+
+
+                     c.providerConfig["appodeal"]["iurl"] = "https://devdash.amadoad.com/_banners/d6/f8/d6f8c637a1dc7933dc602dd6ce1c51e7cd69a316.gif";
+
+                     c.providerConfig["appodeal"]["group_class"] = "group_class";
+                     c.providerConfig["appodeal"]["adid"] = "123476";
+                     c.providerConfig["appodeal"]["crid"] = "123476";
+                     c.providerConfig["appodeal"]["adomain"][0] = "adm.com";
+
+
+
+                  }
 
                 }
 

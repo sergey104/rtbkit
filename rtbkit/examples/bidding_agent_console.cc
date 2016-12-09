@@ -24,9 +24,9 @@ int main() {
     config.account = { "testCampaign", "testStrategy" };
     config.maxInFlight = 20000;
     config.minTimeAvailableMs = 0;
-    config.creatives.push_back(Creative::sampleLB);
-    config.creatives.push_back(Creative::sampleWS);
-    config.creatives.push_back(Creative::sampleBB);
+    config.creatives.push_back(Creative::sample1S);
+    config.creatives.push_back(Creative::sample2S);
+    config.creatives.push_back(Creative::sample3S);
 
     bool bidding = false;
 

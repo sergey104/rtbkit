@@ -111,9 +111,9 @@ int main(int argc, char ** argv)
 
     RTBKIT::AgentConfig config;
     config.maxInFlight = 20000;
-    config.creatives.push_back(RTBKIT::Creative::sampleLB);
-    config.creatives.push_back(RTBKIT::Creative::sampleWS);
-    config.creatives.push_back(RTBKIT::Creative::sampleBB);
+    config.creatives.push_back(RTBKIT::Creative::sample1S);
+    config.creatives.push_back(RTBKIT::Creative::sample2S);
+    config.creatives.push_back(RTBKIT::Creative::sample3S);
 
     // create a router proxy and start it.
     // will start polling in a dedicated thread

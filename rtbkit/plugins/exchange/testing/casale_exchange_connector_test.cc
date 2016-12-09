@@ -101,9 +101,9 @@ BOOST_AUTO_TEST_CASE ( test_bid_request_exchange )
 
     AgentConfig config;
     config.account = { "campaign", "strategy" };
-    config.creatives.push_back(Creative::sampleLB);
-    config.creatives.push_back(Creative::sampleWS);
-    config.creatives.push_back(Creative::sampleBB);
+    config.creatives.push_back(Creative::sample1S);
+    config.creatives.push_back(Creative::sample2S);
+    config.creatives.push_back(Creative::sample3S);
 
     config.providerConfig["casale"]["seat"] = 3122;
 

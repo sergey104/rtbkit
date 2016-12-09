@@ -8,5 +8,15 @@
         "performNameLookup": false,
         "numThreads": 2,
         "slowModeTimeout":100000000
+    },
+{
+        "exchangeType": "appodeal",
+        "listenPort": 17339,
+        "bindHost": "0.0.0.0",
+        "auctionVerb": "POST",
+        "auctionResource": "/auctions",
+        "performNameLookup": false,
+        "numThreads": 2,
+        "slowModeTimeout":100000000
     }
 ]

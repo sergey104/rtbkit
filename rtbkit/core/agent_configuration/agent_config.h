@@ -38,17 +38,19 @@ struct Creative {
             const std::string dealId = "");
 
     // Three samples that can be used for testing...
-    static const Creative sampleLB; //
-    static const Creative sampleBB; //
-    static const Creative sampleWS;
-    static const Creative sampleAA;
-    static const Creative sampleCC;
-    static const Creative sampleDD;
-    static const Creative sampleRR;
-    static const Creative sample1;
-    static const Creative sample2;
-    static const Creative sample3;
-    static const Creative sample4;
+    static const Creative sample1S; //
+    static const Creative sample2S; //
+    static const Creative sample3S;
+    static const Creative sample4S;
+    static const Creative sample5S;
+    static const Creative sample6S;
+    static const Creative sample7S;
+    static const Creative sample8S;
+    static const Creative sample9S;
+    static const Creative sample10S;
+    static const Creative sample11S;
+    static const Creative sample1A;
+    static const Creative sample2A;
 
 
     void fromJson(const Json::Value & val);

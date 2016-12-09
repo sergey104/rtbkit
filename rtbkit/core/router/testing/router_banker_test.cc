@@ -58,9 +58,9 @@ struct TestAgent: public BiddingAgent {
         config.campaign = "TestCampaign";
         config.strategy = "strategy1";
         config.maxInFlight = 20000;
-        config.creatives.push_back(Creative::sampleLB);
-        config.creatives.push_back(Creative::sampleWS);
-        config.creatives.push_back(Creative::sampleBB);
+        config.creatives.push_back(Creative::sample1S);
+        config.creatives.push_back(Creative::sample2S);
+        config.creatives.push_back(Creative::sample3S);
         this->config = config;
     }
 

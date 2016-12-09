@@ -118,8 +118,8 @@ struct FixedPriceBiddingAgent :
         config.account = {"main", "first"};
 
         // Specify the properties of the creatives we are trying to show.
-        config.creatives.push_back(Creative::sampleLB);
-        config.creatives.push_back(Creative::sampleWS);
+        config.creatives.push_back(Creative::sample1S);
+        config.creatives.push_back(Creative::sample2S);
       /*  config.creatives.push_back(Creative::sampleBB);
         config.creatives.push_back(Creative::sampleAA);
         config.creatives.push_back(Creative::sampleCC);

@@ -32,9 +32,9 @@ struct TestAgent : public BiddingAgent {
         RTBKIT::AgentConfig config;
         config.account = accountKey;
         config.maxInFlight = 20000;
-        config.creatives.push_back(RTBKIT::Creative::sampleLB);
-        config.creatives.push_back(RTBKIT::Creative::sampleWS);
-        config.creatives.push_back(RTBKIT::Creative::sampleBB);
+        config.creatives.push_back(RTBKIT::Creative::sample1S);
+        config.creatives.push_back(RTBKIT::Creative::sample2S);
+        config.creatives.push_back(RTBKIT::Creative::sample3S);
         config.externalId = 1;
 
         this->config = config;
