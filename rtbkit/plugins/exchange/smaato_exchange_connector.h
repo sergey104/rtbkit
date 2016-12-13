@@ -77,7 +77,11 @@ struct SmaatoExchangeConnector: public OpenRTBExchangeConnector {
                             int spotNum,
                             OpenRTB::BidResponse & response) const;
 
+    virtual void clearStatistic() const;
 
+    virtual Json::Value
+    getResponseExt(const HttpAuctionHandler & connection,
+                   const Auction & auction) const;
 
   };
 

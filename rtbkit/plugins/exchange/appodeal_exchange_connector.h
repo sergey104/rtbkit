@@ -105,6 +105,9 @@ private:
 
     AppodealCreativeConfiguration creativeConfig;
 
+    virtual void
+    clearStatistic() const;
+
 
 protected:
 

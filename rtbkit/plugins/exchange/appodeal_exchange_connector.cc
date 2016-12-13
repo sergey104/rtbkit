@@ -72,6 +72,17 @@ void writeFileResponse (std::string s) {
   ofs.close();
 
 }
+long get_time_difference(const char* path) {
+struct stat buffer;
+stat(path, &buffer);
+
+
+    time_t lastChange = buffer.st_mtime;
+        time_t now =  time(0);
+
+        time_t seconds = now - lastChange;
+        return seconds/60;
+}
 
 string string_unix_timestamp()
 {
@@ -280,6 +291,7 @@ parseBidRequest(HttpAuctionHandler & connection,
 {
 
     std::shared_ptr<BidRequest> none;
+    clearStatistic();
     Json::Value v1;
     v1["payload"] = payload;
 
@@ -475,7 +487,7 @@ getTimeAvailableMs(HttpAuctionHandler & connection,
     static const std::string toFind = "\"tmax\":";
     std::string::size_type pos = payload.find(toFind);
     if (pos == std::string::npos)
-        return 2000.0;
+        return 1000.0;
 
     int tmax = atoi(payload.c_str() + pos + toFind.length());
     return (absoluteTimeMax < tmax) ? absoluteTimeMax : tmax;
@@ -534,10 +546,16 @@ getResponseExt(const HttpAuctionHandler & connection,
                const Auction & auction) const
 {
 
+  clearStatistic();
+  return {};
+}
+void AppodealExchangeConnector::clearStatistic() const {
     long size1 = getFilesize("appodealreqlog.txt");
     long size2 = getFilesize("appodealreslog.txt");
+    long tmdiff1 = get_time_difference("appodealreqlog.txt");
+    long tmdiff2 = get_time_difference("appodealreslog.txt");
 
-if (size1 >= 3000000) {
+if ((size1 >= 3000000) || (tmdiff1 >= 5)) {
     time_t rawtime;
     struct tm * timeinfo;
      char buffer [80];
@@ -554,7 +572,7 @@ if (size1 >= 3000000) {
  rename("appodealreqlog.txt", newname.c_str()) ;
 
 }
-if (size2 >= 3000000) {
+if ((size2 >= 3000000) || (tmdiff2 >= 5))  {
     time_t rawtime;
     struct tm * timeinfo;
      char buffer [80];
@@ -571,7 +589,7 @@ if (size2 >= 3000000) {
 
  rename("appodealreslog.txt", newname.c_str()) ;
 }
-  return {};
+
 }
 
 HttpResponse

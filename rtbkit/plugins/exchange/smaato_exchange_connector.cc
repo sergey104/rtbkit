@@ -62,6 +62,18 @@ string string_unix_timestamp()
     long int now = static_cast<long int> (t);
     return std::to_string(now);
 }
+
+long get_time_difference(const char* path) {
+struct stat buffer;
+stat(path, &buffer);
+
+
+    time_t lastChange = buffer.st_mtime;
+        time_t now =  time(0);
+
+        time_t seconds = now - lastChange;
+        return seconds/60;
+}
 using namespace Datacratic;
 
 namespace {
@@ -99,6 +111,7 @@ parseBidRequest(HttpAuctionHandler & connection,
                 const std::string & payload)
 {
     std::shared_ptr<BidRequest> none;
+    clearStatistic();
     Json::Value v1;
     v1["payload"] = payload;
 
@@ -354,7 +367,57 @@ setSeatBid(Auction const & auction,
     b.nurl = crinfo->nurl;
 }
 
+Json::Value
+SmaatoExchangeConnector::
+getResponseExt(const HttpAuctionHandler & connection,
+               const Auction & auction) const
+{
+    clearStatistic();
+    return {};
+}
+void SmaatoExchangeConnector::clearStatistic() const {
 
+    long size1 = getFilesize("smaatoreqlog.txt");
+    long size2 = getFilesize("smaatoreslog.txt");
+    long tmdiff1 = get_time_difference("smaatoreqlog.txt");
+    long tmdiff2 = get_time_difference("smaatoreslog.txt");
+
+if ((size1 >= 3000000) || (tmdiff1 >= 5)) {
+    time_t rawtime;
+    struct tm * timeinfo;
+     char buffer [80];
+
+     time (&rawtime);
+     timeinfo = localtime (&rawtime);
+
+  strftime (buffer,80,"%Y-%m-%d",timeinfo);
+  string z  = string(buffer);
+
+ string newname = "../stat/" + z +"/smaatoreq" + string_unix_timestamp()+".txt";
+ string newdir = "../stat/" + z;
+ mkdir(newdir.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+ rename("smaatoreqlog.txt", newname.c_str()) ;
+
+}
+if ((size2 >= 3000000) || (tmdiff2 >= 5))  {
+    time_t rawtime;
+    struct tm * timeinfo;
+     char buffer [80];
+
+     time (&rawtime);
+     timeinfo = localtime (&rawtime);
+
+  strftime (buffer,80,"%Y-%m-%d",timeinfo);
+  string z  = string(buffer);
+
+ string newname = "../stat/" + z +"/smaatores" + string_unix_timestamp()+".txt";
+ string newdir = "../stat/" + z;
+ mkdir(newdir.c_str(),S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+
+ rename("smaatoreslog.txt", newname.c_str()) ;
+}
+
+}
 } // namespace RTBKIT
  
 namespace {
