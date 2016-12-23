@@ -248,6 +248,7 @@ onDisassociate()
     }
 
     endpoint->finishedWithHandler(shared_from_this());
+    this->transport().closeWhenHandlerFinished();
 }
 
 void
@@ -588,6 +589,7 @@ sendErrorResponse(const std::string & error,
 {
     putResponseOnWire(endpoint->getErrorResponse(*this,  error + ": " + details));
     endpoint->onAuctionError("EXCHANGE_ERROR", auction, error + ": " + details);
+    this->transport().closeWhenHandlerFinished(); //new
 }
 
 std::string

@@ -535,8 +535,8 @@ getResponse(const HttpAuctionHandler & connection,
     v1["timestamp"] = string_unix_timestamp();
     writeFileResponse(v1.toString());
 
-    return HttpResponse(200, "application/json", rv);
-    //return HttpResponse(204, "none", "");
+  //  return HttpResponse(200, "application/json", rv);
+    return HttpResponse(204, "none", "");
 }
 
 
