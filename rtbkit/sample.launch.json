@@ -106,16 +106,17 @@
                     "log": true
                 },
                 {
-                    "name": "fixed-price-agent",
+                    "name": "agent-gateway",
                     "root": ".",
-                    "path": "build/x86_64/bin/bidding_agent_ex",
+                    "path": "/usr/bin/python",
                     "arg": [
-                        "-B", "rtbkit/sample.bootstrap.json"
-                           ],
-                    "log": true
+                        "/home/ubuntu/agent_gateway/agent_gateway.py",
+                        "/home/ubuntu/agent_gateway/sample.config",
+                        "&"
+                    ],
+                    "log":false
                 }
             ]
         }
     ]
 }
-
