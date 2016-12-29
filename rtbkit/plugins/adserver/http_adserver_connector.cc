@@ -56,7 +56,7 @@ handleJson(const HttpHeader & header, const Json::Value & json,
 
         this->transport().associateWhenHandlerFinished
         (endpoint_.makeNewHandler(), "rqFinished");
-        this->transport().closeWhenHandlerFinished();
+
     };
 
     try {

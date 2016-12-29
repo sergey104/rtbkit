@@ -69,7 +69,7 @@ struct HttpExchangeConnector
                        const std::string & auctionVerb = "POST",
                        int realTimePriority = -1,
                        bool realTimePolling = false,
-                       double absoluteTimeMax = 50.0);
+                       double absoluteTimeMax = 450.0);
 
     /** Start the exchange connector running */
     virtual void start();
