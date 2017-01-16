@@ -61,7 +61,7 @@ postConstructorInit()
     pingTimeUnknownHostsMs = 20;
     auctionVerb = "POST";
     auctionResource = "/";
-    absoluteTimeMax = 1000.0;
+    absoluteTimeMax = 450.0;
 
     numServingRequest = 0;
 
