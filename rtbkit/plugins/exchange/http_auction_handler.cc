@@ -539,15 +539,15 @@ sendResponse()
                           Date::now().secondsSince(this->firstData) * 1000.0,
                           "ms",
                           { 90, 95, 98, 99 });
-          //  this->transport().closeWhenHandlerFinished(); //appo
-            if (random() % 1000 == 0) {
+            this->transport().closeWhenHandlerFinished(); //appo
+        /*    if (random() % 1000 == 0) {
                 this->transport().closeWhenHandlerFinished();
             }
             else {
                 this->transport().associateWhenHandlerFinished
                 (this->makeNewHandlerShared(), "sendFinished");
             }
-
+*/
         };
 
     addActivityS("beforeSend");
@@ -567,7 +567,7 @@ dropAuction(const std::string & reason)
 {
     auto onSendFinished = [=] ()
         {
-   /*         if (random() % 1000 == 0) {
+         /*  if (random() % 1000 == 0) {
                 this->transport().closeWhenHandlerFinished();
             }
             else {
@@ -590,7 +590,7 @@ sendErrorResponse(const std::string & error,
 {
     putResponseOnWire(endpoint->getErrorResponse(*this,  error + ": " + details));
     endpoint->onAuctionError("EXCHANGE_ERROR", auction, error + ": " + details);
-//this->transport().closeWhenHandlerFinished();  //appo
+    this->transport().closeWhenHandlerFinished();  //appo
 }
 
 std::string
